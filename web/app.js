@@ -97,7 +97,7 @@ $('back').onclick=()=>{if(phone())showDrawer(!state.drawer);else{state.sidebarHi
 $('backdrop').onclick=()=>showDrawer(false);
 // App-frame domain gesture: shell thread-swipe-back is bound to Chats, not frames.
 // Keep shell swipe-intent's deliberate 120px drag / 80px, .6px/ms flick rule.
-// Axis locks at 10px; editable caret/selection drags keep all but the 24px edge.
+// Axis locks at 10px; an active text selection or composition keeps its drag.
 let drawerSwipe=null,suppressDrawerClickUntil=0;
 function drawerPreview(s,dx){
  const progress=Math.max(0,Math.min(1,((s.open?s.width:0)+dx)/s.width));
@@ -118,11 +118,12 @@ $('app').addEventListener('touchstart',e=>{
  const t=e.touches[0],target=e.target,open=state.drawer;
  if(open?!target.closest('#sidebar,#backdrop'):!target.closest('#main'))return;
  if(!open){
-  const editing=document.activeElement?.matches('textarea,input,[contenteditable="true"]');
+  // Live Preview makes the whole note body editable, so a swipe over the text must still open the
+  // drawer (as in Obsidian). Touch drags never select text (long-press does), so only a live text
+  // selection, IME composition or a horizontal scroller (formatting bar, code, title) opts out.
+  // No edge-only rule: Android's system Back owns the screen edge.
   if(editor.composing||!editor.view.state.selection.main.empty||String(window.getSelection()))return;
-  if(editing&&t.clientX>24)return;
-  if(target.closest('button,a,select,input,[contenteditable="true"]'))return;
-  if(String(window.getSelection())||(!editor.view.state.selection.main.empty))return;
+  if(target.closest('#formatting,pre,table,input,select,textarea,.cm-scroller[data-hscroll]'))return;
  }
  drawerSwipe={open,x:t.clientX,y:t.clientY,time:performance.now(),width:$('sidebar').getBoundingClientRect().width,dx:0,dy:0,axis:null,tracking:false};
 },{passive:true});

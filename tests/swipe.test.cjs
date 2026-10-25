@@ -42,13 +42,18 @@ if(!core)throw new Error('WIZARD_CORE must point to the approved shell web/core 
  const treeBefore=await f.locator('#tree').evaluate(e=>e.scrollTop);await swipe(180,500,3,-250);expect(await f.locator('#tree').evaluate(e=>e.scrollTop)).toBeGreaterThan(treeBefore);await opened();report.checks.push('tree vertical scroll remains native');
  expect(await p.evaluate(()=>WizAppServices.back(frame))).toBe('handled');await closed();report.checks.push('WizardApp Back closes drawer and keeps frame');
  const mainBefore=await f.locator('#main').evaluate(e=>e.scrollTop);await swipe(180,500,3,-250);expect(await f.locator('#main').evaluate(e=>e.scrollTop)).toBeGreaterThan(mainBefore);await closed();report.checks.push('reader vertical scroll remains native');
- await f.locator('#main').evaluate(e=>e.scrollTop=0);await f.locator('#mode').click();await f.locator('.cm-content').focus();
- await swipe(90,350,180,0);await closed();expect(await f.locator('.cm-content').evaluate(e=>document.activeElement===e)).toBe(true);report.checks.push('focused editor caret drag does not open');
+ await f.locator('#main').evaluate(e=>e.scrollTop=0);await f.locator('#mode').click();await f.locator('.cm-content').blur();
+ await swipe(120,350,180,0);await opened();report.checks.push('swipe over Live Preview text opens');
+ await f.locator('#backdrop').click({position:{x:370,y:400}});await closed();report.checks.push('tap outside closes');
+ await f.locator('.cm-content').focus();await swipe(120,350,180,0);await opened();report.checks.push('swipe over text opens while editing');
+ await swipe(250,350,-170,1);await closed();report.checks.push('reverse swipe closes after editing');
+ await f.locator('.cm-content').focus();
  await swipe(180,500,3,-250);expect(await f.locator('#main').evaluate(e=>e.scrollTop)).toBeGreaterThan(0);await closed();report.checks.push('editing vertical scroll remains native');
  await f.evaluate(async()=>{const {EditorView}=await import('./vendor/live-preview.js');const v=EditorView.findFromDOM(document.querySelector('.cm-editor'));v.dispatch({selection:{anchor:2,head:12}});v.focus();});
  await swipe(10,350,180,0);await closed();report.checks.push('selected editor text blocks even the edge drawer gesture');
  await f.evaluate(async()=>{const {EditorView}=await import('./vendor/live-preview.js');EditorView.findFromDOM(document.querySelector('.cm-editor')).dispatch({selection:{anchor:2}});window.getSelection().removeAllRanges();});
- await f.locator('.cm-content').focus();await swipe(10,350,180,0);await opened();report.checks.push('focused editor permits 24px edge only');
+ await f.locator('.cm-content').focus();await swipe(150,350,30,0);await closed();report.checks.push('short nudge while editing snaps back');
+ await swipe(120,350,180,0);await opened();
  await context.clearPermissions();await p.emulateMedia({reducedMotion:'reduce'});expect(await f.locator('#sidebar').evaluate(e=>getComputedStyle(e).transitionDuration)).toBe('0s');report.checks.push('reduced motion disables snap animation');
  expect(await p.evaluate(()=>WizAppServices.back(frame))).toBe('handled');await closed();
  if(process.env.QA_OUT){fs.mkdirSync(process.env.QA_OUT,{recursive:true});await p.screenshot({path:path.join(process.env.QA_OUT,'phone-swipe.png')});fs.writeFileSync(path.join(process.env.QA_OUT,'swipe.json'),JSON.stringify(report,null,2));}
