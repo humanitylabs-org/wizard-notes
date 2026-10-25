@@ -57,9 +57,10 @@ for arch,command in zip(['amd64','arm64'],commands):
     assert inspect['Architecture']==arch
     assert inspect['Config']['Labels']['org.opencontainers.image.revision']==a.commit
     subprocess.run([sys.executable,str(root/'tests/smoke_container.py'),'--image',image,'--context',a.context],check=True)
+    # Ephemeral unit-test container stays writable so docker cp can stage tests (runtime stays read-only).
     # Stage only tests through docker cp: external worker paths may not be shared into Colima.
     test_container='notes-unit-'+a.commit[:12]+'-'+arch
-    subprocess.run([*docker,'create','--name',test_container,'--read-only','--tmpfs','/tmp','--user','1000:1000','--cap-drop','ALL','--security-opt','no-new-privileges:true','-e','TMPDIR=/tmp','--entrypoint','python',image,'-m','unittest','discover','-s','/app/tests'],check=True)
+    subprocess.run([*docker,'create','--name',test_container,'--tmpfs','/tmp','--user','1000:1000','--cap-drop','ALL','--security-opt','no-new-privileges:true','-e','TMPDIR=/tmp','--entrypoint','python',image,'-m','unittest','discover','-s','/app/tests'],check=True)
     try:
         subprocess.run([*docker,'cp',str(root/'tests'),test_container+':/app/tests'],check=True)
         subprocess.run([*docker,'start','-a',test_container],check=True)
