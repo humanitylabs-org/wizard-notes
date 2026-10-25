@@ -1,0 +1,485 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Notes Markdown vault API",
+    "version": "0.1.0-alpha.1"
+  },
+  "paths": {
+    "/api/tree": {
+      "get": {
+        "summary": "Nested folders first then notes, sorted by name",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid path or input"
+          },
+          "403": {
+            "description": "Untrusted Host or Origin"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Revision conflict or occupied name. Reread and reconcile; never overwrite."
+          }
+        }
+      }
+    },
+    "/api/note": {
+      "get": {
+        "summary": "Read note content and SHA-256 revision",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid path or input"
+          },
+          "403": {
+            "description": "Untrusted Host or Origin"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Revision conflict or occupied name. Reread and reconcile; never overwrite."
+          }
+        },
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "summary": "Atomically replace an existing note with matching revision",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid path or input"
+          },
+          "403": {
+            "description": "Untrusted Host or Origin"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Revision conflict or occupied name. Reread and reconcile; never overwrite."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  },
+                  "rev": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path",
+                  "rev",
+                  "content"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a note without overwriting",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid path or input"
+          },
+          "403": {
+            "description": "Untrusted Host or Origin"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Revision conflict or occupied name. Reread and reconcile; never overwrite."
+          },
+          "201": {
+            "description": "Created"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path",
+                  "content"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/folder": {
+      "post": {
+        "summary": "Create one nested folder",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid path or input"
+          },
+          "403": {
+            "description": "Untrusted Host or Origin"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Revision conflict or occupied name. Reread and reconcile; never overwrite."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/move": {
+      "post": {
+        "summary": "Move or rename without overwriting (links are not rewritten)",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid path or input"
+          },
+          "403": {
+            "description": "Untrusted Host or Origin"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Revision conflict or occupied name. Reread and reconcile; never overwrite."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "string"
+                  },
+                  "to": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "from",
+                  "to"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/delete": {
+      "post": {
+        "summary": "Move to recoverable trash; returns trash_id",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid path or input"
+          },
+          "403": {
+            "description": "Untrusted Host or Origin"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Revision conflict or occupied name. Reread and reconcile; never overwrite."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/restore": {
+      "post": {
+        "summary": "Restore a trash entry to its original unoccupied path",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid path or input"
+          },
+          "403": {
+            "description": "Untrusted Host or Origin"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Revision conflict or occupied name. Reread and reconcile; never overwrite."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "trash_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "trash_id"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/search": {
+      "get": {
+        "summary": "Titles first, then body, with snippets; empty query returns recent notes",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid path or input"
+          },
+          "403": {
+            "description": "Untrusted Host or Origin"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Revision conflict or occupied name. Reread and reconcile; never overwrite."
+          }
+        },
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/backlinks": {
+      "get": {
+        "summary": "List notes linking to this note",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid path or input"
+          },
+          "403": {
+            "description": "Untrusted Host or Origin"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Revision conflict or occupied name. Reread and reconcile; never overwrite."
+          }
+        },
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/resolve": {
+      "get": {
+        "summary": "Case-insensitive wiki target resolution; path=null when missing",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid path or input"
+          },
+          "403": {
+            "description": "Untrusted Host or Origin"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Revision conflict or occupied name. Reread and reconcile; never overwrite."
+          }
+        },
+        "parameters": [
+          {
+            "name": "target",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "current",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/today": {
+      "post": {
+        "summary": "Create/open Daily/YYYY-MM-DD.md in Asia/Bangkok",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid path or input"
+          },
+          "403": {
+            "description": "Untrusted Host or Origin"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Revision conflict or occupied name. Reread and reconcile; never overwrite."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/healthz": {
+      "get": {
+        "summary": "Service health",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid path or input"
+          },
+          "403": {
+            "description": "Untrusted Host or Origin"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Revision conflict or occupied name. Reread and reconcile; never overwrite."
+          }
+        }
+      }
+    }
+  }
+}
