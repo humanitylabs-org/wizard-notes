@@ -1,0 +1,48 @@
+name: Build, test and publish image
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Full source commit to publish
+        required: true
+      confirm_version:
+        description: Exact version for a v tag, or main for an unversioned build
+        required: true
+permissions:
+  contents: read
+jobs:
+  image:
+    if: github.repository == 'humanitylabs-org/wizard-notes' && (github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')))
+    runs-on: [self-hosted, macOS, ARM64, wizard-notes]
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify release intent and recipe
+        env:
+          EXPECTED_COMMIT: ${{ inputs.expected_commit }}
+          CONFIRM_VERSION: ${{ inputs.confirm_version }}
+        run: |
+          python3 scripts/check_release.py
+          python3 - <<'PY'
+          import os,json
+          version=json.load(open('runtipi/config.json'))['version']
+          if os.environ['GITHUB_EVENT_NAME']=='workflow_dispatch':
+              assert os.environ['EXPECTED_COMMIT']==os.environ['GITHUB_SHA']
+              assert os.environ['CONFIRM_VERSION']==(version if os.environ['GITHUB_REF'].startswith('refs/tags/v') else 'main')
+          PY
+      - name: Build, smoke, archive and push exact images
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/ci_images.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-images-${{ github.sha }}
+          path: ${{ runner.temp }}/notes-release/
+          retention-days: 14

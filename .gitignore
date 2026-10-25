@@ -1,0 +1,8 @@
+.data/
+__pycache__/
+*.pyc
+.source-commit
+agent.token
+*.tar.gz
+release-output/
+node_modules/
