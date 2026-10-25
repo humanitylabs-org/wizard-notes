@@ -27,12 +27,14 @@ class PackageStartup(unittest.TestCase):
             for cycle in range(2):
                 with subprocess.Popen([sys.executable,str(script)],env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE) as service:
                     try:
-                        for attempt in range(50):
+                        # Deadline, not a fixed try count: emulated cross-arch builds start slowly.
+                        deadline=time.monotonic()+15
+                        while time.monotonic()<deadline:
                             if service.poll() is not None:self.fail(service.stderr.read().decode())
                             try:
                                 if req('/healthz')[0]==200:break
                             except OSError:pass
-                            time.sleep(.02)
+                            time.sleep(.05)
                         else:self.fail('No health response')
                         credential=Path(data)/'agent.token'
                         self.assertEqual(credential.stat().st_mode&0o777,0o600)
