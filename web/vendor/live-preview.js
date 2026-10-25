@@ -423,7 +423,7 @@ owDown"),e}var at=typeof navigator<"u"?navigator:{userAgent:"",vendor:"",platfor
 style:{}}},ws=/Edge\/(\d+)/.exec(at.userAgent),ul=/MSIE \d/.test(at.userAgent),xs=/Trident\/(?:[7-9]|\d{2,})\..*rv:(\d+)/.
 exec(at.userAgent),Cn=!!(ul||xs||ws),Po=!Cn&&/gecko\/(\d+)/i.test(at.userAgent),ms=!Cn&&/Chrome\/(\d+)/.exec(at.userAgent),
 Ro="webkitFontSmoothing"in ks.documentElement.style,Ss=!Cn&&/Apple Computer/.test(at.vendor),Io=Ss&&(/Mobile\/\w+/.test(
-at.userAgent)||at.maxTouchPoints>2),A={mac:Io||/Mac/.test(at.platform),windows:/Win/.test(at.platform),linux:/Linux|X11/.
+at.userAgent)||at.maxTouchPoints>2),M={mac:Io||/Mac/.test(at.platform),windows:/Win/.test(at.platform),linux:/Linux|X11/.
 test(at.platform),ie:Cn,ie_version:ul?ks.documentMode||6:xs?+xs[1]:ws?+ws[1]:0,gecko:Po,gecko_version:Po?+(/Firefox\/(\d+)/.
 exec(at.userAgent)||[0,0])[1]:0,chrome:!!ms,chrome_version:ms?+ms[1]:0,ios:Io,android:/Android\b/.test(at.userAgent),webkit:Ro,
 webkit_version:Ro?+(/\bAppleWebKit\/(\d+)/.exec(at.userAgent)||[0,0])[1]:0,safari:Ss,safari_version:Ss?+(/\bVersion\/(\d+(\.\d+)?)/.
@@ -445,13 +445,13 @@ uf(f);else{if(/^(fixed|sticky)$/.test(getComputedStyle(h).position)&&(c=!0),h.sc
 h.clientWidth){h=h.assignedSlot||h.parentNode;continue}let S=h.getBoundingClientRect();({scaleX:p,scaleY:m}=dl(h,S)),u={
 left:S.left,right:S.left+h.clientWidth*p,top:S.top,bottom:S.top+h.clientHeight*m}}let g=0,b=0;if(s=="nearest")t.top<u.top?
 (b=t.top-(u.top+o),e>0&&t.bottom>u.bottom+b&&(b=t.bottom-u.bottom+o)):t.bottom>u.bottom&&(b=t.bottom-u.bottom+o,e<0&&t.top-
-b<u.top&&(b=t.top-(u.top+o)));else{let S=t.bottom-t.top,M=u.bottom-u.top;b=(s=="center"&&S<=M?t.top+S/2-M/2:s=="start"||
-s=="center"&&e<0?t.top-o:t.bottom-M+o)-u.top}if(i=="nearest"?t.left<u.left?(g=t.left-(u.left+r),e>0&&t.right>u.right+g&&
+b<u.top&&(b=t.top-(u.top+o)));else{let S=t.bottom-t.top,C=u.bottom-u.top;b=(s=="center"&&S<=C?t.top+S/2-C/2:s=="start"||
+s=="center"&&e<0?t.top-o:t.bottom-C+o)-u.top}if(i=="nearest"?t.left<u.left?(g=t.left-(u.left+r),e>0&&t.right>u.right+g&&
 (g=t.right-u.right+r)):t.right>u.right&&(g=t.right-u.right+r,e<0&&t.left<u.left+g&&(g=t.left-(u.left+r))):g=(i=="center"?
 t.left+(t.right-t.left)/2-(u.right-u.left)/2:i=="start"==l?t.left-r:t.right-(u.right-u.left)+r)-u.left,g||b)if(d)f.scrollBy(
-g,b);else{let S=0,M=0;if(b){let T=h.scrollTop;h.scrollTop+=b/m,M=(h.scrollTop-T)*m}if(g){let T=h.scrollLeft;h.scrollLeft+=
-g/p,S=(h.scrollLeft-T)*p}t={left:t.left-S,top:t.top-M,right:t.right-S,bottom:t.bottom-M},S&&Math.abs(S-g)<1&&(i="nearest"),
-M&&Math.abs(M-b)<1&&(s="nearest")}if(d)break;(t.top<u.top||t.bottom>u.bottom||t.left<u.left||t.right>u.right)&&(t={left:Math.
+g,b);else{let S=0,C=0;if(b){let T=h.scrollTop;h.scrollTop+=b/m,C=(h.scrollTop-T)*m}if(g){let T=h.scrollLeft;h.scrollLeft+=
+g/p,S=(h.scrollLeft-T)*p}t={left:t.left-S,top:t.top-C,right:t.right-S,bottom:t.bottom-C},S&&Math.abs(S-g)<1&&(i="nearest"),
+C&&Math.abs(C-b)<1&&(s="nearest")}if(d)break;(t.top<u.top||t.bottom>u.bottom||t.left<u.left||t.right>u.right)&&(t={left:Math.
 max(t.left,u.left),right:Math.min(t.right,u.right),top:Math.max(t.top,u.top),bottom:Math.min(t.bottom,u.bottom)}),h=h.assignedSlot||
 h.parentNode}else if(h.nodeType==11)h=h.host;else break}function pf(n){let t=n.ownerDocument,e,i;for(let s=n.parentNode;s&&
 !(s==t.body||e&&i);)if(s.nodeType==1)!i&&s.scrollHeight>s.clientHeight&&(i=s),!e&&s.scrollWidth>s.clientWidth&&(e=s),s=s.
@@ -459,7 +459,7 @@ assignedSlot||s.parentNode;else if(s.nodeType==11)s=s.host;else break;return{x:e
 null,this.anchorOffset=0,this.focusNode=null,this.focusOffset=0}eq(t){return this.anchorNode==t.anchorNode&&this.anchorOffset==
 t.anchorOffset&&this.focusNode==t.focusNode&&this.focusOffset==t.focusOffset}setRange(t){let{anchorNode:e,focusNode:i}=t;
 this.set(e,Math.min(t.anchorOffset,e?zt(e):0),i,Math.min(t.focusOffset,i?zt(i):0))}set(t,e,i,s){this.anchorNode=t,this.anchorOffset=
-e,this.focusNode=i,this.focusOffset=s}},be=null;A.safari&&A.safari_version>=26&&(be=!1);function pl(n){if(n.setActive)return n.
+e,this.focusNode=i,this.focusOffset=s}},be=null;M.safari&&M.safari_version>=26&&(be=!1);function pl(n){if(n.setActive)return n.
 setActive();if(be)return n.focus(be);let t=[];for(let e=n;e&&(t.push(e,e.scrollTop,e.scrollLeft),e!=e.ownerDocument);e=e.
 parentNode);if(n.focus(be==null?{get preventScroll(){return be={preventScroll:!0},!0}}:void 0),!be){be=!1;for(let e=0;e<
 t.length;){let i=t[e++],s=t[e++],r=t[e++];i.scrollTop!=s&&(i.scrollTop=s),i.scrollLeft!=r&&(i.scrollLeft=r)}}}var Ho;function we(n,t,e=t){
@@ -530,9 +530,9 @@ this.mark.tagName))),super.sync(t,e)}merge(t,e,i,s,r,o){return i&&(!(i instanceo
 length&&o<=0)?!1:(wl(this,t,e,i?i.children.slice():[],r-1,o-1),this.markDirty(),!0)}split(t){let e=[],i=0,s=-1,r=0;for(let l of this.
 children){let a=i+l.length;a>t&&e.push(i<t?l.split(t-i):l),s<0&&i>=t&&(s=r),i=a,r++}let o=this.length-t;return this.length=
 t,s>-1&&(this.children.length=s,this.markDirty()),new n(this.mark,e,o)}domAtPos(t){return xl(this,t)}coordsAt(t,e){return vl(
-this,t,e)}};function yf(n,t,e){let i=n.nodeValue.length;t>i&&(t=i);let s=t,r=t,o=0;t==0&&e<0||t==i&&e>=0?A.chrome||A.gecko||
+this,t,e)}};function yf(n,t,e){let i=n.nodeValue.length;t>i&&(t=i);let s=t,r=t,o=0;t==0&&e<0||t==i&&e>=0?M.chrome||M.gecko||
 (t?(s--,o=1):r<i&&(r++,o=-1)):e<0?s--:r<i&&r++;let l=we(n,s,r).getClientRects();if(!l.length)return null;let a=l[(o?o<0:
-e>=0)?0:l.length-1];return A.safari&&!o&&a.width==0&&(a=Array.prototype.find.call(l,f=>f.width)||a),o?xi(a,o<0):a||null}
+e>=0)?0:l.length-1];return M.safari&&!o&&a.width==0&&(a=Array.prototype.find.call(l,f=>f.width)||a),o?xi(a,o<0):a||null}
 var mn=class n extends K{static create(t,e,i){return new n(t,e,i)}constructor(t,e,i){super(),this.widget=t,this.length=e,
 this.side=i,this.prevWidget=null}split(t){let e=n.create(this.widget,this.length-t,this.side);return this.length-=t,e}sync(t){
 (!this.dom||!this.widget.updateDOM(this.dom,t))&&(this.dom&&this.prevWidget&&this.prevWidget.destroy(this.dom),this.prevWidget=
@@ -606,7 +606,7 @@ t),this.flags|=6)}sync(t,e){var i;this.dom?this.flags&4&&(ml(this.dom),this.dom.
 attrs?null:void 0):(this.setDOM(document.createElement("div")),this.dom.className="cm-line",this.prevAttrs=this.attrs?null:
 void 0),this.prevAttrs!==void 0&&(Ms(this.dom,this.prevAttrs,this.attrs),this.dom.classList.add("cm-line"),this.prevAttrs=
 void 0),super.sync(t,e);let s=this.dom.lastChild;for(;s&&K.get(s)instanceof se;)s=s.lastChild;if(!s||!this.length||s.nodeName!=
-"BR"&&((i=K.get(s))===null||i===void 0?void 0:i.isEditable)==!1&&(!A.ios||!this.children.some(r=>r instanceof Wt))){let r=document.
+"BR"&&((i=K.get(s))===null||i===void 0?void 0:i.isEditable)==!1&&(!M.ios||!this.children.some(r=>r instanceof Wt))){let r=document.
 createElement("BR");r.cmIgnore=!0,this.dom.appendChild(r)}}measureTextSize(){if(this.children.length==0||this.length>20)
 return null;let t=0,e;for(let i of this.children){if(!(i instanceof Wt)||/[^ -~]/.test(i.text))return null;let s=We(i.dom);
 if(s.length!=1)return null;t+=s[0].width,e=s[0].height}return t?{lineHeight:this.dom.getBoundingClientRect().height,charWidth:t/
@@ -749,12 +749,12 @@ view.observer.editContext&&(!((e=this.domChanged)===null||e===void 0)&&e.newSel?
 this.hasComposition)&&!t.selectionSet&&(s=t.state.selection.main.head));let r=s>-1?Rf(this.view,t.changes,s):null;if(this.
 domChanged=null,this.hasComposition){this.markedForComposition.clear();let{from:f,to:h}=this.hasComposition;i=new Vt(f,h,
 t.changes.mapPos(f,-1),t.changes.mapPos(h,1)).addToSet(i.slice())}this.hasComposition=r?{from:r.range.fromB,to:r.range.toB}:
-null,(A.ie||A.chrome)&&!r&&t&&t.state.doc.lines!=t.startState.doc.lines&&(this.forceSelection=!0);let o=this.decorations,
+null,(M.ie||M.chrome)&&!r&&t&&t.state.doc.lines!=t.startState.doc.lines&&(this.forceSelection=!0);let o=this.decorations,
 l=this.updateDeco(),a=Hf(o,l,t.changes);return i=Vt.extendWithRanges(i,a),!(this.flags&7)&&i.length==0?!1:(this.updateInner(
 i,t.startState.doc.length,r),t.transactions.length&&(this.lastUpdate=Date.now()),!0)}updateInner(t,e,i){this.view.viewState.
 mustMeasureContent=!0,this.updateChildren(t,e,i);let{observer:s}=this.view;s.ignore(()=>{this.dom.style.height=this.view.
-viewState.contentHeight/this.view.scaleY+"px",this.dom.style.flexBasis=this.minWidth?this.minWidth+"px":"";let o=A.chrome||
-A.ios?{node:s.selectionRange.focusNode,written:!1}:void 0;this.sync(this.view,o),this.flags&=-8,o&&(o.written||s.selectionRange.
+viewState.contentHeight/this.view.scaleY+"px",this.dom.style.flexBasis=this.minWidth?this.minWidth+"px":"";let o=M.chrome||
+M.ios?{node:s.selectionRange.focusNode,written:!1}:void 0;this.sync(this.view,o),this.flags&=-8,o&&(o.written||s.selectionRange.
 focusNode!=o.node)&&(this.forceSelection=!0),this.dom.style.height=""}),this.markedForComposition.forEach(o=>o.flags&=-9);
 let r=[];if(this.view.viewport.from||this.view.viewport.to<this.view.state.doc.length)for(let o of this.children)o instanceof
 ye&&o.widget instanceof bi&&r.push(o.dom);s.updateGaps(r)}updateChildren(t,e,i){let s=i?i.range.addToSet(t.slice()):t,r=this.
@@ -765,7 +765,7 @@ m=w.openEnd;let D=this.compositionView(i);w.breakAtStart?D.breakAfter=1:w.conten
 !1,w.openStart,0)&&(D.breakAfter=w.content[0].breakAfter,w.content.shift()),T.content.length&&D.merge(0,0,T.content[T.content.
 length-1],!0,0,T.openEnd)&&T.content.pop(),u=T.content.concat(D).concat(w.content)}else({content:u,breakAtStart:d,openStart:p,
 openEnd:m}=ai.build(this.view.state.doc,h,c,this.decorations,this.dynamicDecorationMap));let{i:g,off:b}=r.findPos(f,1),{
-i:S,off:M}=r.findPos(a,-1);kl(this,S,M,g,b,u,d,p,m)}i&&this.fixCompositionDOM(i)}updateEditContextFormatting(t){this.editContextFormatting=
+i:S,off:C}=r.findPos(a,-1);kl(this,S,C,g,b,u,d,p,m)}i&&this.fixCompositionDOM(i)}updateEditContextFormatting(t){this.editContextFormatting=
 this.editContextFormatting.map(t.changes);for(let e of t.transactions)for(let i of e.effects)i.is(Vl)&&(this.editContextFormatting=
 i.value)}compositionView(t){let e=new Wt(t.text.nodeValue);e.flags|=8;for(let{deco:s}of t.marks)e=new se(s,[e],e.length);
 let i=new nt;return i.append(e,0),i}fixCompositionDOM(t){let e=(r,o)=>{o.flags|=8|(o.children.some(a=>a.flags&7)?1:0),this.
@@ -775,11 +775,11 @@ s)}updateSelection(t=!1,e=!1){(t||!this.view.observer.selectionRange.focusNode)&
 let i=this.view.root.activeElement,s=i==this.dom,r=!s&&!(this.view.state.facet(Yt)||this.dom.tabIndex>-1)&&hn(this.dom,this.
 view.observer.selectionRange)&&!(i&&this.dom.contains(i));if(!(s||e||r))return;let o=this.forceSelection;this.forceSelection=
 !1;let l=this.view.state.selection.main,a=this.moveToLine(this.domAtPos(l.anchor)),f=l.empty?a:this.moveToLine(this.domAtPos(
-l.head));if(A.gecko&&l.empty&&!this.hasComposition&&Pf(a)){let c=document.createTextNode("");this.view.observer.ignore(()=>a.
+l.head));if(M.gecko&&l.empty&&!this.hasComposition&&Pf(a)){let c=document.createTextNode("");this.view.observer.ignore(()=>a.
 node.insertBefore(c,a.node.childNodes[a.offset]||null)),a=f=new ht(c,0),o=!0}let h=this.view.observer.selectionRange;(o||
 !h.focusNode||(!li(a.node,a.offset,h.anchorNode,h.anchorOffset)||!li(f.node,f.offset,h.focusNode,h.focusOffset))&&!this.
-suppressWidgetCursorChange(h,l))&&(this.view.observer.ignore(()=>{A.android&&A.chrome&&this.dom.contains(h.focusNode)&&Ff(
-h.focusNode,this.dom)&&(this.dom.blur(),this.dom.focus({preventScroll:!0}));let c=di(this.view.root);if(c)if(l.empty){if(A.
+suppressWidgetCursorChange(h,l))&&(this.view.observer.ignore(()=>{M.android&&M.chrome&&this.dom.contains(h.focusNode)&&Ff(
+h.focusNode,this.dom)&&(this.dom.blur(),this.dom.focus({preventScroll:!0}));let c=di(this.view.root);if(c)if(l.empty){if(M.
 gecko){let u=If(a.node,a.offset);if(u&&u!=3){let d=(u==1?bl:yl)(a.node,a.offset);d&&(a=new ht(d.node,d.offset))}}c.collapse(
 a.node,a.offset),l.bidiLevel!=null&&c.caretBidiLevel!==void 0&&(c.caretBidiLevel=l.bidiLevel)}else if(c.extend){c.collapse(
 a.node,a.offset);try{c.extend(f.node,f.offset)}catch{}}else{let u=document.createRange();l.anchor>l.head&&([a,f]=[f,a]),
@@ -852,14 +852,14 @@ l=f}return k.range(o+s.from,l+s.from)}function Wf(n,t){return t.left>n?t.left-n:
 top>n?t.top-n:Math.max(0,n-t.bottom)}function gs(n,t){return n.top<t.bottom-1&&n.bottom>t.top+1}function Wo(n,t){return t<
 n.top?{top:t,left:n.left,right:n.right,bottom:n.bottom}:n}function qo(n,t){return t>n.bottom?{top:n.top,left:n.left,right:n.
 right,bottom:t}:n}function Es(n,t,e){let i,s,r,o,l=!1,a,f,h,c;for(let p=n.firstChild;p;p=p.nextSibling){let m=We(p);for(let g=0;g<
-m.length;g++){let b=m[g];s&&gs(s,b)&&(b=Wo(qo(b,s.bottom),s.top));let S=Wf(t,b),M=qf(e,b);if(S==0&&M==0)return p.nodeType==
-3?Ko(p,t,e):Es(p,t,e);(!i||o>M||o==M&&r>S)&&(i=p,s=b,r=S,o=M,l=S?t<b.left?g>0:g<m.length-1:!0),S==0?e>b.bottom&&(!h||h.bottom<
+m.length;g++){let b=m[g];s&&gs(s,b)&&(b=Wo(qo(b,s.bottom),s.top));let S=Wf(t,b),C=qf(e,b);if(S==0&&C==0)return p.nodeType==
+3?Ko(p,t,e):Es(p,t,e);(!i||o>C||o==C&&r>S)&&(i=p,s=b,r=S,o=C,l=S?t<b.left?g>0:g<m.length-1:!0),S==0?e>b.bottom&&(!h||h.bottom<
 b.bottom)?(a=p,h=b):e<b.top&&(!c||c.top>b.top)&&(f=p,c=b):h&&gs(h,b)?h=qo(h,b.bottom):c&&gs(c,b)&&(c=Wo(c,b.top))}}if(h&&
 h.bottom>=e?(i=a,s=h):c&&c.top<=e&&(i=f,s=c),!i)return{node:n,offset:0};let u=Math.max(s.left,Math.min(s.right,t));if(i.
 nodeType==3)return Ko(i,u,e);if(l&&i.contentEditable!="false")return Es(i,u,e);let d=Array.prototype.indexOf.call(n.childNodes,
 i)+(t>=(s.left+s.right)/2?1:0);return{node:n,offset:d}}function Ko(n,t,e){let i=n.nodeValue.length,s=-1,r=1e9,o=0;for(let l=0;l<
 i;l++){let a=we(n,l,l+1).getClientRects();for(let f=0;f<a.length;f++){let h=a[f];if(h.top==h.bottom)continue;o||(o=t-h.left);
-let c=(h.top>e?h.top-e:e-h.bottom)-1;if(h.left-1<=t&&h.right+1>=t&&c<r){let u=t>=(h.left+h.right)/2,d=u;if((A.chrome||A.
+let c=(h.top>e?h.top-e:e-h.bottom)-1;if(h.left-1<=t&&h.right+1>=t&&c<r){let u=t>=(h.left+h.right)/2,d=u;if((M.chrome||M.
 gecko)&&we(n,l).getBoundingClientRect().left==h.right&&(d=!u),c<=0)return{node:n,offset:l+(d?1:0)};s=l+(d?1:0),r=c}}}return{
 node:n,offset:s>-1?s:o>0?n.nodeValue.length:0}}function Ul(n,t,e,i=-1){var s,r;let o=n.contentDOM.getBoundingClientRect(),
 l=o.top+n.viewState.paddingTop,a,{docHeight:f}=n.viewState,{x:h,y:c}=t,u=c-l;if(u<0)return 0;if(u>f)return n.state.doc.length;
@@ -870,11 +870,11 @@ dom.ownerDocument,m=n.root.elementFromPoint?n.root:p,g=m.elementFromPoint(h,c);g
 (h=Math.max(o.left+1,Math.min(o.right-1,h)),g=m.elementFromPoint(h,c),g&&!n.contentDOM.contains(g)&&(g=null));let b,S=-1;
 if(g&&((s=n.docView.nearest(g))===null||s===void 0?void 0:s.isEditable)!=!1){if(p.caretPositionFromPoint){let T=p.caretPositionFromPoint(
 h,c);T&&({offsetNode:b,offset:S}=T)}else if(p.caretRangeFromPoint){let T=p.caretRangeFromPoint(h,c);T&&({startContainer:b,
-startOffset:S}=T)}b&&(!n.contentDOM.contains(b)||A.safari&&Kf(b,S,h)||A.chrome&&jf(b,S,h))&&(b=void 0),b&&(S=Math.min(zt(
+startOffset:S}=T)}b&&(!n.contentDOM.contains(b)||M.safari&&Kf(b,S,h)||M.chrome&&jf(b,S,h))&&(b=void 0),b&&(S=Math.min(zt(
 b),S))}if(!b||!n.docView.dom.contains(b)){let T=nt.find(n.docView,d);if(!T)return u>a.top+a.height/2?a.to:a.from;({node:b,
-offset:S}=Es(T.dom,h,c))}let M=n.docView.nearest(b);if(!M)return null;if(M.isWidget&&((r=M.dom)===null||r===void 0?void 0:
-r.nodeType)==1){let T=M.dom.getBoundingClientRect();return t.y<T.top||t.y<=T.bottom&&t.x<=(T.left+T.right)/2?M.posAtStart:
-M.posAtEnd}else return M.localPosFromDOM(b,S)+M.posAtStart}function jo(n,t,e,i,s){let r=Math.round((i-t.left)*n.defaultCharacterWidth);
+offset:S}=Es(T.dom,h,c))}let C=n.docView.nearest(b);if(!C)return null;if(C.isWidget&&((r=C.dom)===null||r===void 0?void 0:
+r.nodeType)==1){let T=C.dom.getBoundingClientRect();return t.y<T.top||t.y<=T.bottom&&t.x<=(T.left+T.right)/2?C.posAtStart:
+C.posAtEnd}else return C.localPosFromDOM(b,S)+C.posAtStart}function jo(n,t,e,i,s){let r=Math.round((i-t.left)*n.defaultCharacterWidth);
 if(n.lineWrapping&&e.height>n.defaultLineHeight*1.5){let l=n.viewState.heightOracle.textHeight,a=Math.floor((s-e.top-(n.
 defaultLineHeight-l)*.5)/l);r+=a*n.viewState.heightOracle.lineLength}let o=n.state.sliceDoc(e.from,e.to);return e.from+To(
 o,r,n.state.tabSize)}function Gl(n,t,e){let i,s=n;if(n.nodeType!=3||t!=(i=n.nodeValue.length))return!1;for(;;){let r=s.nextSibling;
@@ -923,24 +923,24 @@ t.docView.domBoundsAround(e,i,0))){let l=r||o?[]:Yf(t),a=new Ps(l,t.state);a.rea
 endDOM),this.text=a.text,this.newSel=Qf(l,this.bounds.from)}else{let l=t.observer.selectionRange,a=r&&r.node==l.focusNode&&
 r.offset==l.focusOffset||!vs(t.contentDOM,l.focusNode)?t.state.selection.main.head:t.docView.posFromDOM(l.focusNode,l.focusOffset),
 f=o&&o.node==l.anchorNode&&o.offset==l.anchorOffset||!vs(t.contentDOM,l.anchorNode)?t.state.selection.main.anchor:t.docView.
-posFromDOM(l.anchorNode,l.anchorOffset),h=t.viewport;if((A.ios||A.chrome)&&t.state.selection.main.empty&&a!=f&&(h.from>0||
+posFromDOM(l.anchorNode,l.anchorOffset),h=t.viewport;if((M.ios||M.chrome)&&t.state.selection.main.empty&&a!=f&&(h.from>0||
 h.to<t.state.doc.length)){let c=Math.min(a,f),u=Math.max(a,f),d=h.from-c,p=h.to-u;(d==0||d==1||c==0)&&(p==0||p==-1||u==t.
 state.doc.length)&&(a=0,f=t.state.doc.length)}this.newSel=k.single(f,a)}}};function Xl(n,t){let e,{newSel:i}=t,s=n.state.
 selection.main,r=n.inputState.lastKeyTime>Date.now()-100?n.inputState.lastKeyCode:-1;if(t.bounds){let{from:o,to:l}=t.bounds,
-a=s.from,f=null;(r===8||A.android&&t.text.length<l-o)&&(a=s.to,f="end");let h=Jl(n.state.doc.sliceString(o,l,ri),t.text,
-a-o,f);h&&(A.chrome&&r==13&&h.toB==h.from+2&&t.text.slice(h.from,h.toB)==ri+ri&&h.toB--,e={from:o+h.from,to:o+h.toA,insert:I.
+a=s.from,f=null;(r===8||M.android&&t.text.length<l-o)&&(a=s.to,f="end");let h=Jl(n.state.doc.sliceString(o,l,ri),t.text,
+a-o,f);h&&(M.chrome&&r==13&&h.toB==h.from+2&&t.text.slice(h.from,h.toB)==ri+ri&&h.toB--,e={from:o+h.from,to:o+h.toA,insert:I.
 of(t.text.slice(h.from,h.toB).split(ri))})}else i&&(!n.hasFocus&&n.state.facet(Yt)||i.main.eq(s))&&(i=null);if(!e&&!i)return!1;
-if(!e&&t.typeOver&&!s.empty&&i&&i.main.empty?e={from:s.from,to:s.to,insert:n.state.doc.slice(s.from,s.to)}:(A.mac||A.android)&&
+if(!e&&t.typeOver&&!s.empty&&i&&i.main.empty?e={from:s.from,to:s.to,insert:n.state.doc.slice(s.from,s.to)}:(M.mac||M.android)&&
 e&&e.from==e.to&&e.from==s.head-1&&/^\. ?$/.test(e.insert.toString())&&n.contentDOM.getAttribute("autocorrect")=="off"?(i&&
 e.insert.length==2&&(i=k.single(i.main.anchor-1,i.main.head-1)),e={from:e.from,to:e.to,insert:I.of([e.insert.toString().
 replace("."," ")])}):e&&e.from>=s.from&&e.to<=s.to&&(e.from!=s.from||e.to!=s.to)&&s.to-s.from-(e.to-e.from)<=4?e={from:s.
-from,to:s.to,insert:n.state.doc.slice(s.from,e.from).append(e.insert).append(n.state.doc.slice(e.to,s.to))}:A.chrome&&e&&
+from,to:s.to,insert:n.state.doc.slice(s.from,e.from).append(e.insert).append(n.state.doc.slice(e.to,s.to))}:M.chrome&&e&&
 e.from==e.to&&e.from==s.head&&e.insert.toString()==`
  `&&n.lineWrapping&&(i&&(i=k.single(i.main.anchor-1,i.main.head-1)),e={from:s.from,to:s.to,insert:I.of([" "])}),e)return sr(
 n,e,i,r);if(i&&!i.main.eq(s)){let o=!1,l="select";return n.inputState.lastSelectionTime>Date.now()-50&&(n.inputState.lastSelectionOrigin==
 "select"&&(o=!0),l=n.inputState.lastSelectionOrigin,l=="select.pointer"&&(i=_l(n.state.facet(Si).map(a=>a(n)),i))),n.dispatch(
-{selection:i,scrollIntoView:o,userEvent:l}),!0}else return!1}function sr(n,t,e,i=-1){if(A.ios&&n.inputState.flushIOSKey(
-t))return!0;let s=n.state.selection.main;if(A.android&&(t.to==s.to&&(t.from==s.from||t.from==s.from-1&&n.state.sliceDoc(
+{selection:i,scrollIntoView:o,userEvent:l}),!0}else return!1}function sr(n,t,e,i=-1){if(M.ios&&n.inputState.flushIOSKey(
+t))return!0;let s=n.state.selection.main;if(M.android&&(t.to==s.to&&(t.from==s.from||t.from==s.from-1&&n.state.sliceDoc(
 t.from,s.from)==" ")&&t.insert.length==1&&t.insert.lines==2&&ze(n.contentDOM,"Enter",13)||(t.from==s.from-1&&t.to==s.to&&
 t.insert.length==0||i==8&&t.insert.length<t.to-t.from&&t.to>s.head)&&ze(n.contentDOM,"Backspace",8)||t.from==s.from&&t.to==
 s.to+1&&t.insert.length==0&&ze(n.contentDOM,"Delete",46)))return!0;let r=t.insert.toString();n.inputState.composing>=0&&
@@ -954,8 +954,8 @@ let a=s.changes(t),f=e&&e.main.to<=a.newLength?e.main:void 0;if(s.selection.rang
 t.to<=r.to&&t.to>=r.to-10){let h=n.state.sliceDoc(t.from,t.to),c,u=e&&$l(n,e.main.head);if(u){let m=t.insert.length-(t.to-
 t.from);c={from:u.from,to:u.to-m}}else c=n.state.doc.lineAt(r.head);let d=r.to-t.to,p=r.to-r.from;i=s.changeByRange(m=>{
 if(m.from==r.from&&m.to==r.to)return{changes:a,range:f||m.map(a)};let g=m.to-d,b=g-h.length;if(m.to-m.from!=p||n.state.sliceDoc(
-b,g)!=h||m.to>=c.from&&m.from<=c.to)return{range:m};let S=s.changes({from:b,to:g,insert:t.insert}),M=m.to-r.to;return{changes:S,
-range:f?k.range(Math.max(0,f.anchor+M),Math.max(0,f.head+M)):m.map(S)}})}else i={changes:a,selection:f&&s.selection.replaceRange(
+b,g)!=h||m.to>=c.from&&m.from<=c.to)return{range:m};let S=s.changes({from:b,to:g,insert:t.insert}),C=m.to-r.to;return{changes:S,
+range:f?k.range(Math.max(0,f.anchor+C),Math.max(0,f.head+C)):m.map(S)}})}else i={changes:a,selection:f&&s.selection.replaceRange(
 f)}}let l="input.type";return(n.composing||n.inputState.compositionPendingChange&&n.inputState.compositionEndedAt>Date.now()-
 50)&&(n.inputState.compositionPendingChange=!1,l+=".compose",n.inputState.compositionFirstChange&&(l+=".start",n.inputState.
 compositionFirstChange=!1)),s.update(i,{userEvent:l,scrollIntoView:!0})}function Jl(n,t,e,i){let s=Math.min(n.length,t.length),
@@ -970,8 +970,8 @@ view=t,this.lastKeyCode=0,this.lastKeyTime=0,this.lastTouchTime=0,this.lastFocus
 0,this.pendingIOSKey=void 0,this.tabFocusMode=-1,this.lastSelectionOrigin=null,this.lastSelectionTime=0,this.lastContextMenu=
 0,this.scrollHandlers=[],this.handlers=Object.create(null),this.composing=-1,this.compositionFirstChange=null,this.compositionEndedAt=
 0,this.compositionPendingKey=!1,this.compositionPendingChange=!1,this.mouseSelection=null,this.draggedContent=null,this.
-handleEvent=this.handleEvent.bind(this),this.notifiedFocused=t.hasFocus,A.safari&&t.contentDOM.addEventListener("input",
-()=>null),A.gecko&&dc(t.contentDOM.ownerDocument)}handleEvent(t){!rc(this.view,t)||this.ignoreDuringComposition(t)||t.type==
+handleEvent=this.handleEvent.bind(this),this.notifiedFocused=t.hasFocus,M.safari&&t.contentDOM.addEventListener("input",
+()=>null),M.gecko&&dc(t.contentDOM.ownerDocument)}handleEvent(t){!rc(this.view,t)||this.ignoreDuringComposition(t)||t.type==
 "keydown"&&this.keydown(t)||(this.view.updateState!=0?Promise.resolve().then(()=>this.runHandlers(t.type,t)):this.runHandlers(
 t.type,t))}runHandlers(t,e){let i=this.handlers[t];if(i){for(let s of i.observers)s(this.view,e);for(let s of i.handlers){
 if(e.defaultPrevented)break;if(s(this.view,e)){e.preventDefault();break}}}}ensureHandlers(t){let e=Zf(t),i=this.handlers,
@@ -979,13 +979,13 @@ s=this.view.contentDOM;for(let r in e)if(r!="scroll"){let o=!e[r].handlers.lengt
 r,this.handleEvent),l=null),l||s.addEventListener(r,this.handleEvent,{passive:o})}for(let r in i)r!="scroll"&&!e[r]&&s.removeEventListener(
 r,this.handleEvent);this.handlers=e}keydown(t){if(this.lastKeyCode=t.keyCode,this.lastKeyTime=Date.now(),t.keyCode==9&&this.
 tabFocusMode>-1&&(!this.tabFocusMode||Date.now()<=this.tabFocusMode))return!0;if(this.tabFocusMode>0&&t.keyCode!=27&&Ql.
-indexOf(t.keyCode)<0&&(this.tabFocusMode=-1),A.android&&A.chrome&&!t.synthetic&&(t.keyCode==13||t.keyCode==8))return this.
-view.observer.delayAndroidKey(t.key,t.keyCode),!0;let e;return A.ios&&!t.synthetic&&!t.altKey&&!t.metaKey&&((e=Yl.find(i=>i.
+indexOf(t.keyCode)<0&&(this.tabFocusMode=-1),M.android&&M.chrome&&!t.synthetic&&(t.keyCode==13||t.keyCode==8))return this.
+view.observer.delayAndroidKey(t.key,t.keyCode),!0;let e;return M.ios&&!t.synthetic&&!t.altKey&&!t.metaKey&&((e=Yl.find(i=>i.
 keyCode==t.keyCode))&&!t.ctrlKey||tc.indexOf(t.key)>-1&&t.ctrlKey&&!t.shiftKey)?(this.pendingIOSKey=e||t,setTimeout(()=>this.
 flushIOSKey(),250),!0):(t.keyCode!=229&&this.view.observer.forceFlush(),!1)}flushIOSKey(t){let e=this.pendingIOSKey;return!e||
 e.key=="Enter"&&t&&t.from<t.to&&/^\S+$/.test(t.insert.toString())?!1:(this.pendingIOSKey=void 0,ze(this.view.contentDOM,
 e.key,e.keyCode,e instanceof KeyboardEvent?e:void 0))}ignoreDuringComposition(t){return!/^key/.test(t.type)||t.synthetic?
-!1:this.composing>0?!0:A.safari&&!A.ios&&this.compositionPendingKey&&Date.now()-this.compositionEndedAt<100?(this.compositionPendingKey=
+!1:this.composing>0?!0:M.safari&&!M.ios&&this.compositionPendingKey&&Date.now()-this.compositionEndedAt<100?(this.compositionPendingKey=
 !1,!0):!1}startMouseSelection(t){this.mouseSelection&&this.mouseSelection.destroy(),this.mouseSelection=t}update(t){this.
 view.observer.update(t),this.mouseSelection&&this.mouseSelection.update(t),this.draggedContent&&t.docChanged&&(this.draggedContent=
 this.draggedContent.map(t.changes)),t.transactions.length&&(this.lastKeyCode=this.lastSelectionTime=0)}destroy(){this.mouseSelection&&
@@ -1016,12 +1016,12 @@ this.dragging===!1&&this.select(this.lastEvent)}select(t){let{view:e}=this,i=_l(
 this.multiple));(this.mustSelect||!i.eq(e.state.selection,this.dragging===!1))&&this.view.dispatch({selection:i,userEvent:"\
 select.pointer"}),this.mustSelect=!1}update(t){t.transactions.some(e=>e.isUserEvent("input.type"))?this.destroy():this.style.
 update(t)&&setTimeout(()=>this.select(this.lastEvent),20)}};function ic(n,t){let e=n.state.facet(Bl);return e.length?e[0](
-t):A.mac?t.metaKey:t.ctrlKey}function nc(n,t){let e=n.state.facet(El);return e.length?e[0](t):A.mac?!t.altKey:!t.ctrlKey}
+t):M.mac?t.metaKey:t.ctrlKey}function nc(n,t){let e=n.state.facet(El);return e.length?e[0](t):M.mac?!t.altKey:!t.ctrlKey}
 function sc(n,t){let{main:e}=n.state.selection;if(e.empty)return!1;let i=di(n.root);if(!i||i.rangeCount==0)return!0;let s=i.
 getRangeAt(0).getClientRects();for(let r=0;r<s.length;r++){let o=s[r];if(o.left<=t.clientX&&o.right>=t.clientX&&o.top<=t.
 clientY&&o.bottom>=t.clientY)return!0}return!1}function rc(n,t){if(!t.bubbles)return!0;if(t.defaultPrevented)return!1;for(let e=t.
 target,i;e!=n.contentDOM;e=e.parentNode)if(!e||e.nodeType==11||(i=K.get(e))&&i.ignoreEvent(t))return!1;return!0}var Bt=Object.
-create(null),St=Object.create(null),Zl=A.ie&&A.ie_version<15||A.ios&&A.webkit_version<604;function oc(n){let t=n.dom.parentNode;
+create(null),St=Object.create(null),Zl=M.ie&&M.ie_version<15||M.ios&&M.webkit_version<604;function oc(n){let t=n.dom.parentNode;
 if(!t)return;let e=t.appendChild(document.createElement("textarea"));e.style.cssText="position: fixed; left: -10000px; t\
 op: 10px",e.focus(),setTimeout(()=>{n.focus(),e.remove(),ta(n,e.value)},50)}function An(n,t,e){for(let i of n.facet(t))e=
 i(e,n);return e}function ta(n,t){t=An(n.state,er,t);let{state:e}=n,i,s=1,r=e.toText(t),o=r.lines==e.selection.ranges.length;
@@ -1042,7 +1042,7 @@ t),o=s?s.posAtStart:r.from,l=s?s.posAtEnd:r.to;return l<n.state.doc.length&&l==r
 e.top&&t<=e.bottom&&n>=e.left&&n<=e.right;function lc(n,t,e,i){let s=nt.find(n.docView,t);if(!s)return 1;let r=t-s.posAtStart;
 if(r==0)return 1;if(r==s.length)return-1;let o=s.coordsAt(r,-1);if(o&&_o(e,i,o))return-1;let l=s.coordsAt(r,1);return l&&
 _o(e,i,l)?1:o&&o.bottom>=i?-1:1}function Xo(n,t){let e=n.posAtCoords({x:t.clientX,y:t.clientY},!1);return{pos:e,bias:lc(
-n,e,t.clientX,t.clientY)}}var ac=A.ie&&A.ie_version<=11,Jo=null,Yo=0,Qo=0;function ea(n){if(!ac)return n.detail;let t=Jo,
+n,e,t.clientX,t.clientY)}}var ac=M.ie&&M.ie_version<=11,Jo=null,Yo=0,Qo=0;function ea(n){if(!ac)return n.detail;let t=Jo,
 e=Qo;return Jo=n,Qo=Date.now(),Yo=!t||e>Date.now()-400&&Math.abs(t.clientX-n.clientX)<2&&Math.abs(t.clientY-n.clientY)<2?
 (Yo+1)%3:1}function hc(n,t){let e=Xo(n,t),i=ea(t),s=n.state.selection;return{update(r){r.docChanged&&(e.pos=r.changes.mapPos(
 e.pos),s=s.map(r.changes))},get(r,o,l){let a=Xo(n,r),f,h=Go(n,a.pos,a.bias,i);if(e.pos!=a.pos&&!o){let c=Go(n,e.pos,e.bias,
@@ -1078,16 +1078,16 @@ sa(n)};St.blur=n=>{n.observer.clearSelectionRange(),sa(n)};St.compositionstart=S
 (n.inputState.compositionFirstChange==null&&(n.inputState.compositionFirstChange=!0),n.inputState.composing<0&&(n.inputState.
 composing=0))};St.compositionend=n=>{n.observer.editContext||(n.inputState.composing=-1,n.inputState.compositionEndedAt=
 Date.now(),n.inputState.compositionPendingKey=!0,n.inputState.compositionPendingChange=n.observer.pendingRecords().length>
-0,n.inputState.compositionFirstChange=null,A.chrome&&A.android?n.observer.flushSoon():n.inputState.compositionPendingChange?
+0,n.inputState.compositionFirstChange=null,M.chrome&&M.android?n.observer.flushSoon():n.inputState.compositionPendingChange?
 Promise.resolve().then(()=>n.observer.flush()):setTimeout(()=>{n.inputState.composing<0&&n.docView.hasComposition&&n.update(
 [])},50))};St.contextmenu=n=>{n.inputState.lastContextMenu=Date.now()};Bt.beforeinput=(n,t)=>{var e,i;if(t.inputType=="i\
 nsertReplacementText"&&n.observer.editContext){let r=(e=t.dataTransfer)===null||e===void 0?void 0:e.getData("text/plain"),
 o=t.getTargetRanges();if(r&&o.length){let l=o[0],a=n.posAtDOM(l.startContainer,l.startOffset),f=n.posAtDOM(l.endContainer,
-l.endOffset);return sr(n,{from:a,to:f,insert:n.state.toText(r)},null),!0}}let s;if(A.chrome&&A.android&&(s=Yl.find(r=>r.
+l.endOffset);return sr(n,{from:a,to:f,insert:n.state.toText(r)},null),!0}}let s;if(M.chrome&&M.android&&(s=Yl.find(r=>r.
 inputType==t.inputType))&&(n.observer.delayAndroidKey(s.key,s.keyCode),s.key=="Backspace"||s.key=="Delete")){let r=((i=window.
 visualViewport)===null||i===void 0?void 0:i.height)||0;setTimeout(()=>{var o;(((o=window.visualViewport)===null||o===void 0?
-void 0:o.height)||0)>r+10&&n.hasFocus&&(n.contentDOM.blur(),n.focus())},100)}return A.ios&&t.inputType=="deleteContentFo\
-rward"&&n.observer.flushSoon(),A.safari&&t.inputType=="insertText"&&n.inputState.composing>=0&&setTimeout(()=>St.compositionend(
+void 0:o.height)||0)>r+10&&n.hasFocus&&(n.contentDOM.blur(),n.focus())},100)}return M.ios&&t.inputType=="deleteContentFo\
+rward"&&n.observer.flushSoon(),M.safari&&t.inputType=="insertText"&&n.inputState.composing>=0&&setTimeout(()=>St.compositionend(
 n,t),20),!1};var tl=new Set;function dc(n){tl.has(n)||(tl.add(n),n.addEventListener("copy",()=>{}),n.addEventListener("c\
 ut",()=>{}))}var el=["pre-wrap","normal","pre-line","break-spaces"],qe=!1;function il(){qe=!1}var Fs=class{constructor(t){
 this.lineWrapping=t,this.doc=I.empty,this.heightSamples={},this.lineHeight=14,this.charWidth=7,this.textHeight=14,this.lineLength=
@@ -1239,13 +1239,13 @@ this.pixelViewport.top&&this.pixelViewport.right>this.pixelViewport.left;if(b!=t
 inView&&!this.scrollTarget&&!bc(t.dom))return 0;let S=l.width;if((this.contentDOMWidth!=S||this.editorHeight!=t.scrollDOM.
 clientHeight)&&(this.contentDOMWidth=l.width,this.editorHeight=t.scrollDOM.clientHeight,f|=16),a){let T=t.docView.measureVisibleLineHeights(
 this.viewport);if(s.mustRefreshForHeights(T)&&(o=!0),o||s.lineWrapping&&Math.abs(S-this.contentDOMWidth)>s.charWidth){let{
-lineHeight:w,charWidth:D,textHeight:C}=t.docView.measureTextSize();o=w>0&&s.refresh(r,w,D,C,Math.max(5,S/D),T),o&&(t.docView.
+lineHeight:w,charWidth:D,textHeight:A}=t.docView.measureTextSize();o=w>0&&s.refresh(r,w,D,A,Math.max(5,S/D),T),o&&(t.docView.
 minWidth=0,f|=16)}m>0&&g>0?h=Math.max(m,g):m<0&&g<0&&(h=Math.min(m,g)),il();for(let w of this.viewports){let D=w.from==this.
 viewport.from?T:t.docView.measureVisibleLineHeights(w);this.heightMap=(o?mt.empty().applyChanges(this.stateDeco,I.empty,
-this.heightOracle,[new Vt(0,0,0,t.state.doc.length)]):this.heightMap).updateHeight(s,0,o,new Vs(w.from,D))}qe&&(f|=2)}let M=!this.
+this.heightOracle,[new Vt(0,0,0,t.state.doc.length)]):this.heightMap).updateHeight(s,0,o,new Vs(w.from,D))}qe&&(f|=2)}let C=!this.
 viewportIsAppropriate(this.viewport,h)||this.scrollTarget&&(this.scrollTarget.range.head<this.viewport.from||this.scrollTarget.
-range.head>this.viewport.to);return M&&(f&2&&(f|=this.updateScaler()),this.viewport=this.getViewport(h,this.scrollTarget),
-f|=this.updateForViewport()),(f&2||M)&&this.updateViewportLines(),(this.lineGaps.length||this.viewport.to-this.viewport.
+range.head>this.viewport.to);return C&&(f&2&&(f|=this.updateScaler()),this.viewport=this.getViewport(h,this.scrollTarget),
+f|=this.updateForViewport()),(f&2||C)&&this.updateViewportLines(),(this.lineGaps.length||this.viewport.to-this.viewport.
 from>4e3)&&this.updateLineGaps(this.ensureLineGaps(o?[]:this.lineGaps,t)),f|=this.computeVisibleRanges(),this.mustEnforceCursorAssoc&&
 (this.mustEnforceCursorAssoc=!1,t.docView.enforceCursorAssoc()),f}get visibleTop(){return this.scaler.fromDOM(this.pixelViewport.
 top)}get visibleBottom(){return this.scaler.fromDOM(this.pixelViewport.bottom)}getViewport(t,e){let i=.5-Math.max(-.5,Math.
@@ -1263,14 +1263,14 @@ to),s.size,s.displaySize));return i}ensureLineGaps(t,e){let i=this.heightOracle.
 defaultTextDirection!=X.LTR&&!i)return[];let l=[],a=(h,c,u,d)=>{if(c-h<r)return;let p=this.state.selection.main,m=[p.from];
 p.empty||m.push(p.to);for(let b of m)if(b>h&&b<c){a(h,b-10,u,d),a(b+10,c,u,d);return}let g=wc(t,b=>b.from>=u.from&&b.to<=
 u.to&&Math.abs(b.from-h)<r&&Math.abs(b.to-c)<r&&!m.some(S=>b.from<S&&b.to>S));if(!g){if(c<u.to&&e&&i&&e.visibleRanges.some(
-M=>M.from<=c&&M.to>=c)){let M=e.moveToLineBoundary(k.cursor(c),!1,!0).head;M>h&&(c=M)}let b=this.gapSize(u,h,c,d),S=i||b<
+C=>C.from<=c&&C.to>=c)){let C=e.moveToLineBoundary(k.cursor(c),!1,!0).head;C>h&&(c=C)}let b=this.gapSize(u,h,c,d),S=i||b<
 2e6?b:2e6;g=new ui(h,c,b,S)}l.push(g)},f=h=>{if(h.length<o||h.type!=pt.Text)return;let c=kc(h.from,h.to,this.stateDeco);
 if(c.total<o)return;let u=this.scrollTarget?this.scrollTarget.range.head:null,d,p;if(i){let m=s/this.heightOracle.lineLength*
-this.heightOracle.lineHeight,g,b;if(u!=null){let S=on(c,u),M=((this.visibleBottom-this.visibleTop)/2+m)/h.height;g=S-M,b=
-S+M}else g=(this.visibleTop-h.top-m)/h.height,b=(this.visibleBottom-h.top+m)/h.height;d=rn(c,g),p=rn(c,b)}else{let m=c.total*
+this.heightOracle.lineHeight,g,b;if(u!=null){let S=on(c,u),C=((this.visibleBottom-this.visibleTop)/2+m)/h.height;g=S-C,b=
+S+C}else g=(this.visibleTop-h.top-m)/h.height,b=(this.visibleBottom-h.top+m)/h.height;d=rn(c,g),p=rn(c,b)}else{let m=c.total*
 this.heightOracle.charWidth,g=s*this.heightOracle.charWidth,b=0;if(m>2e6)for(let D of t)D.from>=h.from&&D.from<h.to&&D.size!=
 D.displaySize&&D.from*this.heightOracle.charWidth+b<this.pixelViewport.left&&(b=D.size-D.displaySize);let S=this.pixelViewport.
-left+b,M=this.pixelViewport.right+b,T,w;if(u!=null){let D=on(c,u),C=((M-S)/2+g)/m;T=D-C,w=D+C}else T=(S-g)/m,w=(M+g)/m;d=
+left+b,C=this.pixelViewport.right+b,T,w;if(u!=null){let D=on(c,u),A=((C-S)/2+g)/m;T=D-A,w=D+A}else T=(S-g)/m,w=(C+g)/m;d=
 rn(c,T),p=rn(c,w)}d>h.from&&a(h.from,d,h,c),p<h.to&&a(p,h.to,h,c)};for(let h of this.viewportLines)Array.isArray(h.type)?
 h.type.forEach(f):f(h);return l}gapSize(t,e,i,s){let r=on(s,i)-on(s,e);return this.heightOracle.lineWrapping?t.height*r:
 s.total*this.heightOracle.charWidth*r}updateLineGaps(t){ui.same(t,this.lineGaps)||(this.lineGaps=t,this.lineGapDeco=z.set(
@@ -1343,14 +1343,14 @@ linear-gradient(#b4b4b4, #d0d3d6)"}},"&dark .cm-button":{backgroundImage:"linear
 lid #888","&:active":{backgroundImage:"linear-gradient(#111, #333)"}},".cm-textfield":{verticalAlign:"middle",color:"inh\
 erit",fontSize:"70%",border:"1px solid silver",padding:".2em .5em"},"&light .cm-textfield":{backgroundColor:"white"},"&d\
 ark .cm-textfield":{border:"1px solid #555",backgroundColor:"inherit"}},la),Sc={childList:!0,characterData:!0,subtree:!0,
-attributes:!0,characterDataOldValue:!0},ys=A.ie&&A.ie_version<=11,_s=class{constructor(t){this.view=t,this.active=!1,this.
+attributes:!0,characterDataOldValue:!0},ys=M.ie&&M.ie_version<=11,_s=class{constructor(t){this.view=t,this.active=!1,this.
 editContext=null,this.selectionRange=new Cs,this.selectionChanged=!1,this.delayedFlush=-1,this.resizeTimeout=-1,this.queue=
 [],this.delayedAndroidKey=null,this.flushingAndroidKey=-1,this.lastChange=0,this.scrollTargets=[],this.intersection=null,
 this.resizeScroll=null,this.intersecting=!1,this.gapIntersection=null,this.gaps=[],this.printQuery=null,this.parentCheck=
--1,this.dom=t.contentDOM,this.observer=new MutationObserver(e=>{for(let i of e)this.queue.push(i);(A.ie&&A.ie_version<=11||
-A.ios&&t.composing)&&e.some(i=>i.type=="childList"&&i.removedNodes.length||i.type=="characterData"&&i.oldValue.length>i.
-target.nodeValue.length)?this.flushSoon():this.flush()}),window.EditContext&&A.android&&t.constructor.EDIT_CONTEXT!==!1&&
-!(A.chrome&&A.chrome_version<126)&&(this.editContext=new Xs(t),t.state.facet(Yt)&&(t.contentDOM.editContext=this.editContext.
+-1,this.dom=t.contentDOM,this.observer=new MutationObserver(e=>{for(let i of e)this.queue.push(i);(M.ie&&M.ie_version<=11||
+M.ios&&t.composing)&&e.some(i=>i.type=="childList"&&i.removedNodes.length||i.type=="characterData"&&i.oldValue.length>i.
+target.nodeValue.length)?this.flushSoon():this.flush()}),window.EditContext&&M.android&&t.constructor.EDIT_CONTEXT!==!1&&
+!(M.chrome&&M.chrome_version<126)&&(this.editContext=new Xs(t),t.state.facet(Yt)&&(t.contentDOM.editContext=this.editContext.
 editContext)),ys&&(this.onCharData=e=>{this.queue.push({target:e.target,type:"characterData",oldValue:e.prevValue}),this.
 flushSoon()}),this.onSelectionChange=this.onSelectionChange.bind(this),this.onResize=this.onResize.bind(this),this.onPrint=
 this.onPrint.bind(this),this.onScroll=this.onScroll.bind(this),window.matchMedia&&(this.printQuery=window.matchMedia("pr\
@@ -1369,9 +1369,9 @@ t)}onResize(){this.resizeTimeout<0&&(this.resizeTimeout=setTimeout(()=>{this.res
 this.gaps.length||this.gaps.some((e,i)=>e!=t[i]))){this.gapIntersection.disconnect();for(let e of t)this.gapIntersection.
 observe(e);this.gaps=t}}onSelectionChange(t){let e=this.selectionChanged;if(!this.readSelectionRange()||this.delayedAndroidKey)
 return;let{view:i}=this,s=this.selectionRange;if(i.state.facet(Yt)?i.root.activeElement!=this.dom:!hn(this.dom,s))return;
-let r=s.anchorNode&&i.docView.nearest(s.anchorNode);if(r&&r.ignoreEvent(t)){e||(this.selectionChanged=!1);return}(A.ie&&
-A.ie_version<=11||A.android&&A.chrome)&&!i.state.selection.main.empty&&s.focusNode&&li(s.focusNode,s.focusOffset,s.anchorNode,
-s.anchorOffset)?this.flushSoon():this.flush(!1)}readSelectionRange(){let{view:t}=this,e=di(t.root);if(!e)return!1;let i=A.
+let r=s.anchorNode&&i.docView.nearest(s.anchorNode);if(r&&r.ignoreEvent(t)){e||(this.selectionChanged=!1);return}(M.ie&&
+M.ie_version<=11||M.android&&M.chrome)&&!i.state.selection.main.empty&&s.focusNode&&li(s.focusNode,s.focusOffset,s.anchorNode,
+s.anchorOffset)?this.flushSoon():this.flush(!1)}readSelectionRange(){let{view:t}=this,e=di(t.root);if(!e)return!1;let i=M.
 safari&&t.root.nodeType==11&&t.root.activeElement==this.dom&&vc(this.view,e)||e;if(!i||this.selectionRange.eq(i))return!1;
 let s=hn(this.dom,i);return s&&!this.selectionChanged&&t.inputState.lastFocusTime>Date.now()-200&&t.inputState.lastTouchTime<
 Date.now()-300&&gf(this.dom,i)?(this.view.inputState.lastFocusTime=0,t.docView.updateSelection(),!1):(this.selectionRange.
@@ -1433,7 +1433,7 @@ l>i.text.length;l==this.from&&r<this.from?l=r:a==this.to&&r>this.to&&(a=r);let h
 s.to)-l,f?"end":null);if(!h){let u=k.single(this.toEditorPos(i.selectionStart),this.toEditorPos(i.selectionEnd));u.main.
 eq(s)||t.dispatch({selection:u,userEvent:"select"});return}let c={from:h.from+l,to:h.toA+l,insert:I.of(i.text.slice(h.from,
 h.toB).split(`
-`))};if((A.mac||A.android)&&c.from==o-1&&/^\. ?$/.test(i.text)&&t.contentDOM.getAttribute("autocorrect")=="off"&&(c={from:l,
+`))};if((M.mac||M.android)&&c.from==o-1&&/^\. ?$/.test(i.text)&&t.contentDOM.getAttribute("autocorrect")=="off"&&(c={from:l,
 to:a,insert:I.of([i.text.replace("."," ")])}),this.pendingContextChange=c,!t.state.readOnly){let u=this.to-this.from+(c.
 to-c.from+c.insert.length);sr(t,c,k.single(this.toEditorPos(i.selectionStart,u),this.toEditorPos(i.selectionEnd,u)))}this.
 pendingContextChange&&(this.revertPending(t.state),this.setSelection(t.state)),c.from<c.to&&!c.insert.length&&t.inputState.
@@ -1527,7 +1527,7 @@ r).top)-o;if(p>1||p<-1){s=s+p,i.scrollTop=s/this.scaleY,o=-1;continue}}break}}}f
 -1}if(e&&!e.empty)for(let l of this.state.facet(Bs))l(e)}get themeClasses(){return Us+" "+(this.state.facet($s)?oa:ra)+"\
  "+this.state.facet(ln)}updateAttrs(){let t=al(this,zl,{class:"cm-editor"+(this.hasFocus?" cm-focused ":" ")+this.themeClasses}),
 e={spellcheck:"false",autocorrect:"off",autocapitalize:"off",writingsuggestions:"false",translate:"no",contenteditable:this.
-state.facet(Yt)?"true":"false",class:"cm-content",style:`${A.tabSize}: ${this.state.tabSize}`,role:"textbox","aria-multi\
+state.facet(Yt)?"true":"false",class:"cm-content",style:`${M.tabSize}: ${this.state.tabSize}`,role:"textbox","aria-multi\
 line":"true"};this.state.readOnly&&(e["aria-readonly"]="true"),al(this,nr,e);let i=this.observer.ignore(()=>{let s=Ms(this.
 contentDOM,this.contentAttrs,e),r=Ms(this.dom,this.editorAttrs,t);return s||r});return this.editorAttrs=t,this.contentAttrs=
 e,i}showAnnouncements(t){let e=!0;for(let i of t)for(let s of i.effects)if(s.is(n.announce)){e&&(this.announceDOM.textContent=
@@ -1556,7 +1556,7 @@ viewport.to?this.textDirection:(this.readMeasured(),this.docView.textDirectionAt
 heightOracle.lineWrapping}bidiSpans(t){if(t.length>Cc)return Tl(t.length);let e=this.textDirectionAt(t.from),i;for(let r of this.
 bidiCache)if(r.from==t.from&&r.dir==e&&(r.fresh||Dl(r.isolates,i=zo(this,t))))return r.order;i||(i=zo(this,t));let s=Lf(
 t.text,e,i);return this.bidiCache.push(new vn(t.from,t.to,e,i,!0,s)),s}get hasFocus(){var t;return(this.dom.ownerDocument.
-hasFocus()||A.safari&&((t=this.inputState)===null||t===void 0?void 0:t.lastContextMenu)>Date.now()-3e4)&&this.root.activeElement==
+hasFocus()||M.safari&&((t=this.inputState)===null||t===void 0?void 0:t.lastContextMenu)>Date.now()-3e4)&&this.root.activeElement==
 this.contentDOM}focus(){this.observer.ignore(()=>{pl(this.contentDOM),this.docView.updateSelection()})}setRoot(t){this._root!=
 t&&(this._root=t,this.observer.setWindow((t.nodeType==9?t:t.ownerDocument).defaultView||window),this.mountStyles())}destroy(){
 this.root.activeElement==this.contentDOM&&this.contentDOM.blur();for(let t of this.plugins)t.destroy(this);this.plugins=
@@ -1578,8 +1578,8 @@ E.announce=j.define();var Cc=4096,ll={},vn=class n{constructor(t,e,i,s,r,o){this
 s,this.fresh=r,this.order=o}static update(t,e){if(e.empty&&!t.some(r=>r.fresh))return t;let i=[],s=t.length?t[t.length-1].
 dir:X.LTR;for(let r=Math.max(0,t.length-10);r<t.length;r++){let o=t[r];o.dir==s&&!e.touchesRange(o.from,o.to)&&i.push(new n(
 e.mapPos(o.from,1),e.mapPos(o.to,-1),o.dir,o.isolates,!1,o.order))}return i}};function al(n,t,e){for(let i=n.state.facet(
-t),s=i.length-1;s>=0;s--){let r=i[s],o=typeof r=="function"?r(n):r;o&&As(o,e)}return e}var Ac=A.mac?"mac":A.windows?"win":
-A.linux?"linux":"key";function Mc(n,t){let e=n.split(/-(?!$)/),i=e[e.length-1];i=="Space"&&(i=" ");let s,r,o,l;for(let a=0;a<
+t),s=i.length-1;s>=0;s--){let r=i[s],o=typeof r=="function"?r(n):r;o&&As(o,e)}return e}var Ac=M.mac?"mac":M.windows?"win":
+M.linux?"linux":"key";function Mc(n,t){let e=n.split(/-(?!$)/),i=e[e.length-1];i=="Space"&&(i=" ");let s,r,o,l;for(let a=0;a<
 e.length-1;++a){let f=e[a];if(/^(cmd|meta|m)$/i.test(f))l=!0;else if(/^a(lt)?$/i.test(f))s=!0;else if(/^(c|ctrl|control)$/i.
 test(f))r=!0;else if(/^s(hift)?$/i.test(f))o=!0;else if(/^mod$/i.test(f))t=="mac"?l=!0:r=!0;else throw new Error("Unreco\
 gnized modifier name: "+f)}return s&&(i="Alt-"+i),r&&(i="Ctrl-"+i),l&&(i="Meta-"+i),o&&(i="Shift-"+i),i}function an(n,t,e){
@@ -1588,7 +1588,7 @@ default(E.domEventHandlers({keydown(n,t){return Ec(Tc(t.state),n,t,"editor")}}))
 function Tc(n){let t=n.facet(rr),e=hl.get(t);return e||hl.set(t,e=Bc(t.reduce((i,s)=>i.concat(s),[]))),e}var ie=null,Lc=4e3;function Bc(n,t=Ac){let e=Object.create(null),i=Object.create(null),s=(o,l)=>{let a=i[o];if(a==null)i[o]=
 l;else if(a!=l)throw new Error("Key binding "+o+" is used both as a regular binding and as a multi-stroke prefix")},r=(o,l,a,f,h)=>{
 var c,u;let d=e[o]||(e[o]=Object.create(null)),p=l.split(/ (?!$)/).map(b=>Mc(b,t));for(let b=1;b<p.length;b++){let S=p.slice(
-0,b).join(" ");s(S,!0),d[S]||(d[S]={preventDefault:!0,stopPropagation:!1,run:[M=>{let T=ie={view:M,prefix:S,scope:o};return setTimeout(
+0,b).join(" ");s(S,!0),d[S]||(d[S]={preventDefault:!0,stopPropagation:!1,run:[C=>{let T=ie={view:C,prefix:S,scope:o};return setTimeout(
 ()=>{ie==T&&(ie=null)},Lc),!0}]})}let m=p.join(" ");s(m,!1);let g=d[m]||(d[m]={preventDefault:!1,stopPropagation:!1,run:((u=
 (c=d._any)===null||c===void 0?void 0:c.run)===null||u===void 0?void 0:u.slice())||[]});a&&g.run.push(a),f&&(g.preventDefault=
 !0),h&&(g.stopPropagation=!0)};for(let o of n){let l=o.scope?o.scope.split(" "):["editor"];if(o.any)for(let f of l){let h=e[f]||
@@ -1598,7 +1598,7 @@ run.push(d=>c(d,Js))}let a=o[t]||o.key;if(a)for(let f of l)r(f,a,o.run,o.prevent
 0),o=bo(r)==s.length&&s!=" ",l="",a=!1,f=!1,h=!1;ie&&ie.view==e&&ie.scope==i&&(l=ie.prefix+" ",Ql.indexOf(t.keyCode)<0&&
 (f=!0,ie=null));let c=new Set,u=g=>{if(g){for(let b of g.run)if(!c.has(b)&&(c.add(b),b(e)))return g.stopPropagation&&(h=
 !0),!0;g.preventDefault&&(g.stopPropagation&&(h=!0),f=!0)}return!1},d=n[i],p,m;return d&&(u(d[l+an(s,t,!o)])?a=!0:o&&(t.
-altKey||t.metaKey||t.ctrlKey)&&!(A.windows&&t.ctrlKey&&t.altKey)&&!(A.mac&&t.altKey&&!(t.ctrlKey||t.metaKey))&&(p=Jt[t.keyCode])&&
+altKey||t.metaKey||t.ctrlKey)&&!(M.windows&&t.ctrlKey&&t.altKey)&&!(M.mac&&t.altKey&&!(t.ctrlKey||t.metaKey))&&(p=Jt[t.keyCode])&&
 p!=s?(u(d[l+an(p,t,!0)])||t.shiftKey&&(m=He[t.keyCode])!=s&&m!=p&&u(d[l+an(m,t,!1)]))&&(a=!0):o&&t.shiftKey&&u(d[l+an(s,
 t,!0)])&&(a=!0),!a&&u(d._any)&&(a=!0)),f&&(a=!0),a&&h&&t.stopPropagation(),Js=null,a}var ki=class n{constructor(t,e,i,s,r){
 this.className=t,this.left=e,this.top=i,this.width=s,this.height=r}draw(){let t=document.createElement("div");return t.className=
@@ -1615,18 +1615,18 @@ max(e.from,n.viewport.from),s=Math.min(e.to,n.viewport.to),r=n.textDirection==X.
 a=aa(n),f=o.querySelector(".cm-line"),h=f&&window.getComputedStyle(f),c=l.left+(h?parseInt(h.paddingLeft)+Math.min(0,parseInt(
 h.textIndent)):0),u=l.right-(h?parseInt(h.paddingRight):0),d=Os(n,i,1),p=Os(n,s,-1),m=d.type==pt.Text?d:null,g=p.type==pt.
 Text?p:null;if(m&&(n.lineWrapping||d.widgetLineBreaks)&&(m=fl(n,i,1,m)),g&&(n.lineWrapping||p.widgetLineBreaks)&&(g=fl(n,
-s,-1,g)),m&&g&&m.from==g.from&&m.to==g.to)return S(M(e.from,e.to,m));{let w=m?M(e.from,null,m):T(d,!1),D=g?M(null,e.to,g):
-T(p,!0),C=[];return(m||d).to<(g||p).from-(m&&g?1:0)||d.widgetLineBreaks>1&&w.bottom+n.defaultLineHeight/2<D.top?C.push(b(
+s,-1,g)),m&&g&&m.from==g.from&&m.to==g.to)return S(C(e.from,e.to,m));{let w=m?C(e.from,null,m):T(d,!1),D=g?C(null,e.to,g):
+T(p,!0),A=[];return(m||d).to<(g||p).from-(m&&g?1:0)||d.widgetLineBreaks>1&&w.bottom+n.defaultLineHeight/2<D.top?A.push(b(
 c,w.bottom,u,D.top)):w.bottom<D.top&&n.elementAtHeight((w.bottom+D.top)/2).type==pt.Text&&(w.bottom=D.top=(w.bottom+D.top)/
-2),S(w).concat(C).concat(S(D))}function b(w,D,C,H){return new ki(t,w-a.left,D-a.top,C-w,H-D)}function S({top:w,bottom:D,
-horizontal:C}){let H=[];for(let R=0;R<C.length;R+=2)H.push(b(C[R],w,C[R+1],D));return H}function M(w,D,C){let H=1e9,R=-1e9,
-W=[];function P(F,$,ot,ut,Rt){let et=n.coordsAtPos(F,F==C.to?-2:2),bt=n.coordsAtPos(ot,ot==C.from?2:-2);!et||!bt||(H=Math.
+2),S(w).concat(A).concat(S(D))}function b(w,D,A,H){return new ki(t,w-a.left,D-a.top,A-w,H-D)}function S({top:w,bottom:D,
+horizontal:A}){let H=[];for(let R=0;R<A.length;R+=2)H.push(b(A[R],w,A[R+1],D));return H}function C(w,D,A){let H=1e9,R=-1e9,
+W=[];function P(F,$,ot,ut,Rt){let et=n.coordsAtPos(F,F==A.to?-2:2),bt=n.coordsAtPos(ot,ot==A.from?2:-2);!et||!bt||(H=Math.
 min(et.top,bt.top,H),R=Math.max(et.bottom,bt.bottom,R),Rt==X.LTR?W.push(r&&$?c:et.left,r&&ut?u:bt.right):W.push(!r&&ut?c:
-bt.left,!r&&$?u:et.right))}let L=w??C.from,V=D??C.to;for(let F of n.visibleRanges)if(F.to>L&&F.from<V)for(let $=Math.max(
+bt.left,!r&&$?u:et.right))}let L=w??A.from,V=D??A.to;for(let F of n.visibleRanges)if(F.to>L&&F.from<V)for(let $=Math.max(
 F.from,L),ot=Math.min(F.to,V);;){let ut=n.state.doc.lineAt($);for(let Rt of n.bidiSpans(ut)){let et=Rt.from+ut.from,bt=Rt.
 to+ut.from;if(et>=ot)break;bt>$&&P(Math.max(et,$),w==null&&et<=L,Math.min(bt,ot),D==null&&bt>=V,Rt.dir)}if($=ut.to+1,$>=
-ot)break}return W.length==0&&P(L,w==null,V,D==null,n.textDirection),{top:H,bottom:R,horizontal:W}}function T(w,D){let C=l.
-top+(D?w.top:w.bottom);return{top:C,bottom:C,horizontal:[]}}}function Pc(n,t){return n.constructor==t.constructor&&n.eq(
+ot)break}return W.length==0&&P(L,w==null,V,D==null,n.textDirection),{top:H,bottom:R,horizontal:W}}function T(w,D){let A=l.
+top+(D?w.top:w.bottom);return{top:A,bottom:A,horizontal:[]}}}function Pc(n,t){return n.constructor==t.constructor&&n.eq(
 t)}var Ys=class{constructor(t,e){this.view=t,this.layer=e,this.drawn=[],this.scaleX=1,this.scaleY=1,this.measureReq={read:this.
 measure.bind(this),write:this.draw.bind(this)},this.dom=t.scrollDOM.appendChild(document.createElement("div")),this.dom.
 classList.add("cm-layer"),e.above&&this.dom.classList.add("cm-layer-above"),e.class&&this.dom.classList.add(e.class),this.
@@ -1638,7 +1638,7 @@ style.zIndex=String((this.layer.above?150:-1)-e)}measure(){return this.layer.mar
 view;(t!=this.scaleX||e!=this.scaleY)&&(this.scaleX=t,this.scaleY=e,this.dom.style.transform=`scale(${1/t}, ${1/e})`)}draw(t){
 if(t.length!=this.drawn.length||t.some((e,i)=>!Pc(e,this.drawn[i]))){let e=this.dom.firstChild,i=0;for(let s of t)s.update&&
 e&&s.constructor&&this.drawn[i].constructor&&s.update(e,this.drawn[i])?(e=e.nextSibling,i++):this.dom.insertBefore(s.draw(),
-e);for(;e;){let s=e.nextSibling;e.remove(),e=s}this.drawn=t,A.safari&&A.safari_version>=26&&(this.dom.style.display=this.
+e);for(;e;){let s=e.nextSibling;e.remove(),e=s}this.drawn=t,M.safari&&M.safari_version>=26&&(this.dom.style.display=this.
 dom.firstChild?"":"none")}}destroy(){this.layer.destroy&&this.layer.destroy(this.dom,this.view),this.dom.remove()}},un=B.
 define();function ha(n){return[qt.define(t=>new Ys(t,n)),un.of(n)]}var wi=B.define({combine(n){return ni(n,{cursorBlinkRate:1200,
 drawRangeCursor:!0},{cursorBlinkRate:(t,e)=>Math.min(t,e),drawRangeCursor:(t,e)=>t||e})}});function fa(n={}){return[wi.of(
@@ -1789,33 +1789,33 @@ if(!this.buffer)return lr(this.node.parent,t);let{buffer:e}=this.buffer,{types:i
 length-1;s>=0;r--){if(r<0)return lr(this._tree,t,s);let o=i[e.buffer[this.stack[r]]];if(!o.isAnonymous){if(t[s]&&t[s]!=o.
 name)return!1;s--}}return!0}};function cr(n){return n.children.some(t=>t instanceof le||!t.type.isAnonymous||cr(t))}function zc(n){
 var t;let{buffer:e,nodeSet:i,maxBufferLength:s=1024,reused:r=[],minRepeatType:o=i.types.length}=n,l=Array.isArray(e)?new or(
-e,e.length):e,a=i.types,f=0,h=0;function c(w,D,C,H,R,W){let{id:P,start:L,end:V,size:F}=l,$=h,ot=f;if(F<0)if(l.next(),F==
--1){let Gt=r[P];C.push(Gt),H.push(L-w);return}else if(F==-3){f=P;return}else if(F==-4){h=P;return}else throw new RangeError(
+e,e.length):e,a=i.types,f=0,h=0;function c(w,D,A,H,R,W){let{id:P,start:L,end:V,size:F}=l,$=h,ot=f;if(F<0)if(l.next(),F==
+-1){let Gt=r[P];A.push(Gt),H.push(L-w);return}else if(F==-3){f=P;return}else if(F==-4){h=P;return}else throw new RangeError(
 `Unrecognized record size: ${F}`);let ut=a[P],Rt,et,bt=L-w;if(V-L<=s&&(et=g(l.pos-D,R))){let Gt=new Uint16Array(et.size-
 et.skip),yt=l.pos-et.size,It=Gt.length;for(;l.pos>yt;)It=b(et.start,Gt,It);Rt=new le(Gt,V-et.start,i),bt=et.start-w}else{
 let Gt=l.pos-F;l.next();let yt=[],It=[],ce=P>=o?P:-1,Be=0,Wi=V,Gn=$;for(;l.pos>Gt;)ce>=0&&l.id==ce&&l.size>=0?(l.end<=Wi-
 s&&(p(yt,It,L,Be,l.end,Wi,ce,Gn,ot),Be=yt.length,Wi=l.end,Gn=h),l.next()):W>2500?u(L,Gt,yt,It):c(L,Gt,yt,It,ce,W+1);if(ce>=
 0&&Be>0&&Be<yt.length&&p(yt,It,L,Be,L,Wi,ce,Gn,ot),yt.reverse(),It.reverse(),ce>-1&&Be>0){let eo=d(ut,ot);Rt=ur(ut,yt,It,
-0,yt.length,0,V-L,eo,eo)}else Rt=m(ut,yt,It,V-L,$-V,ot)}C.push(Rt),H.push(bt)}function u(w,D,C,H){let R=[],W=0,P=-1;for(;l.
+0,yt.length,0,V-L,eo,eo)}else Rt=m(ut,yt,It,V-L,$-V,ot)}A.push(Rt),H.push(bt)}function u(w,D,A,H){let R=[],W=0,P=-1;for(;l.
 pos>D;){let{id:L,start:V,end:F,size:$}=l;if($>4)l.next();else{if(P>-1&&V<P)break;P<0&&(P=F-s),R.push(L,V,F),W++,l.next()}}
 if(W){let L=new Uint16Array(W*4),V=R[R.length-2];for(let F=R.length-3,$=0;F>=0;F-=3)L[$++]=R[F],L[$++]=R[F+1]-V,L[$++]=R[F+
-2]-V,L[$++]=$;C.push(new le(L,R[2]-V,i)),H.push(V-w)}}function d(w,D){return(C,H,R)=>{let W=0,P=C.length-1,L,V;if(P>=0&&
-(L=C[P])instanceof _){if(!P&&L.type==w&&L.length==R)return L;(V=L.prop(O.lookAhead))&&(W=H[P]+L.length+V-R)}return m(w,C,
-H,R,W,D)}}function p(w,D,C,H,R,W,P,L,V){let F=[],$=[];for(;w.length>H;)F.push(w.pop()),$.push(D.pop()+C-R);w.push(m(i.types[P],
-F,$,W-R,L-W,V)),D.push(R-C)}function m(w,D,C,H,R,W,P){if(W){let L=[O.contextHash,W];P=P?[L].concat(P):[L]}if(R>25){let L=[
-O.lookAhead,R];P=P?[L].concat(P):[L]}return new _(w,D,C,H,P)}function g(w,D){let C=l.fork(),H=0,R=0,W=0,P=C.end-s,L={size:0,
-start:0,skip:0};t:for(let V=C.pos-w;C.pos>V;){let F=C.size;if(C.id==D&&F>=0){L.size=H,L.start=R,L.skip=W,W+=4,H+=4,C.next();
-continue}let $=C.pos-F;if(F<0||$<V||C.start<P)break;let ot=C.id>=o?4:0,ut=C.start;for(C.next();C.pos>$;){if(C.size<0)if(C.
-size==-3||C.size==-4)ot+=4;else break t;else C.id>=o&&(ot+=4);C.next()}R=ut,H+=F,W+=ot}return(D<0||H==w)&&(L.size=H,L.start=
-R,L.skip=W),L.size>4?L:void 0}function b(w,D,C){let{id:H,start:R,end:W,size:P}=l;if(l.next(),P>=0&&H<o){let L=C;if(P>4){
-let V=l.pos-(P-4);for(;l.pos>V;)C=b(w,D,C)}D[--C]=L,D[--C]=W-w,D[--C]=R-w,D[--C]=H}else P==-3?f=H:P==-4&&(h=H);return C}
-let S=[],M=[];for(;l.pos>0;)c(n.start||0,n.bufferStart||0,S,M,-1,0);let T=(t=n.length)!==null&&t!==void 0?t:S.length?M[0]+
-S[0].length:0;return new _(a[n.topID],S.reverse(),M.reverse(),T)}var ma=new WeakMap;function Dn(n,t){if(!n.isAnonymous||
+2]-V,L[$++]=$;A.push(new le(L,R[2]-V,i)),H.push(V-w)}}function d(w,D){return(A,H,R)=>{let W=0,P=A.length-1,L,V;if(P>=0&&
+(L=A[P])instanceof _){if(!P&&L.type==w&&L.length==R)return L;(V=L.prop(O.lookAhead))&&(W=H[P]+L.length+V-R)}return m(w,A,
+H,R,W,D)}}function p(w,D,A,H,R,W,P,L,V){let F=[],$=[];for(;w.length>H;)F.push(w.pop()),$.push(D.pop()+A-R);w.push(m(i.types[P],
+F,$,W-R,L-W,V)),D.push(R-A)}function m(w,D,A,H,R,W,P){if(W){let L=[O.contextHash,W];P=P?[L].concat(P):[L]}if(R>25){let L=[
+O.lookAhead,R];P=P?[L].concat(P):[L]}return new _(w,D,A,H,P)}function g(w,D){let A=l.fork(),H=0,R=0,W=0,P=A.end-s,L={size:0,
+start:0,skip:0};t:for(let V=A.pos-w;A.pos>V;){let F=A.size;if(A.id==D&&F>=0){L.size=H,L.start=R,L.skip=W,W+=4,H+=4,A.next();
+continue}let $=A.pos-F;if(F<0||$<V||A.start<P)break;let ot=A.id>=o?4:0,ut=A.start;for(A.next();A.pos>$;){if(A.size<0)if(A.
+size==-3||A.size==-4)ot+=4;else break t;else A.id>=o&&(ot+=4);A.next()}R=ut,H+=F,W+=ot}return(D<0||H==w)&&(L.size=H,L.start=
+R,L.skip=W),L.size>4?L:void 0}function b(w,D,A){let{id:H,start:R,end:W,size:P}=l;if(l.next(),P>=0&&H<o){let L=A;if(P>4){
+let V=l.pos-(P-4);for(;l.pos>V;)A=b(w,D,A)}D[--A]=L,D[--A]=W-w,D[--A]=R-w,D[--A]=H}else P==-3?f=H:P==-4&&(h=H);return A}
+let S=[],C=[];for(;l.pos>0;)c(n.start||0,n.bufferStart||0,S,C,-1,0);let T=(t=n.length)!==null&&t!==void 0?t:S.length?C[0]+
+S[0].length:0;return new _(a[n.topID],S.reverse(),C.reverse(),T)}var ma=new WeakMap;function Dn(n,t){if(!n.isAnonymous||
 t instanceof le||t.type!=n)return 1;let e=ma.get(t);if(e==null){e=1;for(let i of t.children){if(i.type!=n||!(i instanceof
 _)){e=1;break}e+=Dn(n,i)}ma.set(t,e)}return e}function ur(n,t,e,i,s,r,o,l,a){let f=0;for(let p=i;p<s;p++)f+=Dn(n,t[p]);let h=Math.
-ceil(f*1.5/8),c=[],u=[];function d(p,m,g,b,S){for(let M=g;M<b;){let T=M,w=m[M],D=Dn(n,p[M]);for(M++;M<b;M++){let C=Dn(n,
-p[M]);if(D+C>=h)break;D+=C}if(M==T+1){if(D>h){let C=p[T];d(C.children,C.positions,0,C.children.length,m[T]+S);continue}c.
-push(p[T])}else{let C=m[M-1]+p[M-1].length-w;c.push(ur(n,p,m,T,M,w,C,null,a))}u.push(w+S-r)}}return d(t,e,i,s,0),(l||a)(
+ceil(f*1.5/8),c=[],u=[];function d(p,m,g,b,S){for(let C=g;C<b;){let T=C,w=m[C],D=Dn(n,p[C]);for(C++;C<b;C++){let A=Dn(n,
+p[C]);if(D+A>=h)break;D+=A}if(C==T+1){if(D>h){let A=p[T];d(A.children,A.positions,0,A.children.length,m[T]+S);continue}c.
+push(p[T])}else{let A=m[C-1]+p[C-1].length-w;c.push(ur(n,p,m,T,C,w,A,null,a))}u.push(w+S-r)}}return d(t,e,i,s,0),(l||a)(
 c,u,o)}var ve=class n{constructor(t,e,i,s,r=!1,o=!1){this.from=t,this.to=e,this.tree=i,this.offset=s,this.open=(r?1:0)|(o?2:0)}get openStart(){
 return(this.open&1)>0}get openEnd(){return(this.open&2)>0}static addTree(t,e=[],i=!1){let s=[new n(0,t.length,t,0,!1,i)];
 for(let r of e)r.to>t.length&&s.push(r);return s}static applyChanges(t,e,i=128){if(!e.length)return t;let s=[],r=1,o=t.length?
@@ -2306,9 +2306,9 @@ name]=h.id}createParse(t,e,i){let s=new Wr(this,t,e,i);for(let r of this.wrapper
 t);if(!e)return this;let{nodeSet:i,skipContextMarkup:s}=this,r=this.blockParsers.slice(),o=this.leafBlockParsers.slice(),
 l=this.blockNames.slice(),a=this.inlineParsers.slice(),f=this.inlineNames.slice(),h=this.endLeafBlock.slice(),c=this.wrappers;
 if(Hi(e.defineNodes)){s=Object.assign({},s);let u=i.types.slice(),d;for(let p of e.defineNodes){let{name:m,block:g,composite:b,
-style:S}=typeof p=="string"?{name:p}:p;if(u.some(w=>w.name==m))continue;b&&(s[u.length]=(w,D,C)=>b(D,C,w.value));let M=u.
-length,T=b?["Block","BlockContext"]:g?M>=x.ATXHeading1&&M<=x.SetextHeading2?["Block","LeafBlock","Heading"]:["Block","Le\
-afBlock"]:void 0;u.push(tt.define({id:M,name:m,props:T&&[[O.group,T]]})),S&&(d||(d={}),Array.isArray(S)||S instanceof gt?
+style:S}=typeof p=="string"?{name:p}:p;if(u.some(w=>w.name==m))continue;b&&(s[u.length]=(w,D,A)=>b(D,A,w.value));let C=u.
+length,T=b?["Block","BlockContext"]:g?C>=x.ATXHeading1&&C<=x.SetextHeading2?["Block","LeafBlock","Heading"]:["Block","Le\
+afBlock"]:void 0;u.push(tt.define({id:C,name:m,props:T&&[[O.group,T]]})),S&&(d||(d={}),Array.isArray(S)||S instanceof gt?
 d[m]=S:Object.assign(d,S))}i=new Ke(u),d&&(i=i.extend(Ti(d)))}if(Hi(e.props)&&(i=i.extend(...e.props)),Hi(e.remove))for(let u of e.
 remove){let d=this.blockNames.indexOf(u),p=this.inlineNames.indexOf(u);d>-1&&(r[d]=o[d]=void 0),p>-1&&(a[p]=void 0)}if(Hi(
 e.parseBlock))for(let u of e.parseBlock){let d=l.indexOf(u.name);if(d>-1)r[d]=u.parse,o[d]=u.leaf;else{let p=u.before?qn(
@@ -2454,18 +2454,20 @@ index+d[0].length,kind:"wiki",target:p,label:m.join("|")||p};h.push(g),s(g.from)
 m-lp-wiki-source"})}for(let d of l){let p=s(d.from);if(/^ATXHeading[1-6]$/.test(d.name)&&p.classes.push("cm-lp-h"+d.name.
 at(-1)),["FencedCode","CodeBlock"].includes(d.name))for(let m of e)m.from>=p.from&&m.from<d.to&&m.classes.push("cm-lp-co\
 de");if(d.name==="QuoteMark"&&(p.classes.push("cm-lp-quote"),p.active||o.push({from:d.from,to:d.to+(n[d.to]===" "?1:0),kind:"\
-hide"})),d.name==="ListMark"){let m=l.find(S=>S.name==="TaskMarker"&&S.from>=d.to&&S.to<=p.to),g=m?m.to:d.to;p.classes.push(
+hide"})),d.name==="ListMark"){let m=l.find(T=>T.name==="TaskMarker"&&T.from>=d.to&&T.to<=p.to),g=m?m.to:d.to;p.classes.push(
 "cm-lp-list"),p.indent=n.slice(p.from,d.from).replace(/\t/g,"    ").length;let b=/^\s*$/.test(n.slice(p.from,d.from))?p.
-from:d.from;p.active||o.push({from:b,to:g+(n[g]===" "?1:0),kind:m?"task":"bullet",checked:m?n.slice(m.from,m.to).toLowerCase()===
-"[x]":!1,taskAt:m?.from,label:m?p.value.slice(g-p.from).trim():void 0,marker:/^\d/.test(n.slice(d.from,d.to))?n.slice(d.
-from,d.to):"\u2022"})}["StrongEmphasis","Emphasis","InlineCode","Strikethrough"].includes(d.name)&&r.push({from:d.from,to:d.
-to,class:d.name==="StrongEmphasis"?"cm-lp-strong":d.name==="Emphasis"?"cm-lp-em":d.name==="Strikethrough"?"cm-lp-strike":
-"cm-lp-inline-code"}),d.name==="HeaderMark"&&!p.active&&o.push({from:d.from,to:d.to+(n[d.to]===" "?1:0),kind:"hide"}),["\
-EmphasisMark","StrikethroughMark"].includes(d.name)&&!p.active&&o.push({from:d.from,to:d.to,kind:"hide"}),d.name==="Code\
-Mark"&&(d.parent==="InlineCode"?p.active||o.push({from:d.from,to:d.to,kind:"hide"}):(p.classes.push("cm-lp-fence"),p.active||
-o.push({from:p.from,to:p.to,kind:"hide"}))),d.name==="Link"&&!h.some(m=>m.from<d.to&&m.to>d.from)&&r.push({from:d.from,to:d.
-to,class:"cm-lp-link"})}o.sort((d,p)=>d.from-p.from||p.to-d.to);let c=[],u=-1;for(let d of o)d.from>=u&&d.to>d.from&&(c.
-push(d),u=d.to);return{lines:e,marks:r,replacements:c}}var Zr=j.define(),to=class extends Qt{constructor(t,e){super(),this.item=t,this.options=e}eq(t){return JSON.stringify(this.
+from:d.from,S=g+(n[g]===" "?1:0),C=p.active&&(S===g||t.some(T=>T.from<S&&T.to>b));C||(p.bullet=!0),C||o.push({from:b,to:S,
+kind:m?"task":"bullet",checked:m?n.slice(m.from,m.to).toLowerCase()==="[x]":!1,taskAt:m?.from,label:m?p.value.slice(g-p.
+from).trim():void 0,marker:/^\d/.test(n.slice(d.from,d.to))?n.slice(d.from,d.to):"\u2022"})}["StrongEmphasis","Emphasis",
+"InlineCode","Strikethrough"].includes(d.name)&&r.push({from:d.from,to:d.to,class:d.name==="StrongEmphasis"?"cm-lp-stron\
+g":d.name==="Emphasis"?"cm-lp-em":d.name==="Strikethrough"?"cm-lp-strike":"cm-lp-inline-code"}),d.name==="HeaderMark"&&!p.
+active&&o.push({from:d.from,to:d.to+(n[d.to]===" "?1:0),kind:"hide"}),["EmphasisMark","StrikethroughMark"].includes(d.name)&&
+!p.active&&o.push({from:d.from,to:d.to,kind:"hide"}),d.name==="CodeMark"&&(d.parent==="InlineCode"?p.active||o.push({from:d.
+from,to:d.to,kind:"hide"}):(p.classes.push("cm-lp-fence"),p.active||o.push({from:p.from,to:p.to,kind:"hide"}))),d.name===
+"Link"&&!h.some(m=>m.from<d.to&&m.to>d.from)&&r.push({from:d.from,to:d.to,class:"cm-lp-link"})}for(let d of e){let p=d.active&&
+!d.classes.includes("cm-lp-list")&&/^(\s*)([-*+]) $/.exec(d.value);!p||f(d.from,d.to)||(d.classes.push("cm-lp-list"),d.bullet=
+!0,d.indent=p[1].replace(/\t/g,"    ").length,o.push({from:d.from,to:d.to,kind:"bullet",marker:"\u2022"}))}o.sort((d,p)=>d.
+from-p.from||p.to-d.to);let c=[],u=-1;for(let d of o)d.from>=u&&d.to>d.from&&(c.push(d),u=d.to);return{lines:e,marks:r,replacements:c}}var Zr=j.define(),to=class extends Qt{constructor(t,e){super(),this.item=t,this.options=e}eq(t){return JSON.stringify(this.
 item)===JSON.stringify(t.item)}toDOM(t){let e=this.item;if(e.kind==="wiki"){let s=document.createElement("button");return s.
 type="button",s.className="cm-lp-wiki",s.textContent=e.label,s.setAttribute("aria-label","Open linked note "+e.label),s.
 onmousedown=r=>r.preventDefault(),s.onclick=r=>{r.preventDefault(),this.options.onWiki(e.target)},s}let i=document.createElement(
@@ -2476,27 +2478,27 @@ i.append(s)}else i.textContent=e.marker;return i}ignoreEvent(){return!0}};functi
 this.decorations=this.build(t)}update(t){if(t.view.composing){this.decorations=this.decorations.map(t.changes);return}(t.
 docChanged||t.selectionSet||t.focusChanged||t.transactions.some(e=>e.effects.some(i=>i.is(Zr))))&&(this.decorations=this.
 build(t.view))}build(t){let e=t.hasFocus?t.state.selection.ranges.map(r=>({from:r.from,to:r.to})):[],i=Qr(t.state.doc.toString(),
-e),s=[];for(let r of i.lines){let o=[...r.classes,...r.active?["cm-lp-active"]:[]],l={class:o.join(" ")};r.indent!==void 0&&
-!r.active&&(l.style=`--lp-indent:${Math.floor(r.indent/2)*22}px`),o.length&&s.push(z.line({attributes:l}).range(r.from))}
-for(let r of i.marks)r.to>r.from&&s.push(z.mark({class:r.class}).range(r.from,r.to));for(let r of i.replacements)s.push(
-z.replace({widget:r.kind==="hide"?void 0:new to(r,n)}).range(r.from,r.to));return z.set(s,!0)}},{decorations:t=>t.decorations})}
-function Pp(n,t){let e=new Je(""),i,s=new Map,r,o=()=>{clearTimeout(r);let u=()=>{if(i.dom.isConnected){if(i.composing){
-r=setTimeout(u,60);return}i.dispatch({effects:Zr.of(null)}),t.onChange(e.raw,!1)}};r=setTimeout(u,80)},l=()=>{s.set(e.text,
-e.raw),s.size>160&&s.delete(s.keys().next().value)},a=u=>{if(!u||i.composing)return!1;let d=i.state.doc.toString(),p=0,m=d.
-length,g=u.text.length;for(;p<m&&p<g&&d[p]===u.text[p];)p++;for(;m>p&&g>p&&d[m-1]===u.text[g-1];)m--,g--;return i.dispatch(
-{changes:{from:p,to:m,insert:u.text.slice(p,g)},selection:k.range(u.start,u.end),annotations:Y.userEvent.of("input.forma\
-t"),scrollIntoView:!0}),i.focus(),!0},f=u=>{if(i.composing)return!1;if(u==="undo"||u==="redo")return i.focus(),(u==="und\
-o"?Hn:Ii)(i);let d=i.state.selection.main;return a(t.transform(i.state.doc.toString(),d.from,d.to,u))},h=()=>{if(i.composing)
-return!1;let u=i.state.selection.main;return Qr(i.state.doc.toString()).lines.find(p=>p.from<=u.from&&p.to>=u.from)?.classes.
-includes("cm-lp-code")?!1:a(t.continueList(i.state.doc.toString(),u.from,u.to))},c=[Fa(),fa(),E.lineWrapping,ua("Start w\
-riting\u2026"),E.contentAttributes.of({"aria-label":"Live Preview editor",spellcheck:"true",autocorrect:"on",autocapitalize:"\
-sentences"}),Id(t),rr.of([{key:"Tab",run:()=>f("indent"),shift:()=>f("outdent")},{key:"Enter",run:h},{key:"Mod-b",run:()=>f(
-"bold")},{key:"Mod-i",run:()=>f("italic")},...Wa,...dh]),E.domEventHandlers({beforeinput(u){return!u.isComposing&&!i.composing&&
-u.cancelable&&["insertParagraph","insertLineBreak"].includes(u.inputType)&&h()?(u.preventDefault(),!0):!1},compositionend(){
-return o(),!1}}),E.updateListener.of(u=>{if(u.docChanged){l();for(let d of u.transactions)if(d.docChanged){let p=d.newDoc.
-toString(),m=(d.isUserEvent("undo")||d.isUserEvent("redo"))&&s.get(p);if(m!==!1&&m!==void 0)e=new Je(m);else{let g=[];d.
-changes.iterChanges((b,S,M,T,w)=>g.push({from:b,to:S,insert:w.toString()})),e.apply(g)}}l(),t.onChange(e.raw,i.composing),
-i.composing&&o()}})];return i=new E({parent:n,state:U.create({doc:"",extensions:c})}),{view:i,format:f,get value(){return e.
-raw},get composing(){return i.composing},setValue(u){clearTimeout(r),e=new Je(u),s=new Map,l(),i.setState(U.create({doc:e.
-text,extensions:c}))},focus(){i.focus()},select(u,d=u){i.dispatch({selection:k.range(u,d),effects:Zr.of(null)}),i.focus()},
-replace(u){return a(u)},destroy(){clearTimeout(r),i.destroy()}}}export{E as EditorView,Pp as createLiveEditor};
+e),s=[];for(let r of i.lines){let o=[...r.classes,...r.active?["cm-lp-active"]:[],...r.bullet?["cm-lp-bullet"]:[]],l={class:o.
+join(" ")};r.indent!==void 0&&r.bullet&&(l.style=`--lp-indent:${Math.floor(r.indent/2)*22}px`),o.length&&s.push(z.line({
+attributes:l}).range(r.from))}for(let r of i.marks)r.to>r.from&&s.push(z.mark({class:r.class}).range(r.from,r.to));for(let r of i.
+replacements)s.push(z.replace({widget:r.kind==="hide"?void 0:new to(r,n)}).range(r.from,r.to));return z.set(s,!0)}},{decorations:t=>t.
+decorations})}function Pp(n,t){let e=new Je(""),i,s=new Map,r,o=()=>{clearTimeout(r);let u=()=>{if(i.dom.isConnected){if(i.
+composing){r=setTimeout(u,60);return}i.dispatch({effects:Zr.of(null)}),t.onChange(e.raw,!1)}};r=setTimeout(u,80)},l=()=>{
+s.set(e.text,e.raw),s.size>160&&s.delete(s.keys().next().value)},a=u=>{if(!u||i.composing)return!1;let d=i.state.doc.toString(),
+p=0,m=d.length,g=u.text.length;for(;p<m&&p<g&&d[p]===u.text[p];)p++;for(;m>p&&g>p&&d[m-1]===u.text[g-1];)m--,g--;return i.
+dispatch({changes:{from:p,to:m,insert:u.text.slice(p,g)},selection:k.range(u.start,u.end),annotations:Y.userEvent.of("in\
+put.format"),scrollIntoView:!0}),i.focus(),!0},f=u=>{if(i.composing)return!1;if(u==="undo"||u==="redo")return i.focus(),
+(u==="undo"?Hn:Ii)(i);let d=i.state.selection.main;return a(t.transform(i.state.doc.toString(),d.from,d.to,u))},h=()=>{if(i.
+composing)return!1;let u=i.state.selection.main;return Qr(i.state.doc.toString()).lines.find(p=>p.from<=u.from&&p.to>=u.
+from)?.classes.includes("cm-lp-code")?!1:a(t.continueList(i.state.doc.toString(),u.from,u.to))},c=[Fa(),fa(),E.lineWrapping,
+ua("Start writing\u2026"),E.contentAttributes.of({"aria-label":"Live Preview editor",spellcheck:"true",autocorrect:"on",
+autocapitalize:"sentences"}),Id(t),rr.of([{key:"Tab",run:()=>f("indent"),shift:()=>f("outdent")},{key:"Enter",run:h},{key:"\
+Mod-b",run:()=>f("bold")},{key:"Mod-i",run:()=>f("italic")},...Wa,...dh]),E.domEventHandlers({beforeinput(u){return!u.isComposing&&
+!i.composing&&u.cancelable&&["insertParagraph","insertLineBreak"].includes(u.inputType)&&h()?(u.preventDefault(),!0):!1},
+compositionend(){return o(),!1}}),E.updateListener.of(u=>{if(u.docChanged){l();for(let d of u.transactions)if(d.docChanged){
+let p=d.newDoc.toString(),m=(d.isUserEvent("undo")||d.isUserEvent("redo"))&&s.get(p);if(m!==!1&&m!==void 0)e=new Je(m);else{
+let g=[];d.changes.iterChanges((b,S,C,T,w)=>g.push({from:b,to:S,insert:w.toString()})),e.apply(g)}}l(),t.onChange(e.raw,
+i.composing),i.composing&&o()}})];return i=new E({parent:n,state:U.create({doc:"",extensions:c})}),{view:i,format:f,get value(){
+return e.raw},get composing(){return i.composing},setValue(u){clearTimeout(r),e=new Je(u),s=new Map,l(),i.setState(U.create(
+{doc:e.text,extensions:c}))},focus(){i.focus()},select(u,d=u){i.dispatch({selection:k.range(u,d),effects:Zr.of(null)}),i.
+focus()},replace(u){return a(u)},destroy(){clearTimeout(r),i.destroy()}}}export{E as EditorView,Pp as createLiveEditor};

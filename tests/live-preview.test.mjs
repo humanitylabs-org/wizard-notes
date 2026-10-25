@@ -13,3 +13,17 @@ test('exact raw round trip preserves BOM, Unicode, mixed EOLs, final newline and
 test('localized edits leave every untouched EOL and whitespace byte identical',()=>{const raw='\ufeff# Title\r\n\n- [X] keep  \r\n> quote\rLast';const d=new RawMarkdown(raw),at=d.text.indexOf('keep');d.apply([{from:at,to:at+4,insert:'stay'}]);assert.equal(d.raw,raw.replace('keep','stay'));assert.equal(d.text,normalize(d.raw));});
 test('multiple normalized-offset edits and newly inserted lines keep original surrounding bytes',()=>{const d=new RawMarkdown('one\r\ntwo\nthree\r');d.apply([{from:0,to:3,insert:'ONE'},{from:8,to:13,insert:'THREE\nnew'}]);assert.equal(d.raw,'ONE\r\ntwo\nTHREE\r\nnew\r');});
 test('HTML and unsafe wiki labels remain text-only widget data',()=>{const m=model('[[<img src=x onerror=alert(1)>|<script>]]');assert.equal(m.replacements[0].label,'<script>');assert.equal(new RawMarkdown('<script>alert(1)</script>').text,'<script>alert(1)</script>');});
+
+test('bullet renders on the caret line as soon as "- " is typed',()=>{
+  const at=p=>[{from:p,to:p}];
+  assert.equal(previewModel('- ',at(2)).replacements.filter(r=>r.kind==='bullet').length,1);
+  assert.equal(previewModel('- milk',at(6)).replacements[0].marker,'•');
+  assert.equal(previewModel('  - child',at(9)).lines[0].bullet,true);
+  assert.equal(previewModel('-',at(1)).replacements.length,0);
+  assert.equal(previewModel('- milk',at(1)).replacements.length,0);
+  assert.equal(previewModel('- [ ] task',at(10)).replacements[0].kind,'task');
+});
+test('bare "- " under a paragraph renders on the caret line only',()=>{
+  const t='Plain\n- ';assert.equal(previewModel(t,[{from:t.length,to:t.length}]).lines[1].bullet,true);
+  assert.equal(previewModel(t,[]).lines[1].bullet,undefined);
+});

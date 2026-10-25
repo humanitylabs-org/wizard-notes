@@ -20,7 +20,7 @@ dialog{width:min(440px,calc(100% - 28px));max-height:85dvh;overflow:auto;padding
 #source .cm-lp-h1,#source .cm-lp-h2,#source .cm-lp-h3,#source .cm-lp-h4,#source .cm-lp-h5,#source .cm-lp-h6{font-weight:650;line-height:1.35;letter-spacing:-.02em;padding-top:.25em;padding-bottom:.15em}
 #source .cm-lp-h1{font-size:28px}#source .cm-lp-h2{font-size:23px}#source .cm-lp-h3{font-size:20px}#source .cm-lp-h4{font-size:18px}
 #source .cm-lp-strong{font-weight:700}#source .cm-lp-em{font-style:italic}#source .cm-lp-strike{text-decoration:line-through}
-#source .cm-lp-list:not(.cm-lp-active){padding-left:calc(var(--lp-indent,0px) + 24px);text-indent:-24px}
+#source .cm-lp-list.cm-lp-bullet{padding-left:calc(var(--lp-indent,0px) + 24px);text-indent:-24px}
 #source .cm-lp-marker{display:inline-block;width:24px;text-indent:0;text-align:center;color:var(--wz-text-secondary);vertical-align:baseline}
 #source .cm-lp-marker input{appearance:auto;width:16px;height:16px;min-height:0;padding:0;margin:0;accent-color:var(--wz-accent);cursor:pointer;vertical-align:-2px}
 #source .cm-lp-wiki{font:inherit;display:inline;min-width:0;min-height:0;padding:0;margin:0;border:0;border-radius:0;background:none;color:var(--wz-accent);text-align:left;text-indent:0;text-decoration:underline;text-underline-offset:3px;vertical-align:baseline}

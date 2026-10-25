@@ -61,6 +61,17 @@ fs.mkdirSync(out,{recursive:true});
   await p.keyboard.insertText('child');await p.keyboard.press('Tab');expect((await get()).endsWith('\n  - child')).toBe(true);
   await p.keyboard.press('Shift+Tab');expect((await get()).endsWith('\n- child')).toBe(true);
   report.checks.push('Android beforeinput-only Enter continues once; Tab/Shift-Tab indent and outdent');
+  // Obsidian: "- " becomes a bullet immediately on the caret line, and stays one while indenting there.
+  const caretBullet=()=>f.locator('.cm-line.cm-lp-active').last().evaluate(e=>({bullet:!!e.querySelector('.cm-lp-bullet-widget,[class*=bullet]')||e.classList.contains('cm-lp-bullet'),text:e.textContent}));
+  await p.keyboard.press('Enter');let cb=await caretBullet();expect(cb.bullet).toBe(true);expect((await get()).endsWith('\n- child\n- ')).toBe(true);
+  await p.keyboard.insertText('instant');await p.keyboard.press('Tab');cb=await caretBullet();expect(cb.bullet).toBe(true);expect((await get()).endsWith('\n  - instant')).toBe(true);
+  await p.keyboard.press('Shift+Tab');expect((await caretBullet()).bullet).toBe(true);expect((await get()).endsWith('\n- instant')).toBe(true);
+  // Fresh "- " typed under a plain paragraph line (CommonMark would not call it a list yet).
+  await f.evaluate(async()=>{const {EditorView}=await import('./vendor/live-preview.js');const v=EditorView.findFromDOM(document.querySelector('.cm-editor'));const n=v.state.doc.length;v.dispatch({changes:{from:n,insert:'\n\nPlain line\n'},selection:{anchor:n+13}});v.focus();});await p.waitForTimeout(50);
+  await p.keyboard.insertText('-');expect((await caretBullet()).bullet).toBe(false);
+  await p.keyboard.insertText(' ');cb=await caretBullet();expect(cb.bullet).toBe(true);expect(cb.text.includes('-')).toBe(false);
+  await p.keyboard.insertText('typed');expect((await caretBullet()).bullet).toBe(true);expect((await get()).endsWith('\nPlain line\n- typed')).toBe(true);
+  report.checks.push('typing "- " renders a bullet on the caret line at once; Tab/Shift-Tab keep it rendered');
   // Simulate native autocorrect/voice replacement on a selected range, not event replay.
   await p.keyboard.insertText('\nteh');let value=await get();await select(value.length-3,value.length);
   await cdp.send('Input.insertText',{text:'the'});expect((await get()).endsWith('\nthe')).toBe(true);

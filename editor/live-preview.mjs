@@ -41,9 +41,9 @@ function liveDecorations(options) {
       const active=view.hasFocus ? view.state.selection.ranges.map(r=>({from:r.from,to:r.to})) : [];
       const model=previewModel(view.state.doc.toString(),active), ranges=[];
       for (const line of model.lines) {
-        const classes=[...line.classes,...(line.active?['cm-lp-active']:[])];
+        const classes=[...line.classes,...(line.active?['cm-lp-active']:[]),...(line.bullet?['cm-lp-bullet']:[])];
         const attributes={class:classes.join(' ')};
-        if (line.indent!==undefined && !line.active) attributes.style=`--lp-indent:${Math.floor(line.indent/2)*22}px`;
+        if (line.indent!==undefined && line.bullet) attributes.style=`--lp-indent:${Math.floor(line.indent/2)*22}px`;
         if (classes.length) ranges.push(Decoration.line({attributes}).range(line.from));
       }
       for(const m of model.marks) if(m.to>m.from) ranges.push(Decoration.mark({class:m.class}).range(m.from,m.to));

@@ -70,7 +70,12 @@ export function previewModel(text, active = []) {
       line.indent = text.slice(line.from,n.from).replace(/\t/g,'    ').length;
       // Leave quotes outside a list prefix intact; only consume leading whitespace.
       const start = /^\s*$/.test(text.slice(line.from,n.from)) ? line.from : n.from;
-      if (!line.active) replacements.push({from:start, to:end+(text[end]===' '?1:0), kind:task?'task':'bullet',
+      const markEnd = end + (text[end]===' '?1:0);
+      // Obsidian: the bullet renders the moment "- " is typed, even on the caret line; the raw marker
+      // shows only while the caret/selection sits inside it, or before the space is typed.
+      const reveal = line.active && (markEnd===end || active.some(r => r.from < markEnd && r.to > start));
+      if (!reveal) line.bullet = true;
+      if (!reveal) replacements.push({from:start, to:markEnd, kind:task?'task':'bullet',
         checked:task?text.slice(task.from,task.to).toLowerCase()==='[x]':false,
         taskAt:task?.from, label:task?line.value.slice(end-line.from).trim():undefined,
         marker:/^\d/.test(text.slice(n.from,n.to))?text.slice(n.from,n.to):'•'});
@@ -85,6 +90,14 @@ export function previewModel(text, active = []) {
       else { line.classes.push('cm-lp-fence'); if (!line.active) replacements.push({from:line.from,to:line.to,kind:'hide'}); }
     }
     if (n.name === 'Link' && !wiki.some(w=> w.from < n.to && w.to > n.from)) marks.push({from:n.from,to:n.to,class:'cm-lp-link'});
+  }
+  // A bare "- " typed under a paragraph is not a list in CommonMark (an empty item cannot interrupt a
+  // paragraph) but Obsidian shows a bullet at once; render the caret line's bare marker the same way.
+  for (const line of lines) {
+    const bare = line.active && !line.classes.includes('cm-lp-list') && /^(\s*)([-*+]) $/.exec(line.value);
+    if (!bare || inCode(line.from, line.to)) continue;
+    line.classes.push('cm-lp-list'); line.bullet = true; line.indent = bare[1].replace(/\t/g,'    ').length;
+    replacements.push({from:line.from, to:line.to, kind:'bullet', marker:'•'});
   }
   // Non-overlapping replacements: list prefixes own task markers; fenced code owns info.
   replacements.sort((a,b)=>a.from-b.from || b.to-a.to);
