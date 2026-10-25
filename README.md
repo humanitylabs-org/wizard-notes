@@ -8,7 +8,7 @@ The vault is plain `.md` on your disk in the app's data folder: `${APP_DATA_DIR}
 
 Wizard Notes joins private agents by default, never the main agent. The install sheet offers **Set up private agent** when none exists. The vault is readable/editable through Wizard only by agents you tick; the owner can explicitly tick other agents and revoke access later. The owner view remains available regardless of agent assignment. This is an app/gateway boundary, not protection against an administrator or a process with access to the owner's disk.
 
-The service accepts owner-authenticated, same-host Wizard browser requests. Optional trusted hosts/origins come from the Runtipi form, never baked-in owner addresses. The internal app-network MCP route is for the Wizard gateway; direct MCP uses the app-data `agent.token` bearer credential. Do not expose the container directly to the Internet.
+The service accepts owner-authenticated, same-host Wizard browser requests. Optional trusted hosts/origins come from the Runtipi form, never baked-in owner addresses. The declared `/gateway/mcp` route is a box-trusted transport behind owner ingress and the agent-scoped Wizard gateway (which does not inject per-app credentials); browser requests cannot use that route. Direct `/mcp` integrations use the app-data `agent.token` bearer credential. Do not expose the container directly to the Internet.
 
 ## Features
 
@@ -28,7 +28,7 @@ This public package has id `wizard-notes`. An existing local `notes` installatio
 
 `openapi.json` describes the HTTP API. `GET /healthz`, `/api/tree`, `/api/note?path=Inbox/Idea.md`, `/api/search?q=phrase`, `/api/backlinks` and `/api/resolve` are read-only. Mutations use `/api/note`, `/api/folder`, `/api/move`, `/api/delete`, `/api/restore` and `/api/today`.
 
-The streamable-HTTP MCP endpoint is `/mcp`; tools are `notes_tree`, `notes_search`, `notes_read`, `notes_write`, `notes_mkdir`, `notes_move`, `notes_delete`. Read before writing and send the current `rev`; never overwrite a conflict blindly. The installed `skill/SKILL.md` documents safe tool use. Paths are vault-relative; no dot segments, absolute paths, symlinks or hidden paths. `Vault.path()` is the central server path gate, reserved as the extension point for future per-path access.
+The Wizard registry declares streamable-HTTP `/gateway/mcp`; direct integrations use authenticated `/mcp`. Tools are `notes_tree`, `notes_search`, `notes_read`, `notes_write`, `notes_mkdir`, `notes_move`, `notes_delete`. Read before writing and send the current `rev`; never overwrite a conflict blindly. The installed `skill/SKILL.md` documents safe tool use. Paths are vault-relative; no dot segments, absolute paths, symlinks or hidden paths. `Vault.path()` is the central server path gate, reserved as the extension point for future per-path access.
 
 ## Run & test
 

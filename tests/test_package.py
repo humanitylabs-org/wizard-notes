@@ -43,7 +43,8 @@ class PackageStartup(unittest.TestCase):
                         rpc={'jsonrpc':'2.0','id':1,'method':'tools/list'}
                         self.assertEqual(req('/mcp',rpc)[0],401)
                         self.assertEqual(req('/mcp',rpc,{'Authorization':'Bearer '+current})[0],200)
-                        self.assertEqual(req('/mcp',rpc,{'Host':f'wizard-notes:{port}'})[0],200)
+                        self.assertEqual(req('/gateway/mcp',rpc,{'Host':f'wizard-notes:{port}'})[0],200)
+                        self.assertEqual(req('/gateway/mcp',rpc)[0],200)
                         same={'Host':'owner.example.invalid','Origin':'https://owner.example.invalid'}
                         self.assertEqual(req('/api/today',{},same)[0],200)
                         self.assertEqual(req('/api/today',{},{'Host':'owner.example.invalid','Origin':'https://foreign.example.invalid'})[0],403)

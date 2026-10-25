@@ -305,10 +305,11 @@ class Handler(BaseHTTPRequestHandler):
             if not 0 < size <= 2_100_000: raise Problem(413,'Request too large.')
             body = json.loads(self.rfile.read(size))
             path = urlsplit(self.path).path
-            if path == '/mcp' and self.command == 'POST':
-                # The private app network belongs to the authenticated Wizard gateway.
-                # Direct MCP clients must use the owner-only app-data credential.
-                internal = self.headers.get('Host','').lower() == INTERNAL_HOST and not self.headers.get('Origin')
+            if path in {'/mcp','/gateway/mcp'} and self.command == 'POST':
+                # WAM's app bridge has no per-app bearer-header support. Its declared
+                # endpoint is box-only behind owner ingress + agent-scoped gateway ACLs.
+                # Browsers cannot use it. Direct integrations use /mcp + app credential.
+                internal = path == '/gateway/mcp' and not self.headers.get('Origin') and not self.headers.get('Sec-Fetch-Site')
                 if MCP_TOKEN and not internal and not secrets.compare_digest(self.headers.get('Authorization',''), 'Bearer '+MCP_TOKEN):
                     raise Problem(401,'MCP authorization required.')
                 out = rpc(body); return self.send(202 if out is None else 200,out)

@@ -150,8 +150,9 @@ class HttpTests(unittest.TestCase):
         with patch.object(s,'MCP_TOKEN','fixture-not-a-credential'):
             self.assertEqual(self.req('/mcp',rpc)[0],401)
             self.assertEqual(self.req('/mcp',rpc,headers={'Authorization':'Bearer fixture-not-a-credential'})[0],200)
-            self.assertEqual(self.req('/mcp',rpc,headers={'Host':s.INTERNAL_HOST})[0],200)
-            self.assertEqual(self.req('/mcp',rpc,headers={'Host':s.INTERNAL_HOST,'Origin':'https://foreign.example.invalid'})[0],403)
+            self.assertEqual(self.req('/gateway/mcp',rpc,headers={'Host':s.INTERNAL_HOST})[0],200)
+            self.assertEqual(self.req('/gateway/mcp',rpc,headers={'Host':s.INTERNAL_HOST,'Origin':'https://foreign.example.invalid'})[0],403)
+            self.assertEqual(self.req('/gateway/mcp',rpc,headers={'Origin':'http://127.0.0.1:'+str(self.port)})[0],401)
 
     def test_mcp(self):
         def rpc(method,params={}):return self.req('/mcp',{'jsonrpc':'2.0','id':1,'method':method,'params':params})[1]['result']

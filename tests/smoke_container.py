@@ -40,7 +40,8 @@ try:
     code,body=request('/mcp',rpc,{'Authorization':'Bearer '+credential})
     assert code==200 and len(json.loads(body)['result']['tools'])==7
     assert request('/api/note',{'path':'Denied.md','content':'x'},{'Origin':'https://foreign.example.invalid'})[0]==403
-    assert request('/mcp',rpc,{'Host':'wizard-notes:8799'})[0]==200
+    assert request('/gateway/mcp',rpc,{'Host':'wizard-notes:8799'})[0]==200
+    assert request('/gateway/mcp',rpc)[0]==200
     # Real CRUD and restart preserve the same file and credential.
     code,body=request('/api/note',{'path':'Smoke.md','content':'temporary fixture','create':True})
     assert code==201

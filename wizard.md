@@ -18,7 +18,7 @@ api:
   path: /api
   spec: openapi.json
 mcp:
-  path: /mcp
+  path: /gateway/mcp
   port: 8799
   transport: streamable-http
 skill: skill/SKILL.md
