@@ -15,6 +15,7 @@ fs.mkdirSync(out,{recursive:true});
   await p.goto(base+'/?skin='+skin);const f=await(await p.locator('#app-frame').elementHandle()).contentFrame();
   await f.getByRole('treeitem',{name:'Open Live Preview',exact:true}).click();
   await expect(f.locator('.cm-content')).toBeVisible();await expect(f.locator('#read')).toBeHidden();
+  if(width===390)await expect.poll(()=>f.locator('#sidebar').evaluate(e=>e.getBoundingClientRect().right)).toBeLessThanOrEqual(0);
   async function select(from,to=from){await f.evaluate(async({from,to})=>{const {EditorView}=await import('./vendor/live-preview.js');const v=EditorView.findFromDOM(document.querySelector('.cm-editor'));v.dispatch({selection:{anchor:from,head:to}});v.focus();},{from,to});await p.waitForTimeout(70);}
   const doc=()=>f.evaluate(async()=>{const {EditorView}=await import('./vendor/live-preview.js');return EditorView.findFromDOM(document.querySelector('.cm-editor')).state.doc.toString();});
   const text=await doc();await select(text.lastIndexOf('Write here.')+4);
