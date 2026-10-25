@@ -19,8 +19,7 @@ run('volume','create',volume)
 try:
     # A new daemon volume is root-owned. Entry must prepare only /data then drop root.
     run('run','-d','--name',name,'--read-only','--tmpfs','/tmp','--cap-drop','ALL','--cap-add','CHOWN','--cap-add','SETUID','--cap-add','SETGID','--security-opt','no-new-privileges:true','--memory','128m','-p','127.0.0.1::8799','-v',volume+':/data',a.image)
-    address=run('port',name,'8799/tcp').splitlines()[0]
-    base='http://'+address
+    base='http://'+run('port',name,'8799/tcp').splitlines()[0]
     def request(path,body=None,headers=None):
         h={'Content-Type':'application/json',**(headers or {})}
         req=urllib.request.Request(base+path,data=None if body is None else json.dumps(body).encode(),headers=h)
@@ -46,11 +45,14 @@ try:
     code,body=request('/api/note',{'path':'Smoke.md','content':'temporary fixture','create':True})
     assert code==201
     run('restart',name)
+    # An ephemeral host port may be reassigned on restart; resolve it again.
+    base='http://'+run('port',name,'8799/tcp').splitlines()[0]
     for attempt in range(40):
         try:
             if request('/healthz')[0]==200:break
         except OSError:pass
         time.sleep(.5)
+    else:raise AssertionError('Container health did not return after restart')
     assert json.loads(request('/api/note?path=Smoke.md')[1])['content']=='temporary fixture'
     assert run('exec','--user','1000:1000',name,'python','-c',"from pathlib import Path;print(Path('/data/agent.token').read_text().strip())")==credential
     state=run('exec','--user','1000:1000',name,'python','-c',"from pathlib import Path;print(Path('/proc/1/status').read_text())")
