@@ -1,7 +1,7 @@
 import {EditorState, EditorSelection, StateEffect, Transaction} from '@codemirror/state';
 import {EditorView, Decoration, ViewPlugin, WidgetType, keymap, drawSelection, placeholder} from '@codemirror/view';
-import {history, undo, redo, defaultKeymap, historyKeymap} from '@codemirror/commands';
-import {RawMarkdown, previewModel} from './live-preview-model.mjs';
+import {history, undo, redo, defaultKeymap, historyKeymap, isolateHistory} from '@codemirror/commands';
+import {RawMarkdown, previewModel, autocapEdits} from './live-preview-model.mjs';
 
 export {EditorView}; // Standard CM DOM lookup API; useful to host integrations and browser QA.
 const refresh = StateEffect.define();
@@ -60,6 +60,7 @@ export function createLiveEditor(parent, options) {
     const check=()=>{
       if(!view.dom.isConnected)return;
       if(view.composing){settleTimer=setTimeout(check,60);return;}
+      flushCaps();
       view.dispatch({effects:refresh.of(null)});options.onChange(raw.raw,false);
     };
     settleTimer=setTimeout(check,80);
@@ -86,6 +87,14 @@ export function createLiveEditor(parent, options) {
     if(model.lines.find(l=>l.from<=s.from&&l.to>=s.from)?.classes.includes('cm-lp-code'))return false;
     return apply(options.continueList(view.state.doc.toString(),s.from,s.to));
   };
+  let pendingCaps=[];
+  const flushCaps=()=>{
+    if(!pendingCaps.length||view.composing)return;
+    const ranges=pendingCaps;pendingCaps=[];
+    const text=view.state.doc.toString(),seen=new Set(),changes=[];
+    for(const r of ranges)for(const e of autocapEdits(text,r.from,r.to))if(!seen.has(e.from)){seen.add(e.from);changes.push(e);}
+    if(changes.length)view.dispatch({changes,annotations:[Transaction.userEvent.of('input.autocap'),isolateHistory.of('full')]});
+  };
   const extensions=[
     history(),drawSelection(),EditorView.lineWrapping,placeholder('Start writing…'),
     EditorView.contentAttributes.of({'aria-label':'Live Preview editor',spellcheck:'true',autocorrect:'on',autocapitalize:'sentences'}),
@@ -110,6 +119,13 @@ export function createLiveEditor(parent, options) {
         if(restore!==false&&restore!==undefined)raw=new RawMarkdown(restore);
         else {const changes=[];tr.changes.iterChanges((from,to,_a,_b,insert)=>changes.push({from,to,insert:insert.toString()}));raw.apply(changes);}
       }
+      for(const tr of update.transactions)if(tr.docChanged){
+        // Remember typed ranges (mapped through later edits); capitalise only once no IME composition
+        // is open, so the keyboard's composing text is never rewritten under it.
+        pendingCaps=pendingCaps.map(r=>({from:tr.changes.mapPos(r.from,-1),to:tr.changes.mapPos(r.to,1)}));
+        if(tr.isUserEvent('input')&&!tr.isUserEvent('input.autocap')&&!tr.isUserEvent('input.task'))tr.changes.iterChangedRanges((_a,_b,from,to)=>{if(to>from)pendingCaps.push({from,to});});
+      }
+      if(pendingCaps.length&&!view.composing)queueMicrotask(flushCaps);
       remember();options.onChange(raw.raw,view.composing);
       // Chromium EditContext can commit composition without a bubbling DOM
       // compositionend. Watch native CM state rather than relying on that event.

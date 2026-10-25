@@ -1,4 +1,4 @@
-var Xn=[],ro=[];(()=>{let n="lc,34,7n,7,7b,19,,,,2,,2,,,20,b,1c,l,g,,2t,7,2,6,2,2,,4,z,,u,r,2j,b,1m,9,9,,o,4,,9,,3,,5,17\
+var Xn=[],oo=[];(()=>{let n="lc,34,7n,7,7b,19,,,,2,,2,,,20,b,1c,l,g,,2t,7,2,6,2,2,,4,z,,u,r,2j,b,1m,9,9,,o,4,,9,,3,,5,17\
 ,3,1n,9,16,o,,x,1i,3,,i,,7,a,2,t,3,1k,,,7,2,2,2,3,9,,a,2,q,,2,3,1k,,,5,4,2,2,3,3,,u,2,3,,b,3,1k,,,8,,3,,3,k,2,m,6,,3,1k,\
 ,,7,2,2,2,3,7,3,a,2,u,,1n,5,3,3,,4,9,,14,5,1j,,,7,,3,,4,7,2,b,2,t,3,1k,,,7,,3,,4,7,2,b,2,f,,c,4,1j,2,,7,,3,,4,9,,a,2,t,3\
 ,1y,,4,6,,,,8,i,2,1p,,,8,c,8,2q,,,a,b,7,21,2,r,,,,,,4,2,1d,k,,2,5,b,,10,9,,2u,b,,6,n,4,4,3,g,4,d,,,3,6,,f,,jj,3,qa,4,s,3\
@@ -9,14 +9,14 @@ e,c,,8,2,1a,,1f,,,3,2,2,5,2,,,15,5,5,2,6k,8,,2,fn4,,kh,g,g,g,a6,2,gt,,6a,,45,5,1
 2,2,7,3,5,1v,9,,,2,,,4,,5,,,e,2,2a,i,n,,29,k,6j,7,2,9,r,2,2a,h,2y,d,2t,3,2,a,74,f,6t,6,,2,2,4,,,,2,3x,7,2,7,3,,s,a,14,7,\
 ,4,8,,9,b,1a,g,5i,8,5j,8,,8,2a,m,,e,3e,6,3,,,2,,7,,,1u,5,,2,,5,9n,4,9,2,,,1c,7,3,5,n,,44l,,6,f,8ug,i,1xc,5,1n,7,t4,,,1j,\
 7,4,29,,b,2,f57,2,3mp,1a,2,n,f2,5,3,6,8,8,2,7,u,4,44,3,1iz,1j,4,1e,8,,e,,m,5,,f,11s,7,,h,2,7,,2,,5,2s,,4g,7,af,,1p,4,e4,\
-4,72,2,6r,,2,,7,2,5,,d6,7,31,7,240,5".split(",").map(t=>t?parseInt(t,36):1);for(let t=0,e=0;t<n.length;t++)(t%2?ro:Xn).push(
-e=e+n[t])})();function _h(n){if(n<768)return!1;for(let t=0,e=Xn.length;;){let i=t+e>>1;if(n<Xn[i])e=i;else if(n>=ro[i])t=
-i+1;else return!0;if(t==e)return!1}}function io(n){return n>=127462&&n<=127487}var no=8205;function oo(n,t,e=!0,i=!0){return(e?lo:Xh)(n,t,i)}function lo(n,t,e){if(t==n.length)return t;t&&ao(n.charCodeAt(
-t))&&ho(n.charCodeAt(t-1))&&t--;let i=_n(n,t);for(t+=so(i);t<n.length;){let s=_n(n,t);if(i==no||s==no||e&&_h(s))t+=so(s),
-i=s;else if(io(s)){let r=0,o=t-2;for(;o>=0&&io(_n(n,o));)r++,o-=2;if(r%2==0)break;t+=2}else break}return t}function Xh(n,t,e){
-for(;t>1;){let i=lo(n,t-2,e);if(i<t)return i;t--}return 0}function _n(n,t){let e=n.charCodeAt(t);if(!ho(e)||t+1==n.length)
-return e;let i=n.charCodeAt(t+1);return ao(i)?(e-55296<<10)+(i-56320)+65536:e}function ao(n){return n>=56320&&n<57344}function ho(n){
-return n>=55296&&n<56320}function so(n){return n<65536?1:2}var I=class n{lineAt(t){if(t<0||t>this.length)throw new RangeError(`Invalid position ${t} in document of length ${this.length}`);
+4,72,2,6r,,2,,7,2,5,,d6,7,31,7,240,5".split(",").map(t=>t?parseInt(t,36):1);for(let t=0,e=0;t<n.length;t++)(t%2?oo:Xn).push(
+e=e+n[t])})();function Jh(n){if(n<768)return!1;for(let t=0,e=Xn.length;;){let i=t+e>>1;if(n<Xn[i])e=i;else if(n>=oo[i])t=
+i+1;else return!0;if(t==e)return!1}}function no(n){return n>=127462&&n<=127487}var so=8205;function lo(n,t,e=!0,i=!0){return(e?ao:Yh)(n,t,i)}function ao(n,t,e){if(t==n.length)return t;t&&ho(n.charCodeAt(
+t))&&fo(n.charCodeAt(t-1))&&t--;let i=_n(n,t);for(t+=ro(i);t<n.length;){let s=_n(n,t);if(i==so||s==so||e&&Jh(s))t+=ro(s),
+i=s;else if(no(s)){let r=0,o=t-2;for(;o>=0&&no(_n(n,o));)r++,o-=2;if(r%2==0)break;t+=2}else break}return t}function Yh(n,t,e){
+for(;t>1;){let i=ao(n,t-2,e);if(i<t)return i;t--}return 0}function _n(n,t){let e=n.charCodeAt(t);if(!fo(e)||t+1==n.length)
+return e;let i=n.charCodeAt(t+1);return ho(i)?(e-55296<<10)+(i-56320)+65536:e}function ho(n){return n>=56320&&n<57344}function fo(n){
+return n>=55296&&n<56320}function ro(n){return n<65536?1:2}var I=class n{lineAt(t){if(t<0||t>this.length)throw new RangeError(`Invalid position ${t} in document of length ${this.length}`);
 return this.lineInner(t,!1,1,0)}line(t){if(t<1||t>this.lines)throw new RangeError(`Invalid line number ${t} in ${this.lines}\
 -line document`);return this.lineInner(t,!0,1,0)}replace(t,e,i){[t,e]=Ie(this,t,e);let s=[];return this.decompose(0,t,s,
 2),i.length&&i.decompose(0,i.length,s,3),this.decompose(e,this.length,s,1),Oe.from(s,this.length-(e-t)+i.length)}append(t){
@@ -28,12 +28,12 @@ this,t)}iterRange(t,e=this.length){return new Ui(this,t,e)}iterLines(t,e){let i;
 this.lines+1);let s=this.line(t).from;i=this.iterRange(s,Math.max(s,e==this.lines+1?this.length:e<=1?0:this.line(e-1).to))}
 return new Gi(i)}toString(){return this.sliceString(0)}toJSON(){let t=[];return this.flatten(t),t}constructor(){}static of(t){
 if(t.length==0)throw new RangeError("A document must have at least one line");return t.length==1&&!t[0]?n.empty:t.length<=
-32?new dt(t):Oe.from(dt.split(t,[]))}},dt=class n extends I{constructor(t,e=Jh(t)){super(),this.text=t,this.length=e}get lines(){
+32?new dt(t):Oe.from(dt.split(t,[]))}},dt=class n extends I{constructor(t,e=Qh(t)){super(),this.text=t,this.length=e}get lines(){
 return this.text.length}get children(){return null}lineInner(t,e,i,s){for(let r=0;;r++){let o=this.text[r],l=s+o.length;
-if((e?i:l)>=t)return new Yn(s,l,i,o);s=l+1,i++}}decompose(t,e,i,s){let r=t<=0&&e>=this.length?this:new n(fo(this.text,t,
+if((e?i:l)>=t)return new Yn(s,l,i,o);s=l+1,i++}}decompose(t,e,i,s){let r=t<=0&&e>=this.length?this:new n(co(this.text,t,
 e),Math.min(e,this.length)-Math.max(0,t));if(s&1){let o=i.pop(),l=$i(r.text,o.text.slice(),0,r.length);if(l.length<=32)i.
 push(new n(l,o.length+r.length));else{let a=l.length>>1;i.push(new n(l.slice(0,a)),new n(l.slice(a)))}}else i.push(r)}replace(t,e,i){
-if(!(i instanceof n))return super.replace(t,e,i);[t,e]=Ie(this,t,e);let s=$i(this.text,$i(i.text,fo(this.text,0,t)),e),r=this.
+if(!(i instanceof n))return super.replace(t,e,i);[t,e]=Ie(this,t,e);let s=$i(this.text,$i(i.text,co(this.text,0,t)),e),r=this.
 length+i.length-(e-t);return s.length<=32?new n(s,r):Oe.from(n.split(s,[]),r)}sliceString(t,e=this.length,i=`
 `){[t,e]=Ie(this,t,e);let s="";for(let r=0,o=0;r<=e&&o<this.text.length;o++){let l=this.text[o],a=r+l.length;r>t&&o&&(s+=
 i),t<a&&e>r&&(s+=l.slice(Math.max(0,t-r),e-r)),r=a+1}return s}flatten(t){for(let e of this.text)t.push(e)}scanIdentical(){
@@ -56,9 +56,9 @@ function c(d){let p;if(d.lines>r&&d instanceof n)for(let m of d.children)c(m);el
 d instanceof dt&&a&&(p=h[h.length-1])instanceof dt&&d.lines+p.lines<=32?(a+=d.lines,f+=d.length+1,h[h.length-1]=new dt(p.
 text.concat(d.text),p.length+1+d.length)):(a+d.lines>s&&u(),a+=d.lines,f+=d.length+1,h.push(d))}function u(){a!=0&&(l.push(
 h.length==1?h[0]:n.from(h,f)),f=-1,a=h.length=0)}for(let d of t)c(d);return u(),l.length==1?l[0]:new n(l,e)}};I.empty=new dt(
-[""],0);function Jh(n){let t=-1;for(let e of n)t+=e.length+1;return t}function $i(n,t,e=0,i=1e9){for(let s=0,r=0,o=!0;r<
+[""],0);function Qh(n){let t=-1;for(let e of n)t+=e.length+1;return t}function $i(n,t,e=0,i=1e9){for(let s=0,r=0,o=!0;r<
 n.length&&s<=i;r++){let l=n[r],a=s+l.length;a>=e&&(a>i&&(l=l.slice(0,i-s)),s<e&&(l=l.slice(e-s)),o?(t[t.length-1]+=l,o=!1):
-t.push(l)),s=a+1}return t}function fo(n,t,e){return $i(n,[""],t,e)}var pe=class{constructor(t,e=1){this.dir=e,this.done=
+t.push(l)),s=a+1}return t}function co(n,t,e){return $i(n,[""],t,e)}var pe=class{constructor(t,e=1){this.dir=e,this.done=
 !1,this.lineBreak=!1,this.value="",this.nodes=[t],this.offsets=[e>0?1:(t instanceof dt?t.text.length:t.children.length)<<
 1]}nextInner(t,e){for(this.done=this.lineBreak=!1;;){let i=this.nodes.length-1,s=this.nodes[i],r=this.offsets[i],o=r>>1,
 l=s instanceof dt?s.text.length:s.children.length;if(o==(e>0?l:0)){if(i==0)return this.done=!0,this.value="",this;e>0&&this.
@@ -80,16 +80,16 @@ return e&&this.afterBreak?(this.value="",this.afterBreak=!1):e?(this.done=!0,thi
 (I.prototype[Symbol.iterator]=function(){return this.iter()},pe.prototype[Symbol.iterator]=Ui.prototype[Symbol.iterator]=
 Gi.prototype[Symbol.iterator]=function(){return this});var Yn=class{constructor(t,e,i,s){this.from=t,this.to=e,this.number=
 i,this.text=s}get length(){return this.to-this.from}};function Ie(n,t,e){return t=Math.max(0,Math.min(n.length,t)),[t,Math.
-max(t,Math.min(n.length,e))]}function it(n,t,e=!0,i=!0){return oo(n,t,e,i)}function Yh(n){return n>=56320&&n<57344}function Qh(n){
-return n>=55296&&n<56320}function go(n,t){let e=n.charCodeAt(t);if(!Qh(e)||t+1==n.length)return e;let i=n.charCodeAt(t+1);
-return Yh(i)?(e-55296<<10)+(i-56320)+65536:e}function bo(n){return n<65536?1:2}var Qn=/\r\n?|\n/,ft=(function(n){return n[n.Simple=0]="Simple",n[n.TrackDel=1]="Track\
+max(t,Math.min(n.length,e))]}function it(n,t,e=!0,i=!0){return lo(n,t,e,i)}function Zh(n){return n>=56320&&n<57344}function tf(n){
+return n>=55296&&n<56320}function bo(n,t){let e=n.charCodeAt(t);if(!tf(e)||t+1==n.length)return e;let i=n.charCodeAt(t+1);
+return Zh(i)?(e-55296<<10)+(i-56320)+65536:e}function yo(n){return n<65536?1:2}var Qn=/\r\n?|\n/,ft=(function(n){return n[n.Simple=0]="Simple",n[n.TrackDel=1]="Track\
 Del",n[n.TrackBefore=2]="TrackBefore",n[n.TrackAfter=3]="TrackAfter",n})(ft||(ft={})),_t=class n{constructor(t){this.sections=
 t}get length(){let t=0;for(let e=0;e<this.sections.length;e+=2)t+=this.sections[e];return t}get newLength(){let t=0;for(let e=0;e<
 this.sections.length;e+=2){let i=this.sections[e+1];t+=i<0?this.sections[e]:i}return t}get empty(){return this.sections.
 length==0||this.sections.length==2&&this.sections[1]<0}iterGaps(t){for(let e=0,i=0,s=0;e<this.sections.length;){let r=this.
 sections[e++],o=this.sections[e++];o<0?(t(i,s,r),s+=r):s+=o,i+=r}}iterChangedRanges(t,e=!1){Zn(this,t,e)}get invertedDesc(){
 let t=[];for(let e=0;e<this.sections.length;){let i=this.sections[e++],s=this.sections[e++];s<0?t.push(i,s):t.push(s,i)}
-return new n(t)}composeDesc(t){return this.empty?t:t.empty?this:yo(this,t)}mapDesc(t,e=!1){return t.empty?this:ts(this,t,
+return new n(t)}composeDesc(t){return this.empty?t:t.empty?this:ko(this,t)}mapDesc(t,e=!1){return t.empty?this:ts(this,t,
 e)}mapPos(t,e=-1,i=ft.Simple){let s=0,r=0;for(let o=0;o<this.sections.length;){let l=this.sections[o++],a=this.sections[o++],
 f=s+l;if(a<0){if(f>t)return r+(t-s);r+=l}else{if(i!=ft.Simple&&f>=t&&(i==ft.TrackDel&&s<t&&f>t||i==ft.TrackBefore&&s<t||
 i==ft.TrackAfter&&f>t))return null;if(f>t||f==t&&e<0&&!l)return t==s||e<0?r:r+a;r+=a}s=f}if(t>s)throw new RangeError(`Po\
@@ -102,7 +102,7 @@ lt=class n extends _t{constructor(t,e){super(t),this.inserted=e}apply(t){if(this
 Applying change set to a document with the wrong length");return Zn(this,(e,i,s,r,o)=>t=t.replace(s,s+(i-e),o),!1),t}mapDesc(t,e=!1){
 return ts(this,t,e,!0)}invert(t){let e=this.sections.slice(),i=[];for(let s=0,r=0;s<e.length;s+=2){let o=e[s],l=e[s+1];if(l>=
 0){e[s]=l,e[s+1]=o;let a=s>>1;for(;i.length<a;)i.push(I.empty);i.push(o?t.slice(r,r+o):I.empty)}r+=o}return new n(e,i)}compose(t){
-return this.empty?t:t.empty?this:yo(this,t,!0)}map(t,e=!1){return t.empty?this:ts(this,t,e,!0)}iterChanges(t,e=!1){Zn(this,
+return this.empty?t:t.empty?this:ko(this,t,!0)}map(t,e=!1){return t.empty?this:ts(this,t,e,!0)}iterChanges(t,e=!1){Zn(this,
 t,e)}get desc(){return _t.create(this.sections)}filter(t){let e=[],i=[],s=[],r=new me(this);t:for(let o=0,l=0;;){let a=o==
 t.length?1e9:t[o++];for(;l<a||l==a&&r.len==0;){if(r.done)break t;let h=Math.min(r.len,a-l);st(s,h,-1);let c=r.ins==-1?-1:
 r.off==0?r.ins:0;st(e,h,c),c>0&&ee(i,e,r.text),r.forward(h),l+=h}let f=t[o++];for(;l<f;){if(r.done)break t;let h=Math.min(
@@ -130,7 +130,7 @@ o.len,l.len);st(s,f,-1),o.forward(f),l.forward(f)}else if(l.ins>=0&&(o.ins<0||a=
 a=o.i),o.forward(h),f-=h}l.next()}else if(o.ins>=0){let f=0,h=o.len;for(;h;)if(l.ins==-1){let c=Math.min(h,l.len);f+=c,h-=
 c,l.forward(c)}else if(l.ins==0&&l.len<h)h-=l.len,l.next();else break;st(s,f,a<o.i?o.ins:0),r&&a<o.i&&ee(r,s,o.text),a=o.
 i,o.forward(o.len-h)}else{if(o.done&&l.done)return r?lt.createSet(s,r):_t.create(s);throw new Error("Mismatched change s\
-et lengths")}}}function yo(n,t,e=!1){let i=[],s=e?[]:null,r=new me(n),o=new me(t);for(let l=!1;;){if(r.done&&o.done)return s?
+et lengths")}}}function ko(n,t,e=!1){let i=[],s=e?[]:null,r=new me(n),o=new me(t);for(let l=!1;;){if(r.done&&o.done)return s?
 lt.createSet(i,s):_t.create(i);if(r.ins==0)st(i,r.len,0,l),r.next();else if(o.len==0&&!o.done)st(i,0,o.ins,l),s&&ee(s,i,
 o.text),o.next();else{if(r.done||o.done)throw new Error("Mismatched change set lengths");{let a=Math.min(r.len2,o.len),f=i.
 length;if(r.ins==-1){let h=o.ins==-1?-1:o.off?0:o.ins;st(i,a,h,l),s&&h&&ee(s,i,o.text)}else o.ins==-1?(st(i,r.off?0:r.len,
@@ -145,11 +145,11 @@ return this.flags&32?this.to:this.from}get head(){return this.flags&32?this.from
 to}get assoc(){return this.flags&8?-1:this.flags&16?1:0}get bidiLevel(){let t=this.flags&7;return t==7?null:t}get goalColumn(){
 let t=this.flags>>6;return t==16777215?void 0:t}map(t,e=-1){let i,s;return this.empty?i=s=t.mapPos(this.from,e):(i=t.mapPos(
 this.from,1),s=t.mapPos(this.to,-1)),i==this.from&&s==this.to?this:new n(i,s,this.flags)}extend(t,e=t){if(t<=this.anchor&&
-e>=this.anchor)return k.range(t,e);let i=Math.abs(t-this.anchor)>Math.abs(e-this.anchor)?t:e;return k.range(this.anchor,
+e>=this.anchor)return w.range(t,e);let i=Math.abs(t-this.anchor)>Math.abs(e-this.anchor)?t:e;return w.range(this.anchor,
 i)}eq(t,e=!1){return this.anchor==t.anchor&&this.head==t.head&&this.goalColumn==t.goalColumn&&(!e||!this.empty||this.assoc==
 t.assoc)}toJSON(){return{anchor:this.anchor,head:this.head}}static fromJSON(t){if(!t||typeof t.anchor!="number"||typeof t.
-head!="number")throw new RangeError("Invalid JSON representation for SelectionRange");return k.range(t.anchor,t.head)}static create(t,e,i){
-return new n(t,e,i)}},k=class n{constructor(t,e){this.ranges=t,this.mainIndex=e}map(t,e=-1){return t.empty?this:n.create(
+head!="number")throw new RangeError("Invalid JSON representation for SelectionRange");return w.range(t.anchor,t.head)}static create(t,e,i){
+return new n(t,e,i)}},w=class n{constructor(t,e){this.ranges=t,this.mainIndex=e}map(t,e=-1){return t.empty?this:n.create(
 this.ranges.map(i=>i.map(t,e)),this.mainIndex)}eq(t,e=!1){if(this.ranges.length!=t.ranges.length||this.mainIndex!=t.mainIndex)
 return!1;for(let i=0;i<this.ranges.length;i++)if(!this.ranges[i].eq(t.ranges[i],e))return!1;return!0}get main(){return this.
 ranges[this.mainIndex]}asSingle(){return this.ranges.length==1?this:new n([this.main],0)}addRange(t,e=!0){return n.create(
@@ -163,7 +163,7 @@ return Ee.create(t,t,(e==0?0:e<0?8:16)|(i==null?7:Math.min(6,i))|(s??16777215)<<
 6|(s==null?7:Math.min(6,s));return e<t?Ee.create(e,t,48|r):Ee.create(t,e,(e>t?8:0)|r)}static normalized(t,e=0){let i=t[e];
 t.sort((s,r)=>s.from-r.from),e=t.indexOf(i);for(let s=1;s<t.length;s++){let r=t[s],o=t[s-1];if(r.empty?r.from<=o.to:r.from<
 o.to){let l=o.from,a=Math.max(r.to,o.to);s<=e&&e--,t.splice(--s,2,r.anchor>r.head?n.range(a,l):n.range(l,a))}}return new n(
-t,e)}};function ko(n,t){for(let e of n.ranges)if(e.to>t)throw new RangeError("Selection points outside of document")}var fs=0,
+t,e)}};function wo(n,t){for(let e of n.ranges)if(e.to>t)throw new RangeError("Selection points outside of document")}var fs=0,
 B=class n{constructor(t,e,i,s,r){this.combine=t,this.compareInput=e,this.compare=i,this.isStatic=s,this.id=fs++,this.default=
 t([]),this.extensions=typeof r=="function"?r(this):r}get reader(){return this}static define(t={}){return new n(t.combine||
 (e=>e),t.compareInput||((e,i)=>e===i),t.compare||(t.combine?(e,i)=>e===i:cs),!!t.static,t.enables)}of(t){return new Pe([],
@@ -173,16 +173,16 @@ this.compute([t],i=>e(i.field(t)))}};function cs(n,t){return n==t||n.length==t.l
 this.dependencies=t,this.facet=e,this.type=i,this.value=s,this.id=fs++}dynamicSlot(t){var e;let i=this.value,s=this.facet.
 compareInput,r=this.id,o=t[r]>>1,l=this.type==2,a=!1,f=!1,h=[];for(let c of this.dependencies)c=="doc"?a=!0:c=="selectio\
 n"?f=!0:(((e=t[c.id])!==null&&e!==void 0?e:1)&1)==0&&h.push(t[c.id]);return{create(c){return c.values[o]=i(c),1},update(c,u){
-if(a&&u.docChanged||f&&(u.docChanged||u.selection)||es(c,h)){let d=i(c);if(l?!co(d,c.values[o],s):!s(d,c.values[o]))return c.
+if(a&&u.docChanged||f&&(u.docChanged||u.selection)||es(c,h)){let d=i(c);if(l?!uo(d,c.values[o],s):!s(d,c.values[o]))return c.
 values[o]=d,1}return 0},reconfigure:(c,u)=>{let d,p=u.config.address[r];if(p!=null){let m=Yi(u,p);if(this.dependencies.every(
-g=>g instanceof B?u.facet(g)===c.facet(g):g instanceof Tt?u.field(g,!1)==c.field(g,!1):!0)||(l?co(d=i(c),m,s):s(d=i(c),m)))
-return c.values[o]=m,0}else d=i(c);return c.values[o]=d,1}}}};function co(n,t,e){if(n.length!=t.length)return!1;for(let i=0;i<
-n.length;i++)if(!e(n[i],t[i]))return!1;return!0}function es(n,t){let e=!1;for(let i of t)Qe(n,i)&1&&(e=!0);return e}function Zh(n,t,e){
+g=>g instanceof B?u.facet(g)===c.facet(g):g instanceof Lt?u.field(g,!1)==c.field(g,!1):!0)||(l?uo(d=i(c),m,s):s(d=i(c),m)))
+return c.values[o]=m,0}else d=i(c);return c.values[o]=d,1}}}};function uo(n,t,e){if(n.length!=t.length)return!1;for(let i=0;i<
+n.length;i++)if(!e(n[i],t[i]))return!1;return!0}function es(n,t){let e=!1;for(let i of t)Qe(n,i)&1&&(e=!0);return e}function ef(n,t,e){
 let i=e.map(a=>n[a.id]),s=e.map(a=>a.type),r=i.filter(a=>!(a&1)),o=n[t.id]>>1;function l(a){let f=[];for(let h=0;h<i.length;h++){
 let c=Yi(a,i[h]);if(s[h]==2)for(let u of c)f.push(u);else f.push(c)}return t.combine(f)}return{create(a){for(let f of i)
 Qe(a,f);return a.values[o]=l(a),1},update(a,f){if(!es(a,r))return 0;let h=l(a);return t.compare(h,a.values[o])?0:(a.values[o]=
 h,1)},reconfigure(a,f){let h=es(a,i),c=f.config.facets[t.id],u=f.facet(t);if(c&&!h&&cs(e,c))return a.values[o]=u,0;let d=l(
-a);return t.compare(d,u)?(a.values[o]=u,0):(a.values[o]=d,1)}}}var qi=B.define({static:!0}),Tt=class n{constructor(t,e,i,s,r){
+a);return t.compare(d,u)?(a.values[o]=u,0):(a.values[o]=d,1)}}}var qi=B.define({static:!0}),Lt=class n{constructor(t,e,i,s,r){
 this.id=t,this.createF=e,this.updateF=i,this.compareF=s,this.spec=r,this.provides=void 0}static define(t){let e=new n(fs++,
 t.create,t.update,t.compare||((i,s)=>i===s),t);return t.provide&&(e.provides=t.provide(e)),e}create(t){let e=t.facet(qi).
 find(i=>i.field==this);return(e?.create||this.createF)(t)}slot(t){let e=t[this.id]>>1;return{create:i=>(i.values[e]=this.
@@ -196,92 +196,92 @@ reconfigure.of({compartment:this,extension:t})}get(t){return t.config.compartmen
 this.compartment=t,this.inner=e}},Ji=class n{constructor(t,e,i,s,r,o){for(this.base=t,this.compartments=e,this.dynamicSlots=
 i,this.address=s,this.staticValues=r,this.facets=o,this.statusTemplate=[];this.statusTemplate.length<i.length;)this.statusTemplate.
 push(0)}staticFacet(t){let e=this.address[t.id];return e==null?t.default:this.staticValues[e>>1]}static resolve(t,e,i){let s=[],
-r=Object.create(null),o=new Map;for(let u of tf(t,e,o))u instanceof Tt?s.push(u):(r[u.facet.id]||(r[u.facet.id]=[])).push(
+r=Object.create(null),o=new Map;for(let u of nf(t,e,o))u instanceof Lt?s.push(u):(r[u.facet.id]||(r[u.facet.id]=[])).push(
 u);let l=Object.create(null),a=[],f=[];for(let u of s)l[u.id]=f.length<<1,f.push(d=>u.slot(d));let h=i?.config.facets;for(let u in r){
 let d=r[u],p=d[0].facet,m=h&&h[u]||[];if(d.every(g=>g.type==0))if(l[p.id]=a.length<<1|1,cs(m,d))a.push(i.facet(p));else{
 let g=p.combine(d.map(b=>b.value));a.push(i&&p.compare(g,i.facet(p))?i.facet(p):g)}else{for(let g of d)g.type==0?(l[g.id]=
-a.length<<1|1,a.push(g.value)):(l[g.id]=f.length<<1,f.push(b=>g.dynamicSlot(b)));l[p.id]=f.length<<1,f.push(g=>Zh(g,p,d))}}
-let c=f.map(u=>u(l));return new n(t,o,c,l,a,r)}};function tf(n,t,e){let i=[[],[],[],[],[]],s=new Map;function r(o,l){let a=s.
+a.length<<1|1,a.push(g.value)):(l[g.id]=f.length<<1,f.push(b=>g.dynamicSlot(b)));l[p.id]=f.length<<1,f.push(g=>ef(g,p,d))}}
+let c=f.map(u=>u(l));return new n(t,o,c,l,a,r)}};function nf(n,t,e){let i=[[],[],[],[],[]],s=new Map;function r(o,l){let a=s.
 get(o);if(a!=null){if(a<=l)return;let f=i[a].indexOf(o);f>-1&&i[a].splice(f,1),o instanceof Ze&&e.delete(o.compartment)}
 if(s.set(o,l),Array.isArray(o))for(let f of o)r(f,l);else if(o instanceof Ze){if(e.has(o.compartment))throw new RangeError(
 "Duplicate use of compartment in extensions");let f=t.get(o.compartment)||o.inner;e.set(o.compartment,f),r(f,l)}else if(o instanceof
-_i)r(o.inner,o.prec);else if(o instanceof Tt)i[l].push(o),o.provides&&r(o.provides,l);else if(o instanceof Pe)i[l].push(
+_i)r(o.inner,o.prec);else if(o instanceof Lt)i[l].push(o),o.provides&&r(o.provides,l);else if(o instanceof Pe)i[l].push(
 o),o.facet.extensions&&r(o.facet.extensions,ue.default);else{let f=o.extension;if(!f)throw new Error(`Unrecognized exten\
 sion value in extension set (${o}). This sometimes happens because multiple instances of @codemirror/state are loaded, b\
 reaking instanceof checks.`);r(f,l)}}return r(n,ue.default),i.reduce((o,l)=>o.concat(l))}function Qe(n,t){if(t&1)return 2;
 let e=t>>1,i=n.status[e];if(i==4)throw new Error("Cyclic dependency between fields and/or facets");if(i&2)return i;n.status[e]=
 4;let s=n.computeSlot(n,n.config.dynamicSlots[e]);return n.status[e]=2|s}function Yi(n,t){return t&1?n.config.staticValues[t>>
-1]:n.values[t>>1]}var wo=B.define(),is=B.define({combine:n=>n.some(t=>t),static:!0}),xo=B.define({combine:n=>n.length?n[0]:
-void 0,static:!0}),So=B.define(),vo=B.define(),Co=B.define(),Ao=B.define({combine:n=>n.length?n[0]:!1}),kt=class{constructor(t,e){
+1]:n.values[t>>1]}var xo=B.define(),is=B.define({combine:n=>n.some(t=>t),static:!0}),So=B.define({combine:n=>n.length?n[0]:
+void 0,static:!0}),vo=B.define(),Co=B.define(),Ao=B.define(),Mo=B.define({combine:n=>n.length?n[0]:!1}),kt=class{constructor(t,e){
 this.type=t,this.value=e}static define(){return new ns}},ns=class{of(t){return new kt(this,t)}},ss=class{constructor(t){
 this.map=t}of(t){return new j(this,t)}},j=class n{constructor(t,e){this.type=t,this.value=e}map(t){let e=this.type.map(this.
 value,t);return e===void 0?void 0:e==this.value?this:new n(this.type,e)}is(t){return this.type==t}static define(t={}){return new ss(
 t.map||(e=>e))}static mapEffects(t,e){if(!t.length)return t;let i=[];for(let s of t){let r=s.map(e);r&&i.push(r)}return i}};
-j.reconfigure=j.define();j.appendConfig=j.define();var Y=class n{constructor(t,e,i,s,r,o){this.startState=t,this.changes=
-e,this.selection=i,this.effects=s,this.annotations=r,this.scrollIntoView=o,this._doc=null,this._state=null,i&&ko(i,e.newLength),
+j.reconfigure=j.define();j.appendConfig=j.define();var J=class n{constructor(t,e,i,s,r,o){this.startState=t,this.changes=
+e,this.selection=i,this.effects=s,this.annotations=r,this.scrollIntoView=o,this._doc=null,this._state=null,i&&wo(i,e.newLength),
 r.some(l=>l.type==n.time)||(this.annotations=r.concat(n.time.of(Date.now())))}static create(t,e,i,s,r,o){return new n(t,
 e,i,s,r,o)}get newDoc(){return this._doc||(this._doc=this.changes.apply(this.startState.doc))}get newSelection(){return this.
 selection||this.startState.selection.map(this.changes)}get state(){return this._state||this.startState.applyTransaction(
 this),this._state}annotation(t){for(let e of this.annotations)if(e.type==t)return e.value}get docChanged(){return!this.changes.
 empty}get reconfigured(){return this.startState.config!=this.state.config}isUserEvent(t){let e=this.annotation(n.userEvent);
-return!!(e&&(e==t||e.length>t.length&&e.slice(0,t.length)==t&&e[t.length]=="."))}};Y.time=kt.define();Y.userEvent=kt.define();
-Y.addToHistory=kt.define();Y.remote=kt.define();function ef(n,t){let e=[];for(let i=0,s=0;;){let r,o;if(i<n.length&&(s==
+return!!(e&&(e==t||e.length>t.length&&e.slice(0,t.length)==t&&e[t.length]=="."))}};J.time=kt.define();J.userEvent=kt.define();
+J.addToHistory=kt.define();J.remote=kt.define();function sf(n,t){let e=[];for(let i=0,s=0;;){let r,o;if(i<n.length&&(s==
 t.length||t[s]>=n[i]))r=n[i++],o=n[i++];else if(s<t.length)r=t[s++],o=t[s++];else return e;!e.length||e[e.length-1]<r?e.
-push(r,o):e[e.length-1]<o&&(e[e.length-1]=o)}}function Mo(n,t,e){var i;let s,r,o;return e?(s=t.changes,r=lt.empty(t.changes.
+push(r,o):e[e.length-1]<o&&(e[e.length-1]=o)}}function Do(n,t,e){var i;let s,r,o;return e?(s=t.changes,r=lt.empty(t.changes.
 length),o=n.changes.compose(t.changes)):(s=t.changes.map(n.changes),r=n.changes.mapDesc(t.changes,!0),o=n.changes.compose(
 s)),{changes:o,selection:t.selection?t.selection.map(r):(i=n.selection)===null||i===void 0?void 0:i.map(s),effects:j.mapEffects(
 n.effects,s).concat(j.mapEffects(t.effects,r)),annotations:n.annotations.length?n.annotations.concat(t.annotations):t.annotations,
 scrollIntoView:n.scrollIntoView||t.scrollIntoView}}function rs(n,t,e){let i=t.selection,s=Re(t.annotations);return t.userEvent&&
-(s=s.concat(Y.userEvent.of(t.userEvent))),{changes:t.changes instanceof lt?t.changes:lt.of(t.changes||[],e,n.facet(xo)),
-selection:i&&(i instanceof k?i:k.single(i.anchor,i.head)),effects:Re(t.effects),annotations:s,scrollIntoView:!!t.scrollIntoView}}
-function Do(n,t,e){let i=rs(n,t.length?t[0]:{},n.doc.length);t.length&&t[0].filter===!1&&(e=!1);for(let r=1;r<t.length;r++){
-t[r].filter===!1&&(e=!1);let o=!!t[r].sequential;i=Mo(i,rs(n,t[r],o?i.changes.newLength:n.doc.length),o)}let s=Y.create(
-n,i.changes,i.selection,i.effects,i.annotations,i.scrollIntoView);return sf(e?nf(s):s)}function nf(n){let t=n.startState,
-e=!0;for(let s of t.facet(So)){let r=s(n);if(r===!1){e=!1;break}Array.isArray(r)&&(e=e===!0?r:ef(e,r))}if(e!==!0){let s,
+(s=s.concat(J.userEvent.of(t.userEvent))),{changes:t.changes instanceof lt?t.changes:lt.of(t.changes||[],e,n.facet(So)),
+selection:i&&(i instanceof w?i:w.single(i.anchor,i.head)),effects:Re(t.effects),annotations:s,scrollIntoView:!!t.scrollIntoView}}
+function Lo(n,t,e){let i=rs(n,t.length?t[0]:{},n.doc.length);t.length&&t[0].filter===!1&&(e=!1);for(let r=1;r<t.length;r++){
+t[r].filter===!1&&(e=!1);let o=!!t[r].sequential;i=Do(i,rs(n,t[r],o?i.changes.newLength:n.doc.length),o)}let s=J.create(
+n,i.changes,i.selection,i.effects,i.annotations,i.scrollIntoView);return of(e?rf(s):s)}function rf(n){let t=n.startState,
+e=!0;for(let s of t.facet(vo)){let r=s(n);if(r===!1){e=!1;break}Array.isArray(r)&&(e=e===!0?r:sf(e,r))}if(e!==!0){let s,
 r;if(e===!1)r=n.changes.invertedDesc,s=lt.empty(t.doc.length);else{let o=n.changes.filter(e);s=o.changes,r=o.filtered.mapDesc(
-o.changes).invertedDesc}n=Y.create(t,s,n.selection&&n.selection.map(r),j.mapEffects(n.effects,r),n.annotations,n.scrollIntoView)}
-let i=t.facet(vo);for(let s=i.length-1;s>=0;s--){let r=i[s](n);r instanceof Y?n=r:Array.isArray(r)&&r.length==1&&r[0]instanceof
-Y?n=r[0]:n=Do(t,Re(r),!1)}return n}function sf(n){let t=n.startState,e=t.facet(Co),i=n;for(let s=e.length-1;s>=0;s--){let r=e[s](
-n);r&&Object.keys(r).length&&(i=Mo(i,rs(t,r,n.changes.newLength),!0))}return i==n?n:Y.create(t,n.changes,n.selection,i.effects,
-i.annotations,i.scrollIntoView)}var rf=[];function Re(n){return n==null?rf:Array.isArray(n)?n:[n]}var Dt=(function(n){return n[n.
-Word=0]="Word",n[n.Space=1]="Space",n[n.Other=2]="Other",n})(Dt||(Dt={})),of=/[\u00df\u0587\u0590-\u05f4\u0600-\u06ff\u3040-\u309f\u30a0-\u30ff\u3400-\u4db5\u4e00-\u9fcc\uac00-\ud7af]/,
-os;try{os=new RegExp("[\\p{Alphabetic}\\p{Number}_]","u")}catch{}function lf(n){if(os)return os.test(n);for(let t=0;t<n.
-length;t++){let e=n[t];if(/\w/.test(e)||e>"\x80"&&(e.toUpperCase()!=e.toLowerCase()||of.test(e)))return!0}return!1}function af(n){
-return t=>{if(!/\S/.test(t))return Dt.Space;if(lf(t))return Dt.Word;for(let e=0;e<n.length;e++)if(t.indexOf(n[e])>-1)return Dt.
+o.changes).invertedDesc}n=J.create(t,s,n.selection&&n.selection.map(r),j.mapEffects(n.effects,r),n.annotations,n.scrollIntoView)}
+let i=t.facet(Co);for(let s=i.length-1;s>=0;s--){let r=i[s](n);r instanceof J?n=r:Array.isArray(r)&&r.length==1&&r[0]instanceof
+J?n=r[0]:n=Lo(t,Re(r),!1)}return n}function of(n){let t=n.startState,e=t.facet(Ao),i=n;for(let s=e.length-1;s>=0;s--){let r=e[s](
+n);r&&Object.keys(r).length&&(i=Do(i,rs(t,r,n.changes.newLength),!0))}return i==n?n:J.create(t,n.changes,n.selection,i.effects,
+i.annotations,i.scrollIntoView)}var lf=[];function Re(n){return n==null?lf:Array.isArray(n)?n:[n]}var Dt=(function(n){return n[n.
+Word=0]="Word",n[n.Space=1]="Space",n[n.Other=2]="Other",n})(Dt||(Dt={})),af=/[\u00df\u0587\u0590-\u05f4\u0600-\u06ff\u3040-\u309f\u30a0-\u30ff\u3400-\u4db5\u4e00-\u9fcc\uac00-\ud7af]/,
+os;try{os=new RegExp("[\\p{Alphabetic}\\p{Number}_]","u")}catch{}function hf(n){if(os)return os.test(n);for(let t=0;t<n.
+length;t++){let e=n[t];if(/\w/.test(e)||e>"\x80"&&(e.toUpperCase()!=e.toLowerCase()||af.test(e)))return!0}return!1}function ff(n){
+return t=>{if(!/\S/.test(t))return Dt.Space;if(hf(t))return Dt.Word;for(let e=0;e<n.length;e++)if(t.indexOf(n[e])>-1)return Dt.
 Word;return Dt.Other}}var U=class n{constructor(t,e,i,s,r,o){this.config=t,this.doc=e,this.selection=i,this.values=s,this.
 status=t.statusTemplate.slice(),this.computeSlot=r,o&&(o._state=this);for(let l=0;l<this.config.dynamicSlots.length;l++)
 Qe(this,l<<1);this.computeSlot=null}field(t,e=!0){let i=this.config.address[t.id];if(i==null){if(e)throw new RangeError(
-"Field is not present in this state");return}return Qe(this,i),Yi(this,i)}update(...t){return Do(this,t,!0)}applyTransaction(t){
+"Field is not present in this state");return}return Qe(this,i),Yi(this,i)}update(...t){return Lo(this,t,!0)}applyTransaction(t){
 let e=this.config,{base:i,compartments:s}=e;for(let l of t.effects)l.is(Xi.reconfigure)?(e&&(s=new Map,e.compartments.forEach(
 (a,f)=>s.set(f,a)),e=null),s.set(l.value.compartment,l.value.extension)):l.is(j.reconfigure)?(e=null,i=l.value):l.is(j.appendConfig)&&
 (e=null,i=Re(i).concat(l.value));let r;e?r=t.startState.values.slice():(e=Ji.resolve(i,s,this),r=new n(e,this.doc,this.selection,
 e.dynamicSlots.map(()=>null),(a,f)=>f.reconfigure(a,this),null).values);let o=t.startState.facet(is)?t.newSelection:t.newSelection.
 asSingle();new n(e,t.newDoc,o,r,(l,a)=>a.update(l,t),t)}replaceSelection(t){return typeof t=="string"&&(t=this.toText(t)),
-this.changeByRange(e=>({changes:{from:e.from,to:e.to,insert:t},range:k.cursor(e.from+t.length)}))}changeByRange(t){let e=this.
+this.changeByRange(e=>({changes:{from:e.from,to:e.to,insert:t},range:w.cursor(e.from+t.length)}))}changeByRange(t){let e=this.
 selection,i=t(e.ranges[0]),s=this.changes(i.changes),r=[i.range],o=Re(i.effects);for(let l=1;l<e.ranges.length;l++){let a=t(
 e.ranges[l]),f=this.changes(a.changes),h=f.map(s);for(let u=0;u<l;u++)r[u]=r[u].map(h);let c=s.mapDesc(f,!0);r.push(a.range.
-map(c)),s=s.compose(h),o=j.mapEffects(o,h).concat(j.mapEffects(Re(a.effects),c))}return{changes:s,selection:k.create(r,e.
+map(c)),s=s.compose(h),o=j.mapEffects(o,h).concat(j.mapEffects(Re(a.effects),c))}return{changes:s,selection:w.create(r,e.
 mainIndex),effects:o}}changes(t=[]){return t instanceof lt?t:lt.of(t,this.doc.length,this.facet(n.lineSeparator))}toText(t){
 return I.of(t.split(this.facet(n.lineSeparator)||Qn))}sliceDoc(t=0,e=this.doc.length){return this.doc.sliceString(t,e,this.
 lineBreak)}facet(t){let e=this.config.address[t.id];return e==null?t.default:(Qe(this,e),Yi(this,e))}toJSON(t){let e={doc:this.
-sliceDoc(),selection:this.selection.toJSON()};if(t)for(let i in t){let s=t[i];s instanceof Tt&&this.config.address[s.id]!=
+sliceDoc(),selection:this.selection.toJSON()};if(t)for(let i in t){let s=t[i];s instanceof Lt&&this.config.address[s.id]!=
 null&&(e[i]=s.spec.toJSON(this.field(t[i]),this))}return e}static fromJSON(t,e={},i){if(!t||typeof t.doc!="string")throw new RangeError(
 "Invalid JSON representation for EditorState");let s=[];if(i){for(let r in i)if(Object.prototype.hasOwnProperty.call(t,r)){
-let o=i[r],l=t[r];s.push(o.init(a=>o.spec.fromJSON(l,a)))}}return n.create({doc:t.doc,selection:k.fromJSON(t.selection),
+let o=i[r],l=t[r];s.push(o.init(a=>o.spec.fromJSON(l,a)))}}return n.create({doc:t.doc,selection:w.fromJSON(t.selection),
 extensions:e.extensions?s.concat([e.extensions]):s})}static create(t={}){let e=Ji.resolve(t.extensions||[],new Map),i=t.
-doc instanceof I?t.doc:I.of((t.doc||"").split(e.staticFacet(n.lineSeparator)||Qn)),s=t.selection?t.selection instanceof k?
-t.selection:k.single(t.selection.anchor,t.selection.head):k.single(0);return ko(s,i.length),e.staticFacet(is)||(s=s.asSingle()),
+doc instanceof I?t.doc:I.of((t.doc||"").split(e.staticFacet(n.lineSeparator)||Qn)),s=t.selection?t.selection instanceof w?
+t.selection:w.single(t.selection.anchor,t.selection.head):w.single(0);return wo(s,i.length),e.staticFacet(is)||(s=s.asSingle()),
 new n(e,i,s,e.dynamicSlots.map(()=>null),(r,o)=>o.create(r),null)}get tabSize(){return this.facet(n.tabSize)}get lineBreak(){
 return this.facet(n.lineSeparator)||`
-`}get readOnly(){return this.facet(Ao)}phrase(t,...e){for(let i of this.facet(n.phrases))if(Object.prototype.hasOwnProperty.
+`}get readOnly(){return this.facet(Mo)}phrase(t,...e){for(let i of this.facet(n.phrases))if(Object.prototype.hasOwnProperty.
 call(i,t)){t=i[t];break}return e.length&&(t=t.replace(/\$(\$|\d*)/g,(i,s)=>{if(s=="$")return"$";let r=+(s||1);return!r||
-r>e.length?i:e[r-1]})),t}languageDataAt(t,e,i=-1){let s=[];for(let r of this.facet(wo))for(let o of r(this,e,i))Object.prototype.
-hasOwnProperty.call(o,t)&&s.push(o[t]);return s}charCategorizer(t){let e=this.languageDataAt("wordChars",t);return af(e.
+r>e.length?i:e[r-1]})),t}languageDataAt(t,e,i=-1){let s=[];for(let r of this.facet(xo))for(let o of r(this,e,i))Object.prototype.
+hasOwnProperty.call(o,t)&&s.push(o[t]);return s}charCategorizer(t){let e=this.languageDataAt("wordChars",t);return ff(e.
 length?e[0]:"")}wordAt(t){let{text:e,from:i,length:s}=this.doc.lineAt(t),r=this.charCategorizer(t),o=t-i,l=t-i;for(;o>0;){
 let a=it(e,o,!1);if(r(e.slice(a,o))!=Dt.Word)break;o=a}for(;l<s;){let a=it(e,l);if(r(e.slice(l,a))!=Dt.Word)break;l=a}return o==
-l?null:k.range(o+i,l+i)}};U.allowMultipleSelections=is;U.tabSize=B.define({combine:n=>n.length?n[0]:4});U.lineSeparator=
-xo;U.readOnly=Ao;U.phrases=B.define({compare(n,t){let e=Object.keys(n),i=Object.keys(t);return e.length==i.length&&e.every(
-s=>n[s]==t[s])}});U.languageData=wo;U.changeFilter=So;U.transactionFilter=vo;U.transactionExtender=Co;Xi.reconfigure=j.define();
+l?null:w.range(o+i,l+i)}};U.allowMultipleSelections=is;U.tabSize=B.define({combine:n=>n.length?n[0]:4});U.lineSeparator=
+So;U.readOnly=Mo;U.phrases=B.define({compare(n,t){let e=Object.keys(n),i=Object.keys(t);return e.length==i.length&&e.every(
+s=>n[s]==t[s])}});U.languageData=xo;U.changeFilter=vo;U.transactionFilter=Co;U.transactionExtender=Ao;Xi.reconfigure=j.define();
 function ni(n,t,e={}){let i={};for(let s of n)for(let r of Object.keys(s)){let o=s[r],l=i[r];if(l===void 0)i[r]=o;else if(!(l===
 o||o===void 0))if(Object.hasOwnProperty.call(e,r))i[r]=e[r](l,o);else throw new Error("Config merge conflict for field "+
 r)}for(let s in t)i[s]===void 0&&(i[s]=t[s]);return i}var Xt=class{eq(t){return this==t}range(t,e=t){return ti.create(t,
@@ -313,17 +313,17 @@ max(s,h.maxPoint),e.push(h),i.push(c))}}let r=this.nextLayer.map(t);return e.len
 if(!this.isEmpty){for(let s=0;s<this.chunk.length;s++){let r=this.chunkPos[s],o=this.chunk[s];if(e>=r&&t<=r+o.length&&o.
 between(r,t-r,e-r,i)===!1)return}this.nextLayer.between(t,e,i)}}iter(t=0){return ei.from([this]).goto(t)}get isEmpty(){return this.
 nextLayer==this}static iter(t,e=0){return ei.from(t).goto(e)}static compare(t,e,i,s,r=-1){let o=t.filter(c=>c.maxPoint>0||
-!c.isEmpty&&c.maxPoint>=r),l=e.filter(c=>c.maxPoint>0||!c.isEmpty&&c.maxPoint>=r),a=uo(o,l,i),f=new de(o,a,r),h=new de(l,
-a,r);i.iterGaps((c,u,d)=>po(f,c,h,u,d,s)),i.empty&&i.length==0&&po(f,0,h,0,0,s)}static eq(t,e,i=0,s){s==null&&(s=999999999);
+!c.isEmpty&&c.maxPoint>=r),l=e.filter(c=>c.maxPoint>0||!c.isEmpty&&c.maxPoint>=r),a=po(o,l,i),f=new de(o,a,r),h=new de(l,
+a,r);i.iterGaps((c,u,d)=>mo(f,c,h,u,d,s)),i.empty&&i.length==0&&mo(f,0,h,0,0,s)}static eq(t,e,i=0,s){s==null&&(s=999999999);
 let r=t.filter(h=>!h.isEmpty&&e.indexOf(h)<0),o=e.filter(h=>!h.isEmpty&&t.indexOf(h)<0);if(r.length!=o.length)return!1;if(!r.
-length)return!0;let l=uo(r,o),a=new de(r,l,0).goto(i),f=new de(o,l,0).goto(i);for(;;){if(a.to!=f.to||!hs(a.active,f.active)||
+length)return!0;let l=po(r,o),a=new de(r,l,0).goto(i),f=new de(o,l,0).goto(i);for(;;){if(a.to!=f.to||!hs(a.active,f.active)||
 a.point&&(!f.point||!us(a.point,f.point)))return!1;if(a.to>s)return!0;a.next(),f.next()}}static spans(t,e,i,s,r=-1){let o=new de(
 t,null,r).goto(e),l=e,a=o.openStart;for(;;){let f=Math.min(o.to,i);if(o.point){let h=o.activeForPoint(o.to),c=o.pointFrom<
 e?h.length+1:o.point.startSide<0?h.length:Math.min(h.length,a);s.point(l,f,o.point,h,c,o.pointRank),a=Math.min(o.openEnd(
 f),h.length)}else f>l&&(s.span(l,f,o.active,a),a=o.openEnd(f));if(o.to>i)return a+(o.point&&o.to>i?1:0);l=o.to,o.next()}}static of(t,e=!1){
-let i=new Ne;for(let s of t instanceof ti?[t]:e?hf(t):t)i.add(s.from,s.to,s.value);return i.finish()}static join(t){if(!t.
+let i=new Ne;for(let s of t instanceof ti?[t]:e?cf(t):t)i.add(s.from,s.to,s.value);return i.finish()}static join(t){if(!t.
 length)return n.empty;let e=t[t.length-1];for(let i=t.length-2;i>=0;i--)for(let s=t[i];s!=n.empty;s=s.nextLayer)e=new n(
-s.chunkPos,s.chunk,e,Math.max(s.maxPoint,e.maxPoint));return e}};Q.empty=new Q([],[],null,-1);function hf(n){if(n.length>
+s.chunkPos,s.chunk,e,Math.max(s.maxPoint,e.maxPoint));return e}};Q.empty=new Q([],[],null,-1);function cf(n){if(n.length>
 1)for(let t=n[0],e=1;e<n.length;e++){let i=n[e];if(ls(t,i)>0)return n.slice().sort(ls);t=i}return n}Q.empty.nextLayer=Q.
 empty;var Ne=class n{finishChunk(t){this.chunks.push(new as(this.from,this.to,this.value,this.maxPoint)),this.chunkPos.push(
 this.chunkStart),this.chunkStart=-1,this.setMaxPoint=Math.max(this.setMaxPoint,this.maxPoint),this.maxPoint=-1,t&&(this.
@@ -338,7 +338,7 @@ startSide-this.last.endSide)<0)return!1;this.from.length&&this.finishChunk(!0),t
 e.maxPoint),this.chunks.push(e),this.chunkPos.push(t);let i=e.value.length-1;return this.last=e.value[i],this.lastFrom=e.
 from[i]+t,this.lastTo=e.to[i]+t,!0}finish(){return this.finishInner(Q.empty)}finishInner(t){if(this.from.length&&this.finishChunk(
 !1),this.chunks.length==0)return t;let e=Q.create(this.chunkPos,this.chunks,this.nextLayer?this.nextLayer.finishInner(t):
-t,this.setMaxPoint);return this.from=null,e}};function uo(n,t,e){let i=new Map;for(let r of n)for(let o=0;o<r.chunk.length;o++)
+t,this.setMaxPoint);return this.from=null,e}};function po(n,t,e){let i=new Map;for(let r of n)for(let o=0;o<r.chunk.length;o++)
 r.chunk[o].maxPoint<=0&&i.set(r.chunk[o],r.chunkPos[o]);let s=new Set;for(let r of t)for(let o=0;o<r.chunk.length;o++){let l=i.
 get(r.chunk[o]);l!=null&&(e?e.mapPos(l):l)==r.chunkPos[o]&&!e?.touchesRange(l,l+r.chunk[o].length)&&s.add(r.chunk[o])}return s}
 var Qi=class{constructor(t,e,i,s=0){this.layer=t,this.skip=e,this.minPoint=i,this.rank=s}get startSide(){return this.value?
@@ -367,9 +367,9 @@ pointRank=0,this.to=-1e9,this.endSide=0,this.openStart=-1,this.cursor=ei.from(t,
 t,e),this.active.length=this.activeTo.length=this.activeRank.length=0,this.minActive=-1,this.to=t,this.endSide=e,this.openStart=
 -1,this.next(),this}forward(t,e){for(;this.minActive>-1&&(this.activeTo[this.minActive]-t||this.active[this.minActive].endSide-
 e)<0;)this.removeActive(this.minActive);this.cursor.forward(t,e)}removeActive(t){Ki(this.active,t),Ki(this.activeTo,t),Ki(
-this.activeRank,t),this.minActive=mo(this.active,this.activeTo)}addActive(t){let e=0,{value:i,to:s,rank:r}=this.cursor;for(;e<
+this.activeRank,t),this.minActive=go(this.active,this.activeTo)}addActive(t){let e=0,{value:i,to:s,rank:r}=this.cursor;for(;e<
 this.activeRank.length&&(r-this.activeRank[e]||s-this.activeTo[e])>0;)e++;ji(this.active,e,i),ji(this.activeTo,e,s),ji(this.
-activeRank,e,r),t&&ji(t,e,this.cursor.from),this.minActive=mo(this.active,this.activeTo)}next(){let t=this.to,e=this.point;
+activeRank,e,r),t&&ji(t,e,this.cursor.from),this.minActive=go(this.active,this.activeTo)}next(){let t=this.to,e=this.point;
 this.point=null;let i=this.openStart<0?[]:null;for(;;){let s=this.minActive;if(s>-1&&(this.activeTo[s]-this.cursor.from||
 this.active[s].endSide-this.cursor.startSide)<0){if(this.activeTo[s]>t){this.to=this.activeTo[s],this.endSide=this.active[s].
 endSide;break}this.removeActive(s),i&&Ki(i,s)}else if(this.cursor.value)if(this.cursor.from>t){this.to=this.cursor.from,
@@ -380,27 +380,27 @@ to,this.endSide);break}}else{this.to=this.endSide=1e9;break}}if(i){this.openStar
 this.openStart++}}activeForPoint(t){if(!this.active.length)return this.active;let e=[];for(let i=this.active.length-1;i>=
 0&&!(this.activeRank[i]<this.pointRank);i--)(this.activeTo[i]>t||this.activeTo[i]==t&&this.active[i].endSide>=this.point.
 endSide)&&e.push(this.active[i]);return e.reverse()}openEnd(t){let e=0;for(let i=this.activeTo.length-1;i>=0&&this.activeTo[i]>
-t;i--)e++;return e}};function po(n,t,e,i,s,r){n.goto(t),e.goto(i);let o=i+s,l=i,a=i-t,f=!!r.boundChange;for(let h=!1;;){
+t;i--)e++;return e}};function mo(n,t,e,i,s,r){n.goto(t),e.goto(i);let o=i+s,l=i,a=i-t,f=!!r.boundChange;for(let h=!1;;){
 let c=n.to+a-e.to,u=c||n.endSide-e.endSide,d=u<0?n.to+a:e.to,p=Math.min(d,o);if(n.point||e.point?(n.point&&e.point&&us(n.
 point,e.point)&&hs(n.activeForPoint(n.to),e.activeForPoint(e.to))||r.comparePoint(l,p,n.point,e.point),h=!1):(h&&r.boundChange(
 l),p>l&&!hs(n.active,e.active)&&r.compareRange(l,p,n.active,e.active),f&&p<o&&(c||n.openEnd(d)!=e.openEnd(d))&&(h=!0)),d>
 o)break;l=d,u<=0&&n.next(),u>=0&&e.next()}}function hs(n,t){if(n.length!=t.length)return!1;for(let e=0;e<n.length;e++)if(n[e]!=
 t[e]&&!us(n[e],t[e]))return!1;return!0}function Ki(n,t){for(let e=t,i=n.length-1;e<i;e++)n[e]=n[e+1];n.pop()}function ji(n,t,e){
-for(let i=n.length-1;i>=t;i--)n[i+1]=n[i];n[t]=e}function mo(n,t){let e=-1,i=1e9;for(let s=0;s<t.length;s++)(t[s]-i||n[s].
+for(let i=n.length-1;i>=t;i--)n[i+1]=n[i];n[t]=e}function go(n,t){let e=-1,i=1e9;for(let s=0;s<t.length;s++)(t[s]-i||n[s].
 endSide-n[e].endSide)<0&&(e=s,i=t[s]);return e}function ge(n,t,e=n.length){let i=0;for(let s=0;s<e&&s<n.length;)n.charCodeAt(
 s)==9?(i+=t-i%t,s++):(i++,s=it(n,s));return i}function To(n,t,e,i){for(let s=0,r=0;;){if(r>=t)return s;if(s==n.length)break;
-r+=n.charCodeAt(s)==9?e-r%e:1,s=it(n,s)}return i===!0?-1:n.length}var Lo=typeof Symbol>"u"?"__\u037C":Symbol.for("\u037C"),ds=typeof Symbol>"u"?"__styleSet"+Math.floor(Math.random()*1e8):
-Symbol("styleSet"),Bo=typeof globalThis<"u"?globalThis:typeof window<"u"?window:{},wt=class{constructor(t,e){this.rules=
+r+=n.charCodeAt(s)==9?e-r%e:1,s=it(n,s)}return i===!0?-1:n.length}var Bo=typeof Symbol>"u"?"__\u037C":Symbol.for("\u037C"),ds=typeof Symbol>"u"?"__styleSet"+Math.floor(Math.random()*1e8):
+Symbol("styleSet"),Eo=typeof globalThis<"u"?globalThis:typeof window<"u"?window:{},wt=class{constructor(t,e){this.rules=
 [];let{finish:i}=e||{};function s(o){return/^@/.test(o)?[o]:o.split(/,\s*/)}function r(o,l,a,f){let h=[],c=/^@(\w+)\b/.exec(
 o[0]),u=c&&c[1]=="keyframes";if(c&&l==null)return a.push(o[0]+";");for(let d in l){let p=l[d];if(/&/.test(d))r(d.split(/,\s*/).
 map(m=>o.map(g=>m.replace(/&/,g))).reduce((m,g)=>m.concat(g)),p,a);else if(p&&typeof p=="object"){if(!c)throw new RangeError(
 "The value of a property ("+d+") should be a primitive value.");r(s(d),p,h,u)}else p!=null&&h.push(d.replace(/_.*/,"").replace(
 /[A-Z]/g,m=>"-"+m.toLowerCase())+": "+p+";")}(h.length||u)&&a.push((i&&!c&&!f?o.map(i):o).join(", ")+" {"+h.join(" ")+"}")}
 for(let o in t)r(s(o),t[o],this.rules)}getRules(){return this.rules.join(`
-`)}static newName(){let t=Bo[Lo]||1;return Bo[Lo]=t+1,"\u037C"+t.toString(36)}static mount(t,e,i){let s=t[ds],r=i&&i.nonce;
-s?r&&s.setNonce(r):s=new ps(t,r),s.mount(Array.isArray(e)?e:[e],t)}},Eo=new Map,ps=class{constructor(t,e){let i=t.ownerDocument||
-t,s=i.defaultView;if(!t.head&&t.adoptedStyleSheets&&s.CSSStyleSheet){let r=Eo.get(i);if(r)return t[ds]=r;this.sheet=new s.
-CSSStyleSheet,Eo.set(i,this)}else this.styleTag=i.createElement("style"),e&&this.styleTag.setAttribute("nonce",e);this.modules=
+`)}static newName(){let t=Eo[Bo]||1;return Eo[Bo]=t+1,"\u037C"+t.toString(36)}static mount(t,e,i){let s=t[ds],r=i&&i.nonce;
+s?r&&s.setNonce(r):s=new ps(t,r),s.mount(Array.isArray(e)?e:[e],t)}},Oo=new Map,ps=class{constructor(t,e){let i=t.ownerDocument||
+t,s=i.defaultView;if(!t.head&&t.adoptedStyleSheets&&s.CSSStyleSheet){let r=Oo.get(i);if(r)return t[ds]=r;this.sheet=new s.
+CSSStyleSheet,Oo.set(i,this)}else this.styleTag=i.createElement("style"),e&&this.styleTag.setAttribute("nonce",e);this.modules=
 [],t[ds]=this}mount(t,e){let i=this.sheet,s=0,r=0,o=!1;for(let l=0;l<t.length;l++){let a=t[l],f=this.modules.indexOf(a);
 if(f<r&&f>-1&&(this.modules.splice(f,1),o=!0,r--,f=-1),f==-1){if(this.modules.splice(r++,0,a),o=!0,i)for(let h=0;h<a.rules.
 length;h++)i.insertRule(a.rules[h],s++)}else{for(;r<f;)s+=this.modules[r++].rules.length;s+=a.rules.length,r++}}if(i)e.adoptedStyleSheets.
@@ -413,66 +413,66 @@ rintScreen",45:"Insert",46:"Delete",59:";",61:"=",91:"Meta",92:"Meta",106:"*",10
 NumLock",145:"ScrollLock",160:"Shift",161:"Shift",162:"Control",163:"Control",164:"Alt",165:"Alt",173:"-",186:";",187:"=",
 188:",",189:"-",190:".",191:"/",192:"`",219:"[",220:"\\",221:"]",222:"'"},He={48:")",49:"!",50:"@",51:"#",52:"$",53:"%",
 54:"^",55:"&",56:"*",57:"(",59:":",61:"+",173:"_",186:":",187:"+",188:"<",189:"_",190:">",191:"?",192:"~",219:"{",220:"|",
-221:"}",222:'"'},ff=typeof navigator<"u"&&/Mac/.test(navigator.platform),cf=typeof navigator<"u"&&/MSIE \d|Trident\/(?:[7-9]|\d{2,})\..*rv:(\d+)/.
+221:"}",222:'"'},uf=typeof navigator<"u"&&/Mac/.test(navigator.platform),df=typeof navigator<"u"&&/MSIE \d|Trident\/(?:[7-9]|\d{2,})\..*rv:(\d+)/.
 exec(navigator.userAgent);for(Z=0;Z<10;Z++)Jt[48+Z]=Jt[96+Z]=String(Z);var Z;for(Z=1;Z<=24;Z++)Jt[Z+111]="F"+Z;var Z;for(Z=
 65;Z<=90;Z++)Jt[Z]=String.fromCharCode(Z+32),He[Z]=String.fromCharCode(Z);var Z;for(Zi in Jt)He.hasOwnProperty(Zi)||(He[Zi]=
-Jt[Zi]);var Zi;function Oo(n){var t=ff&&n.metaKey&&n.shiftKey&&!n.ctrlKey&&!n.altKey||cf&&n.shiftKey&&n.key&&n.key.length==
+Jt[Zi]);var Zi;function Po(n){var t=uf&&n.metaKey&&n.shiftKey&&!n.ctrlKey&&!n.altKey||df&&n.shiftKey&&n.key&&n.key.length==
 1||n.key=="Unidentified",e=!t&&n.key||(n.shiftKey?He:Jt)[n.keyCode]||n.key||"Unidentified";return e=="Esc"&&(e="Escape"),
 e=="Del"&&(e="Delete"),e=="Left"&&(e="ArrowLeft"),e=="Up"&&(e="ArrowUp"),e=="Right"&&(e="ArrowRight"),e=="Down"&&(e="Arr\
 owDown"),e}var at=typeof navigator<"u"?navigator:{userAgent:"",vendor:"",platform:""},ks=typeof document<"u"?document:{documentElement:{
-style:{}}},ws=/Edge\/(\d+)/.exec(at.userAgent),ul=/MSIE \d/.test(at.userAgent),xs=/Trident\/(?:[7-9]|\d{2,})\..*rv:(\d+)/.
-exec(at.userAgent),Cn=!!(ul||xs||ws),Po=!Cn&&/gecko\/(\d+)/i.test(at.userAgent),ms=!Cn&&/Chrome\/(\d+)/.exec(at.userAgent),
-Ro="webkitFontSmoothing"in ks.documentElement.style,Ss=!Cn&&/Apple Computer/.test(at.vendor),Io=Ss&&(/Mobile\/\w+/.test(
-at.userAgent)||at.maxTouchPoints>2),M={mac:Io||/Mac/.test(at.platform),windows:/Win/.test(at.platform),linux:/Linux|X11/.
-test(at.platform),ie:Cn,ie_version:ul?ks.documentMode||6:xs?+xs[1]:ws?+ws[1]:0,gecko:Po,gecko_version:Po?+(/Firefox\/(\d+)/.
-exec(at.userAgent)||[0,0])[1]:0,chrome:!!ms,chrome_version:ms?+ms[1]:0,ios:Io,android:/Android\b/.test(at.userAgent),webkit:Ro,
-webkit_version:Ro?+(/\bAppleWebKit\/(\d+)/.exec(at.userAgent)||[0,0])[1]:0,safari:Ss,safari_version:Ss?+(/\bVersion\/(\d+(\.\d+)?)/.
+style:{}}},ws=/Edge\/(\d+)/.exec(at.userAgent),dl=/MSIE \d/.test(at.userAgent),xs=/Trident\/(?:[7-9]|\d{2,})\..*rv:(\d+)/.
+exec(at.userAgent),Cn=!!(dl||xs||ws),Ro=!Cn&&/gecko\/(\d+)/i.test(at.userAgent),ms=!Cn&&/Chrome\/(\d+)/.exec(at.userAgent),
+Io="webkitFontSmoothing"in ks.documentElement.style,Ss=!Cn&&/Apple Computer/.test(at.vendor),No=Ss&&(/Mobile\/\w+/.test(
+at.userAgent)||at.maxTouchPoints>2),M={mac:No||/Mac/.test(at.platform),windows:/Win/.test(at.platform),linux:/Linux|X11/.
+test(at.platform),ie:Cn,ie_version:dl?ks.documentMode||6:xs?+xs[1]:ws?+ws[1]:0,gecko:Ro,gecko_version:Ro?+(/Firefox\/(\d+)/.
+exec(at.userAgent)||[0,0])[1]:0,chrome:!!ms,chrome_version:ms?+ms[1]:0,ios:No,android:/Android\b/.test(at.userAgent),webkit:Io,
+webkit_version:Io?+(/\bAppleWebKit\/(\d+)/.exec(at.userAgent)||[0,0])[1]:0,safari:Ss,safari_version:Ss?+(/\bVersion\/(\d+(\.\d+)?)/.
 exec(at.userAgent)||[0,0])[1]:0,tabSize:ks.documentElement.style.tabSize!=null?"tab-size":"-moz-tab-size"};function di(n){
 let t;return n.nodeType==11?t=n.getSelection?n:n.ownerDocument:t=n,t.getSelection()}function vs(n,t){return t?n==t||n.contains(
 t.nodeType!=1?t.parentNode:t):!1}function hn(n,t){if(!t.anchorNode)return!1;try{return vs(n,t.anchorNode)}catch{return!1}}
 function We(n){return n.nodeType==3?we(n,0,n.nodeValue.length).getClientRects():n.nodeType==1?n.getClientRects():[]}function li(n,t,e,i){
-return e?No(n,t,e,i,-1)||No(n,t,e,i,1):!1}function ke(n){for(var t=0;;t++)if(n=n.previousSibling,!n)return t}function dn(n){
-return n.nodeType==1&&/^(DIV|P|LI|UL|OL|BLOCKQUOTE|DD|DT|H\d|SECTION|PRE)$/.test(n.nodeName)}function No(n,t,e,i,s){for(;;){
+return e?Ho(n,t,e,i,-1)||Ho(n,t,e,i,1):!1}function ke(n){for(var t=0;;t++)if(n=n.previousSibling,!n)return t}function dn(n){
+return n.nodeType==1&&/^(DIV|P|LI|UL|OL|BLOCKQUOTE|DD|DT|H\d|SECTION|PRE)$/.test(n.nodeName)}function Ho(n,t,e,i,s){for(;;){
 if(n==e&&t==i)return!0;if(t==(s<0?0:zt(n))){if(n.nodeName=="DIV")return!1;let r=n.parentNode;if(!r||r.nodeType!=1)return!1;
 t=ke(n)+(s<0?0:1),n=r}else if(n.nodeType==1){if(n=n.childNodes[t+(s<0?-1:0)],n.nodeType==1&&n.contentEditable=="false")return!1;
 t=s<0?zt(n):0}else return!1}}function zt(n){return n.nodeType==3?n.nodeValue.length:n.childNodes.length}function xi(n,t){
-let e=t?n.left:n.right;return{left:e,right:e,top:n.top,bottom:n.bottom}}function uf(n){let t=n.visualViewport;return t?{
-left:0,right:t.width,top:0,bottom:t.height}:{left:0,right:n.innerWidth,top:0,bottom:n.innerHeight}}function dl(n,t){let e=t.
+let e=t?n.left:n.right;return{left:e,right:e,top:n.top,bottom:n.bottom}}function pf(n){let t=n.visualViewport;return t?{
+left:0,right:t.width,top:0,bottom:t.height}:{left:0,right:n.innerWidth,top:0,bottom:n.innerHeight}}function pl(n,t){let e=t.
 width/n.offsetWidth,i=t.height/n.offsetHeight;return(e>.995&&e<1.005||!isFinite(e)||Math.abs(t.width-n.offsetWidth)<1)&&
-(e=1),(i>.995&&i<1.005||!isFinite(i)||Math.abs(t.height-n.offsetHeight)<1)&&(i=1),{scaleX:e,scaleY:i}}function df(n,t,e,i,s,r,o,l){
+(e=1),(i>.995&&i<1.005||!isFinite(i)||Math.abs(t.height-n.offsetHeight)<1)&&(i=1),{scaleX:e,scaleY:i}}function mf(n,t,e,i,s,r,o,l){
 let a=n.ownerDocument,f=a.defaultView||window;for(let h=n,c=!1;h&&!c;)if(h.nodeType==1){let u,d=h==a.body,p=1,m=1;if(d)u=
-uf(f);else{if(/^(fixed|sticky)$/.test(getComputedStyle(h).position)&&(c=!0),h.scrollHeight<=h.clientHeight&&h.scrollWidth<=
-h.clientWidth){h=h.assignedSlot||h.parentNode;continue}let S=h.getBoundingClientRect();({scaleX:p,scaleY:m}=dl(h,S)),u={
-left:S.left,right:S.left+h.clientWidth*p,top:S.top,bottom:S.top+h.clientHeight*m}}let g=0,b=0;if(s=="nearest")t.top<u.top?
+pf(f);else{if(/^(fixed|sticky)$/.test(getComputedStyle(h).position)&&(c=!0),h.scrollHeight<=h.clientHeight&&h.scrollWidth<=
+h.clientWidth){h=h.assignedSlot||h.parentNode;continue}let k=h.getBoundingClientRect();({scaleX:p,scaleY:m}=pl(h,k)),u={
+left:k.left,right:k.left+h.clientWidth*p,top:k.top,bottom:k.top+h.clientHeight*m}}let g=0,b=0;if(s=="nearest")t.top<u.top?
 (b=t.top-(u.top+o),e>0&&t.bottom>u.bottom+b&&(b=t.bottom-u.bottom+o)):t.bottom>u.bottom&&(b=t.bottom-u.bottom+o,e<0&&t.top-
-b<u.top&&(b=t.top-(u.top+o)));else{let S=t.bottom-t.top,C=u.bottom-u.top;b=(s=="center"&&S<=C?t.top+S/2-C/2:s=="start"||
-s=="center"&&e<0?t.top-o:t.bottom-C+o)-u.top}if(i=="nearest"?t.left<u.left?(g=t.left-(u.left+r),e>0&&t.right>u.right+g&&
+b<u.top&&(b=t.top-(u.top+o)));else{let k=t.bottom-t.top,x=u.bottom-u.top;b=(s=="center"&&k<=x?t.top+k/2-x/2:s=="start"||
+s=="center"&&e<0?t.top-o:t.bottom-x+o)-u.top}if(i=="nearest"?t.left<u.left?(g=t.left-(u.left+r),e>0&&t.right>u.right+g&&
 (g=t.right-u.right+r)):t.right>u.right&&(g=t.right-u.right+r,e<0&&t.left<u.left+g&&(g=t.left-(u.left+r))):g=(i=="center"?
 t.left+(t.right-t.left)/2-(u.right-u.left)/2:i=="start"==l?t.left-r:t.right-(u.right-u.left)+r)-u.left,g||b)if(d)f.scrollBy(
-g,b);else{let S=0,C=0;if(b){let T=h.scrollTop;h.scrollTop+=b/m,C=(h.scrollTop-T)*m}if(g){let T=h.scrollLeft;h.scrollLeft+=
-g/p,S=(h.scrollLeft-T)*p}t={left:t.left-S,top:t.top-C,right:t.right-S,bottom:t.bottom-C},S&&Math.abs(S-g)<1&&(i="nearest"),
-C&&Math.abs(C-b)<1&&(s="nearest")}if(d)break;(t.top<u.top||t.bottom>u.bottom||t.left<u.left||t.right>u.right)&&(t={left:Math.
+g,b);else{let k=0,x=0;if(b){let L=h.scrollTop;h.scrollTop+=b/m,x=(h.scrollTop-L)*m}if(g){let L=h.scrollLeft;h.scrollLeft+=
+g/p,k=(h.scrollLeft-L)*p}t={left:t.left-k,top:t.top-x,right:t.right-k,bottom:t.bottom-x},k&&Math.abs(k-g)<1&&(i="nearest"),
+x&&Math.abs(x-b)<1&&(s="nearest")}if(d)break;(t.top<u.top||t.bottom>u.bottom||t.left<u.left||t.right>u.right)&&(t={left:Math.
 max(t.left,u.left),right:Math.min(t.right,u.right),top:Math.max(t.top,u.top),bottom:Math.min(t.bottom,u.bottom)}),h=h.assignedSlot||
-h.parentNode}else if(h.nodeType==11)h=h.host;else break}function pf(n){let t=n.ownerDocument,e,i;for(let s=n.parentNode;s&&
+h.parentNode}else if(h.nodeType==11)h=h.host;else break}function gf(n){let t=n.ownerDocument,e,i;for(let s=n.parentNode;s&&
 !(s==t.body||e&&i);)if(s.nodeType==1)!i&&s.scrollHeight>s.clientHeight&&(i=s),!e&&s.scrollWidth>s.clientWidth&&(e=s),s=s.
 assignedSlot||s.parentNode;else if(s.nodeType==11)s=s.host;else break;return{x:e,y:i}}var Cs=class{constructor(){this.anchorNode=
 null,this.anchorOffset=0,this.focusNode=null,this.focusOffset=0}eq(t){return this.anchorNode==t.anchorNode&&this.anchorOffset==
 t.anchorOffset&&this.focusNode==t.focusNode&&this.focusOffset==t.focusOffset}setRange(t){let{anchorNode:e,focusNode:i}=t;
 this.set(e,Math.min(t.anchorOffset,e?zt(e):0),i,Math.min(t.focusOffset,i?zt(i):0))}set(t,e,i,s){this.anchorNode=t,this.anchorOffset=
-e,this.focusNode=i,this.focusOffset=s}},be=null;M.safari&&M.safari_version>=26&&(be=!1);function pl(n){if(n.setActive)return n.
+e,this.focusNode=i,this.focusOffset=s}},be=null;M.safari&&M.safari_version>=26&&(be=!1);function ml(n){if(n.setActive)return n.
 setActive();if(be)return n.focus(be);let t=[];for(let e=n;e&&(t.push(e,e.scrollTop,e.scrollLeft),e!=e.ownerDocument);e=e.
 parentNode);if(n.focus(be==null?{get preventScroll(){return be={preventScroll:!0},!0}}:void 0),!be){be=!1;for(let e=0;e<
-t.length;){let i=t[e++],s=t[e++],r=t[e++];i.scrollTop!=s&&(i.scrollTop=s),i.scrollLeft!=r&&(i.scrollLeft=r)}}}var Ho;function we(n,t,e=t){
-let i=Ho||(Ho=document.createRange());return i.setEnd(n,e),i.setStart(n,t),i}function ze(n,t,e,i){let s={key:t,code:t,keyCode:e,
+t.length;){let i=t[e++],s=t[e++],r=t[e++];i.scrollTop!=s&&(i.scrollTop=s),i.scrollLeft!=r&&(i.scrollLeft=r)}}}var Fo;function we(n,t,e=t){
+let i=Fo||(Fo=document.createRange());return i.setEnd(n,e),i.setStart(n,t),i}function ze(n,t,e,i){let s={key:t,code:t,keyCode:e,
 which:e,cancelable:!0};i&&({altKey:s.altKey,ctrlKey:s.ctrlKey,shiftKey:s.shiftKey,metaKey:s.metaKey}=i);let r=new KeyboardEvent(
 "keydown",s);r.synthetic=!0,n.dispatchEvent(r);let o=new KeyboardEvent("keyup",s);return o.synthetic=!0,n.dispatchEvent(
-o),r.defaultPrevented||o.defaultPrevented}function mf(n){for(;n;){if(n&&(n.nodeType==9||n.nodeType==11&&n.host))return n;
-n=n.assignedSlot||n.parentNode}return null}function ml(n){for(;n.attributes.length;)n.removeAttributeNode(n.attributes[0])}
-function gf(n,t){let e=t.focusNode,i=t.focusOffset;if(!e||t.anchorNode!=e||t.anchorOffset!=i)return!1;for(i=Math.min(i,zt(
+o),r.defaultPrevented||o.defaultPrevented}function bf(n){for(;n;){if(n&&(n.nodeType==9||n.nodeType==11&&n.host))return n;
+n=n.assignedSlot||n.parentNode}return null}function gl(n){for(;n.attributes.length;)n.removeAttributeNode(n.attributes[0])}
+function yf(n,t){let e=t.focusNode,i=t.focusOffset;if(!e||t.anchorNode!=e||t.anchorOffset!=i)return!1;for(i=Math.min(i,zt(
 e));;)if(i){if(e.nodeType!=1)return!1;let s=e.childNodes[i-1];s.contentEditable=="false"?i--:(e=s,i=zt(e))}else{if(e==n)
-return!0;i=ke(e),e=e.parentNode}}function gl(n){return n.scrollTop>Math.max(1,n.scrollHeight-n.clientHeight-4)}function bl(n,t){
+return!0;i=ke(e),e=e.parentNode}}function bl(n){return n.scrollTop>Math.max(1,n.scrollHeight-n.clientHeight-4)}function yl(n,t){
 for(let e=n,i=t;;){if(e.nodeType==3&&i>0)return{node:e,offset:i};if(e.nodeType==1&&i>0){if(e.contentEditable=="false")return null;
-e=e.childNodes[i-1],i=zt(e)}else if(e.parentNode&&!dn(e))i=ke(e),e=e.parentNode;else return null}}function yl(n,t){for(let e=n,
+e=e.childNodes[i-1],i=zt(e)}else if(e.parentNode&&!dn(e))i=ke(e),e=e.parentNode;else return null}}function kl(n,t){for(let e=n,
 i=t;;){if(e.nodeType==3&&i<e.nodeValue.length)return{node:e,offset:i};if(e.nodeType==1&&i<e.childNodes.length){if(e.contentEditable==
 "false")return null;e=e.childNodes[i],i=0}else if(e.parentNode&&!dn(e))i=ke(e)+1,e=e.parentNode;else return null}}var ht=class n{constructor(t,e,i=!0){
 this.node=t,this.offset=e,this.precise=i}static before(t,e){return new n(t.parentNode,ke(t),e)}static after(t,e){return new n(
@@ -482,8 +482,8 @@ length}posBefore(t){let e=this.posAtStart;for(let i of this.children){if(i==t)re
 "Invalid child in posBefore")}posAfter(t){return this.posBefore(t)+t.length}sync(t,e){if(this.flags&2){let i=this.dom,s=null,
 r;for(let o of this.children){if(o.flags&7){if(!o.dom&&(r=s?s.nextSibling:i.firstChild)){let l=n.get(r);(!l||!l.parent&&
 l.canReuseDOM(o))&&o.reuseDOM(r)}o.sync(t,e),o.flags&=-8}if(r=s?s.nextSibling:i.firstChild,e&&!e.written&&e.node==i&&r!=
-o.dom&&(e.written=!0),o.dom.parentNode==i)for(;r&&r!=o.dom;)r=Fo(r);else i.insertBefore(o.dom,r);s=o.dom}for(r=s?s.nextSibling:
-i.firstChild,r&&e&&e.node==i&&(e.written=!0);r;)r=Fo(r)}else if(this.flags&1)for(let i of this.children)i.flags&7&&(i.sync(
+o.dom&&(e.written=!0),o.dom.parentNode==i)for(;r&&r!=o.dom;)r=Vo(r);else i.insertBefore(o.dom,r);s=o.dom}for(r=s?s.nextSibling:
+i.firstChild,r&&e&&e.node==i&&(e.written=!0);r;)r=Vo(r)}else if(this.flags&1)for(let i of this.children)i.flags&7&&(i.sync(
 t,e),i.flags&=-8)}reuseDOM(t){}localPosFromDOM(t,e){let i;if(t==this.dom)i=this.dom.childNodes[e];else{let s=zt(t)==0?0:
 e==0?-1:1;for(;;){let r=t.parentNode;if(r==this.dom)break;s==0&&r.firstChild!=r.lastChild&&(t==r.firstChild?s=-1:s=1),t=
 r}s<0?i=t:i=t.nextSibling}if(i==this.dom.firstChild)return 0;for(;i&&!n.get(i);)i=i.nextSibling;if(!i)return this.length;
@@ -502,10 +502,10 @@ findPos(t,e)}toString(){let t=this.constructor.name.replace("View","");return t+
 join()+")":this.length?"["+(t=="Text"?this.text:this.length)+"]":"")+(this.breakAfter?"#":"")}static get(t){return t.cmView}get isEditable(){
 return!0}get isWidget(){return!1}get isHidden(){return!1}merge(t,e,i,s,r,o){return!1}become(t){return!1}canReuseDOM(t){return t.
 constructor==this.constructor&&!((this.flags|t.flags)&8)}getSide(){return 0}destroy(){for(let t of this.children)t.parent==
-this&&t.destroy();this.parent=null}};K.prototype.breakAfter=0;function Fo(n){let t=n.nextSibling;return n.parentNode.removeChild(
+this&&t.destroy();this.parent=null}};K.prototype.breakAfter=0;function Vo(n){let t=n.nextSibling;return n.parentNode.removeChild(
 n),t}var pn=class{constructor(t,e,i){this.children=t,this.pos=e,this.i=i,this.off=0}findPos(t,e=1){for(;;){if(t>this.pos||
 t==this.pos&&(e>0||this.i==0||this.children[this.i-1].breakAfter))return this.off=t-this.pos,this;let i=this.children[--this.
-i];this.pos-=i.length+i.breakAfter}}};function kl(n,t,e,i,s,r,o,l,a){let{children:f}=n,h=f.length?f[t]:null,c=r.length?r[r.
+i];this.pos-=i.length+i.breakAfter}}};function wl(n,t,e,i,s,r,o,l,a){let{children:f}=n,h=f.length?f[t]:null,c=r.length?r[r.
 length-1]:null,u=c?c.breakAfter:o;if(!(t==i&&h&&!o&&!u&&r.length<2&&h.merge(e,s,r.length?c:null,e==0,l,a))){if(i<f.length){
 let d=f[i];d&&(s<d.length||d.breakAfter&&c?.breakAfter)?(t==i&&(d=d.split(s),s=0),!u&&c&&d.merge(0,s,c,!0,0,a)?r[r.length-
 1]=d:((s||d.children.length&&!d.children[0].length)&&d.merge(0,s,null,!1,0,a),r.push(d))):d?.breakAfter&&(c?c.breakAfter=
@@ -513,24 +513,24 @@ let d=f[i];d&&(s<d.length||d.breakAfter&&c?.breakAfter)?(t==i&&(d=d.split(s),s=0
 (e<h.length||h.children.length&&h.children[h.children.length-1].length==0)&&h.merge(e,h.length,null,!1,l,0),t++));t<i&&r.
 length;)if(f[i-1].become(r[r.length-1]))i--,r.pop(),a=r.length?0:l;else if(f[t].become(r[0]))t++,r.shift(),l=r.length?0:
 a;else break;!r.length&&t&&i<f.length&&!f[t-1].breakAfter&&f[i].merge(0,0,f[t-1],!1,l,a)&&t--,(t<i||r.length)&&n.replaceChildren(
-t,i,r)}}function wl(n,t,e,i,s,r){let o=n.childCursor(),{i:l,off:a}=o.findPos(e,1),{i:f,off:h}=o.findPos(t,-1),c=t-e;for(let u of i)
-c+=u.length;n.length+=c,kl(n,f,h,l,a,i,0,s,r)}var bf=256,Wt=class n extends K{constructor(t){super(),this.text=t}get length(){
+t,i,r)}}function xl(n,t,e,i,s,r){let o=n.childCursor(),{i:l,off:a}=o.findPos(e,1),{i:f,off:h}=o.findPos(t,-1),c=t-e;for(let u of i)
+c+=u.length;n.length+=c,wl(n,f,h,l,a,i,0,s,r)}var kf=256,Wt=class n extends K{constructor(t){super(),this.text=t}get length(){
 return this.text.length}createDOM(t){this.setDOM(t||document.createTextNode(this.text))}sync(t,e){this.dom||this.createDOM(),
 this.dom.nodeValue!=this.text&&(e&&e.node==this.dom&&(e.written=!0),this.dom.nodeValue=this.text)}reuseDOM(t){t.nodeType==
-3&&this.createDOM(t)}merge(t,e,i){return this.flags&8||i&&(!(i instanceof n)||this.length-(e-t)+i.length>bf||i.flags&8)?
+3&&this.createDOM(t)}merge(t,e,i){return this.flags&8||i&&(!(i instanceof n)||this.length-(e-t)+i.length>kf||i.flags&8)?
 !1:(this.text=this.text.slice(0,t)+(i?i.text:"")+this.text.slice(e),this.markDirty(),!0)}split(t){let e=new n(this.text.
 slice(t));return this.text=this.text.slice(0,t),this.markDirty(),e.flags|=this.flags&8,e}localPosFromDOM(t,e){return t==
 this.dom?e:e?this.text.length:0}domAtPos(t){return new ht(this.dom,t)}domBoundsAround(t,e,i){return{from:i,to:i+this.length,
-startDOM:this.dom,endDOM:this.dom.nextSibling}}coordsAt(t,e){return yf(this.dom,t,e)}},se=class n extends K{constructor(t,e=[],i=0){
-super(),this.mark=t,this.children=e,this.length=i;for(let s of e)s.setParent(this)}setAttrs(t){if(ml(t),this.mark.class&&
+startDOM:this.dom,endDOM:this.dom.nextSibling}}coordsAt(t,e){return wf(this.dom,t,e)}},se=class n extends K{constructor(t,e=[],i=0){
+super(),this.mark=t,this.children=e,this.length=i;for(let s of e)s.setParent(this)}setAttrs(t){if(gl(t),this.mark.class&&
 (t.className=this.mark.class),this.mark.attrs)for(let e in this.mark.attrs)t.setAttribute(e,this.mark.attrs[e]);return t}canReuseDOM(t){
 return super.canReuseDOM(t)&&!((this.flags|t.flags)&8)}reuseDOM(t){t.nodeName==this.mark.tagName.toUpperCase()&&(this.setDOM(
 t),this.flags|=6)}sync(t,e){this.dom?this.flags&4&&this.setAttrs(this.dom):this.setDOM(this.setAttrs(document.createElement(
 this.mark.tagName))),super.sync(t,e)}merge(t,e,i,s,r,o){return i&&(!(i instanceof n&&i.mark.eq(this.mark))||t&&r<=0||e<this.
-length&&o<=0)?!1:(wl(this,t,e,i?i.children.slice():[],r-1,o-1),this.markDirty(),!0)}split(t){let e=[],i=0,s=-1,r=0;for(let l of this.
+length&&o<=0)?!1:(xl(this,t,e,i?i.children.slice():[],r-1,o-1),this.markDirty(),!0)}split(t){let e=[],i=0,s=-1,r=0;for(let l of this.
 children){let a=i+l.length;a>t&&e.push(i<t?l.split(t-i):l),s<0&&i>=t&&(s=r),i=a,r++}let o=this.length-t;return this.length=
-t,s>-1&&(this.children.length=s,this.markDirty()),new n(this.mark,e,o)}domAtPos(t){return xl(this,t)}coordsAt(t,e){return vl(
-this,t,e)}};function yf(n,t,e){let i=n.nodeValue.length;t>i&&(t=i);let s=t,r=t,o=0;t==0&&e<0||t==i&&e>=0?M.chrome||M.gecko||
+t,s>-1&&(this.children.length=s,this.markDirty()),new n(this.mark,e,o)}domAtPos(t){return Sl(this,t)}coordsAt(t,e){return Cl(
+this,t,e)}};function wf(n,t,e){let i=n.nodeValue.length;t>i&&(t=i);let s=t,r=t,o=0;t==0&&e<0||t==i&&e>=0?M.chrome||M.gecko||
 (t?(s--,o=1):r<i&&(r++,o=-1)):e<0?s--:r<i&&r++;let l=we(n,s,r).getClientRects();if(!l.length)return null;let a=l[(o?o<0:
 e>=0)?0:l.length-1];return M.safari&&!o&&a.width==0&&(a=Array.prototype.find.call(l,f=>f.width)||a),o?xi(a,o<0):a||null}
 var mn=class n extends K{static create(t,e,i){return new n(t,e,i)}constructor(t,e,i){super(),this.widget=t,this.length=e,
@@ -551,22 +551,22 @@ super(),this.side=t}get length(){return 0}merge(){return!1}become(t){return t in
 this.side)}sync(){if(!this.dom){let t=document.createElement("img");t.className="cm-widgetBuffer",t.setAttribute("aria-h\
 idden","true"),this.setDOM(t)}}getSide(){return this.side}domAtPos(t){return this.side>0?ht.before(this.dom):ht.after(this.
 dom)}localPosFromDOM(){return 0}domBoundsAround(){return null}coordsAt(t){return this.dom.getBoundingClientRect()}get overrideDOMText(){
-return I.empty}get isHidden(){return!0}};Wt.prototype.children=mn.prototype.children=pi.prototype.children=Zs;function xl(n,t){
+return I.empty}get isHidden(){return!0}};Wt.prototype.children=mn.prototype.children=pi.prototype.children=Zs;function Sl(n,t){
 let e=n.dom,{children:i}=n,s=0;for(let r=0;s<i.length;s++){let o=i[s],l=r+o.length;if(!(l==r&&o.getSide()<=0)){if(t>r&&t<
 l&&o.dom.parentNode==e)return o.domAtPos(t-r);if(t<=r)break;r=l}}for(let r=s;r>0;r--){let o=i[r-1];if(o.dom.parentNode==
 e)return o.domAtPos(o.length)}for(let r=s;r<i.length;r++){let o=i[r];if(o.dom.parentNode==e)return o.domAtPos(0)}return new ht(
-e,0)}function Sl(n,t,e){let i,{children:s}=n;e>0&&t instanceof se&&s.length&&(i=s[s.length-1])instanceof se&&i.mark.eq(t.
-mark)?Sl(i,t.children[0],e-1):(s.push(t),t.setParent(n)),n.length+=t.length}function vl(n,t,e){let i=null,s=-1,r=null,o=-1;
+e,0)}function vl(n,t,e){let i,{children:s}=n;e>0&&t instanceof se&&s.length&&(i=s[s.length-1])instanceof se&&i.mark.eq(t.
+mark)?vl(i,t.children[0],e-1):(s.push(t),t.setParent(n)),n.length+=t.length}function Cl(n,t,e){let i=null,s=-1,r=null,o=-1;
 function l(f,h){for(let c=0,u=0;c<f.children.length&&u<=h;c++){let d=f.children[c],p=u+d.length;p>=h&&(d.children.length?
-l(d,h-u):(!r||r.isHidden&&(e>0||wf(r,d)))&&(p>h||u==p&&d.getSide()>0)?(r=d,o=h-u):(u<h||u==p&&d.getSide()<0&&!d.isHidden)&&
-(i=d,s=h-u)),u=p}}l(n,t);let a=(e<0?i:r)||i||r;return a?a.coordsAt(Math.max(0,a==i?s:o),e):kf(n)}function kf(n){let t=n.
-dom.lastChild;if(!t)return n.dom.getBoundingClientRect();let e=We(t);return e[e.length-1]||null}function wf(n,t){let e=n.
+l(d,h-u):(!r||r.isHidden&&(e>0||Sf(r,d)))&&(p>h||u==p&&d.getSide()>0)?(r=d,o=h-u):(u<h||u==p&&d.getSide()<0&&!d.isHidden)&&
+(i=d,s=h-u)),u=p}}l(n,t);let a=(e<0?i:r)||i||r;return a?a.coordsAt(Math.max(0,a==i?s:o),e):xf(n)}function xf(n){let t=n.
+dom.lastChild;if(!t)return n.dom.getBoundingClientRect();let e=We(t);return e[e.length-1]||null}function Sf(n,t){let e=n.
 coordsAt(0,1),i=t.coordsAt(0,1);return e&&i&&i.top<e.bottom}function As(n,t){for(let e in n)e=="class"&&t.class?t.class+=
-" "+n.class:e=="style"&&t.style?t.style+=";"+n.style:t[e]=n[e];return t}var Vo=Object.create(null);function gn(n,t,e){if(n==
-t)return!0;n||(n=Vo),t||(t=Vo);let i=Object.keys(n),s=Object.keys(t);if(i.length-(e&&i.indexOf(e)>-1?1:0)!=s.length-(e&&
+" "+n.class:e=="style"&&t.style?t.style+=";"+n.style:t[e]=n[e];return t}var zo=Object.create(null);function gn(n,t,e){if(n==
+t)return!0;n||(n=zo),t||(t=zo);let i=Object.keys(n),s=Object.keys(t);if(i.length-(e&&i.indexOf(e)>-1?1:0)!=s.length-(e&&
 s.indexOf(e)>-1?1:0))return!1;for(let r of i)if(r!=e&&(s.indexOf(r)==-1||n[r]!==t[r]))return!1;return!0}function Ms(n,t,e){
 let i=!1;if(t)for(let s in t)e&&s in e||(i=!0,s=="style"?n.style.cssText="":n.removeAttribute(s));if(e)for(let s in e)t&&
-t[s]==e[s]||(i=!0,s=="style"?n.style.cssText=e[s]:n.setAttribute(s,e[s]));return i}function xf(n){let t=Object.create(null);
+t[s]==e[s]||(i=!0,s=="style"?n.style.cssText=e[s]:n.setAttribute(s,e[s]));return i}function vf(n){let t=Object.create(null);
 for(let e=0;e<n.attributes.length;e++){let i=n.attributes[e];t[i.name]=i.value}return t}var Qt=class{eq(t){return!1}updateDOM(t,e){
 return!1}compare(t){return this==t||this.constructor==t.constructor&&this.eq(t)}get estimatedHeight(){return-1}get lineBreaks(){
 return 0}ignoreEvent(t){return!0}coordsAt(t,e,i){return null}get isHidden(){return!1}get editable(){return!1}destroy(t){}},
@@ -574,10 +574,10 @@ pt=(function(n){return n[n.Text=0]="Text",n[n.WidgetBefore=1]="WidgetBefore",n[n
 3]="WidgetRange",n})(pt||(pt={})),z=class extends Xt{constructor(t,e,i,s){super(),this.startSide=t,this.endSide=e,this.widget=
 i,this.spec=s}get heightRelevant(){return!1}static mark(t){return new mi(t)}static widget(t){let e=Math.max(-1e4,Math.min(
 1e4,t.side||0)),i=!!t.block;return e+=i&&!t.inlineOrder?e>0?3e8:-4e8:e>0?1e8:-1e8,new re(t,e,e,i,t.widget||null,!1)}static replace(t){
-let e=!!t.block,i,s;if(t.isBlockGap)i=-5e8,s=4e8;else{let{start:r,end:o}=Cl(t,e);i=(r?e?-3e8:-1:5e8)-1,s=(o?e?2e8:1:-6e8)+
+let e=!!t.block,i,s;if(t.isBlockGap)i=-5e8,s=4e8;else{let{start:r,end:o}=Al(t,e);i=(r?e?-3e8:-1:5e8)-1,s=(o?e?2e8:1:-6e8)+
 1}return new re(t,i,s,e,t.widget||null,!0)}static line(t){return new gi(t)}static set(t,e=!1){return Q.of(t,e)}hasHeight(){
 return this.widget?this.widget.estimatedHeight>-1:!1}};z.none=Q.empty;var mi=class n extends z{constructor(t){let{start:e,
-end:i}=Cl(t);super(e?-1:5e8,i?1:-6e8,null,t),this.tagName=t.tagName||"span",this.class=t.class||"",this.attrs=t.attributes||
+end:i}=Al(t);super(e?-1:5e8,i?1:-6e8,null,t),this.tagName=t.tagName||"span",this.class=t.class||"",this.attrs=t.attributes||
 null}eq(t){var e,i;return this==t||t instanceof n&&this.tagName==t.tagName&&(this.class||((e=this.attrs)===null||e===void 0?
 void 0:e.class))==(t.class||((i=t.attrs)===null||i===void 0?void 0:i.class))&&gn(this.attrs,t.attrs,"class")}range(t,e=t){
 if(t>=e)throw new RangeError("Mark decorations may not be empty");return super.range(t,e)}};mi.prototype.point=!1;var gi=class n extends z{constructor(t){
@@ -586,23 +586,23 @@ if(e!=t)throw new RangeError("Line decoration ranges must be zero-length");retur
 ft.TrackBefore;gi.prototype.point=!0;var re=class n extends z{constructor(t,e,i,s,r,o){super(e,i,r,t),this.block=s,this.
 isReplace=o,this.mapMode=s?e<=0?ft.TrackBefore:ft.TrackAfter:ft.TrackDel}get type(){return this.startSide!=this.endSide?
 pt.WidgetRange:this.startSide<=0?pt.WidgetBefore:pt.WidgetAfter}get heightRelevant(){return this.block||!!this.widget&&(this.
-widget.estimatedHeight>=5||this.widget.lineBreaks>0)}eq(t){return t instanceof n&&Sf(this.widget,t.widget)&&this.block==
+widget.estimatedHeight>=5||this.widget.lineBreaks>0)}eq(t){return t instanceof n&&Cf(this.widget,t.widget)&&this.block==
 t.block&&this.startSide==t.startSide&&this.endSide==t.endSide}range(t,e=t){if(this.isReplace&&(t>e||t==e&&this.startSide>
 0&&this.endSide<=0))throw new RangeError("Invalid range for replacement decoration");if(!this.isReplace&&e!=t)throw new RangeError(
-"Widget decorations can only have zero-length ranges");return super.range(t,e)}};re.prototype.point=!0;function Cl(n,t=!1){
-let{inclusiveStart:e,inclusiveEnd:i}=n;return e==null&&(e=n.inclusive),i==null&&(i=n.inclusive),{start:e??t,end:i??t}}function Sf(n,t){
+"Widget decorations can only have zero-length ranges");return super.range(t,e)}};re.prototype.point=!0;function Al(n,t=!1){
+let{inclusiveStart:e,inclusiveEnd:i}=n;return e==null&&(e=n.inclusive),i==null&&(i=n.inclusive),{start:e??t,end:i??t}}function Cf(n,t){
 return n==t||!!(n&&t&&n.compare(t))}function fn(n,t,e,i=0){let s=e.length-1;s>=0&&e[s]+i>=n?e[s]=Math.max(e[s],t):e.push(
 n,t)}var nt=class n extends K{constructor(){super(...arguments),this.children=[],this.length=0,this.prevAttrs=void 0,this.
 attrs=null,this.breakAfter=0}merge(t,e,i,s,r,o){if(i){if(!(i instanceof n))return!1;this.dom||i.transferDOM(this)}return s&&
-this.setDeco(i?i.attrs:null),wl(this,t,e,i?i.children.slice():[],r,o),!0}split(t){let e=new n;if(e.breakAfter=this.breakAfter,
+this.setDeco(i?i.attrs:null),xl(this,t,e,i?i.children.slice():[],r,o),!0}split(t){let e=new n;if(e.breakAfter=this.breakAfter,
 this.length==0)return e;let{i,off:s}=this.childPos(t);s&&(e.append(this.children[i].split(s),0),this.children[i].merge(s,
 this.children[i].length,null,!1,0,0),i++);for(let r=i;r<this.children.length;r++)e.append(this.children[r],0);for(;i>0&&
 this.children[i-1].length==0;)this.children[--i].destroy();return this.children.length=i,this.markDirty(),this.length=t,
 e}transferDOM(t){this.dom&&(this.markDirty(),t.setDOM(this.dom),t.prevAttrs=this.prevAttrs===void 0?this.attrs:this.prevAttrs,
 this.prevAttrs=void 0,this.dom=null)}setDeco(t){gn(this.attrs,t)||(this.dom&&(this.prevAttrs=this.attrs,this.markDirty()),
-this.attrs=t)}append(t,e){Sl(this,t,e)}addLineDeco(t){let e=t.spec.attributes,i=t.spec.class;e&&(this.attrs=As(e,this.attrs||
-{})),i&&(this.attrs=As({class:i},this.attrs||{}))}domAtPos(t){return xl(this,t)}reuseDOM(t){t.nodeName=="DIV"&&(this.setDOM(
-t),this.flags|=6)}sync(t,e){var i;this.dom?this.flags&4&&(ml(this.dom),this.dom.className="cm-line",this.prevAttrs=this.
+this.attrs=t)}append(t,e){vl(this,t,e)}addLineDeco(t){let e=t.spec.attributes,i=t.spec.class;e&&(this.attrs=As(e,this.attrs||
+{})),i&&(this.attrs=As({class:i},this.attrs||{}))}domAtPos(t){return Sl(this,t)}reuseDOM(t){t.nodeName=="DIV"&&(this.setDOM(
+t),this.flags|=6)}sync(t,e){var i;this.dom?this.flags&4&&(gl(this.dom),this.dom.className="cm-line",this.prevAttrs=this.
 attrs?null:void 0):(this.setDOM(document.createElement("div")),this.dom.className="cm-line",this.prevAttrs=this.attrs?null:
 void 0),this.prevAttrs!==void 0&&(Ms(this.dom,this.prevAttrs,this.attrs),this.dom.classList.add("cm-line"),this.prevAttrs=
 void 0),super.sync(t,e);let s=this.dom.lastChild;for(;s&&K.get(s)instanceof se;)s=s.lastChild;if(!s||!this.length||s.nodeName!=
@@ -610,7 +610,7 @@ void 0),super.sync(t,e);let s=this.dom.lastChild;for(;s&&K.get(s)instanceof se;)
 createElement("BR");r.cmIgnore=!0,this.dom.appendChild(r)}}measureTextSize(){if(this.children.length==0||this.length>20)
 return null;let t=0,e;for(let i of this.children){if(!(i instanceof Wt)||/[^ -~]/.test(i.text))return null;let s=We(i.dom);
 if(s.length!=1)return null;t+=s[0].width,e=s[0].height}return t?{lineHeight:this.dom.getBoundingClientRect().height,charWidth:t/
-this.length,textHeight:e}:null}coordsAt(t,e){let i=vl(this,t,e);if(!this.children.length&&i&&this.parent){let{heightOracle:s}=this.
+this.length,textHeight:e}:null}coordsAt(t,e){let i=Cl(this,t,e);if(!this.children.length&&i&&this.parent){let{heightOracle:s}=this.
 parent.view.viewState,r=i.bottom-i.top;if(Math.abs(r-s.lineHeight)<2&&s.textHeight<r){let o=(r-s.textHeight)/2;return{top:i.
 top+o,bottom:i.bottom-o,left:i.left,right:i.left}}}return i}become(t){return t instanceof n&&this.children.length==0&&t.
 children.length==0&&gn(this.attrs,t.attrs)&&this.breakAfter==t.breakAfter}covers(){return!0}static find(t,e){for(let i=0,
@@ -659,71 +659,71 @@ Q.spans(s,e,i,o),o.openStart<0&&(o.openStart=o.openEnd),o.finish(o.openEnd),o}};
 e,[n],n.length);return n}var oe=class extends Qt{constructor(t){super(),this.tag=t}eq(t){return t.tag==this.tag}toDOM(){
 return document.createElement(this.tag)}updateDOM(t){return t.nodeName.toLowerCase()==this.tag}get isHidden(){return!0}};
 oe.inline=new oe("span");oe.block=new oe("div");var X=(function(n){return n[n.LTR=0]="LTR",n[n.RTL=1]="RTL",n})(X||(X={})),
-xe=X.LTR,tr=X.RTL;function Al(n){let t=[];for(let e=0;e<n.length;e++)t.push(1<<+n[e]);return t}var vf=Al("88888888888888\
+xe=X.LTR,tr=X.RTL;function Ml(n){let t=[];for(let e=0;e<n.length;e++)t.push(1<<+n[e]);return t}var Af=Ml("88888888888888\
 888888888888888888888666888888787833333333337888888000000000000000000000000008888880000000000000000000000000088888888888\
-888888888888888888888888887866668888088888663380888308888800000000000000000000000800000000000000000000000000000008"),Cf=Al(
+888888888888888888888888887866668888088888663380888308888800000000000000000000000800000000000000000000000000000008"),Mf=Ml(
 "44444488266272889999999999922222222222222222222222222222222222222222222222299999999999999999999944444444446442228222222\
 222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222229999999499999992299899992\
 23333333333"),Ds=Object.create(null),Nt=[];for(let n of["()","[]","{}"]){let t=n.charCodeAt(0),e=n.charCodeAt(1);Ds[t]=e,
-Ds[e]=-t}function Ml(n){return n<=247?vf[n]:1424<=n&&n<=1524?2:1536<=n&&n<=1785?Cf[n-1536]:1774<=n&&n<=2220?4:8192<=n&&n<=
-8204?256:64336<=n&&n<=65023?4:1}var Af=/[\u0590-\u05f4\u0600-\u06ff\u0700-\u08ac\ufb50-\ufdff]/,Ft=class{get dir(){return this.
+Ds[e]=-t}function Dl(n){return n<=247?Af[n]:1424<=n&&n<=1524?2:1536<=n&&n<=1785?Mf[n-1536]:1774<=n&&n<=2220?4:8192<=n&&n<=
+8204?256:64336<=n&&n<=65023?4:1}var Df=/[\u0590-\u05f4\u0600-\u06ff\u0700-\u08ac\ufb50-\ufdff]/,Ft=class{get dir(){return this.
 level%2?tr:xe}constructor(t,e,i){this.from=t,this.to=e,this.level=i}side(t,e){return this.dir==e==t?this.to:this.from}forward(t,e){
 return t==(this.dir==e)}static find(t,e,i,s){let r=-1;for(let o=0;o<t.length;o++){let l=t[o];if(l.from<=e&&l.to>=e){if(l.
 level==i)return o;(r<0||(s!=0?s<0?l.from<e:l.to>e:t[r].level>l.level))&&(r=o)}}if(r<0)throw new RangeError("Index out of\
- range");return r}};function Dl(n,t){if(n.length!=t.length)return!1;for(let e=0;e<n.length;e++){let i=n[e],s=t[e];if(i.from!=
-s.from||i.to!=s.to||i.direction!=s.direction||!Dl(i.inner,s.inner))return!1}return!0}var q=[];function Mf(n,t,e,i,s){for(let r=0;r<=
-i.length;r++){let o=r?i[r-1].to:t,l=r<i.length?i[r].from:e,a=r?256:s;for(let f=o,h=a,c=a;f<l;f++){let u=Ml(n.charCodeAt(
+ range");return r}};function Ll(n,t){if(n.length!=t.length)return!1;for(let e=0;e<n.length;e++){let i=n[e],s=t[e];if(i.from!=
+s.from||i.to!=s.to||i.direction!=s.direction||!Ll(i.inner,s.inner))return!1}return!0}var q=[];function Lf(n,t,e,i,s){for(let r=0;r<=
+i.length;r++){let o=r?i[r-1].to:t,l=r<i.length?i[r].from:e,a=r?256:s;for(let f=o,h=a,c=a;f<l;f++){let u=Dl(n.charCodeAt(
 f));u==512?u=h:u==8&&c==4&&(u=16),q[f]=u==4?2:u,u&7&&(c=u),h=u}for(let f=o,h=a,c=a;f<l;f++){let u=q[f];if(u==128)f<l-1&&
 h==q[f+1]&&h&24?u=q[f]=h:q[f]=256;else if(u==64){let d=f+1;for(;d<l&&q[d]==64;)d++;let p=f&&h==8||d<e&&q[d]==8?c==1?1:8:
-256;for(let m=f;m<d;m++)q[m]=p;f=d-1}else u==8&&c==1&&(q[f]=1);h=u,u&7&&(c=u)}}}function Df(n,t,e,i,s){let r=s==1?2:1;for(let o=0,
+256;for(let m=f;m<d;m++)q[m]=p;f=d-1}else u==8&&c==1&&(q[f]=1);h=u,u&7&&(c=u)}}}function Tf(n,t,e,i,s){let r=s==1?2:1;for(let o=0,
 l=0,a=0;o<=i.length;o++){let f=o?i[o-1].to:t,h=o<i.length?i[o].from:e;for(let c=f,u,d,p;c<h;c++)if(d=Ds[u=n.charCodeAt(c)])
 if(d<0){for(let m=l-3;m>=0;m-=3)if(Nt[m+1]==-d){let g=Nt[m+2],b=g&2?s:g&4?g&1?r:s:0;b&&(q[c]=q[Nt[m]]=b),l=m;break}}else{
 if(Nt.length==189)break;Nt[l++]=c,Nt[l++]=u,Nt[l++]=a}else if((p=q[c])==2||p==1){let m=p==s;a=m?0:1;for(let g=l-3;g>=0;g-=
-3){let b=Nt[g+2];if(b&2)break;if(m)Nt[g+2]|=2;else{if(b&4)break;Nt[g+2]|=4}}}}}function Tf(n,t,e,i){for(let s=0,r=i;s<=e.
+3){let b=Nt[g+2];if(b&2)break;if(m)Nt[g+2]|=2;else{if(b&4)break;Nt[g+2]|=4}}}}}function Bf(n,t,e,i){for(let s=0,r=i;s<=e.
 length;s++){let o=s?e[s-1].to:n,l=s<e.length?e[s].from:t;for(let a=o;a<l;){let f=q[a];if(f==256){let h=a+1;for(;;)if(h==
 l){if(s==e.length)break;h=e[s++].to,l=s<e.length?e[s].from:t}else if(q[h]==256)h++;else break;let c=r==1,u=(h<t?q[h]:i)==
 1,d=c==u?c?1:2:i;for(let p=h,m=s,g=m?e[m-1].to:n;p>a;)p==g&&(p=e[--m].from,g=m?e[m-1].to:n),q[--p]=d;a=h}else r=f,a++}}}
-function Ts(n,t,e,i,s,r,o){let l=i%2?2:1;if(i%2==s%2)for(let a=t,f=0;a<e;){let h=!0,c=!1;if(f==r.length||a<r[f].from){let m=q[a];
+function Ls(n,t,e,i,s,r,o){let l=i%2?2:1;if(i%2==s%2)for(let a=t,f=0;a<e;){let h=!0,c=!1;if(f==r.length||a<r[f].from){let m=q[a];
 m!=l&&(h=!1,c=m==16)}let u=!h&&l==1?[]:null,d=h?i:i+1,p=a;t:for(;;)if(f<r.length&&p==r[f].from){if(c)break t;let m=r[f];
 if(!h)for(let g=m.to,b=f+1;;){if(g==e)break t;if(b<r.length&&r[b].from==g)g=r[b++].to;else{if(q[g]==l)break t;break}}if(f++,
-u)u.push(m);else{m.from>a&&o.push(new Ft(a,m.from,d));let g=m.direction==xe!=!(d%2);Ls(n,g?i+1:i,s,m.inner,m.from,m.to,o),
-a=m.to}p=m.to}else{if(p==e||(h?q[p]!=l:q[p]==l))break;p++}u?Ts(n,a,p,i+1,s,u,o):a<p&&o.push(new Ft(a,p,d)),a=p}else for(let a=e,
+u)u.push(m);else{m.from>a&&o.push(new Ft(a,m.from,d));let g=m.direction==xe!=!(d%2);Ts(n,g?i+1:i,s,m.inner,m.from,m.to,o),
+a=m.to}p=m.to}else{if(p==e||(h?q[p]!=l:q[p]==l))break;p++}u?Ls(n,a,p,i+1,s,u,o):a<p&&o.push(new Ft(a,p,d)),a=p}else for(let a=e,
 f=r.length;a>t;){let h=!0,c=!1;if(!f||a>r[f-1].to){let m=q[a-1];m!=l&&(h=!1,c=m==16)}let u=!h&&l==1?[]:null,d=h?i:i+1,p=a;
 t:for(;;)if(f&&p==r[f-1].to){if(c)break t;let m=r[--f];if(!h)for(let g=m.from,b=f;;){if(g==t)break t;if(b&&r[b-1].to==g)
 g=r[--b].from;else{if(q[g-1]==l)break t;break}}if(u)u.push(m);else{m.to<a&&o.push(new Ft(m.to,a,d));let g=m.direction==xe!=
-!(d%2);Ls(n,g?i+1:i,s,m.inner,m.from,m.to,o),a=m.from}p=m.from}else{if(p==t||(h?q[p-1]!=l:q[p-1]==l))break;p--}u?Ts(n,p,
-a,i+1,s,u,o):p<a&&o.push(new Ft(p,a,d)),a=p}}function Ls(n,t,e,i,s,r,o){let l=t%2?2:1;Mf(n,s,r,i,l),Df(n,s,r,i,l),Tf(s,r,
-i,l),Ts(n,s,r,t,e,i,o)}function Lf(n,t,e){if(!n)return[new Ft(0,0,t==tr?1:0)];if(t==xe&&!e.length&&!Af.test(n))return Tl(
-n.length);if(e.length)for(;n.length>q.length;)q[q.length]=256;let i=[],s=t==xe?0:1;return Ls(n,s,s,e,0,n.length,i),i}function Tl(n){
-return[new Ft(0,n,0)]}var Ll="";function Bf(n,t,e,i,s){var r;let o=i.head-n.from,l=Ft.find(t,o,(r=i.bidiLevel)!==null&&r!==
+!(d%2);Ts(n,g?i+1:i,s,m.inner,m.from,m.to,o),a=m.from}p=m.from}else{if(p==t||(h?q[p-1]!=l:q[p-1]==l))break;p--}u?Ls(n,p,
+a,i+1,s,u,o):p<a&&o.push(new Ft(p,a,d)),a=p}}function Ts(n,t,e,i,s,r,o){let l=t%2?2:1;Lf(n,s,r,i,l),Tf(n,s,r,i,l),Bf(s,r,
+i,l),Ls(n,s,r,t,e,i,o)}function Ef(n,t,e){if(!n)return[new Ft(0,0,t==tr?1:0)];if(t==xe&&!e.length&&!Df.test(n))return Tl(
+n.length);if(e.length)for(;n.length>q.length;)q[q.length]=256;let i=[],s=t==xe?0:1;return Ts(n,s,s,e,0,n.length,i),i}function Tl(n){
+return[new Ft(0,n,0)]}var Bl="";function Of(n,t,e,i,s){var r;let o=i.head-n.from,l=Ft.find(t,o,(r=i.bidiLevel)!==null&&r!==
 void 0?r:-1,i.assoc),a=t[l],f=a.side(s,e);if(o==f){let u=l+=s?1:-1;if(u<0||u>=t.length)return null;a=t[l=u],o=a.side(!s,
-e),f=a.side(s,e)}let h=it(n.text,o,a.forward(s,e));(h<a.from||h>a.to)&&(h=f),Ll=n.text.slice(Math.min(o,h),Math.max(o,h));
-let c=l==(s?t.length-1:0)?null:t[l+(s?1:-1)];return c&&h==f&&c.level+(s?0:1)<a.level?k.cursor(c.side(!s,e)+n.from,c.forward(
-s,e)?1:-1,c.level):k.cursor(h+n.from,a.forward(s,e)?-1:1,a.level)}function Ef(n,t,e){for(let i=t;i<e;i++){let s=Ml(n.charCodeAt(
-i));if(s==1)return xe;if(s==2||s==4)return tr}return xe}var Bl=B.define(),El=B.define(),Ol=B.define(),Pl=B.define(),Bs=B.
-define(),Rl=B.define(),Il=B.define(),er=B.define(),ir=B.define(),Nl=B.define({combine:n=>n.some(t=>t)}),Hl=B.define({combine:n=>n.
-some(t=>t)}),Fl=B.define(),hi=class n{constructor(t,e="nearest",i="nearest",s=5,r=5,o=!1){this.range=t,this.y=e,this.x=i,
+e),f=a.side(s,e)}let h=it(n.text,o,a.forward(s,e));(h<a.from||h>a.to)&&(h=f),Bl=n.text.slice(Math.min(o,h),Math.max(o,h));
+let c=l==(s?t.length-1:0)?null:t[l+(s?1:-1)];return c&&h==f&&c.level+(s?0:1)<a.level?w.cursor(c.side(!s,e)+n.from,c.forward(
+s,e)?1:-1,c.level):w.cursor(h+n.from,a.forward(s,e)?-1:1,a.level)}function Pf(n,t,e){for(let i=t;i<e;i++){let s=Dl(n.charCodeAt(
+i));if(s==1)return xe;if(s==2||s==4)return tr}return xe}var El=B.define(),Ol=B.define(),Pl=B.define(),Rl=B.define(),Bs=B.
+define(),Il=B.define(),Nl=B.define(),er=B.define(),ir=B.define(),Hl=B.define({combine:n=>n.some(t=>t)}),Fl=B.define({combine:n=>n.
+some(t=>t)}),Vl=B.define(),hi=class n{constructor(t,e="nearest",i="nearest",s=5,r=5,o=!1){this.range=t,this.y=e,this.x=i,
 this.yMargin=s,this.xMargin=r,this.isSnapshot=o}map(t){return t.empty?this:new n(this.range.map(t),this.y,this.x,this.yMargin,
-this.xMargin,this.isSnapshot)}clip(t){return this.range.to<=t.doc.length?this:new n(k.cursor(t.doc.length),this.y,this.x,
-this.yMargin,this.xMargin,this.isSnapshot)}},en=j.define({map:(n,t)=>n.map(t)}),Vl=j.define();function Lt(n,t,e){let i=n.
-facet(Pl);i.length?i[0](t):window.onerror&&window.onerror(String(t),e,void 0,void 0,t)||(e?console.error(e+":",t):console.
-error(t))}var Yt=B.define({combine:n=>n.length?n[0]:!0}),Of=0,Fe=B.define({combine(n){return n.filter((t,e)=>{for(let i=0;i<
+this.xMargin,this.isSnapshot)}clip(t){return this.range.to<=t.doc.length?this:new n(w.cursor(t.doc.length),this.y,this.x,
+this.yMargin,this.xMargin,this.isSnapshot)}},en=j.define({map:(n,t)=>n.map(t)}),zl=j.define();function Tt(n,t,e){let i=n.
+facet(Rl);i.length?i[0](t):window.onerror&&window.onerror(String(t),e,void 0,void 0,t)||(e?console.error(e+":",t):console.
+error(t))}var Yt=B.define({combine:n=>n.length?n[0]:!0}),Rf=0,Fe=B.define({combine(n){return n.filter((t,e)=>{for(let i=0;i<
 e;i++)if(n[i].plugin==t.plugin)return!1;return!0})}}),qt=class n{constructor(t,e,i,s,r){this.id=t,this.create=e,this.domEventHandlers=
 i,this.domEventObservers=s,this.baseExtensions=r(this),this.extension=this.baseExtensions.concat(Fe.of({plugin:this,arg:void 0}))}of(t){
 return this.baseExtensions.concat(Fe.of({plugin:this,arg:t}))}static define(t,e){let{eventHandlers:i,eventObservers:s,provide:r,
-decorations:o}=e||{};return new n(Of++,t,i,s,l=>{let a=[];return o&&a.push(yi.of(f=>{let h=f.plugin(l);return h?o(h):z.none})),
+decorations:o}=e||{};return new n(Rf++,t,i,s,l=>{let a=[];return o&&a.push(yi.of(f=>{let h=f.plugin(l);return h?o(h):z.none})),
 r&&a.push(r(l)),a})}static fromClass(t,e){return n.define((i,s)=>new t(i,s),e)}},fi=class{constructor(t){this.spec=t,this.
 mustUpdate=null,this.value=null}get plugin(){return this.spec&&this.spec.plugin}update(t){if(this.value){if(this.mustUpdate){
-let e=this.mustUpdate;if(this.mustUpdate=null,this.value.update)try{this.value.update(e)}catch(i){if(Lt(e.state,i,"CodeM\
+let e=this.mustUpdate;if(this.mustUpdate=null,this.value.update)try{this.value.update(e)}catch(i){if(Tt(e.state,i,"CodeM\
 irror plugin crashed"),this.value.destroy)try{this.value.destroy()}catch{}this.deactivate()}}}else if(this.spec)try{this.
-value=this.spec.plugin.create(t,this.spec.arg)}catch(e){Lt(t.state,e,"CodeMirror plugin crashed"),this.deactivate()}return this}destroy(t){
-var e;if(!((e=this.value)===null||e===void 0)&&e.destroy)try{this.value.destroy()}catch(i){Lt(t.state,i,"CodeMirror plug\
-in crashed")}}deactivate(){this.spec=this.value=null}},zl=B.define(),nr=B.define(),yi=B.define(),Wl=B.define(),Si=B.define(),
-ql=B.define();function zo(n,t){let e=n.state.facet(ql);if(!e.length)return e;let i=e.map(r=>r instanceof Function?r(n):r),
+value=this.spec.plugin.create(t,this.spec.arg)}catch(e){Tt(t.state,e,"CodeMirror plugin crashed"),this.deactivate()}return this}destroy(t){
+var e;if(!((e=this.value)===null||e===void 0)&&e.destroy)try{this.value.destroy()}catch(i){Tt(t.state,i,"CodeMirror plug\
+in crashed")}}deactivate(){this.spec=this.value=null}},Wl=B.define(),nr=B.define(),yi=B.define(),ql=B.define(),Si=B.define(),
+Kl=B.define();function Wo(n,t){let e=n.state.facet(Kl);if(!e.length)return e;let i=e.map(r=>r instanceof Function?r(n):r),
 s=[];return Q.spans(i,t.from,t.to,{point(){},span(r,o,l,a){let f=r-t.from,h=o-t.from,c=s;for(let u=l.length-1;u>=0;u--,a--){
-let d=l[u].spec.bidiIsolate,p;if(d==null&&(d=Ef(t.text,f,h)),a>0&&c.length&&(p=c[c.length-1]).to==f&&p.direction==d)p.to=
-h,c=p.inner;else{let m={from:f,to:h,direction:d,inner:[]};c.push(m),c=m.inner}}}}),s}var Kl=B.define();function jl(n){let t=0,
-e=0,i=0,s=0;for(let r of n.state.facet(Kl)){let o=r(n);o&&(o.left!=null&&(t=Math.max(t,o.left)),o.right!=null&&(e=Math.max(
+let d=l[u].spec.bidiIsolate,p;if(d==null&&(d=Pf(t.text,f,h)),a>0&&c.length&&(p=c[c.length-1]).to==f&&p.direction==d)p.to=
+h,c=p.inner;else{let m={from:f,to:h,direction:d,inner:[]};c.push(m),c=m.inner}}}}),s}var jl=B.define();function $l(n){let t=0,
+e=0,i=0,s=0;for(let r of n.state.facet(jl)){let o=r(n);o&&(o.left!=null&&(t=Math.max(t,o.left)),o.right!=null&&(e=Math.max(
 e,o.right)),o.top!=null&&(i=Math.max(i,o.top)),o.bottom!=null&&(s=Math.max(s,o.bottom)))}return{left:t,right:e,top:i,bottom:s}}
 var si=B.define(),Vt=class n{constructor(t,e,i,s){this.fromA=t,this.toA=e,this.fromB=i,this.toB=s}join(t){return new n(Math.
 min(this.fromA,t.fromA),Math.max(this.toA,t.toA),Math.min(this.fromB,t.fromB),Math.max(this.toB,t.toB))}addToSet(t){let e=t.
@@ -745,12 +745,12 @@ this.children[0].setParent(this),this.updateDeco(),this.updateInner([new Vt(0,0,
 var e;let i=t.changedRanges;this.minWidth>0&&i.length&&(i.every(({fromA:f,toA:h})=>h<this.minWidthFrom||f>this.minWidthTo)?
 (this.minWidthFrom=t.changes.mapPos(this.minWidthFrom,1),this.minWidthTo=t.changes.mapPos(this.minWidthTo,1)):this.minWidth=
 this.minWidthFrom=this.minWidthTo=0),this.updateEditContextFormatting(t);let s=-1;this.view.inputState.composing>=0&&!this.
-view.observer.editContext&&(!((e=this.domChanged)===null||e===void 0)&&e.newSel?s=this.domChanged.newSel.head:!Vf(t.changes,
-this.hasComposition)&&!t.selectionSet&&(s=t.state.selection.main.head));let r=s>-1?Rf(this.view,t.changes,s):null;if(this.
+view.observer.editContext&&(!((e=this.domChanged)===null||e===void 0)&&e.newSel?s=this.domChanged.newSel.head:!Wf(t.changes,
+this.hasComposition)&&!t.selectionSet&&(s=t.state.selection.main.head));let r=s>-1?Nf(this.view,t.changes,s):null;if(this.
 domChanged=null,this.hasComposition){this.markedForComposition.clear();let{from:f,to:h}=this.hasComposition;i=new Vt(f,h,
 t.changes.mapPos(f,-1),t.changes.mapPos(h,1)).addToSet(i.slice())}this.hasComposition=r?{from:r.range.fromB,to:r.range.toB}:
 null,(M.ie||M.chrome)&&!r&&t&&t.state.doc.lines!=t.startState.doc.lines&&(this.forceSelection=!0);let o=this.decorations,
-l=this.updateDeco(),a=Hf(o,l,t.changes);return i=Vt.extendWithRanges(i,a),!(this.flags&7)&&i.length==0?!1:(this.updateInner(
+l=this.updateDeco(),a=Vf(o,l,t.changes);return i=Vt.extendWithRanges(i,a),!(this.flags&7)&&i.length==0?!1:(this.updateInner(
 i,t.startState.doc.length,r),t.transactions.length&&(this.lastUpdate=Date.now()),!0)}updateInner(t,e,i){this.view.viewState.
 mustMeasureContent=!0,this.updateChildren(t,e,i);let{observer:s}=this.view;s.ignore(()=>{this.dom.style.height=this.view.
 viewState.contentHeight/this.view.scaleY+"px",this.dom.style.flexBasis=this.minWidth?this.minWidth+"px":"";let o=M.chrome||
@@ -759,14 +759,14 @@ focusNode!=o.node)&&(this.forceSelection=!0),this.dom.style.height=""}),this.mar
 let r=[];if(this.view.viewport.from||this.view.viewport.to<this.view.state.doc.length)for(let o of this.children)o instanceof
 ye&&o.widget instanceof bi&&r.push(o.dom);s.updateGaps(r)}updateChildren(t,e,i){let s=i?i.range.addToSet(t.slice()):t,r=this.
 childCursor(e);for(let o=s.length-1;;o--){let l=o>=0?s[o]:null;if(!l)break;let{fromA:a,toA:f,fromB:h,toB:c}=l,u,d,p,m;if(i&&
-i.range.fromB<c&&i.range.toB>h){let T=ai.build(this.view.state.doc,h,i.range.fromB,this.decorations,this.dynamicDecorationMap),
-w=ai.build(this.view.state.doc,i.range.toB,c,this.decorations,this.dynamicDecorationMap);d=T.breakAtStart,p=T.openStart,
-m=w.openEnd;let D=this.compositionView(i);w.breakAtStart?D.breakAfter=1:w.content.length&&D.merge(D.length,D.length,w.content[0],
-!1,w.openStart,0)&&(D.breakAfter=w.content[0].breakAfter,w.content.shift()),T.content.length&&D.merge(0,0,T.content[T.content.
-length-1],!0,0,T.openEnd)&&T.content.pop(),u=T.content.concat(D).concat(w.content)}else({content:u,breakAtStart:d,openStart:p,
+i.range.fromB<c&&i.range.toB>h){let L=ai.build(this.view.state.doc,h,i.range.fromB,this.decorations,this.dynamicDecorationMap),
+v=ai.build(this.view.state.doc,i.range.toB,c,this.decorations,this.dynamicDecorationMap);d=L.breakAtStart,p=L.openStart,
+m=v.openEnd;let D=this.compositionView(i);v.breakAtStart?D.breakAfter=1:v.content.length&&D.merge(D.length,D.length,v.content[0],
+!1,v.openStart,0)&&(D.breakAfter=v.content[0].breakAfter,v.content.shift()),L.content.length&&D.merge(0,0,L.content[L.content.
+length-1],!0,0,L.openEnd)&&L.content.pop(),u=L.content.concat(D).concat(v.content)}else({content:u,breakAtStart:d,openStart:p,
 openEnd:m}=ai.build(this.view.state.doc,h,c,this.decorations,this.dynamicDecorationMap));let{i:g,off:b}=r.findPos(f,1),{
-i:S,off:C}=r.findPos(a,-1);kl(this,S,C,g,b,u,d,p,m)}i&&this.fixCompositionDOM(i)}updateEditContextFormatting(t){this.editContextFormatting=
-this.editContextFormatting.map(t.changes);for(let e of t.transactions)for(let i of e.effects)i.is(Vl)&&(this.editContextFormatting=
+i:k,off:x}=r.findPos(a,-1);wl(this,k,x,g,b,u,d,p,m)}i&&this.fixCompositionDOM(i)}updateEditContextFormatting(t){this.editContextFormatting=
+this.editContextFormatting.map(t.changes);for(let e of t.transactions)for(let i of e.effects)i.is(zl)&&(this.editContextFormatting=
 i.value)}compositionView(t){let e=new Wt(t.text.nodeValue);e.flags|=8;for(let{deco:s}of t.marks)e=new se(s,[e],e.length);
 let i=new nt;return i.append(e,0),i}fixCompositionDOM(t){let e=(r,o)=>{o.flags|=8|(o.children.some(a=>a.flags&7)?1:0),this.
 markedForComposition.add(o);let l=K.get(r);l&&l!=o&&(l.dom=null),o.setDOM(r)},i=this.childPos(t.range.fromB,1),s=this.children[i.
@@ -775,12 +775,12 @@ s)}updateSelection(t=!1,e=!1){(t||!this.view.observer.selectionRange.focusNode)&
 let i=this.view.root.activeElement,s=i==this.dom,r=!s&&!(this.view.state.facet(Yt)||this.dom.tabIndex>-1)&&hn(this.dom,this.
 view.observer.selectionRange)&&!(i&&this.dom.contains(i));if(!(s||e||r))return;let o=this.forceSelection;this.forceSelection=
 !1;let l=this.view.state.selection.main,a=this.moveToLine(this.domAtPos(l.anchor)),f=l.empty?a:this.moveToLine(this.domAtPos(
-l.head));if(M.gecko&&l.empty&&!this.hasComposition&&Pf(a)){let c=document.createTextNode("");this.view.observer.ignore(()=>a.
+l.head));if(M.gecko&&l.empty&&!this.hasComposition&&If(a)){let c=document.createTextNode("");this.view.observer.ignore(()=>a.
 node.insertBefore(c,a.node.childNodes[a.offset]||null)),a=f=new ht(c,0),o=!0}let h=this.view.observer.selectionRange;(o||
 !h.focusNode||(!li(a.node,a.offset,h.anchorNode,h.anchorOffset)||!li(f.node,f.offset,h.focusNode,h.focusOffset))&&!this.
-suppressWidgetCursorChange(h,l))&&(this.view.observer.ignore(()=>{M.android&&M.chrome&&this.dom.contains(h.focusNode)&&Ff(
+suppressWidgetCursorChange(h,l))&&(this.view.observer.ignore(()=>{M.android&&M.chrome&&this.dom.contains(h.focusNode)&&zf(
 h.focusNode,this.dom)&&(this.dom.blur(),this.dom.focus({preventScroll:!0}));let c=di(this.view.root);if(c)if(l.empty){if(M.
-gecko){let u=If(a.node,a.offset);if(u&&u!=3){let d=(u==1?bl:yl)(a.node,a.offset);d&&(a=new ht(d.node,d.offset))}}c.collapse(
+gecko){let u=Hf(a.node,a.offset);if(u&&u!=3){let d=(u==1?yl:kl)(a.node,a.offset);d&&(a=new ht(d.node,d.offset))}}c.collapse(
 a.node,a.offset),l.bidiLevel!=null&&c.caretBidiLevel!==void 0&&(c.caretBidiLevel=l.bidiLevel)}else if(c.extend){c.collapse(
 a.node,a.offset);try{c.extend(f.node,f.offset)}catch{}}else{let u=document.createRange();l.anchor>l.head&&([a,f]=[f,a]),
 u.setEnd(f.node,f.offset),u.setStart(a.node,a.offset),c.removeAllRanges(),c.addRange(u)}r&&this.view.root.activeElement==
@@ -819,93 +819,93 @@ children.length;return e&&(t-=this.children[--e].length),new pn(this.children,t,
 view.viewState;for(let i=0,s=0;;s++){let r=s==e.viewports.length?null:e.viewports[s],o=r?r.from-1:this.length;if(o>i){let l=(e.
 lineBlockAt(o).bottom-e.lineBlockAt(i).top)/this.view.scaleY;t.push(z.replace({widget:new bi(l),block:!0,inclusive:!0,isBlockGap:!0}).
 range(i,o))}if(!r)break;i=r.to+1}return z.set(t)}updateDeco(){let t=1,e=this.view.state.facet(yi).map(r=>(this.dynamicDecorationMap[t++]=
-typeof r=="function")?r(this.view):r),i=!1,s=this.view.state.facet(Wl).map((r,o)=>{let l=typeof r=="function";return l&&
+typeof r=="function")?r(this.view):r),i=!1,s=this.view.state.facet(ql).map((r,o)=>{let l=typeof r=="function";return l&&
 (i=!0),l?r(this.view):r});for(s.length&&(this.dynamicDecorationMap[t++]=i,e.push(Q.join(s))),this.decorations=[this.editContextFormatting,
 ...e,this.computeBlockGapDeco(),this.view.viewState.lineGapDeco];t<this.decorations.length;)this.dynamicDecorationMap[t++]=
 !1;return this.decorations}scrollIntoView(t){if(t.isSnapshot){let f=this.view.viewState.lineBlockAt(t.range.head);this.view.
-scrollDOM.scrollTop=f.top-t.yMargin,this.view.scrollDOM.scrollLeft=t.xMargin;return}for(let f of this.view.state.facet(Fl))
-try{if(f(this.view,t.range,t))return!0}catch(h){Lt(this.view.state,h,"scroll handler")}let{range:e}=t,i=this.coordsAt(e.
+scrollDOM.scrollTop=f.top-t.yMargin,this.view.scrollDOM.scrollLeft=t.xMargin;return}for(let f of this.view.state.facet(Vl))
+try{if(f(this.view,t.range,t))return!0}catch(h){Tt(this.view.state,h,"scroll handler")}let{range:e}=t,i=this.coordsAt(e.
 head,e.empty?e.assoc:e.head>e.anchor?-1:1),s;if(!i)return;!e.empty&&(s=this.coordsAt(e.anchor,e.anchor>e.head?-1:1))&&(i=
 {left:Math.min(i.left,s.left),top:Math.min(i.top,s.top),right:Math.max(i.right,s.right),bottom:Math.max(i.bottom,s.bottom)});
-let r=jl(this.view),o={left:i.left-r.left,top:i.top-r.top,right:i.right+r.right,bottom:i.bottom+r.bottom},{offsetWidth:l,
-offsetHeight:a}=this.view.scrollDOM;df(this.view.scrollDOM,o,e.head<e.anchor?-1:1,t.x,t.y,Math.max(Math.min(t.xMargin,l),
--l),Math.max(Math.min(t.yMargin,a),-a),this.view.textDirection==X.LTR)}};function Pf(n){return n.node.nodeType==1&&n.node.
+let r=$l(this.view),o={left:i.left-r.left,top:i.top-r.top,right:i.right+r.right,bottom:i.bottom+r.bottom},{offsetWidth:l,
+offsetHeight:a}=this.view.scrollDOM;mf(this.view.scrollDOM,o,e.head<e.anchor?-1:1,t.x,t.y,Math.max(Math.min(t.xMargin,l),
+-l),Math.max(Math.min(t.yMargin,a),-a),this.view.textDirection==X.LTR)}};function If(n){return n.node.nodeType==1&&n.node.
 firstChild&&(n.offset==0||n.node.childNodes[n.offset-1].contentEditable=="false")&&(n.offset==n.node.childNodes.length||
-n.node.childNodes[n.offset].contentEditable=="false")}function $l(n,t){let e=n.observer.selectionRange;if(!e.focusNode)return null;
-let i=bl(e.focusNode,e.focusOffset),s=yl(e.focusNode,e.focusOffset),r=i||s;if(s&&i&&s.node!=i.node){let l=K.get(s.node);
+n.node.childNodes[n.offset].contentEditable=="false")}function Ul(n,t){let e=n.observer.selectionRange;if(!e.focusNode)return null;
+let i=yl(e.focusNode,e.focusOffset),s=kl(e.focusNode,e.focusOffset),r=i||s;if(s&&i&&s.node!=i.node){let l=K.get(s.node);
 if(!l||l instanceof Wt&&l.text!=s.node.nodeValue)r=s;else if(n.docView.lastCompositionAfterCursor){let a=K.get(i.node);!a||
 a instanceof Wt&&a.text!=i.node.nodeValue||(r=s)}}if(n.docView.lastCompositionAfterCursor=r!=i,!r)return null;let o=t-r.
-offset;return{from:o,to:o+r.node.nodeValue.length,node:r.node}}function Rf(n,t,e){let i=$l(n,e);if(!i)return null;let{node:s,
+offset;return{from:o,to:o+r.node.nodeValue.length,node:r.node}}function Nf(n,t,e){let i=Ul(n,e);if(!i)return null;let{node:s,
 from:r,to:o}=i,l=s.nodeValue;if(/[\n\r]/.test(l)||n.state.doc.sliceString(i.from,i.to)!=l)return null;let a=t.invertedDesc,
 f=new Vt(a.mapPos(r),a.mapPos(o),r,o),h=[];for(let c=s.parentNode;;c=c.parentNode){let u=K.get(c);if(u instanceof se)h.push(
 {node:c,deco:u.mark});else{if(u instanceof nt||c.nodeName=="DIV"&&c.parentNode==n.contentDOM)return{range:f,text:s,marks:h,
-line:c};if(c!=n.contentDOM)h.push({node:c,deco:new mi({inclusive:!0,attributes:xf(c),tagName:c.tagName.toLowerCase()})});else
-return null}}}function If(n,t){return n.nodeType!=1?0:(t&&n.childNodes[t-1].contentEditable=="false"?1:0)|(t<n.childNodes.
-length&&n.childNodes[t].contentEditable=="false"?2:0)}var Nf=class{constructor(){this.changes=[]}compareRange(t,e){fn(t,
-e,this.changes)}comparePoint(t,e){fn(t,e,this.changes)}boundChange(t){fn(t,t,this.changes)}};function Hf(n,t,e){let i=new Nf;
-return Q.compare(n,t,e,i),i.changes}function Ff(n,t){for(let e=n;e&&e!=t;e=e.assignedSlot||e.parentNode)if(e.nodeType==1&&
-e.contentEditable=="false")return!0;return!1}function Vf(n,t){let e=!1;return t&&n.iterChangedRanges((i,s)=>{i<t.to&&s>t.
-from&&(e=!0)}),e}function zf(n,t,e=1){let i=n.charCategorizer(t),s=n.doc.lineAt(t),r=t-s.from;if(s.length==0)return k.cursor(
+line:c};if(c!=n.contentDOM)h.push({node:c,deco:new mi({inclusive:!0,attributes:vf(c),tagName:c.tagName.toLowerCase()})});else
+return null}}}function Hf(n,t){return n.nodeType!=1?0:(t&&n.childNodes[t-1].contentEditable=="false"?1:0)|(t<n.childNodes.
+length&&n.childNodes[t].contentEditable=="false"?2:0)}var Ff=class{constructor(){this.changes=[]}compareRange(t,e){fn(t,
+e,this.changes)}comparePoint(t,e){fn(t,e,this.changes)}boundChange(t){fn(t,t,this.changes)}};function Vf(n,t,e){let i=new Ff;
+return Q.compare(n,t,e,i),i.changes}function zf(n,t){for(let e=n;e&&e!=t;e=e.assignedSlot||e.parentNode)if(e.nodeType==1&&
+e.contentEditable=="false")return!0;return!1}function Wf(n,t){let e=!1;return t&&n.iterChangedRanges((i,s)=>{i<t.to&&s>t.
+from&&(e=!0)}),e}function qf(n,t,e=1){let i=n.charCategorizer(t),s=n.doc.lineAt(t),r=t-s.from;if(s.length==0)return w.cursor(
 t);r==0?e=1:r==s.length&&(e=-1);let o=r,l=r;e<0?o=it(s.text,r,!1):l=it(s.text,r);let a=i(s.text.slice(o,l));for(;o>0;){let f=it(
 s.text,o,!1);if(i(s.text.slice(f,o))!=a)break;o=f}for(;l<s.length;){let f=it(s.text,l);if(i(s.text.slice(l,f))!=a)break;
-l=f}return k.range(o+s.from,l+s.from)}function Wf(n,t){return t.left>n?t.left-n:Math.max(0,n-t.right)}function qf(n,t){return t.
-top>n?t.top-n:Math.max(0,n-t.bottom)}function gs(n,t){return n.top<t.bottom-1&&n.bottom>t.top+1}function Wo(n,t){return t<
-n.top?{top:t,left:n.left,right:n.right,bottom:n.bottom}:n}function qo(n,t){return t>n.bottom?{top:n.top,left:n.left,right:n.
+l=f}return w.range(o+s.from,l+s.from)}function Kf(n,t){return t.left>n?t.left-n:Math.max(0,n-t.right)}function jf(n,t){return t.
+top>n?t.top-n:Math.max(0,n-t.bottom)}function gs(n,t){return n.top<t.bottom-1&&n.bottom>t.top+1}function qo(n,t){return t<
+n.top?{top:t,left:n.left,right:n.right,bottom:n.bottom}:n}function Ko(n,t){return t>n.bottom?{top:n.top,left:n.left,right:n.
 right,bottom:t}:n}function Es(n,t,e){let i,s,r,o,l=!1,a,f,h,c;for(let p=n.firstChild;p;p=p.nextSibling){let m=We(p);for(let g=0;g<
-m.length;g++){let b=m[g];s&&gs(s,b)&&(b=Wo(qo(b,s.bottom),s.top));let S=Wf(t,b),C=qf(e,b);if(S==0&&C==0)return p.nodeType==
-3?Ko(p,t,e):Es(p,t,e);(!i||o>C||o==C&&r>S)&&(i=p,s=b,r=S,o=C,l=S?t<b.left?g>0:g<m.length-1:!0),S==0?e>b.bottom&&(!h||h.bottom<
-b.bottom)?(a=p,h=b):e<b.top&&(!c||c.top>b.top)&&(f=p,c=b):h&&gs(h,b)?h=qo(h,b.bottom):c&&gs(c,b)&&(c=Wo(c,b.top))}}if(h&&
+m.length;g++){let b=m[g];s&&gs(s,b)&&(b=qo(Ko(b,s.bottom),s.top));let k=Kf(t,b),x=jf(e,b);if(k==0&&x==0)return p.nodeType==
+3?jo(p,t,e):Es(p,t,e);(!i||o>x||o==x&&r>k)&&(i=p,s=b,r=k,o=x,l=k?t<b.left?g>0:g<m.length-1:!0),k==0?e>b.bottom&&(!h||h.bottom<
+b.bottom)?(a=p,h=b):e<b.top&&(!c||c.top>b.top)&&(f=p,c=b):h&&gs(h,b)?h=Ko(h,b.bottom):c&&gs(c,b)&&(c=qo(c,b.top))}}if(h&&
 h.bottom>=e?(i=a,s=h):c&&c.top<=e&&(i=f,s=c),!i)return{node:n,offset:0};let u=Math.max(s.left,Math.min(s.right,t));if(i.
-nodeType==3)return Ko(i,u,e);if(l&&i.contentEditable!="false")return Es(i,u,e);let d=Array.prototype.indexOf.call(n.childNodes,
-i)+(t>=(s.left+s.right)/2?1:0);return{node:n,offset:d}}function Ko(n,t,e){let i=n.nodeValue.length,s=-1,r=1e9,o=0;for(let l=0;l<
+nodeType==3)return jo(i,u,e);if(l&&i.contentEditable!="false")return Es(i,u,e);let d=Array.prototype.indexOf.call(n.childNodes,
+i)+(t>=(s.left+s.right)/2?1:0);return{node:n,offset:d}}function jo(n,t,e){let i=n.nodeValue.length,s=-1,r=1e9,o=0;for(let l=0;l<
 i;l++){let a=we(n,l,l+1).getClientRects();for(let f=0;f<a.length;f++){let h=a[f];if(h.top==h.bottom)continue;o||(o=t-h.left);
 let c=(h.top>e?h.top-e:e-h.bottom)-1;if(h.left-1<=t&&h.right+1>=t&&c<r){let u=t>=(h.left+h.right)/2,d=u;if((M.chrome||M.
 gecko)&&we(n,l).getBoundingClientRect().left==h.right&&(d=!u),c<=0)return{node:n,offset:l+(d?1:0)};s=l+(d?1:0),r=c}}}return{
-node:n,offset:s>-1?s:o>0?n.nodeValue.length:0}}function Ul(n,t,e,i=-1){var s,r;let o=n.contentDOM.getBoundingClientRect(),
+node:n,offset:s>-1?s:o>0?n.nodeValue.length:0}}function Gl(n,t,e,i=-1){var s,r;let o=n.contentDOM.getBoundingClientRect(),
 l=o.top+n.viewState.paddingTop,a,{docHeight:f}=n.viewState,{x:h,y:c}=t,u=c-l;if(u<0)return 0;if(u>f)return n.state.doc.length;
-for(let T=n.viewState.heightOracle.textHeight/2,w=!1;a=n.elementAtHeight(u),a.type!=pt.Text;)for(;u=i>0?a.bottom+T:a.top-
-T,!(u>=0&&u<=f);){if(w)return e?null:0;w=!0,i=-i}c=l+u;let d=a.from;if(d<n.viewport.from)return n.viewport.from==0?0:e?null:
-jo(n,o,a,h,c);if(d>n.viewport.to)return n.viewport.to==n.state.doc.length?n.state.doc.length:e?null:jo(n,o,a,h,c);let p=n.
+for(let L=n.viewState.heightOracle.textHeight/2,v=!1;a=n.elementAtHeight(u),a.type!=pt.Text;)for(;u=i>0?a.bottom+L:a.top-
+L,!(u>=0&&u<=f);){if(v)return e?null:0;v=!0,i=-i}c=l+u;let d=a.from;if(d<n.viewport.from)return n.viewport.from==0?0:e?null:
+$o(n,o,a,h,c);if(d>n.viewport.to)return n.viewport.to==n.state.doc.length?n.state.doc.length:e?null:$o(n,o,a,h,c);let p=n.
 dom.ownerDocument,m=n.root.elementFromPoint?n.root:p,g=m.elementFromPoint(h,c);g&&!n.contentDOM.contains(g)&&(g=null),g||
-(h=Math.max(o.left+1,Math.min(o.right-1,h)),g=m.elementFromPoint(h,c),g&&!n.contentDOM.contains(g)&&(g=null));let b,S=-1;
-if(g&&((s=n.docView.nearest(g))===null||s===void 0?void 0:s.isEditable)!=!1){if(p.caretPositionFromPoint){let T=p.caretPositionFromPoint(
-h,c);T&&({offsetNode:b,offset:S}=T)}else if(p.caretRangeFromPoint){let T=p.caretRangeFromPoint(h,c);T&&({startContainer:b,
-startOffset:S}=T)}b&&(!n.contentDOM.contains(b)||M.safari&&Kf(b,S,h)||M.chrome&&jf(b,S,h))&&(b=void 0),b&&(S=Math.min(zt(
-b),S))}if(!b||!n.docView.dom.contains(b)){let T=nt.find(n.docView,d);if(!T)return u>a.top+a.height/2?a.to:a.from;({node:b,
-offset:S}=Es(T.dom,h,c))}let C=n.docView.nearest(b);if(!C)return null;if(C.isWidget&&((r=C.dom)===null||r===void 0?void 0:
-r.nodeType)==1){let T=C.dom.getBoundingClientRect();return t.y<T.top||t.y<=T.bottom&&t.x<=(T.left+T.right)/2?C.posAtStart:
-C.posAtEnd}else return C.localPosFromDOM(b,S)+C.posAtStart}function jo(n,t,e,i,s){let r=Math.round((i-t.left)*n.defaultCharacterWidth);
+(h=Math.max(o.left+1,Math.min(o.right-1,h)),g=m.elementFromPoint(h,c),g&&!n.contentDOM.contains(g)&&(g=null));let b,k=-1;
+if(g&&((s=n.docView.nearest(g))===null||s===void 0?void 0:s.isEditable)!=!1){if(p.caretPositionFromPoint){let L=p.caretPositionFromPoint(
+h,c);L&&({offsetNode:b,offset:k}=L)}else if(p.caretRangeFromPoint){let L=p.caretRangeFromPoint(h,c);L&&({startContainer:b,
+startOffset:k}=L)}b&&(!n.contentDOM.contains(b)||M.safari&&$f(b,k,h)||M.chrome&&Uf(b,k,h))&&(b=void 0),b&&(k=Math.min(zt(
+b),k))}if(!b||!n.docView.dom.contains(b)){let L=nt.find(n.docView,d);if(!L)return u>a.top+a.height/2?a.to:a.from;({node:b,
+offset:k}=Es(L.dom,h,c))}let x=n.docView.nearest(b);if(!x)return null;if(x.isWidget&&((r=x.dom)===null||r===void 0?void 0:
+r.nodeType)==1){let L=x.dom.getBoundingClientRect();return t.y<L.top||t.y<=L.bottom&&t.x<=(L.left+L.right)/2?x.posAtStart:
+x.posAtEnd}else return x.localPosFromDOM(b,k)+x.posAtStart}function $o(n,t,e,i,s){let r=Math.round((i-t.left)*n.defaultCharacterWidth);
 if(n.lineWrapping&&e.height>n.defaultLineHeight*1.5){let l=n.viewState.heightOracle.textHeight,a=Math.floor((s-e.top-(n.
 defaultLineHeight-l)*.5)/l);r+=a*n.viewState.heightOracle.lineLength}let o=n.state.sliceDoc(e.from,e.to);return e.from+To(
-o,r,n.state.tabSize)}function Gl(n,t,e){let i,s=n;if(n.nodeType!=3||t!=(i=n.nodeValue.length))return!1;for(;;){let r=s.nextSibling;
+o,r,n.state.tabSize)}function _l(n,t,e){let i,s=n;if(n.nodeType!=3||t!=(i=n.nodeValue.length))return!1;for(;;){let r=s.nextSibling;
 if(r){if(r.nodeName=="BR")break;return!1}else{let o=s.parentNode;if(!o||o.nodeName=="DIV")break;s=o}}return we(n,i-1,i).
-getBoundingClientRect().right>e}function Kf(n,t,e){return Gl(n,t,e)}function jf(n,t,e){if(t!=0)return Gl(n,t,e);for(let s=n;;){
+getBoundingClientRect().right>e}function $f(n,t,e){return _l(n,t,e)}function Uf(n,t,e){if(t!=0)return _l(n,t,e);for(let s=n;;){
 let r=s.parentNode;if(!r||r.nodeType!=1||r.firstChild!=s)return!1;if(r.classList.contains("cm-line"))break;s=r}let i=n.nodeType==
 1?n.getBoundingClientRect():we(n,0,Math.max(n.nodeValue.length,1)).getBoundingClientRect();return e-i.left>5}function Os(n,t,e){
 let i=n.lineBlockAt(t);if(Array.isArray(i.type)){let s;for(let r of i.type){if(r.from>t)break;if(!(r.to<t)){if(r.from<t&&
-r.to>t)return r;(!s||r.type==pt.Text&&(s.type!=r.type||(e<0?r.from<t:r.to>t)))&&(s=r)}}return s||i}return i}function $f(n,t,e,i){
+r.to>t)return r;(!s||r.type==pt.Text&&(s.type!=r.type||(e<0?r.from<t:r.to>t)))&&(s=r)}}return s||i}return i}function Gf(n,t,e,i){
 let s=Os(n,t.head,t.assoc||-1),r=!i||s.type!=pt.Text||!(n.lineWrapping||s.widgetLineBreaks)?null:n.coordsAtPos(t.assoc<0&&
 t.head>s.from?t.head-1:t.head);if(r){let o=n.dom.getBoundingClientRect(),l=n.textDirectionAt(s.from),a=n.posAtCoords({x:e==
-(l==X.LTR)?o.right-1:o.left+1,y:(r.top+r.bottom)/2});if(a!=null)return k.cursor(a,e?-1:1)}return k.cursor(e?s.to:s.from,
-e?-1:1)}function $o(n,t,e,i){let s=n.state.doc.lineAt(t.head),r=n.bidiSpans(s),o=n.textDirectionAt(s.from);for(let l=t,a=null;;){
-let f=Bf(s,r,o,l,e),h=Ll;if(!f){if(s.number==(e?n.state.doc.lines:1))return l;h=`
+(l==X.LTR)?o.right-1:o.left+1,y:(r.top+r.bottom)/2});if(a!=null)return w.cursor(a,e?-1:1)}return w.cursor(e?s.to:s.from,
+e?-1:1)}function Uo(n,t,e,i){let s=n.state.doc.lineAt(t.head),r=n.bidiSpans(s),o=n.textDirectionAt(s.from);for(let l=t,a=null;;){
+let f=Of(s,r,o,l,e),h=Bl;if(!f){if(s.number==(e?n.state.doc.lines:1))return l;h=`
 `,s=n.state.doc.line(s.number+(e?1:-1)),r=n.bidiSpans(s),f=n.visualLineSide(s,!e)}if(a){if(!a(h))return l}else{if(!i)return f;
-a=i(h)}l=f}}function Uf(n,t,e){let i=n.state.charCategorizer(t),s=i(e);return r=>{let o=i(r);return s==Dt.Space&&(s=o),s==
-o}}function Gf(n,t,e,i){let s=t.head,r=e?1:-1;if(s==(e?n.state.doc.length:0))return k.cursor(s,t.assoc);let o=t.goalColumn,
+a=i(h)}l=f}}function _f(n,t,e){let i=n.state.charCategorizer(t),s=i(e);return r=>{let o=i(r);return s==Dt.Space&&(s=o),s==
+o}}function Xf(n,t,e,i){let s=t.head,r=e?1:-1;if(s==(e?n.state.doc.length:0))return w.cursor(s,t.assoc);let o=t.goalColumn,
 l,a=n.contentDOM.getBoundingClientRect(),f=n.coordsAtPos(s,t.assoc||-1),h=n.documentTop;if(f)o==null&&(o=f.left-a.left),
 l=r<0?f.top:f.bottom;else{let d=n.viewState.lineBlockAt(s);o==null&&(o=Math.min(a.right-a.left,n.defaultCharacterWidth*(s-
 d.from))),l=(r<0?d.top:d.bottom)+h}let c=a.left+o,u=i??n.viewState.heightOracle.textHeight>>1;for(let d=0;;d+=10){let p=l+
-(u+d)*r,m=Ul(n,{x:c,y:p},!1,r);if(p<a.top||p>a.bottom||(r<0?m<s:m>s)){let g=n.docView.coordsForChar(m),b=!g||p<g.top?-1:
-1;return k.cursor(m,b,void 0,o)}}}function ci(n,t,e){for(;;){let i=0;for(let s of n)s.between(t-1,t+1,(r,o,l)=>{if(t>r&&
-t<o){let a=i||e||(t-r<o-t?-1:1);t=a<0?r:o,i=a}});if(!i)return t}}function _l(n,t){let e=null;for(let i=0;i<t.ranges.length;i++){
-let s=t.ranges[i],r=null;if(s.empty){let o=ci(n,s.from,0);o!=s.from&&(r=k.cursor(o,-1))}else{let o=ci(n,s.from,-1),l=ci(
-n,s.to,1);(o!=s.from||l!=s.to)&&(r=k.range(s.from==s.anchor?o:l,s.from==s.head?o:l))}r&&(e||(e=t.ranges.slice()),e[i]=r)}
-return e?k.create(e,t.mainIndex):t}function bs(n,t,e){let i=ci(n.state.facet(Si).map(s=>s(n)),e.from,t.head>e.from?-1:1);
-return i==e.from?e:k.cursor(i,i<e.from?1:-1)}var ri="\uFFFF",Ps=class{constructor(t,e){this.points=t,this.text="",this.lineSeparator=
+(u+d)*r,m=Gl(n,{x:c,y:p},!1,r);if(p<a.top||p>a.bottom||(r<0?m<s:m>s)){let g=n.docView.coordsForChar(m),b=!g||p<g.top?-1:
+1;return w.cursor(m,b,void 0,o)}}}function ci(n,t,e){for(;;){let i=0;for(let s of n)s.between(t-1,t+1,(r,o,l)=>{if(t>r&&
+t<o){let a=i||e||(t-r<o-t?-1:1);t=a<0?r:o,i=a}});if(!i)return t}}function Xl(n,t){let e=null;for(let i=0;i<t.ranges.length;i++){
+let s=t.ranges[i],r=null;if(s.empty){let o=ci(n,s.from,0);o!=s.from&&(r=w.cursor(o,-1))}else{let o=ci(n,s.from,-1),l=ci(
+n,s.to,1);(o!=s.from||l!=s.to)&&(r=w.range(s.from==s.anchor?o:l,s.from==s.head?o:l))}r&&(e||(e=t.ranges.slice()),e[i]=r)}
+return e?w.create(e,t.mainIndex):t}function bs(n,t,e){let i=ci(n.state.facet(Si).map(s=>s(n)),e.from,t.head>e.from?-1:1);
+return i==e.from?e:w.cursor(i,i<e.from?1:-1)}var ri="\uFFFF",Ps=class{constructor(t,e){this.points=t,this.text="",this.lineSeparator=
 e.facet(U.lineSeparator)}append(t){this.text+=t}lineBreak(){this.text+=ri}readRange(t,e){if(!t)return this;let i=t.parentNode;
 for(let s=t;;){this.findPointBefore(i,s);let r=this.text.length;this.readNode(s);let o=s.nextSibling;if(o==e)break;let l=K.
 get(s),a=K.get(o);(l&&a?l.breakAfter:(l?l.breakAfter:dn(s))||dn(o)&&(s.nodeName!="BR"||s.cmIgnore)&&this.text.length>r)&&
-!Xf(o,e)&&this.lineBreak(),s=o}return this.findPointBefore(i,e),this}readTextNode(t){let e=t.nodeValue;for(let i of this.
+!Yf(o,e)&&this.lineBreak(),s=o}return this.findPointBefore(i,e),this}readTextNode(t){let e=t.nodeValue;for(let i of this.
 points)i.node==t&&(i.pos=this.text.length+Math.min(i.offset,e.length));for(let i=0,s=this.lineSeparator?null:/\r\n?|\n/g;;){
 let r=-1,o=1,l;if(this.lineSeparator?(r=e.indexOf(this.lineSeparator,i),o=this.lineSeparator.length):(l=s.exec(e))&&(r=l.
 index,o=l[0].length),this.append(e.slice(i,r<0?e.length:r)),r<0)break;if(this.lineBreak(),o>1)for(let a of this.points)a.
@@ -914,74 +914,74 @@ if(i!=null){this.findPointInside(t,i.length);for(let s=i.iter();!s.next().done;)
 s.value)}else t.nodeType==3?this.readTextNode(t):t.nodeName=="BR"?t.nextSibling&&this.lineBreak():t.nodeType==1&&this.readRange(
 t.firstChild,null)}findPointBefore(t,e){for(let i of this.points)i.node==t&&t.childNodes[i.offset]==e&&(i.pos=this.text.
 length)}findPointInside(t,e){for(let i of this.points)(t.nodeType==3?i.node==t:t.contains(i.node))&&(i.pos=this.text.length+
-(_f(t,i.node,i.offset)?e:0))}};function _f(n,t,e){for(;;){if(!t||e<zt(t))return!1;if(t==n)return!0;e=ke(t)+1,t=t.parentNode}}
-function Xf(n,t){let e;for(;!(n==t||!n);n=n.nextSibling){let i=K.get(n);if(!(i?.isWidget||n.cmIgnore))return!1;i&&(e||(e=
+(Jf(t,i.node,i.offset)?e:0))}};function Jf(n,t,e){for(;;){if(!t||e<zt(t))return!1;if(t==n)return!0;e=ke(t)+1,t=t.parentNode}}
+function Yf(n,t){let e;for(;!(n==t||!n);n=n.nextSibling){let i=K.get(n);if(!(i?.isWidget||n.cmIgnore))return!1;i&&(e||(e=
 [])).push(i)}if(e)for(let i of e){let s=i.overrideDOMText;if(s?.length)return!1}return!0}var kn=class{constructor(t,e){this.
 node=t,this.offset=e,this.pos=-1}},Rs=class{constructor(t,e,i,s){this.typeOver=s,this.bounds=null,this.text="",this.domChanged=
 e>-1;let{impreciseHead:r,impreciseAnchor:o}=t.docView;if(t.state.readOnly&&e>-1)this.newSel=null;else if(e>-1&&(this.bounds=
-t.docView.domBoundsAround(e,i,0))){let l=r||o?[]:Yf(t),a=new Ps(l,t.state);a.readRange(this.bounds.startDOM,this.bounds.
-endDOM),this.text=a.text,this.newSel=Qf(l,this.bounds.from)}else{let l=t.observer.selectionRange,a=r&&r.node==l.focusNode&&
+t.docView.domBoundsAround(e,i,0))){let l=r||o?[]:Zf(t),a=new Ps(l,t.state);a.readRange(this.bounds.startDOM,this.bounds.
+endDOM),this.text=a.text,this.newSel=tc(l,this.bounds.from)}else{let l=t.observer.selectionRange,a=r&&r.node==l.focusNode&&
 r.offset==l.focusOffset||!vs(t.contentDOM,l.focusNode)?t.state.selection.main.head:t.docView.posFromDOM(l.focusNode,l.focusOffset),
 f=o&&o.node==l.anchorNode&&o.offset==l.anchorOffset||!vs(t.contentDOM,l.anchorNode)?t.state.selection.main.anchor:t.docView.
 posFromDOM(l.anchorNode,l.anchorOffset),h=t.viewport;if((M.ios||M.chrome)&&t.state.selection.main.empty&&a!=f&&(h.from>0||
 h.to<t.state.doc.length)){let c=Math.min(a,f),u=Math.max(a,f),d=h.from-c,p=h.to-u;(d==0||d==1||c==0)&&(p==0||p==-1||u==t.
-state.doc.length)&&(a=0,f=t.state.doc.length)}this.newSel=k.single(f,a)}}};function Xl(n,t){let e,{newSel:i}=t,s=n.state.
+state.doc.length)&&(a=0,f=t.state.doc.length)}this.newSel=w.single(f,a)}}};function Jl(n,t){let e,{newSel:i}=t,s=n.state.
 selection.main,r=n.inputState.lastKeyTime>Date.now()-100?n.inputState.lastKeyCode:-1;if(t.bounds){let{from:o,to:l}=t.bounds,
-a=s.from,f=null;(r===8||M.android&&t.text.length<l-o)&&(a=s.to,f="end");let h=Jl(n.state.doc.sliceString(o,l,ri),t.text,
+a=s.from,f=null;(r===8||M.android&&t.text.length<l-o)&&(a=s.to,f="end");let h=Yl(n.state.doc.sliceString(o,l,ri),t.text,
 a-o,f);h&&(M.chrome&&r==13&&h.toB==h.from+2&&t.text.slice(h.from,h.toB)==ri+ri&&h.toB--,e={from:o+h.from,to:o+h.toA,insert:I.
 of(t.text.slice(h.from,h.toB).split(ri))})}else i&&(!n.hasFocus&&n.state.facet(Yt)||i.main.eq(s))&&(i=null);if(!e&&!i)return!1;
 if(!e&&t.typeOver&&!s.empty&&i&&i.main.empty?e={from:s.from,to:s.to,insert:n.state.doc.slice(s.from,s.to)}:(M.mac||M.android)&&
 e&&e.from==e.to&&e.from==s.head-1&&/^\. ?$/.test(e.insert.toString())&&n.contentDOM.getAttribute("autocorrect")=="off"?(i&&
-e.insert.length==2&&(i=k.single(i.main.anchor-1,i.main.head-1)),e={from:e.from,to:e.to,insert:I.of([e.insert.toString().
+e.insert.length==2&&(i=w.single(i.main.anchor-1,i.main.head-1)),e={from:e.from,to:e.to,insert:I.of([e.insert.toString().
 replace("."," ")])}):e&&e.from>=s.from&&e.to<=s.to&&(e.from!=s.from||e.to!=s.to)&&s.to-s.from-(e.to-e.from)<=4?e={from:s.
 from,to:s.to,insert:n.state.doc.slice(s.from,e.from).append(e.insert).append(n.state.doc.slice(e.to,s.to))}:M.chrome&&e&&
 e.from==e.to&&e.from==s.head&&e.insert.toString()==`
- `&&n.lineWrapping&&(i&&(i=k.single(i.main.anchor-1,i.main.head-1)),e={from:s.from,to:s.to,insert:I.of([" "])}),e)return sr(
+ `&&n.lineWrapping&&(i&&(i=w.single(i.main.anchor-1,i.main.head-1)),e={from:s.from,to:s.to,insert:I.of([" "])}),e)return sr(
 n,e,i,r);if(i&&!i.main.eq(s)){let o=!1,l="select";return n.inputState.lastSelectionTime>Date.now()-50&&(n.inputState.lastSelectionOrigin==
-"select"&&(o=!0),l=n.inputState.lastSelectionOrigin,l=="select.pointer"&&(i=_l(n.state.facet(Si).map(a=>a(n)),i))),n.dispatch(
+"select"&&(o=!0),l=n.inputState.lastSelectionOrigin,l=="select.pointer"&&(i=Xl(n.state.facet(Si).map(a=>a(n)),i))),n.dispatch(
 {selection:i,scrollIntoView:o,userEvent:l}),!0}else return!1}function sr(n,t,e,i=-1){if(M.ios&&n.inputState.flushIOSKey(
 t))return!0;let s=n.state.selection.main;if(M.android&&(t.to==s.to&&(t.from==s.from||t.from==s.from-1&&n.state.sliceDoc(
 t.from,s.from)==" ")&&t.insert.length==1&&t.insert.lines==2&&ze(n.contentDOM,"Enter",13)||(t.from==s.from-1&&t.to==s.to&&
 t.insert.length==0||i==8&&t.insert.length<t.to-t.from&&t.to>s.head)&&ze(n.contentDOM,"Backspace",8)||t.from==s.from&&t.to==
 s.to+1&&t.insert.length==0&&ze(n.contentDOM,"Delete",46)))return!0;let r=t.insert.toString();n.inputState.composing>=0&&
-n.inputState.composing++;let o,l=()=>o||(o=Jf(n,t,e));return n.state.facet(Rl).some(a=>a(n,t.from,t.to,r,l))||n.dispatch(
-l()),!0}function Jf(n,t,e){let i,s=n.state,r=s.selection.main,o=-1;if(t.from==t.to&&t.from<r.from||t.from>r.to){let a=t.
-from<r.from?-1:1,f=a<0?r.from:r.to,h=ci(s.facet(Si).map(c=>c(n)),f,a);t.from==h&&(o=h)}if(o>-1)i={changes:t,selection:k.
+n.inputState.composing++;let o,l=()=>o||(o=Qf(n,t,e));return n.state.facet(Il).some(a=>a(n,t.from,t.to,r,l))||n.dispatch(
+l()),!0}function Qf(n,t,e){let i,s=n.state,r=s.selection.main,o=-1;if(t.from==t.to&&t.from<r.from||t.from>r.to){let a=t.
+from<r.from?-1:1,f=a<0?r.from:r.to,h=ci(s.facet(Si).map(c=>c(n)),f,a);t.from==h&&(o=h)}if(o>-1)i={changes:t,selection:w.
 cursor(t.from+t.insert.length,-1)};else if(t.from>=r.from&&t.to<=r.to&&t.to-t.from>=(r.to-r.from)/3&&(!e||e.main.empty&&
 e.main.from==t.from+t.insert.length)&&n.inputState.composing<0){let a=r.from<t.from?s.sliceDoc(r.from,t.from):"",f=r.to>
 t.to?s.sliceDoc(t.to,r.to):"";i=s.replaceSelection(n.state.toText(a+t.insert.sliceString(0,void 0,n.state.lineBreak)+f))}else{
 let a=s.changes(t),f=e&&e.main.to<=a.newLength?e.main:void 0;if(s.selection.ranges.length>1&&n.inputState.composing>=0&&
-t.to<=r.to&&t.to>=r.to-10){let h=n.state.sliceDoc(t.from,t.to),c,u=e&&$l(n,e.main.head);if(u){let m=t.insert.length-(t.to-
+t.to<=r.to&&t.to>=r.to-10){let h=n.state.sliceDoc(t.from,t.to),c,u=e&&Ul(n,e.main.head);if(u){let m=t.insert.length-(t.to-
 t.from);c={from:u.from,to:u.to-m}}else c=n.state.doc.lineAt(r.head);let d=r.to-t.to,p=r.to-r.from;i=s.changeByRange(m=>{
 if(m.from==r.from&&m.to==r.to)return{changes:a,range:f||m.map(a)};let g=m.to-d,b=g-h.length;if(m.to-m.from!=p||n.state.sliceDoc(
-b,g)!=h||m.to>=c.from&&m.from<=c.to)return{range:m};let S=s.changes({from:b,to:g,insert:t.insert}),C=m.to-r.to;return{changes:S,
-range:f?k.range(Math.max(0,f.anchor+C),Math.max(0,f.head+C)):m.map(S)}})}else i={changes:a,selection:f&&s.selection.replaceRange(
+b,g)!=h||m.to>=c.from&&m.from<=c.to)return{range:m};let k=s.changes({from:b,to:g,insert:t.insert}),x=m.to-r.to;return{changes:k,
+range:f?w.range(Math.max(0,f.anchor+x),Math.max(0,f.head+x)):m.map(k)}})}else i={changes:a,selection:f&&s.selection.replaceRange(
 f)}}let l="input.type";return(n.composing||n.inputState.compositionPendingChange&&n.inputState.compositionEndedAt>Date.now()-
 50)&&(n.inputState.compositionPendingChange=!1,l+=".compose",n.inputState.compositionFirstChange&&(l+=".start",n.inputState.
-compositionFirstChange=!1)),s.update(i,{userEvent:l,scrollIntoView:!0})}function Jl(n,t,e,i){let s=Math.min(n.length,t.length),
+compositionFirstChange=!1)),s.update(i,{userEvent:l,scrollIntoView:!0})}function Yl(n,t,e,i){let s=Math.min(n.length,t.length),
 r=0;for(;r<s&&n.charCodeAt(r)==t.charCodeAt(r);)r++;if(r==s&&n.length==t.length)return null;let o=n.length,l=t.length;for(;o>
 0&&l>0&&n.charCodeAt(o-1)==t.charCodeAt(l-1);)o--,l--;if(i=="end"){let a=Math.max(0,r-Math.min(o,l));e-=o+a-r}if(o<r&&n.
 length<t.length){let a=e<=r&&e>=o?r-e:0;r-=a,l=r+(l-o),o=r}else if(l<r){let a=e<=r&&e>=l?r-e:0;r-=a,o=r+(o-l),l=r}return{
-from:r,toA:o,toB:l}}function Yf(n){let t=[];if(n.root.activeElement!=n.contentDOM)return t;let{anchorNode:e,anchorOffset:i,
+from:r,toA:o,toB:l}}function Zf(n){let t=[];if(n.root.activeElement!=n.contentDOM)return t;let{anchorNode:e,anchorOffset:i,
 focusNode:s,focusOffset:r}=n.observer.selectionRange;return e&&(t.push(new kn(e,i)),(s!=e||r!=i)&&t.push(new kn(s,r))),t}
-function Qf(n,t){if(n.length==0)return null;let e=n[0].pos,i=n.length==2?n[1].pos:e;return e>-1&&i>-1?k.single(e+t,i+t):
+function tc(n,t){if(n.length==0)return null;let e=n[0].pos,i=n.length==2?n[1].pos:e;return e>-1&&i>-1?w.single(e+t,i+t):
 null}var Is=class{setSelectionOrigin(t){this.lastSelectionOrigin=t,this.lastSelectionTime=Date.now()}constructor(t){this.
 view=t,this.lastKeyCode=0,this.lastKeyTime=0,this.lastTouchTime=0,this.lastFocusTime=0,this.lastScrollTop=0,this.lastScrollLeft=
 0,this.pendingIOSKey=void 0,this.tabFocusMode=-1,this.lastSelectionOrigin=null,this.lastSelectionTime=0,this.lastContextMenu=
 0,this.scrollHandlers=[],this.handlers=Object.create(null),this.composing=-1,this.compositionFirstChange=null,this.compositionEndedAt=
 0,this.compositionPendingKey=!1,this.compositionPendingChange=!1,this.mouseSelection=null,this.draggedContent=null,this.
 handleEvent=this.handleEvent.bind(this),this.notifiedFocused=t.hasFocus,M.safari&&t.contentDOM.addEventListener("input",
-()=>null),M.gecko&&dc(t.contentDOM.ownerDocument)}handleEvent(t){!rc(this.view,t)||this.ignoreDuringComposition(t)||t.type==
+()=>null),M.gecko&&mc(t.contentDOM.ownerDocument)}handleEvent(t){!lc(this.view,t)||this.ignoreDuringComposition(t)||t.type==
 "keydown"&&this.keydown(t)||(this.view.updateState!=0?Promise.resolve().then(()=>this.runHandlers(t.type,t)):this.runHandlers(
 t.type,t))}runHandlers(t,e){let i=this.handlers[t];if(i){for(let s of i.observers)s(this.view,e);for(let s of i.handlers){
-if(e.defaultPrevented)break;if(s(this.view,e)){e.preventDefault();break}}}}ensureHandlers(t){let e=Zf(t),i=this.handlers,
+if(e.defaultPrevented)break;if(s(this.view,e)){e.preventDefault();break}}}}ensureHandlers(t){let e=ec(t),i=this.handlers,
 s=this.view.contentDOM;for(let r in e)if(r!="scroll"){let o=!e[r].handlers.length,l=i[r];l&&o!=!l.handlers.length&&(s.removeEventListener(
 r,this.handleEvent),l=null),l||s.addEventListener(r,this.handleEvent,{passive:o})}for(let r in i)r!="scroll"&&!e[r]&&s.removeEventListener(
 r,this.handleEvent);this.handlers=e}keydown(t){if(this.lastKeyCode=t.keyCode,this.lastKeyTime=Date.now(),t.keyCode==9&&this.
-tabFocusMode>-1&&(!this.tabFocusMode||Date.now()<=this.tabFocusMode))return!0;if(this.tabFocusMode>0&&t.keyCode!=27&&Ql.
+tabFocusMode>-1&&(!this.tabFocusMode||Date.now()<=this.tabFocusMode))return!0;if(this.tabFocusMode>0&&t.keyCode!=27&&Zl.
 indexOf(t.keyCode)<0&&(this.tabFocusMode=-1),M.android&&M.chrome&&!t.synthetic&&(t.keyCode==13||t.keyCode==8))return this.
-view.observer.delayAndroidKey(t.key,t.keyCode),!0;let e;return M.ios&&!t.synthetic&&!t.altKey&&!t.metaKey&&((e=Yl.find(i=>i.
-keyCode==t.keyCode))&&!t.ctrlKey||tc.indexOf(t.key)>-1&&t.ctrlKey&&!t.shiftKey)?(this.pendingIOSKey=e||t,setTimeout(()=>this.
+view.observer.delayAndroidKey(t.key,t.keyCode),!0;let e;return M.ios&&!t.synthetic&&!t.altKey&&!t.metaKey&&((e=Ql.find(i=>i.
+keyCode==t.keyCode))&&!t.ctrlKey||ic.indexOf(t.key)>-1&&t.ctrlKey&&!t.shiftKey)?(this.pendingIOSKey=e||t,setTimeout(()=>this.
 flushIOSKey(),250),!0):(t.keyCode!=229&&this.view.observer.forceFlush(),!1)}flushIOSKey(t){let e=this.pendingIOSKey;return!e||
 e.key=="Enter"&&t&&t.from<t.to&&/^\S+$/.test(t.insert.toString())?!1:(this.pendingIOSKey=void 0,ze(this.view.contentDOM,
 e.key,e.keyCode,e instanceof KeyboardEvent?e:void 0))}ignoreDuringComposition(t){return!/^key/.test(t.type)||t.synthetic?
@@ -989,22 +989,22 @@ e.key,e.keyCode,e instanceof KeyboardEvent?e:void 0))}ignoreDuringComposition(t)
 !1,!0):!1}startMouseSelection(t){this.mouseSelection&&this.mouseSelection.destroy(),this.mouseSelection=t}update(t){this.
 view.observer.update(t),this.mouseSelection&&this.mouseSelection.update(t),this.draggedContent&&t.docChanged&&(this.draggedContent=
 this.draggedContent.map(t.changes)),t.transactions.length&&(this.lastKeyCode=this.lastSelectionTime=0)}destroy(){this.mouseSelection&&
-this.mouseSelection.destroy()}};function Uo(n,t){return(e,i)=>{try{return t.call(n,i,e)}catch(s){Lt(e.state,s)}}}function Zf(n){
+this.mouseSelection.destroy()}};function Go(n,t){return(e,i)=>{try{return t.call(n,i,e)}catch(s){Tt(e.state,s)}}}function ec(n){
 let t=Object.create(null);function e(i){return t[i]||(t[i]={observers:[],handlers:[]})}for(let i of n){let s=i.spec,r=s&&
-s.plugin.domEventHandlers,o=s&&s.plugin.domEventObservers;if(r)for(let l in r){let a=r[l];a&&e(l).handlers.push(Uo(i.value,
-a))}if(o)for(let l in o){let a=o[l];a&&e(l).observers.push(Uo(i.value,a))}}for(let i in Bt)e(i).handlers.push(Bt[i]);for(let i in St)
-e(i).observers.push(St[i]);return t}var Yl=[{key:"Backspace",keyCode:8,inputType:"deleteContentBackward"},{key:"Enter",keyCode:13,
+s.plugin.domEventHandlers,o=s&&s.plugin.domEventObservers;if(r)for(let l in r){let a=r[l];a&&e(l).handlers.push(Go(i.value,
+a))}if(o)for(let l in o){let a=o[l];a&&e(l).observers.push(Go(i.value,a))}}for(let i in Bt)e(i).handlers.push(Bt[i]);for(let i in St)
+e(i).observers.push(St[i]);return t}var Ql=[{key:"Backspace",keyCode:8,inputType:"deleteContentBackward"},{key:"Enter",keyCode:13,
 inputType:"insertParagraph"},{key:"Enter",keyCode:13,inputType:"insertLineBreak"},{key:"Delete",keyCode:46,inputType:"de\
-leteContentForward"}],tc="dthko",Ql=[16,17,18,20,91,92,224,225],nn=6;function sn(n){return Math.max(0,n)*.7+8}function ec(n,t){
+leteContentForward"}],ic="dthko",Zl=[16,17,18,20,91,92,224,225],nn=6;function sn(n){return Math.max(0,n)*.7+8}function nc(n,t){
 return Math.max(Math.abs(n.clientX-t.clientX),Math.abs(n.clientY-t.clientY))}var Ns=class{constructor(t,e,i,s){this.view=
 t,this.startEvent=e,this.style=i,this.mustSelect=s,this.scrollSpeed={x:0,y:0},this.scrolling=-1,this.lastEvent=e,this.scrollParents=
-pf(t.contentDOM),this.atoms=t.state.facet(Si).map(o=>o(t));let r=t.contentDOM.ownerDocument;r.addEventListener("mousemov\
+gf(t.contentDOM),this.atoms=t.state.facet(Si).map(o=>o(t));let r=t.contentDOM.ownerDocument;r.addEventListener("mousemov\
 e",this.move=this.move.bind(this)),r.addEventListener("mouseup",this.up=this.up.bind(this)),this.extend=e.shiftKey,this.
-multiple=t.state.facet(U.allowMultipleSelections)&&ic(t,e),this.dragging=sc(t,e)&&ea(e)==1?null:!1}start(t){this.dragging===
-!1&&this.select(t)}move(t){if(t.buttons==0)return this.destroy();if(this.dragging||this.dragging==null&&ec(this.startEvent,
+multiple=t.state.facet(U.allowMultipleSelections)&&sc(t,e),this.dragging=oc(t,e)&&ia(e)==1?null:!1}start(t){this.dragging===
+!1&&this.select(t)}move(t){if(t.buttons==0)return this.destroy();if(this.dragging||this.dragging==null&&nc(this.startEvent,
 t)<10)return;this.select(this.lastEvent=t);let e=0,i=0,s=0,r=0,o=this.view.win.innerWidth,l=this.view.win.innerHeight;this.
 scrollParents.x&&({left:s,right:o}=this.scrollParents.x.getBoundingClientRect()),this.scrollParents.y&&({top:r,bottom:l}=
-this.scrollParents.y.getBoundingClientRect());let a=jl(this.view);t.clientX-a.left<=s+nn?e=-sn(s-t.clientX):t.clientX+a.
+this.scrollParents.y.getBoundingClientRect());let a=$l(this.view);t.clientX-a.left<=s+nn?e=-sn(s-t.clientX):t.clientX+a.
 right>=o-nn&&(e=sn(t.clientX-o)),t.clientY-a.top<=r+nn?i=-sn(r-t.clientY):t.clientY+a.bottom>=l-nn&&(i=sn(t.clientY-l)),
 this.setScrollSpeed(e,i)}up(t){this.dragging==null&&this.select(this.lastEvent),this.dragging||t.preventDefault(),this.destroy()}destroy(){
 this.setScrollSpeed(0,0);let t=this.view.contentDOM.ownerDocument;t.removeEventListener("mousemove",this.move),t.removeEventListener(
@@ -1012,69 +1012,69 @@ this.setScrollSpeed(0,0);let t=this.view.contentDOM.ownerDocument;t.removeEventL
 scrollSpeed={x:t,y:e},t||e?this.scrolling<0&&(this.scrolling=setInterval(()=>this.scroll(),50)):this.scrolling>-1&&(clearInterval(
 this.scrolling),this.scrolling=-1)}scroll(){let{x:t,y:e}=this.scrollSpeed;t&&this.scrollParents.x&&(this.scrollParents.x.
 scrollLeft+=t,t=0),e&&this.scrollParents.y&&(this.scrollParents.y.scrollTop+=e,e=0),(t||e)&&this.view.win.scrollBy(t,e),
-this.dragging===!1&&this.select(this.lastEvent)}select(t){let{view:e}=this,i=_l(this.atoms,this.style.get(t,this.extend,
+this.dragging===!1&&this.select(this.lastEvent)}select(t){let{view:e}=this,i=Xl(this.atoms,this.style.get(t,this.extend,
 this.multiple));(this.mustSelect||!i.eq(e.state.selection,this.dragging===!1))&&this.view.dispatch({selection:i,userEvent:"\
 select.pointer"}),this.mustSelect=!1}update(t){t.transactions.some(e=>e.isUserEvent("input.type"))?this.destroy():this.style.
-update(t)&&setTimeout(()=>this.select(this.lastEvent),20)}};function ic(n,t){let e=n.state.facet(Bl);return e.length?e[0](
-t):M.mac?t.metaKey:t.ctrlKey}function nc(n,t){let e=n.state.facet(El);return e.length?e[0](t):M.mac?!t.altKey:!t.ctrlKey}
-function sc(n,t){let{main:e}=n.state.selection;if(e.empty)return!1;let i=di(n.root);if(!i||i.rangeCount==0)return!0;let s=i.
+update(t)&&setTimeout(()=>this.select(this.lastEvent),20)}};function sc(n,t){let e=n.state.facet(El);return e.length?e[0](
+t):M.mac?t.metaKey:t.ctrlKey}function rc(n,t){let e=n.state.facet(Ol);return e.length?e[0](t):M.mac?!t.altKey:!t.ctrlKey}
+function oc(n,t){let{main:e}=n.state.selection;if(e.empty)return!1;let i=di(n.root);if(!i||i.rangeCount==0)return!0;let s=i.
 getRangeAt(0).getClientRects();for(let r=0;r<s.length;r++){let o=s[r];if(o.left<=t.clientX&&o.right>=t.clientX&&o.top<=t.
-clientY&&o.bottom>=t.clientY)return!0}return!1}function rc(n,t){if(!t.bubbles)return!0;if(t.defaultPrevented)return!1;for(let e=t.
+clientY&&o.bottom>=t.clientY)return!0}return!1}function lc(n,t){if(!t.bubbles)return!0;if(t.defaultPrevented)return!1;for(let e=t.
 target,i;e!=n.contentDOM;e=e.parentNode)if(!e||e.nodeType==11||(i=K.get(e))&&i.ignoreEvent(t))return!1;return!0}var Bt=Object.
-create(null),St=Object.create(null),Zl=M.ie&&M.ie_version<15||M.ios&&M.webkit_version<604;function oc(n){let t=n.dom.parentNode;
+create(null),St=Object.create(null),ta=M.ie&&M.ie_version<15||M.ios&&M.webkit_version<604;function ac(n){let t=n.dom.parentNode;
 if(!t)return;let e=t.appendChild(document.createElement("textarea"));e.style.cssText="position: fixed; left: -10000px; t\
-op: 10px",e.focus(),setTimeout(()=>{n.focus(),e.remove(),ta(n,e.value)},50)}function An(n,t,e){for(let i of n.facet(t))e=
-i(e,n);return e}function ta(n,t){t=An(n.state,er,t);let{state:e}=n,i,s=1,r=e.toText(t),o=r.lines==e.selection.ranges.length;
+op: 10px",e.focus(),setTimeout(()=>{n.focus(),e.remove(),ea(n,e.value)},50)}function An(n,t,e){for(let i of n.facet(t))e=
+i(e,n);return e}function ea(n,t){t=An(n.state,er,t);let{state:e}=n,i,s=1,r=e.toText(t),o=r.lines==e.selection.ranges.length;
 if(Hs!=null&&e.selection.ranges.every(a=>a.empty)&&Hs==r.toString()){let a=-1;i=e.changeByRange(f=>{let h=e.doc.lineAt(f.
 from);if(h.from==a)return{range:f};a=h.from;let c=e.toText((o?r.line(s++).text:t)+e.lineBreak);return{changes:{from:h.from,
-insert:c},range:k.cursor(f.from+c.length)}})}else o?i=e.changeByRange(a=>{let f=r.line(s++);return{changes:{from:a.from,
-to:a.to,insert:f.text},range:k.cursor(a.from+f.length)}}):i=e.replaceSelection(r);n.dispatch(i,{userEvent:"input.paste",
+insert:c},range:w.cursor(f.from+c.length)}})}else o?i=e.changeByRange(a=>{let f=r.line(s++);return{changes:{from:a.from,
+to:a.to,insert:f.text},range:w.cursor(a.from+f.length)}}):i=e.replaceSelection(r);n.dispatch(i,{userEvent:"input.paste",
 scrollIntoView:!0})}St.scroll=n=>{n.inputState.lastScrollTop=n.scrollDOM.scrollTop,n.inputState.lastScrollLeft=n.scrollDOM.
 scrollLeft};Bt.keydown=(n,t)=>(n.inputState.setSelectionOrigin("select"),t.keyCode==27&&n.inputState.tabFocusMode!=0&&(n.
 inputState.tabFocusMode=Date.now()+2e3),!1);St.touchstart=(n,t)=>{n.inputState.lastTouchTime=Date.now(),n.inputState.setSelectionOrigin(
 "select.pointer")};St.touchmove=n=>{n.inputState.setSelectionOrigin("select.pointer")};Bt.mousedown=(n,t)=>{if(n.observer.
-flush(),n.inputState.lastTouchTime>Date.now()-2e3)return!1;let e=null;for(let i of n.state.facet(Ol))if(e=i(n,t),e)break;
-if(!e&&t.button==0&&(e=hc(n,t)),e){let i=!n.hasFocus;n.inputState.startMouseSelection(new Ns(n,t,e,i)),i&&n.observer.ignore(
-()=>{pl(n.contentDOM);let r=n.root.activeElement;r&&!r.contains(n.contentDOM)&&r.blur()});let s=n.inputState.mouseSelection;
-if(s)return s.start(t),s.dragging===!1}else n.inputState.setSelectionOrigin("select.pointer");return!1};function Go(n,t,e,i){
-if(i==1)return k.cursor(t,e);if(i==2)return zf(n.state,t,e);{let s=nt.find(n.docView,t),r=n.state.doc.lineAt(s?s.posAtEnd:
-t),o=s?s.posAtStart:r.from,l=s?s.posAtEnd:r.to;return l<n.state.doc.length&&l==r.to&&l++,k.range(o,l)}}var _o=(n,t,e)=>t>=
-e.top&&t<=e.bottom&&n>=e.left&&n<=e.right;function lc(n,t,e,i){let s=nt.find(n.docView,t);if(!s)return 1;let r=t-s.posAtStart;
-if(r==0)return 1;if(r==s.length)return-1;let o=s.coordsAt(r,-1);if(o&&_o(e,i,o))return-1;let l=s.coordsAt(r,1);return l&&
-_o(e,i,l)?1:o&&o.bottom>=i?-1:1}function Xo(n,t){let e=n.posAtCoords({x:t.clientX,y:t.clientY},!1);return{pos:e,bias:lc(
-n,e,t.clientX,t.clientY)}}var ac=M.ie&&M.ie_version<=11,Jo=null,Yo=0,Qo=0;function ea(n){if(!ac)return n.detail;let t=Jo,
-e=Qo;return Jo=n,Qo=Date.now(),Yo=!t||e>Date.now()-400&&Math.abs(t.clientX-n.clientX)<2&&Math.abs(t.clientY-n.clientY)<2?
-(Yo+1)%3:1}function hc(n,t){let e=Xo(n,t),i=ea(t),s=n.state.selection;return{update(r){r.docChanged&&(e.pos=r.changes.mapPos(
-e.pos),s=s.map(r.changes))},get(r,o,l){let a=Xo(n,r),f,h=Go(n,a.pos,a.bias,i);if(e.pos!=a.pos&&!o){let c=Go(n,e.pos,e.bias,
-i),u=Math.min(c.from,h.from),d=Math.max(c.to,h.to);h=u<h.from?k.range(u,d):k.range(d,u)}return o?s.replaceRange(s.main.extend(
-h.from,h.to)):l&&i==1&&s.ranges.length>1&&(f=fc(s,a.pos))?f:l?s.addRange(h):k.create([h])}}}function fc(n,t){for(let e=0;e<
-n.ranges.length;e++){let{from:i,to:s}=n.ranges[e];if(i<=t&&s>=t)return k.create(n.ranges.slice(0,e).concat(n.ranges.slice(
+flush(),n.inputState.lastTouchTime>Date.now()-2e3)return!1;let e=null;for(let i of n.state.facet(Pl))if(e=i(n,t),e)break;
+if(!e&&t.button==0&&(e=cc(n,t)),e){let i=!n.hasFocus;n.inputState.startMouseSelection(new Ns(n,t,e,i)),i&&n.observer.ignore(
+()=>{ml(n.contentDOM);let r=n.root.activeElement;r&&!r.contains(n.contentDOM)&&r.blur()});let s=n.inputState.mouseSelection;
+if(s)return s.start(t),s.dragging===!1}else n.inputState.setSelectionOrigin("select.pointer");return!1};function _o(n,t,e,i){
+if(i==1)return w.cursor(t,e);if(i==2)return qf(n.state,t,e);{let s=nt.find(n.docView,t),r=n.state.doc.lineAt(s?s.posAtEnd:
+t),o=s?s.posAtStart:r.from,l=s?s.posAtEnd:r.to;return l<n.state.doc.length&&l==r.to&&l++,w.range(o,l)}}var Xo=(n,t,e)=>t>=
+e.top&&t<=e.bottom&&n>=e.left&&n<=e.right;function hc(n,t,e,i){let s=nt.find(n.docView,t);if(!s)return 1;let r=t-s.posAtStart;
+if(r==0)return 1;if(r==s.length)return-1;let o=s.coordsAt(r,-1);if(o&&Xo(e,i,o))return-1;let l=s.coordsAt(r,1);return l&&
+Xo(e,i,l)?1:o&&o.bottom>=i?-1:1}function Jo(n,t){let e=n.posAtCoords({x:t.clientX,y:t.clientY},!1);return{pos:e,bias:hc(
+n,e,t.clientX,t.clientY)}}var fc=M.ie&&M.ie_version<=11,Yo=null,Qo=0,Zo=0;function ia(n){if(!fc)return n.detail;let t=Yo,
+e=Zo;return Yo=n,Zo=Date.now(),Qo=!t||e>Date.now()-400&&Math.abs(t.clientX-n.clientX)<2&&Math.abs(t.clientY-n.clientY)<2?
+(Qo+1)%3:1}function cc(n,t){let e=Jo(n,t),i=ia(t),s=n.state.selection;return{update(r){r.docChanged&&(e.pos=r.changes.mapPos(
+e.pos),s=s.map(r.changes))},get(r,o,l){let a=Jo(n,r),f,h=_o(n,a.pos,a.bias,i);if(e.pos!=a.pos&&!o){let c=_o(n,e.pos,e.bias,
+i),u=Math.min(c.from,h.from),d=Math.max(c.to,h.to);h=u<h.from?w.range(u,d):w.range(d,u)}return o?s.replaceRange(s.main.extend(
+h.from,h.to)):l&&i==1&&s.ranges.length>1&&(f=uc(s,a.pos))?f:l?s.addRange(h):w.create([h])}}}function uc(n,t){for(let e=0;e<
+n.ranges.length;e++){let{from:i,to:s}=n.ranges[e];if(i<=t&&s>=t)return w.create(n.ranges.slice(0,e).concat(n.ranges.slice(
 e+1)),n.mainIndex==e?0:n.mainIndex-(n.mainIndex>e?1:0))}return null}Bt.dragstart=(n,t)=>{let{selection:{main:e}}=n.state;
 if(t.target.draggable){let s=n.docView.nearest(t.target);if(s&&s.isWidget){let r=s.posAtStart,o=r+s.length;(r>=e.to||o<=
-e.from)&&(e=k.range(r,o))}}let{inputState:i}=n;return i.mouseSelection&&(i.mouseSelection.dragging=!0),i.draggedContent=
+e.from)&&(e=w.range(r,o))}}let{inputState:i}=n;return i.mouseSelection&&(i.mouseSelection.dragging=!0),i.draggedContent=
 e,t.dataTransfer&&(t.dataTransfer.setData("Text",An(n.state,ir,n.state.sliceDoc(e.from,e.to))),t.dataTransfer.effectAllowed=
-"copyMove"),!1};Bt.dragend=n=>(n.inputState.draggedContent=null,!1);function Zo(n,t,e,i){if(e=An(n.state,er,e),!e)return;
-let s=n.posAtCoords({x:t.clientX,y:t.clientY},!1),{draggedContent:r}=n.inputState,o=i&&r&&nc(n,t)?{from:r.from,to:r.to}:
+"copyMove"),!1};Bt.dragend=n=>(n.inputState.draggedContent=null,!1);function tl(n,t,e,i){if(e=An(n.state,er,e),!e)return;
+let s=n.posAtCoords({x:t.clientX,y:t.clientY},!1),{draggedContent:r}=n.inputState,o=i&&r&&rc(n,t)?{from:r.from,to:r.to}:
 null,l={from:s,insert:e},a=n.state.changes(o?[o,l]:l);n.focus(),n.dispatch({changes:a,selection:{anchor:a.mapPos(s,-1),head:a.
 mapPos(s,1)},userEvent:o?"move.drop":"input.drop"}),n.inputState.draggedContent=null}Bt.drop=(n,t)=>{if(!t.dataTransfer)
 return!1;if(n.state.readOnly)return!0;let e=t.dataTransfer.files;if(e&&e.length){let i=Array(e.length),s=0,r=()=>{++s==e.
-length&&Zo(n,t,i.filter(o=>o!=null).join(n.state.lineBreak),!1)};for(let o=0;o<e.length;o++){let l=new FileReader;l.onerror=
+length&&tl(n,t,i.filter(o=>o!=null).join(n.state.lineBreak),!1)};for(let o=0;o<e.length;o++){let l=new FileReader;l.onerror=
 r,l.onload=()=>{/[\x00-\x08\x0e-\x1f]{2}/.test(l.result)||(i[o]=l.result),r()},l.readAsText(e[o])}return!0}else{let i=t.
-dataTransfer.getData("Text");if(i)return Zo(n,t,i,!0),!0}return!1};Bt.paste=(n,t)=>{if(n.state.readOnly)return!0;n.observer.
-flush();let e=Zl?null:t.clipboardData;return e?(ta(n,e.getData("text/plain")||e.getData("text/uri-list")),!0):(oc(n),!1)};
-function cc(n,t){let e=n.dom.parentNode;if(!e)return;let i=e.appendChild(document.createElement("textarea"));i.style.cssText=
+dataTransfer.getData("Text");if(i)return tl(n,t,i,!0),!0}return!1};Bt.paste=(n,t)=>{if(n.state.readOnly)return!0;n.observer.
+flush();let e=ta?null:t.clipboardData;return e?(ea(n,e.getData("text/plain")||e.getData("text/uri-list")),!0):(ac(n),!1)};
+function dc(n,t){let e=n.dom.parentNode;if(!e)return;let i=e.appendChild(document.createElement("textarea"));i.style.cssText=
 "position: fixed; left: -10000px; top: 10px",i.value=t,i.focus(),i.selectionEnd=t.length,i.selectionStart=0,setTimeout(()=>{
-i.remove(),n.focus()},50)}function uc(n){let t=[],e=[],i=!1;for(let s of n.selection.ranges)s.empty||(t.push(n.sliceDoc(
+i.remove(),n.focus()},50)}function pc(n){let t=[],e=[],i=!1;for(let s of n.selection.ranges)s.empty||(t.push(n.sliceDoc(
 s.from,s.to)),e.push(s));if(!t.length){let s=-1;for(let{from:r}of n.selection.ranges){let o=n.doc.lineAt(r);o.number>s&&
 (t.push(o.text),e.push({from:o.from,to:Math.min(n.doc.length,o.to+1)})),s=o.number}i=!0}return{text:An(n,ir,t.join(n.lineBreak)),
-ranges:e,linewise:i}}var Hs=null;Bt.copy=Bt.cut=(n,t)=>{let{text:e,ranges:i,linewise:s}=uc(n.state);if(!e&&!s)return!1;Hs=
-s?e:null,t.type=="cut"&&!n.state.readOnly&&n.dispatch({changes:i,scrollIntoView:!0,userEvent:"delete.cut"});let r=Zl?null:
-t.clipboardData;return r?(r.clearData(),r.setData("text/plain",e),!0):(cc(n,e),!1)};var ia=kt.define();function na(n,t){
-let e=[];for(let i of n.facet(Il)){let s=i(n,t);s&&e.push(s)}return e.length?n.update({effects:e,annotations:ia.of(!0)}):
-null}function sa(n){setTimeout(()=>{let t=n.hasFocus;if(t!=n.inputState.notifiedFocused){let e=na(n.state,t);e?n.dispatch(
+ranges:e,linewise:i}}var Hs=null;Bt.copy=Bt.cut=(n,t)=>{let{text:e,ranges:i,linewise:s}=pc(n.state);if(!e&&!s)return!1;Hs=
+s?e:null,t.type=="cut"&&!n.state.readOnly&&n.dispatch({changes:i,scrollIntoView:!0,userEvent:"delete.cut"});let r=ta?null:
+t.clipboardData;return r?(r.clearData(),r.setData("text/plain",e),!0):(dc(n,e),!1)};var na=kt.define();function sa(n,t){
+let e=[];for(let i of n.facet(Nl)){let s=i(n,t);s&&e.push(s)}return e.length?n.update({effects:e,annotations:na.of(!0)}):
+null}function ra(n){setTimeout(()=>{let t=n.hasFocus;if(t!=n.inputState.notifiedFocused){let e=sa(n.state,t);e?n.dispatch(
 e):n.update([])}},10)}St.focus=n=>{n.inputState.lastFocusTime=Date.now(),!n.scrollDOM.scrollTop&&(n.inputState.lastScrollTop||
 n.inputState.lastScrollLeft)&&(n.scrollDOM.scrollTop=n.inputState.lastScrollTop,n.scrollDOM.scrollLeft=n.inputState.lastScrollLeft),
-sa(n)};St.blur=n=>{n.observer.clearSelectionRange(),sa(n)};St.compositionstart=St.compositionupdate=n=>{n.observer.editContext||
+ra(n)};St.blur=n=>{n.observer.clearSelectionRange(),ra(n)};St.compositionstart=St.compositionupdate=n=>{n.observer.editContext||
 (n.inputState.compositionFirstChange==null&&(n.inputState.compositionFirstChange=!0),n.inputState.composing<0&&(n.inputState.
 composing=0))};St.compositionend=n=>{n.observer.editContext||(n.inputState.composing=-1,n.inputState.compositionEndedAt=
 Date.now(),n.inputState.compositionPendingKey=!0,n.inputState.compositionPendingChange=n.observer.pendingRecords().length>
@@ -1083,20 +1083,20 @@ Promise.resolve().then(()=>n.observer.flush()):setTimeout(()=>{n.inputState.comp
 [])},50))};St.contextmenu=n=>{n.inputState.lastContextMenu=Date.now()};Bt.beforeinput=(n,t)=>{var e,i;if(t.inputType=="i\
 nsertReplacementText"&&n.observer.editContext){let r=(e=t.dataTransfer)===null||e===void 0?void 0:e.getData("text/plain"),
 o=t.getTargetRanges();if(r&&o.length){let l=o[0],a=n.posAtDOM(l.startContainer,l.startOffset),f=n.posAtDOM(l.endContainer,
-l.endOffset);return sr(n,{from:a,to:f,insert:n.state.toText(r)},null),!0}}let s;if(M.chrome&&M.android&&(s=Yl.find(r=>r.
+l.endOffset);return sr(n,{from:a,to:f,insert:n.state.toText(r)},null),!0}}let s;if(M.chrome&&M.android&&(s=Ql.find(r=>r.
 inputType==t.inputType))&&(n.observer.delayAndroidKey(s.key,s.keyCode),s.key=="Backspace"||s.key=="Delete")){let r=((i=window.
 visualViewport)===null||i===void 0?void 0:i.height)||0;setTimeout(()=>{var o;(((o=window.visualViewport)===null||o===void 0?
 void 0:o.height)||0)>r+10&&n.hasFocus&&(n.contentDOM.blur(),n.focus())},100)}return M.ios&&t.inputType=="deleteContentFo\
 rward"&&n.observer.flushSoon(),M.safari&&t.inputType=="insertText"&&n.inputState.composing>=0&&setTimeout(()=>St.compositionend(
-n,t),20),!1};var tl=new Set;function dc(n){tl.has(n)||(tl.add(n),n.addEventListener("copy",()=>{}),n.addEventListener("c\
-ut",()=>{}))}var el=["pre-wrap","normal","pre-line","break-spaces"],qe=!1;function il(){qe=!1}var Fs=class{constructor(t){
+n,t),20),!1};var el=new Set;function mc(n){el.has(n)||(el.add(n),n.addEventListener("copy",()=>{}),n.addEventListener("c\
+ut",()=>{}))}var il=["pre-wrap","normal","pre-line","break-spaces"],qe=!1;function nl(){qe=!1}var Fs=class{constructor(t){
 this.lineWrapping=t,this.doc=I.empty,this.heightSamples={},this.lineHeight=14,this.charWidth=7,this.textHeight=14,this.lineLength=
 30}heightForGap(t,e){let i=this.doc.lineAt(e).number-this.doc.lineAt(t).number+1;return this.lineWrapping&&(i+=Math.max(
 0,Math.ceil((e-t-i*this.lineLength*.5)/this.lineLength))),this.lineHeight*i}heightForLine(t){return this.lineWrapping?(1+
 Math.max(0,Math.ceil((t-this.lineLength)/Math.max(1,this.lineLength-5))))*this.lineHeight:this.lineHeight}setDoc(t){return this.
-doc=t,this}mustRefreshForWrapping(t){return el.indexOf(t)>-1!=this.lineWrapping}mustRefreshForHeights(t){let e=!1;for(let i=0;i<
+doc=t,this}mustRefreshForWrapping(t){return il.indexOf(t)>-1!=this.lineWrapping}mustRefreshForHeights(t){let e=!1;for(let i=0;i<
 t.length;i++){let s=t[i];s<0?i++:this.heightSamples[Math.floor(s*10)]||(e=!0,this.heightSamples[Math.floor(s*10)]=!0)}return e}refresh(t,e,i,s,r,o){
-let l=el.indexOf(t)>-1,a=Math.round(e)!=Math.round(this.lineHeight)||this.lineWrapping!=l;if(this.lineWrapping=l,this.lineHeight=
+let l=il.indexOf(t)>-1,a=Math.round(e)!=Math.round(this.lineHeight)||this.lineWrapping!=l;if(this.lineWrapping=l,this.lineHeight=
 e,this.charWidth=i,this.textHeight=s,this.lineLength=r,a){this.heightSamples={};for(let f=0;f<o.length;f++){let h=o[f];h<
 0?f++:this.heightSamples[Math.floor(h*10)]=!0}}return a}},Vs=class{constructor(t,e){this.from=t,this.heights=e,this.index=
 0}get more(){return this.index<this.heights.length}},Ht=class n{constructor(t,e,i,s,r){this.from=t,this.length=e,this.top=
@@ -1156,8 +1156,8 @@ a=r+this.left.length+this.break;if(this.break)t<a&&this.left.forEachLine(t,e,i,s
 l,a,o);else{let f=this.lineAt(a,G.ByPos,i,s,r);t<f.from&&this.left.forEachLine(t,f.from-1,i,s,r,o),f.to>=t&&f.from<=e&&o(
 f),e>f.to&&this.right.forEachLine(f.to+1,e,i,l,a,o)}}replace(t,e,i){let s=this.left.length+this.break;if(e<s)return this.
 balanced(this.left.replace(t,e,i),this.right);if(t>this.left.length)return this.balanced(this.left,this.right.replace(t-
-s,e-s,i));let r=[];t>0&&this.decomposeLeft(t,r);let o=r.length;for(let l of i)r.push(l);if(t>0&&nl(r,o-1),e<this.length){
-let l=r.length;this.decomposeRight(e,r),nl(r,l)}return mt.of(r)}decomposeLeft(t,e){let i=this.left.length;if(t<=i)return this.
+s,e-s,i));let r=[];t>0&&this.decomposeLeft(t,r);let o=r.length;for(let l of i)r.push(l);if(t>0&&sl(r,o-1),e<this.length){
+let l=r.length;this.decomposeRight(e,r),sl(r,l)}return mt.of(r)}decomposeLeft(t,e){let i=this.left.length;if(t<=i)return this.
 left.decomposeLeft(t,e);e.push(this.left),this.break&&(i++,t>=i&&e.push(null)),t>i&&this.right.decomposeLeft(t-i,e)}decomposeRight(t,e){
 let i=this.left.length,s=i+this.break;if(t>=s)return this.right.decomposeRight(t-s,e);t<i&&this.left.decomposeRight(t,e),
 this.break&&t<s&&e.push(null),e.push(this.right)}balanced(t,e){return t.size>2*e.size||e.size>2*t.size?mt.of(this.break?
@@ -1166,14 +1166,14 @@ t.outdated||e.outdated,this.size=t.size+e.size,this.length=t.length+this.break+e
 let{left:r,right:o}=this,l=e+r.length+this.break,a=null;return s&&s.from<=e+r.length&&s.more?a=r=r.updateHeight(t,e,i,s):
 r.updateHeight(t,e,i),s&&s.from<=l+o.length&&s.more?a=o=o.updateHeight(t,l,i,s):o.updateHeight(t,l,i),a?this.balanced(r,
 o):(this.height=this.left.height+this.right.height,this.outdated=!1,this)}toString(){return this.left+(this.break?" ":"-")+
-this.right}};function nl(n,t){let e,i;n[t]==null&&(e=n[t-1])instanceof ne&&(i=n[t+1])instanceof ne&&n.splice(t-1,3,new ne(
-e.length+1+i.length))}var pc=5,Ws=class n{constructor(t,e){this.pos=t,this.oracle=e,this.nodes=[],this.lineStart=-1,this.
+this.right}};function sl(n,t){let e,i;n[t]==null&&(e=n[t-1])instanceof ne&&(i=n[t+1])instanceof ne&&n.splice(t-1,3,new ne(
+e.length+1+i.length))}var gc=5,Ws=class n{constructor(t,e){this.pos=t,this.oracle=e,this.nodes=[],this.lineStart=-1,this.
 lineEnd=-1,this.covering=null,this.writtenTo=t}get isCovered(){return this.covering&&this.nodes[this.nodes.length-1]==this.
 covering}span(t,e){if(this.lineStart>-1){let i=Math.min(e,this.lineEnd),s=this.nodes[this.nodes.length-1];s instanceof xt?
 s.length+=i-this.pos:(i>this.pos||!this.isCovered)&&this.nodes.push(new xt(i-this.pos,-1)),this.writtenTo=i,e>i&&(this.nodes.
 push(null),this.writtenTo++,this.lineStart=-1)}this.pos=e}point(t,e,i){if(t<e||i.heightRelevant){let s=i.widget?i.widget.
 estimatedHeight:0,r=i.widget?i.widget.lineBreaks:0;s<0&&(s=this.oracle.lineHeight);let o=e-t;i.block?this.addBlock(new xn(
-o,s,i)):(o||r||s>=pc)&&this.addLineDeco(s,r,o)}else e>t&&this.span(t,e);this.lineEnd>-1&&this.lineEnd<this.pos&&(this.lineEnd=
+o,s,i)):(o||r||s>=gc)&&this.addLineDeco(s,r,o)}else e>t&&this.span(t,e);this.lineEnd>-1&&this.lineEnd<this.pos&&(this.lineEnd=
 this.oracle.doc.lineAt(this.pos).to)}enterLine(){if(this.lineStart>-1)return;let{from:t,to:e}=this.oracle.doc.lineAt(this.
 pos);this.lineStart=t,this.lineEnd=e,this.writtenTo<t&&((this.writtenTo<t-1||this.nodes[this.nodes.length-1]==null)&&this.
 nodes.push(this.blankContent(this.writtenTo,t-1)),this.nodes.push(null)),this.pos>t&&this.nodes.push(new xt(this.pos-t,-1)),
@@ -1185,16 +1185,16 @@ ensureLine();s.length+=i,s.collapsed+=i,s.widgetHeight=Math.max(s.widgetHeight,t
 pos+i}finish(t){let e=this.nodes.length==0?null:this.nodes[this.nodes.length-1];this.lineStart>-1&&!(e instanceof xt)&&!this.
 isCovered?this.nodes.push(new xt(0,-1)):(this.writtenTo<this.pos||e==null)&&this.nodes.push(this.blankContent(this.writtenTo,
 this.pos));let i=t;for(let s of this.nodes)s instanceof xt&&s.updateHeight(this.oracle,i),i+=s?s.length:1;return this.nodes}static build(t,e,i,s){
-let r=new n(i,t);return Q.spans(e,i,s,r,0),r.finish(i)}};function mc(n,t,e){let i=new qs;return Q.compare(n,t,e,i,0),i.changes}
+let r=new n(i,t);return Q.spans(e,i,s,r,0),r.finish(i)}};function bc(n,t,e){let i=new qs;return Q.compare(n,t,e,i,0),i.changes}
 var qs=class{constructor(){this.changes=[]}compareRange(){}comparePoint(t,e,i,s){(t<e||i&&i.heightRelevant||s&&s.heightRelevant)&&
-fn(t,e,this.changes,5)}};function gc(n,t){let e=n.getBoundingClientRect(),i=n.ownerDocument,s=i.defaultView||window,r=Math.
+fn(t,e,this.changes,5)}};function yc(n,t){let e=n.getBoundingClientRect(),i=n.ownerDocument,s=i.defaultView||window,r=Math.
 max(0,e.left),o=Math.min(s.innerWidth,e.right),l=Math.max(0,e.top),a=Math.min(s.innerHeight,e.bottom);for(let f=n.parentNode;f&&
 f!=i.body;)if(f.nodeType==1){let h=f,c=window.getComputedStyle(h);if((h.scrollHeight>h.clientHeight||h.scrollWidth>h.clientWidth)&&
 c.overflow!="visible"){let u=h.getBoundingClientRect();r=Math.max(r,u.left),o=Math.min(o,u.right),l=Math.max(l,u.top),a=
 Math.min(f==n.parentNode?s.innerHeight:a,u.bottom)}f=c.position=="absolute"||c.position=="fixed"?h.offsetParent:h.parentNode}else if(f.
 nodeType==11)f=f.host;else break;return{left:r-e.left,right:Math.max(r,o)-e.left,top:l-(e.top+t),bottom:Math.max(l,a)-(e.
-top+t)}}function bc(n){let t=n.getBoundingClientRect(),e=n.ownerDocument.defaultView||window;return t.left<e.innerWidth&&
-t.right>0&&t.top<e.innerHeight&&t.bottom>0}function yc(n,t){let e=n.getBoundingClientRect();return{left:0,right:e.right-
+top+t)}}function kc(n){let t=n.getBoundingClientRect(),e=n.ownerDocument.defaultView||window;return t.left<e.innerWidth&&
+t.right>0&&t.top<e.innerHeight&&t.bottom>0}function wc(n,t){let e=n.getBoundingClientRect();return{left:0,right:e.right-
 e.left,top:t,bottom:e.bottom-(e.top+t)}}var ui=class{constructor(t,e,i,s){this.from=t,this.to=e,this.size=i,this.displaySize=
 s}static same(t,e){if(t.length!=e.length)return!1;for(let i=0;i<t.length;i++){let s=t[i],r=e[i];if(s.from!=r.from||s.to!=
 r.to||s.size!=r.size)return!1}return!0}draw(t,e){return z.replace({widget:new Ks(this.displaySize*(e?t.scaleY:t.scaleX),
@@ -1204,7 +1204,7 @@ this.size+"px":(t.style.width=this.size+"px",t.style.height="2px",t.style.displa
 return this.vertical?this.size:-1}},Sn=class{constructor(t){this.state=t,this.pixelViewport={left:0,right:window.innerWidth,
 top:0,bottom:0},this.inView=!0,this.paddingTop=0,this.paddingBottom=0,this.contentDOMWidth=0,this.contentDOMHeight=0,this.
 editorHeight=0,this.editorWidth=0,this.scrollTop=0,this.scrolledToBottom=!1,this.scaleX=1,this.scaleY=1,this.scrollAnchorPos=
-0,this.scrollAnchorHeight=-1,this.scaler=sl,this.scrollTarget=null,this.printing=!1,this.mustMeasureContent=!0,this.defaultTextDirection=
+0,this.scrollAnchorHeight=-1,this.scaler=rl,this.scrollTarget=null,this.printing=!1,this.mustMeasureContent=!0,this.defaultTextDirection=
 X.LTR,this.visibleRanges=[],this.mustEnforceCursorAssoc=!1;let e=t.facet(nr).some(i=>typeof i!="function"&&i.class=="cm-\
 lineWrapping");this.heightOracle=new Fs(e),this.stateDeco=t.facet(yi).filter(i=>typeof i!="function"),this.heightMap=mt.
 empty().applyChanges(this.stateDeco,I.empty,this.heightOracle.setDoc(t.doc),[new Vt(0,0,0,t.doc.length)]);for(let i=0;i<
@@ -1212,12 +1212,12 @@ empty().applyChanges(this.stateDeco,I.empty,this.heightOracle.setDoc(t.doc),[new
 ensureLineGaps([]),this.lineGapDeco=z.set(this.lineGaps.map(i=>i.draw(this,!1))),this.computeVisibleRanges()}updateForViewport(){
 let t=[this.viewport],{main:e}=this.state.selection;for(let i=0;i<=1;i++){let s=i?e.head:e.anchor;if(!t.some(({from:r,to:o})=>s>=
 r&&s<=o)){let{from:r,to:o}=this.lineBlockAt(s);t.push(new Ve(r,o))}}return this.viewports=t.sort((i,s)=>i.from-s.from),this.
-updateScaler()}updateScaler(){let t=this.scaler;return this.scaler=this.heightMap.height<=7e6?sl:new js(this.heightOracle,
+updateScaler()}updateScaler(){let t=this.scaler;return this.scaler=this.heightMap.height<=7e6?rl:new js(this.heightOracle,
 this.heightMap,this.viewports),t.eq(this.scaler)?0:2}updateViewportLines(){this.viewportLines=[],this.heightMap.forEachLine(
 this.viewport.from,this.viewport.to,this.heightOracle.setDoc(this.state.doc),0,0,t=>{this.viewportLines.push(oi(t,this.scaler))})}update(t,e=null){
 this.state=t.state;let i=this.stateDeco;this.stateDeco=this.state.facet(yi).filter(h=>typeof h!="function");let s=t.changedRanges,
-r=Vt.extendWithRanges(s,mc(i,this.stateDeco,t?t.changes:lt.empty(this.state.doc.length))),o=this.heightMap.height,l=this.
-scrolledToBottom?null:this.scrollAnchorAt(this.scrollTop);il(),this.heightMap=this.heightMap.applyChanges(this.stateDeco,
+r=Vt.extendWithRanges(s,bc(i,this.stateDeco,t?t.changes:lt.empty(this.state.doc.length))),o=this.heightMap.height,l=this.
+scrolledToBottom?null:this.scrollAnchorAt(this.scrollTop);nl(),this.heightMap=this.heightMap.applyChanges(this.stateDeco,
 t.startState.doc,this.heightOracle.setDoc(this.state.doc),r),(this.heightMap.height!=o||qe)&&(t.flags|=2),l?(this.scrollAnchorPos=
 t.changes.mapPos(l.from,-1),this.scrollAnchorHeight=l.top):(this.scrollAnchorPos=-1,this.scrollAnchorHeight=o);let a=r.length?
 this.mapViewport(this.viewport,t.changes):this.viewport;(e&&(e.range.head<a.from||e.range.head>a.to)||!this.viewportIsAppropriate(
@@ -1225,27 +1225,27 @@ a))&&(a=this.getViewport(0,e));let f=a.from!=this.viewport.from||a.to!=this.view
 (f||!t.changes.empty||t.flags&2)&&this.updateViewportLines(),(this.lineGaps.length||this.viewport.to-this.viewport.from>
 4e3)&&this.updateLineGaps(this.ensureLineGaps(this.mapLineGaps(this.lineGaps,t.changes))),t.flags|=this.computeVisibleRanges(
 t.changes),e&&(this.scrollTarget=e),!this.mustEnforceCursorAssoc&&t.selectionSet&&t.view.lineWrapping&&t.state.selection.
-main.empty&&t.state.selection.main.assoc&&!t.state.facet(Hl)&&(this.mustEnforceCursorAssoc=!0)}measure(t){let e=t.contentDOM,
+main.empty&&t.state.selection.main.assoc&&!t.state.facet(Fl)&&(this.mustEnforceCursorAssoc=!0)}measure(t){let e=t.contentDOM,
 i=window.getComputedStyle(e),s=this.heightOracle,r=i.whiteSpace;this.defaultTextDirection=i.direction=="rtl"?X.RTL:X.LTR;
 let o=this.heightOracle.mustRefreshForWrapping(r),l=e.getBoundingClientRect(),a=o||this.mustMeasureContent||this.contentDOMHeight!=
-l.height;this.contentDOMHeight=l.height,this.mustMeasureContent=!1;let f=0,h=0;if(l.width&&l.height){let{scaleX:T,scaleY:w}=dl(
-e,l);(T>.005&&Math.abs(this.scaleX-T)>.005||w>.005&&Math.abs(this.scaleY-w)>.005)&&(this.scaleX=T,this.scaleY=w,f|=16,o=
+l.height;this.contentDOMHeight=l.height,this.mustMeasureContent=!1;let f=0,h=0;if(l.width&&l.height){let{scaleX:L,scaleY:v}=pl(
+e,l);(L>.005&&Math.abs(this.scaleX-L)>.005||v>.005&&Math.abs(this.scaleY-v)>.005)&&(this.scaleX=L,this.scaleY=v,f|=16,o=
 a=!0)}let c=(parseInt(i.paddingTop)||0)*this.scaleY,u=(parseInt(i.paddingBottom)||0)*this.scaleY;(this.paddingTop!=c||this.
 paddingBottom!=u)&&(this.paddingTop=c,this.paddingBottom=u,f|=18),this.editorWidth!=t.scrollDOM.clientWidth&&(s.lineWrapping&&
 (a=!0),this.editorWidth=t.scrollDOM.clientWidth,f|=16);let d=t.scrollDOM.scrollTop*this.scaleY;this.scrollTop!=d&&(this.
-scrollAnchorHeight=-1,this.scrollTop=d),this.scrolledToBottom=gl(t.scrollDOM);let p=(this.printing?yc:gc)(e,this.paddingTop),
+scrollAnchorHeight=-1,this.scrollTop=d),this.scrolledToBottom=bl(t.scrollDOM);let p=(this.printing?wc:yc)(e,this.paddingTop),
 m=p.top-this.pixelViewport.top,g=p.bottom-this.pixelViewport.bottom;this.pixelViewport=p;let b=this.pixelViewport.bottom>
 this.pixelViewport.top&&this.pixelViewport.right>this.pixelViewport.left;if(b!=this.inView&&(this.inView=b,b&&(a=!0)),!this.
-inView&&!this.scrollTarget&&!bc(t.dom))return 0;let S=l.width;if((this.contentDOMWidth!=S||this.editorHeight!=t.scrollDOM.
-clientHeight)&&(this.contentDOMWidth=l.width,this.editorHeight=t.scrollDOM.clientHeight,f|=16),a){let T=t.docView.measureVisibleLineHeights(
-this.viewport);if(s.mustRefreshForHeights(T)&&(o=!0),o||s.lineWrapping&&Math.abs(S-this.contentDOMWidth)>s.charWidth){let{
-lineHeight:w,charWidth:D,textHeight:A}=t.docView.measureTextSize();o=w>0&&s.refresh(r,w,D,A,Math.max(5,S/D),T),o&&(t.docView.
-minWidth=0,f|=16)}m>0&&g>0?h=Math.max(m,g):m<0&&g<0&&(h=Math.min(m,g)),il();for(let w of this.viewports){let D=w.from==this.
-viewport.from?T:t.docView.measureVisibleLineHeights(w);this.heightMap=(o?mt.empty().applyChanges(this.stateDeco,I.empty,
-this.heightOracle,[new Vt(0,0,0,t.state.doc.length)]):this.heightMap).updateHeight(s,0,o,new Vs(w.from,D))}qe&&(f|=2)}let C=!this.
+inView&&!this.scrollTarget&&!kc(t.dom))return 0;let k=l.width;if((this.contentDOMWidth!=k||this.editorHeight!=t.scrollDOM.
+clientHeight)&&(this.contentDOMWidth=l.width,this.editorHeight=t.scrollDOM.clientHeight,f|=16),a){let L=t.docView.measureVisibleLineHeights(
+this.viewport);if(s.mustRefreshForHeights(L)&&(o=!0),o||s.lineWrapping&&Math.abs(k-this.contentDOMWidth)>s.charWidth){let{
+lineHeight:v,charWidth:D,textHeight:A}=t.docView.measureTextSize();o=v>0&&s.refresh(r,v,D,A,Math.max(5,k/D),L),o&&(t.docView.
+minWidth=0,f|=16)}m>0&&g>0?h=Math.max(m,g):m<0&&g<0&&(h=Math.min(m,g)),nl();for(let v of this.viewports){let D=v.from==this.
+viewport.from?L:t.docView.measureVisibleLineHeights(v);this.heightMap=(o?mt.empty().applyChanges(this.stateDeco,I.empty,
+this.heightOracle,[new Vt(0,0,0,t.state.doc.length)]):this.heightMap).updateHeight(s,0,o,new Vs(v.from,D))}qe&&(f|=2)}let x=!this.
 viewportIsAppropriate(this.viewport,h)||this.scrollTarget&&(this.scrollTarget.range.head<this.viewport.from||this.scrollTarget.
-range.head>this.viewport.to);return C&&(f&2&&(f|=this.updateScaler()),this.viewport=this.getViewport(h,this.scrollTarget),
-f|=this.updateForViewport()),(f&2||C)&&this.updateViewportLines(),(this.lineGaps.length||this.viewport.to-this.viewport.
+range.head>this.viewport.to);return x&&(f&2&&(f|=this.updateScaler()),this.viewport=this.getViewport(h,this.scrollTarget),
+f|=this.updateForViewport()),(f&2||x)&&this.updateViewportLines(),(this.lineGaps.length||this.viewport.to-this.viewport.
 from>4e3)&&this.updateLineGaps(this.ensureLineGaps(o?[]:this.lineGaps,t)),f|=this.computeVisibleRanges(),this.mustEnforceCursorAssoc&&
 (this.mustEnforceCursorAssoc=!1,t.docView.enforceCursorAssoc()),f}get visibleTop(){return this.scaler.fromDOM(this.pixelViewport.
 top)}get visibleBottom(){return this.scaler.fromDOM(this.pixelViewport.bottom)}getViewport(t,e){let i=.5-Math.max(-.5,Math.
@@ -1261,17 +1261,17 @@ min(-i,250)))&&(e==this.state.doc.length||r>=l+Math.max(10,Math.min(i,250)))&&s>
 length||e.empty)return t;let i=[];for(let s of t)e.touchesRange(s.from,s.to)||i.push(new ui(e.mapPos(s.from),e.mapPos(s.
 to),s.size,s.displaySize));return i}ensureLineGaps(t,e){let i=this.heightOracle.lineWrapping,s=i?1e4:2e3,r=s>>1,o=s<<1;if(this.
 defaultTextDirection!=X.LTR&&!i)return[];let l=[],a=(h,c,u,d)=>{if(c-h<r)return;let p=this.state.selection.main,m=[p.from];
-p.empty||m.push(p.to);for(let b of m)if(b>h&&b<c){a(h,b-10,u,d),a(b+10,c,u,d);return}let g=wc(t,b=>b.from>=u.from&&b.to<=
-u.to&&Math.abs(b.from-h)<r&&Math.abs(b.to-c)<r&&!m.some(S=>b.from<S&&b.to>S));if(!g){if(c<u.to&&e&&i&&e.visibleRanges.some(
-C=>C.from<=c&&C.to>=c)){let C=e.moveToLineBoundary(k.cursor(c),!1,!0).head;C>h&&(c=C)}let b=this.gapSize(u,h,c,d),S=i||b<
-2e6?b:2e6;g=new ui(h,c,b,S)}l.push(g)},f=h=>{if(h.length<o||h.type!=pt.Text)return;let c=kc(h.from,h.to,this.stateDeco);
+p.empty||m.push(p.to);for(let b of m)if(b>h&&b<c){a(h,b-10,u,d),a(b+10,c,u,d);return}let g=Sc(t,b=>b.from>=u.from&&b.to<=
+u.to&&Math.abs(b.from-h)<r&&Math.abs(b.to-c)<r&&!m.some(k=>b.from<k&&b.to>k));if(!g){if(c<u.to&&e&&i&&e.visibleRanges.some(
+x=>x.from<=c&&x.to>=c)){let x=e.moveToLineBoundary(w.cursor(c),!1,!0).head;x>h&&(c=x)}let b=this.gapSize(u,h,c,d),k=i||b<
+2e6?b:2e6;g=new ui(h,c,b,k)}l.push(g)},f=h=>{if(h.length<o||h.type!=pt.Text)return;let c=xc(h.from,h.to,this.stateDeco);
 if(c.total<o)return;let u=this.scrollTarget?this.scrollTarget.range.head:null,d,p;if(i){let m=s/this.heightOracle.lineLength*
-this.heightOracle.lineHeight,g,b;if(u!=null){let S=on(c,u),C=((this.visibleBottom-this.visibleTop)/2+m)/h.height;g=S-C,b=
-S+C}else g=(this.visibleTop-h.top-m)/h.height,b=(this.visibleBottom-h.top+m)/h.height;d=rn(c,g),p=rn(c,b)}else{let m=c.total*
+this.heightOracle.lineHeight,g,b;if(u!=null){let k=on(c,u),x=((this.visibleBottom-this.visibleTop)/2+m)/h.height;g=k-x,b=
+k+x}else g=(this.visibleTop-h.top-m)/h.height,b=(this.visibleBottom-h.top+m)/h.height;d=rn(c,g),p=rn(c,b)}else{let m=c.total*
 this.heightOracle.charWidth,g=s*this.heightOracle.charWidth,b=0;if(m>2e6)for(let D of t)D.from>=h.from&&D.from<h.to&&D.size!=
-D.displaySize&&D.from*this.heightOracle.charWidth+b<this.pixelViewport.left&&(b=D.size-D.displaySize);let S=this.pixelViewport.
-left+b,C=this.pixelViewport.right+b,T,w;if(u!=null){let D=on(c,u),A=((C-S)/2+g)/m;T=D-A,w=D+A}else T=(S-g)/m,w=(C+g)/m;d=
-rn(c,T),p=rn(c,w)}d>h.from&&a(h.from,d,h,c),p<h.to&&a(p,h.to,h,c)};for(let h of this.viewportLines)Array.isArray(h.type)?
+D.displaySize&&D.from*this.heightOracle.charWidth+b<this.pixelViewport.left&&(b=D.size-D.displaySize);let k=this.pixelViewport.
+left+b,x=this.pixelViewport.right+b,L,v;if(u!=null){let D=on(c,u),A=((x-k)/2+g)/m;L=D-A,v=D+A}else L=(k-g)/m,v=(x+g)/m;d=
+rn(c,L),p=rn(c,v)}d>h.from&&a(h.from,d,h,c),p<h.to&&a(p,h.to,h,c)};for(let h of this.viewportLines)Array.isArray(h.type)?
 h.type.forEach(f):f(h);return l}gapSize(t,e,i,s){let r=on(s,i)-on(s,e);return this.heightOracle.lineWrapping?t.height*r:
 s.total*this.heightOracle.charWidth*r}updateLineGaps(t){ui.same(t,this.lineGaps)||(this.lineGaps=t,this.lineGapDeco=z.set(
 t.map(e=>e.draw(this,this.heightOracle.lineWrapping))))}computeVisibleRanges(t){let e=this.stateDeco;this.lineGaps.length&&
@@ -1285,11 +1285,11 @@ heightMap.lineAt(this.scaler.fromDOM(t),G.ByHeight,this.heightOracle,0,0),this.s
 t+8);return e.from>=this.viewport.from||this.viewportLines[0].top-t>200?e:this.viewportLines[0]}elementAtHeight(t){return oi(
 this.heightMap.blockAt(this.scaler.fromDOM(t),this.heightOracle,0,0),this.scaler)}get docHeight(){return this.scaler.toDOM(
 this.heightMap.height)}get contentHeight(){return this.docHeight+this.paddingTop+this.paddingBottom}},Ve=class{constructor(t,e){
-this.from=t,this.to=e}};function kc(n,t,e){let i=[],s=n,r=0;return Q.spans(e,n,t,{span(){},point(o,l){o>s&&(i.push({from:s,
+this.from=t,this.to=e}};function xc(n,t,e){let i=[],s=n,r=0;return Q.spans(e,n,t,{span(){},point(o,l){o>s&&(i.push({from:s,
 to:o}),r+=o-s),s=l}},20),s<t&&(i.push({from:s,to:t}),r+=t-s),{total:r,ranges:i}}function rn({total:n,ranges:t},e){if(e<=
 0)return t[0].from;if(e>=1)return t[t.length-1].to;let i=Math.floor(n*e);for(let s=0;;s++){let{from:r,to:o}=t[s],l=o-r;if(i<=
 l)return r+i;i-=l}}function on(n,t){let e=0;for(let{from:i,to:s}of n.ranges){if(t<=s){e+=t-i;break}e+=s-i}return e/n.total}
-function wc(n,t){for(let e of n)if(t(e))return e}var sl={toDOM(n){return n},fromDOM(n){return n},scale:1,eq(n){return n==
+function Sc(n,t){for(let e of n)if(t(e))return e}var rl={toDOM(n){return n},fromDOM(n){return n},scale:1,eq(n){return n==
 this}},js=class n{constructor(t,e,i){let s=0,r=0,o=0;this.viewports=i.map(({from:l,to:a})=>{let f=e.lineAt(l,G.ByPos,t,0,
 0).top,h=e.lineAt(a,G.ByPos,t,0,0).bottom;return s+=h-f,{from:l,to:a,top:f,bottom:h,domTop:0,domBottom:0}}),this.scale=(7e6-
 s)/(e.height-s);for(let l of this.viewports)l.domTop=o+(l.top-r)*this.scale,o=l.domBottom=l.domTop+(l.bottom-l.top),r=l.
@@ -1300,9 +1300,9 @@ this.viewports.length?this.viewports[e]:null;if(!r||t<r.domTop)return i+(t-s)/th
 length&&this.viewports.every((e,i)=>e.from==t.viewports[i].from&&e.to==t.viewports[i].to):!1}};function oi(n,t){if(t.scale==
 1)return n;let e=t.toDOM(n.top),i=t.toDOM(n.bottom);return new Ht(n.from,n.length,e,i-e,Array.isArray(n._content)?n._content.
 map(s=>oi(s,t)):n._content)}var ln=B.define({combine:n=>n.join(" ")}),$s=B.define({combine:n=>n.indexOf(!0)>-1}),Us=wt.newName(),
-ra=wt.newName(),oa=wt.newName(),la={"&light":"."+ra,"&dark":"."+oa};function Gs(n,t,e){return new wt(t,{finish(i){return/&/.
+oa=wt.newName(),la=wt.newName(),aa={"&light":"."+oa,"&dark":"."+la};function Gs(n,t,e){return new wt(t,{finish(i){return/&/.
 test(i)?i.replace(/&\w*/,s=>{if(s=="&")return n;if(!e||!e[s])throw new RangeError(`Unsupported selector: ${s}`);return e[s]}):
-n+" "+i}})}var xc=Gs("."+Us,{"&":{position:"relative !important",boxSizing:"border-box","&.cm-focused":{outline:"1px dot\
+n+" "+i}})}var vc=Gs("."+Us,{"&":{position:"relative !important",boxSizing:"border-box","&.cm-focused":{outline:"1px dot\
 ted #212121"},display:"flex !important",flexDirection:"column"},".cm-scroller":{display:"flex !important",alignItems:"fl\
 ex-start !important",fontFamily:"monospace",lineHeight:1.4,height:"100%",overflowX:"auto",position:"relative",zIndex:0,overflowAnchor:"\
 none"},".cm-content":{margin:0,flexGrow:2,flexShrink:0,display:"block",whiteSpace:"pre",wordWrap:"normal",boxSizing:"bor\
@@ -1342,7 +1342,7 @@ center"},".cm-highlightTab":{backgroundImage:`url('data:image/svg+xml,<svg xmlns
 linear-gradient(#b4b4b4, #d0d3d6)"}},"&dark .cm-button":{backgroundImage:"linear-gradient(#393939, #111)",border:"1px so\
 lid #888","&:active":{backgroundImage:"linear-gradient(#111, #333)"}},".cm-textfield":{verticalAlign:"middle",color:"inh\
 erit",fontSize:"70%",border:"1px solid silver",padding:".2em .5em"},"&light .cm-textfield":{backgroundColor:"white"},"&d\
-ark .cm-textfield":{border:"1px solid #555",backgroundColor:"inherit"}},la),Sc={childList:!0,characterData:!0,subtree:!0,
+ark .cm-textfield":{border:"1px solid #555",backgroundColor:"inherit"}},aa),Cc={childList:!0,characterData:!0,subtree:!0,
 attributes:!0,characterDataOldValue:!0},ys=M.ie&&M.ie_version<=11,_s=class{constructor(t){this.view=t,this.active=!1,this.
 editContext=null,this.selectionRange=new Cs,this.selectionChanged=!1,this.delayedFlush=-1,this.resizeTimeout=-1,this.queue=
 [],this.delayedAndroidKey=null,this.flushingAndroidKey=-1,this.lastChange=0,this.scrollTargets=[],this.intersection=null,
@@ -1372,9 +1372,9 @@ return;let{view:i}=this,s=this.selectionRange;if(i.state.facet(Yt)?i.root.active
 let r=s.anchorNode&&i.docView.nearest(s.anchorNode);if(r&&r.ignoreEvent(t)){e||(this.selectionChanged=!1);return}(M.ie&&
 M.ie_version<=11||M.android&&M.chrome)&&!i.state.selection.main.empty&&s.focusNode&&li(s.focusNode,s.focusOffset,s.anchorNode,
 s.anchorOffset)?this.flushSoon():this.flush(!1)}readSelectionRange(){let{view:t}=this,e=di(t.root);if(!e)return!1;let i=M.
-safari&&t.root.nodeType==11&&t.root.activeElement==this.dom&&vc(this.view,e)||e;if(!i||this.selectionRange.eq(i))return!1;
+safari&&t.root.nodeType==11&&t.root.activeElement==this.dom&&Ac(this.view,e)||e;if(!i||this.selectionRange.eq(i))return!1;
 let s=hn(this.dom,i);return s&&!this.selectionChanged&&t.inputState.lastFocusTime>Date.now()-200&&t.inputState.lastTouchTime<
-Date.now()-300&&gf(this.dom,i)?(this.view.inputState.lastFocusTime=0,t.docView.updateSelection(),!1):(this.selectionRange.
+Date.now()-300&&yf(this.dom,i)?(this.view.inputState.lastFocusTime=0,t.docView.updateSelection(),!1):(this.selectionRange.
 setRange(i),s&&(this.selectionChanged=!0),!0)}setSelectionRange(t,e){this.selectionRange.set(t.node,t.offset,e.node,e.offset),
 this.selectionChanged=!1}clearSelectionRange(){this.selectionRange.set(null,0,null,0)}listenForScroll(){this.parentCheck=
 -1;let t=0,e=null;for(let i=this.dom;i;)if(i.nodeType==1)!e&&t<this.scrollTargets.length&&this.scrollTargets[t]==i?t++:e||
@@ -1382,7 +1382,7 @@ this.selectionChanged=!1}clearSelectionRange(){this.selectionRange.set(null,0,nu
 if(t<this.scrollTargets.length&&!e&&(e=this.scrollTargets.slice(0,t)),e){for(let i of this.scrollTargets)i.removeEventListener(
 "scroll",this.onScroll);for(let i of this.scrollTargets=e)i.addEventListener("scroll",this.onScroll)}}ignore(t){if(!this.
 active)return t();try{return this.stop(),t()}finally{this.start(),this.clear()}}start(){this.active||(this.observer.observe(
-this.dom,Sc),ys&&this.dom.addEventListener("DOMCharacterDataModified",this.onCharData),this.active=!0)}stop(){this.active&&
+this.dom,Cc),ys&&this.dom.addEventListener("DOMCharacterDataModified",this.onCharData),this.active=!0)}stop(){this.active&&
 (this.active=!1,this.observer.disconnect(),ys&&this.dom.removeEventListener("DOMCharacterDataModified",this.onCharData))}clear(){
 this.processRecords(),this.queue.length=0,this.selectionChanged=!1}delayAndroidKey(t,e){var i;if(!this.delayedAndroidKey){
 let s=()=>{let r=this.delayedAndroidKey;r&&(this.clearDelayedAndroidKey(),this.view.inputState.lastKeyCode=r.keyCode,this.
@@ -1398,11 +1398,11 @@ to:i}=o:(e=Math.min(o.from,e),i=Math.max(o.to,i)))}return{from:e,to:i,typeOver:s
 processRecords(),s=this.selectionChanged&&hn(this.dom,this.selectionRange);if(t<0&&!s)return null;t>-1&&(this.lastChange=
 Date.now()),this.view.inputState.lastFocusTime=0,this.selectionChanged=!1;let r=new Rs(this.view,t,e,i);return this.view.
 docView.domChanged={newSel:r.newSel?r.newSel.main:null},r}flush(t=!0){if(this.delayedFlush>=0||this.delayedAndroidKey)return!1;
-t&&this.readSelectionRange();let e=this.readChange();if(!e)return this.view.requestMeasure(),!1;let i=this.view.state,s=Xl(
+t&&this.readSelectionRange();let e=this.readChange();if(!e)return this.view.requestMeasure(),!1;let i=this.view.state,s=Jl(
 this.view,e);return this.view.state==i&&(e.domChanged||e.newSel&&!e.newSel.main.eq(this.view.state.selection.main))&&this.
 view.update([]),s}readMutation(t){let e=this.view.docView.nearest(t.target);if(!e||e.ignoreMutation(t))return null;if(e.
-markDirty(t.type=="attributes"),t.type=="attributes"&&(e.flags|=4),t.type=="childList"){let i=rl(e,t.previousSibling||t.
-target.previousSibling,-1),s=rl(e,t.nextSibling||t.target.nextSibling,1);return{from:i?e.posAfter(i):e.posAtStart,to:s?e.
+markDirty(t.type=="attributes"),t.type=="attributes"&&(e.flags|=4),t.type=="childList"){let i=ol(e,t.previousSibling||t.
+target.previousSibling,-1),s=ol(e,t.nextSibling||t.target.nextSibling,1);return{from:i?e.posAfter(i):e.posAtStart,to:s?e.
 posBefore(s):e.posAtEnd,typeOver:!1}}else return t.type=="characterData"?{from:e.posAtStart,to:e.posAtEnd,typeOver:t.target.
 nodeValue==t.oldValue}:null}setWindow(t){t!=this.win&&(this.removeWindowListeners(this.win),this.win=t,this.addWindowListeners(
 this.win))}addWindowListeners(t){t.addEventListener("resize",this.onResize),this.printQuery?this.printQuery.addEventListener?
@@ -1417,25 +1417,25 @@ void 0||t.disconnect(),(e=this.gapIntersection)===null||e===void 0||e.disconnect
 i.disconnect();for(let s of this.scrollTargets)s.removeEventListener("scroll",this.onScroll);this.removeWindowListeners(
 this.win),clearTimeout(this.parentCheck),clearTimeout(this.resizeTimeout),this.win.cancelAnimationFrame(this.delayedFlush),
 this.win.cancelAnimationFrame(this.flushingAndroidKey),this.editContext&&(this.view.contentDOM.editContext=null,this.editContext.
-destroy())}};function rl(n,t,e){for(;t;){let i=K.get(t);if(i&&i.parent==n)return i;let s=t.parentNode;t=s!=n.dom?s:e>0?t.
-nextSibling:t.previousSibling}return null}function ol(n,t){let e=t.startContainer,i=t.startOffset,s=t.endContainer,r=t.endOffset,
+destroy())}};function ol(n,t,e){for(;t;){let i=K.get(t);if(i&&i.parent==n)return i;let s=t.parentNode;t=s!=n.dom?s:e>0?t.
+nextSibling:t.previousSibling}return null}function ll(n,t){let e=t.startContainer,i=t.startOffset,s=t.endContainer,r=t.endOffset,
 o=n.docView.domAtPos(n.state.selection.main.anchor);return li(o.node,o.offset,s,r)&&([e,i,s,r]=[s,r,e,i]),{anchorNode:e,
-anchorOffset:i,focusNode:s,focusOffset:r}}function vc(n,t){if(t.getComposedRanges){let s=t.getComposedRanges(n.root)[0];
-if(s)return ol(n,s)}let e=null;function i(s){s.preventDefault(),s.stopImmediatePropagation(),e=s.getTargetRanges()[0]}return n.
+anchorOffset:i,focusNode:s,focusOffset:r}}function Ac(n,t){if(t.getComposedRanges){let s=t.getComposedRanges(n.root)[0];
+if(s)return ll(n,s)}let e=null;function i(s){s.preventDefault(),s.stopImmediatePropagation(),e=s.getTargetRanges()[0]}return n.
 contentDOM.addEventListener("beforeinput",i,!0),n.dom.ownerDocument.execCommand("indent"),n.contentDOM.removeEventListener(
-"beforeinput",i,!0),e?ol(n,e):null}var Xs=class{constructor(t){this.from=0,this.to=0,this.pendingContextChange=null,this.
+"beforeinput",i,!0),e?ll(n,e):null}var Xs=class{constructor(t){this.from=0,this.to=0,this.pendingContextChange=null,this.
 handlers=Object.create(null),this.composing=null,this.resetRange(t.state);let e=this.editContext=new window.EditContext(
 {text:t.state.doc.sliceString(this.from,this.to),selectionStart:this.toContextPos(Math.max(this.from,Math.min(this.to,t.
 state.selection.main.anchor))),selectionEnd:this.toContextPos(t.state.selection.main.head)});this.handlers.textupdate=i=>{
 let s=t.state.selection.main,{anchor:r,head:o}=s,l=this.toEditorPos(i.updateRangeStart),a=this.toEditorPos(i.updateRangeEnd);
 t.inputState.composing>=0&&!this.composing&&(this.composing={contextBase:i.updateRangeStart,editorBase:l,drifted:!1});let f=a-
-l>i.text.length;l==this.from&&r<this.from?l=r:a==this.to&&r>this.to&&(a=r);let h=Jl(t.state.sliceDoc(l,a),i.text,(f?s.from:
-s.to)-l,f?"end":null);if(!h){let u=k.single(this.toEditorPos(i.selectionStart),this.toEditorPos(i.selectionEnd));u.main.
+l>i.text.length;l==this.from&&r<this.from?l=r:a==this.to&&r>this.to&&(a=r);let h=Yl(t.state.sliceDoc(l,a),i.text,(f?s.from:
+s.to)-l,f?"end":null);if(!h){let u=w.single(this.toEditorPos(i.selectionStart),this.toEditorPos(i.selectionEnd));u.main.
 eq(s)||t.dispatch({selection:u,userEvent:"select"});return}let c={from:h.from+l,to:h.toA+l,insert:I.of(i.text.slice(h.from,
 h.toB).split(`
 `))};if((M.mac||M.android)&&c.from==o-1&&/^\. ?$/.test(i.text)&&t.contentDOM.getAttribute("autocorrect")=="off"&&(c={from:l,
 to:a,insert:I.of([i.text.replace("."," ")])}),this.pendingContextChange=c,!t.state.readOnly){let u=this.to-this.from+(c.
-to-c.from+c.insert.length);sr(t,c,k.single(this.toEditorPos(i.selectionStart,u),this.toEditorPos(i.selectionEnd,u)))}this.
+to-c.from+c.insert.length);sr(t,c,w.single(this.toEditorPos(i.selectionStart,u),this.toEditorPos(i.selectionEnd,u)))}this.
 pendingContextChange&&(this.revertPending(t.state),this.setSelection(t.state)),c.from<c.to&&!c.insert.length&&t.inputState.
 composing>=0&&!/[\\p{Alphabetic}\\p{Number}_]/.test(e.text.slice(Math.max(0,i.updateRangeStart-1),Math.min(e.text.length,
 i.updateRangeStart+1)))&&this.handlers.compositionend(i)},this.handlers.characterboundsupdate=i=>{let s=[],r=null;for(let o=this.
@@ -1444,7 +1444,7 @@ a.right-a.left,a.bottom-a.top)||r||new DOMRect,s.push(r)}e.updateCharacterBounds
 i=>{let s=[];for(let r of i.getTextFormats()){let o=r.underlineStyle,l=r.underlineThickness;if(!/none/i.test(o)&&!/none/i.
 test(l)){let a=this.toEditorPos(r.rangeStart),f=this.toEditorPos(r.rangeEnd);if(a<f){let h=`text-decoration: underline ${/^[a-z]/.
 test(o)?o+" ":o=="Dashed"?"dashed ":o=="Squiggle"?"wavy ":""}${/thin/i.test(l)?1:2}px`;s.push(z.mark({attributes:{style:h}}).
-range(a,f))}}}t.dispatch({effects:Vl.of(z.set(s))})},this.handlers.compositionstart=()=>{t.inputState.composing<0&&(t.inputState.
+range(a,f))}}}t.dispatch({effects:zl.of(z.set(s))})},this.handlers.compositionstart=()=>{t.inputState.composing<0&&(t.inputState.
 composing=0,t.inputState.compositionFirstChange=!0)},this.handlers.compositionend=()=>{if(t.inputState.composing=-1,t.inputState.
 compositionFirstChange=null,this.composing){let{drifted:i}=this.composing;this.composing=null,i&&this.reset(t.state)}};for(let i in this.
 handlers)e.addEventListener(i,this.handlers[i]);this.measureReq={read:i=>{this.editContext.updateControlBounds(i.contentDOM.
@@ -1478,28 +1478,28 @@ document.createElement("div"),this.scrollDOM=document.createElement("div"),this.
 className="cm-announced",this.announceDOM.setAttribute("aria-live","polite"),this.dom=document.createElement("div"),this.
 dom.appendChild(this.announceDOM),this.dom.appendChild(this.scrollDOM),t.parent&&t.parent.appendChild(this.dom);let{dispatch:i}=t;
 this.dispatchTransactions=t.dispatchTransactions||i&&(s=>s.forEach(r=>i(r,this)))||(s=>this.update(s)),this.dispatch=this.
-dispatch.bind(this),this._root=t.root||mf(t.parent)||document,this.viewState=new Sn(t.state||U.create(t)),t.scrollTo&&t.
+dispatch.bind(this),this._root=t.root||bf(t.parent)||document,this.viewState=new Sn(t.state||U.create(t)),t.scrollTo&&t.
 scrollTo.is(en)&&(this.viewState.scrollTarget=t.scrollTo.value.clip(this.viewState.state)),this.plugins=this.state.facet(
 Fe).map(s=>new fi(s));for(let s of this.plugins)s.update(this);this.observer=new _s(this),this.inputState=new Is(this),this.
 inputState.ensureHandlers(this.plugins),this.docView=new yn(this),this.mountStyles(),this.updateAttrs(),this.updateState=
 0,this.requestMeasure(),!((e=document.fonts)===null||e===void 0)&&e.ready&&document.fonts.ready.then(()=>this.requestMeasure())}dispatch(...t){
-let e=t.length==1&&t[0]instanceof Y?t:t.length==1&&Array.isArray(t[0])?t[0]:[this.state.update(...t)];this.dispatchTransactions(
+let e=t.length==1&&t[0]instanceof J?t:t.length==1&&Array.isArray(t[0])?t[0]:[this.state.update(...t)];this.dispatchTransactions(
 e,this)}update(t){if(this.updateState!=0)throw new Error("Calls to EditorView.update are not allowed while an update is \
 in progress");let e=!1,i=!1,s,r=this.state;for(let u of t){if(u.startState!=r)throw new RangeError("Trying to update sta\
 te with a transaction that doesn't start from the previous state.");r=u.state}if(this.destroyed){this.viewState.state=r;
-return}let o=this.hasFocus,l=0,a=null;t.some(u=>u.annotation(ia))?(this.inputState.notifiedFocused=o,l=1):o!=this.inputState.
-notifiedFocused&&(this.inputState.notifiedFocused=o,a=na(r,o),a||(l=1));let f=this.observer.delayedAndroidKey,h=null;if(f?
+return}let o=this.hasFocus,l=0,a=null;t.some(u=>u.annotation(na))?(this.inputState.notifiedFocused=o,l=1):o!=this.inputState.
+notifiedFocused&&(this.inputState.notifiedFocused=o,a=sa(r,o),a||(l=1));let f=this.observer.delayedAndroidKey,h=null;if(f?
 (this.observer.clearDelayedAndroidKey(),h=this.observer.readChange(),(h&&!this.state.doc.eq(r.doc)||!this.state.selection.
 eq(r.selection))&&(h=null)):this.observer.clear(),r.facet(U.phrases)!=this.state.facet(U.phrases))return this.setState(r);
 s=bn.create(this,r,t),s.flags|=l;let c=this.viewState.scrollTarget;try{this.updateState=2;for(let u of t){if(c&&(c=c.map(
-u.changes)),u.scrollIntoView){let{main:d}=u.state.selection;c=new hi(d.empty?d:k.cursor(d.head,d.head>d.anchor?-1:1))}for(let d of u.
+u.changes)),u.scrollIntoView){let{main:d}=u.state.selection;c=new hi(d.empty?d:w.cursor(d.head,d.head>d.anchor?-1:1))}for(let d of u.
 effects)d.is(en)&&(c=d.value.clip(this.state))}this.viewState.update(s,c),this.bidiCache=vn.update(this.bidiCache,s.changes),
 s.empty||(this.updatePlugins(s),this.inputState.update(s)),e=this.docView.update(s),this.state.facet(si)!=this.styleModules&&
 this.mountStyles(),i=this.updateAttrs(),this.showAnnouncements(t),this.docView.updateSelection(e,t.some(u=>u.isUserEvent(
 "select.pointer")))}finally{this.updateState=0}if(s.startState.facet(ln)!=s.state.facet(ln)&&(this.viewState.mustMeasureContent=
 !0),(e||i||c||this.viewState.mustEnforceCursorAssoc||this.viewState.mustMeasureContent)&&this.requestMeasure(),e&&this.docViewUpdate(),
-!s.empty)for(let u of this.state.facet(Bs))try{u(s)}catch(d){Lt(this.state,d,"update listener")}(a||h)&&Promise.resolve().
-then(()=>{a&&this.state==a.startState&&this.dispatch(a),h&&!Xl(this,h)&&f.force&&ze(this.contentDOM,f.key,f.keyCode)})}setState(t){
+!s.empty)for(let u of this.state.facet(Bs))try{u(s)}catch(d){Tt(this.state,d,"update listener")}(a||h)&&Promise.resolve().
+then(()=>{a&&this.state==a.startState&&this.dispatch(a),h&&!Jl(this,h)&&f.force&&ze(this.contentDOM,f.key,f.keyCode)})}setState(t){
 if(this.updateState!=0)throw new Error("Calls to EditorView.setState are not allowed while an update is in progress");if(this.
 destroyed){this.viewState.state=t;return}this.updateState=2;let e=this.hasFocus;try{for(let i of this.plugins)i.destroy(
 this);this.viewState=new Sn(t),this.plugins=t.facet(Fe).map(i=>new fi(i)),this.pluginMap.clear();for(let i of this.plugins)
@@ -1509,30 +1509,30 @@ startState.facet(Fe),i=t.state.facet(Fe);if(e!=i){let s=[];for(let r of i){let o
 let l=this.plugins[o];l.mustUpdate=t,s.push(l)}}for(let r of this.plugins)r.mustUpdate!=t&&r.destroy(this);this.plugins=
 s,this.pluginMap.clear()}else for(let s of this.plugins)s.mustUpdate=t;for(let s=0;s<this.plugins.length;s++)this.plugins[s].
 update(this);e!=i&&this.inputState.ensureHandlers(this.plugins)}docViewUpdate(){for(let t of this.plugins){let e=t.value;
-if(e&&e.docViewUpdate)try{e.docViewUpdate(this)}catch(i){Lt(this.state,i,"doc view update listener")}}}measure(t=!0){if(this.
+if(e&&e.docViewUpdate)try{e.docViewUpdate(this)}catch(i){Tt(this.state,i,"doc view update listener")}}}measure(t=!0){if(this.
 destroyed)return;if(this.measureScheduled>-1&&this.win.cancelAnimationFrame(this.measureScheduled),this.observer.delayedAndroidKey){
 this.measureScheduled=-1,this.requestMeasure();return}this.measureScheduled=0,t&&this.observer.forceFlush();let e=null,i=this.
 scrollDOM,s=i.scrollTop*this.scaleY,{scrollAnchorPos:r,scrollAnchorHeight:o}=this.viewState;Math.abs(s-this.viewState.scrollTop)>
-1&&(o=-1),this.viewState.scrollAnchorHeight=-1;try{for(let l=0;;l++){if(o<0)if(gl(i))r=-1,o=this.viewState.heightMap.height;else{
+1&&(o=-1),this.viewState.scrollAnchorHeight=-1;try{for(let l=0;;l++){if(o<0)if(bl(i))r=-1,o=this.viewState.heightMap.height;else{
 let d=this.viewState.scrollAnchorAt(s);r=d.from,o=d.top}this.updateState=1;let a=this.viewState.measure(this);if(!a&&!this.
 measureRequests.length&&this.viewState.scrollTarget==null)break;if(l>5){console.warn(this.measureRequests.length?"Measur\
 e loop restarted more than 5 times":"Viewport failed to stabilize");break}let f=[];a&4||([this.measureRequests,f]=[f,this.
-measureRequests]);let h=f.map(d=>{try{return d.read(this)}catch(p){return Lt(this.state,p),ll}}),c=bn.create(this,this.state,
+measureRequests]);let h=f.map(d=>{try{return d.read(this)}catch(p){return Tt(this.state,p),al}}),c=bn.create(this,this.state,
 []),u=!1;c.flags|=a,e?e.flags|=a:e=c,this.updateState=2,c.empty||(this.updatePlugins(c),this.inputState.update(c),this.updateAttrs(),
-u=this.docView.update(c),u&&this.docViewUpdate());for(let d=0;d<f.length;d++)if(h[d]!=ll)try{let p=f[d];p.write&&p.write(
-h[d],this)}catch(p){Lt(this.state,p)}if(u&&this.docView.updateSelection(!0),!c.viewportChanged&&this.measureRequests.length==
+u=this.docView.update(c),u&&this.docViewUpdate());for(let d=0;d<f.length;d++)if(h[d]!=al)try{let p=f[d];p.write&&p.write(
+h[d],this)}catch(p){Tt(this.state,p)}if(u&&this.docView.updateSelection(!0),!c.viewportChanged&&this.measureRequests.length==
 0){if(this.viewState.editorHeight)if(this.viewState.scrollTarget){this.docView.scrollIntoView(this.viewState.scrollTarget),
 this.viewState.scrollTarget=null,o=-1;continue}else{let p=(r<0?this.viewState.heightMap.height:this.viewState.lineBlockAt(
 r).top)-o;if(p>1||p<-1){s=s+p,i.scrollTop=s/this.scaleY,o=-1;continue}}break}}}finally{this.updateState=0,this.measureScheduled=
--1}if(e&&!e.empty)for(let l of this.state.facet(Bs))l(e)}get themeClasses(){return Us+" "+(this.state.facet($s)?oa:ra)+"\
- "+this.state.facet(ln)}updateAttrs(){let t=al(this,zl,{class:"cm-editor"+(this.hasFocus?" cm-focused ":" ")+this.themeClasses}),
+-1}if(e&&!e.empty)for(let l of this.state.facet(Bs))l(e)}get themeClasses(){return Us+" "+(this.state.facet($s)?la:oa)+"\
+ "+this.state.facet(ln)}updateAttrs(){let t=hl(this,Wl,{class:"cm-editor"+(this.hasFocus?" cm-focused ":" ")+this.themeClasses}),
 e={spellcheck:"false",autocorrect:"off",autocapitalize:"off",writingsuggestions:"false",translate:"no",contenteditable:this.
 state.facet(Yt)?"true":"false",class:"cm-content",style:`${M.tabSize}: ${this.state.tabSize}`,role:"textbox","aria-multi\
-line":"true"};this.state.readOnly&&(e["aria-readonly"]="true"),al(this,nr,e);let i=this.observer.ignore(()=>{let s=Ms(this.
+line":"true"};this.state.readOnly&&(e["aria-readonly"]="true"),hl(this,nr,e);let i=this.observer.ignore(()=>{let s=Ms(this.
 contentDOM,this.contentAttrs,e),r=Ms(this.dom,this.editorAttrs,t);return s||r});return this.editorAttrs=t,this.contentAttrs=
 e,i}showAnnouncements(t){let e=!0;for(let i of t)for(let s of i.effects)if(s.is(n.announce)){e&&(this.announceDOM.textContent=
 ""),e=!1;let r=this.announceDOM.appendChild(document.createElement("div"));r.textContent=s.value}}mountStyles(){this.styleModules=
-this.state.facet(si);let t=this.state.facet(n.cspNonce);wt.mount(this.root,this.styleModules.concat(xc).reverse(),t?{nonce:t}:
+this.state.facet(si);let t=this.state.facet(n.cspNonce);wt.mount(this.root,this.styleModules.concat(vc).reverse(),t?{nonce:t}:
 void 0)}readMeasured(){if(this.updateState==2)throw new Error("Reading the editor layout isn't allowed during an update");
 this.updateState==0&&this.measureScheduled>-1&&this.measure(!1)}requestMeasure(t){if(this.measureScheduled<0&&(this.measureScheduled=
 this.win.requestAnimationFrame(()=>this.measure())),t){if(this.measureRequests.indexOf(t)>-1)return;if(t.key!=null){for(let e=0;e<
@@ -1543,59 +1543,59 @@ viewState.paddingTop}get documentPadding(){return{top:this.viewState.paddingTop,
 return this.viewState.scaleX}get scaleY(){return this.viewState.scaleY}elementAtHeight(t){return this.readMeasured(),this.
 viewState.elementAtHeight(t)}lineBlockAtHeight(t){return this.readMeasured(),this.viewState.lineBlockAtHeight(t)}get viewportLineBlocks(){
 return this.viewState.viewportLines}lineBlockAt(t){return this.viewState.lineBlockAt(t)}get contentHeight(){return this.
-viewState.contentHeight}moveByChar(t,e,i){return bs(this,t,$o(this,t,e,i))}moveByGroup(t,e){return bs(this,t,$o(this,t,e,
-i=>Uf(this,t.head,i)))}visualLineSide(t,e){let i=this.bidiSpans(t),s=this.textDirectionAt(t.from),r=i[e?i.length-1:0];return k.
-cursor(r.side(e,s)+t.from,r.forward(!e,s)?1:-1)}moveToLineBoundary(t,e,i=!0){return $f(this,t,e,i)}moveVertically(t,e,i){
-return bs(this,t,Gf(this,t,e,i))}domAtPos(t){return this.docView.domAtPos(t)}posAtDOM(t,e=0){return this.docView.posFromDOM(
-t,e)}posAtCoords(t,e=!0){return this.readMeasured(),Ul(this,t,e)}coordsAtPos(t,e=1){this.readMeasured();let i=this.docView.
+viewState.contentHeight}moveByChar(t,e,i){return bs(this,t,Uo(this,t,e,i))}moveByGroup(t,e){return bs(this,t,Uo(this,t,e,
+i=>_f(this,t.head,i)))}visualLineSide(t,e){let i=this.bidiSpans(t),s=this.textDirectionAt(t.from),r=i[e?i.length-1:0];return w.
+cursor(r.side(e,s)+t.from,r.forward(!e,s)?1:-1)}moveToLineBoundary(t,e,i=!0){return Gf(this,t,e,i)}moveVertically(t,e,i){
+return bs(this,t,Xf(this,t,e,i))}domAtPos(t){return this.docView.domAtPos(t)}posAtDOM(t,e=0){return this.docView.posFromDOM(
+t,e)}posAtCoords(t,e=!0){return this.readMeasured(),Gl(this,t,e)}coordsAtPos(t,e=1){this.readMeasured();let i=this.docView.
 coordsAt(t,e);if(!i||i.left==i.right)return i;let s=this.state.doc.lineAt(t),r=this.bidiSpans(s),o=r[Ft.find(r,t-s.from,
 -1,e)];return xi(i,o.dir==X.LTR==e>0)}coordsForChar(t){return this.readMeasured(),this.docView.coordsForChar(t)}get defaultCharacterWidth(){
 return this.viewState.heightOracle.charWidth}get defaultLineHeight(){return this.viewState.heightOracle.lineHeight}get textDirection(){
-return this.viewState.defaultTextDirection}textDirectionAt(t){return!this.state.facet(Nl)||t<this.viewport.from||t>this.
+return this.viewState.defaultTextDirection}textDirectionAt(t){return!this.state.facet(Hl)||t<this.viewport.from||t>this.
 viewport.to?this.textDirection:(this.readMeasured(),this.docView.textDirectionAt(t))}get lineWrapping(){return this.viewState.
-heightOracle.lineWrapping}bidiSpans(t){if(t.length>Cc)return Tl(t.length);let e=this.textDirectionAt(t.from),i;for(let r of this.
-bidiCache)if(r.from==t.from&&r.dir==e&&(r.fresh||Dl(r.isolates,i=zo(this,t))))return r.order;i||(i=zo(this,t));let s=Lf(
+heightOracle.lineWrapping}bidiSpans(t){if(t.length>Mc)return Tl(t.length);let e=this.textDirectionAt(t.from),i;for(let r of this.
+bidiCache)if(r.from==t.from&&r.dir==e&&(r.fresh||Ll(r.isolates,i=Wo(this,t))))return r.order;i||(i=Wo(this,t));let s=Ef(
 t.text,e,i);return this.bidiCache.push(new vn(t.from,t.to,e,i,!0,s)),s}get hasFocus(){var t;return(this.dom.ownerDocument.
 hasFocus()||M.safari&&((t=this.inputState)===null||t===void 0?void 0:t.lastContextMenu)>Date.now()-3e4)&&this.root.activeElement==
-this.contentDOM}focus(){this.observer.ignore(()=>{pl(this.contentDOM),this.docView.updateSelection()})}setRoot(t){this._root!=
+this.contentDOM}focus(){this.observer.ignore(()=>{ml(this.contentDOM),this.docView.updateSelection()})}setRoot(t){this._root!=
 t&&(this._root=t,this.observer.setWindow((t.nodeType==9?t:t.ownerDocument).defaultView||window),this.mountStyles())}destroy(){
 this.root.activeElement==this.contentDOM&&this.contentDOM.blur();for(let t of this.plugins)t.destroy(this);this.plugins=
 [],this.inputState.destroy(),this.docView.destroy(),this.dom.remove(),this.observer.destroy(),this.measureScheduled>-1&&
 this.win.cancelAnimationFrame(this.measureScheduled),this.destroyed=!0}static scrollIntoView(t,e={}){return en.of(new hi(
-typeof t=="number"?k.cursor(t):t,e.y,e.x,e.yMargin,e.xMargin))}scrollSnapshot(){let{scrollTop:t,scrollLeft:e}=this.scrollDOM,
-i=this.viewState.scrollAnchorAt(t);return en.of(new hi(k.cursor(i.from),"start","start",i.top-t,e,!0))}setTabFocusMode(t){
+typeof t=="number"?w.cursor(t):t,e.y,e.x,e.yMargin,e.xMargin))}scrollSnapshot(){let{scrollTop:t,scrollLeft:e}=this.scrollDOM,
+i=this.viewState.scrollAnchorAt(t);return en.of(new hi(w.cursor(i.from),"start","start",i.top-t,e,!0))}setTabFocusMode(t){
 t==null?this.inputState.tabFocusMode=this.inputState.tabFocusMode<0?0:-1:typeof t=="boolean"?this.inputState.tabFocusMode=
 t?0:-1:this.inputState.tabFocusMode!=0&&(this.inputState.tabFocusMode=Date.now()+t)}static domEventHandlers(t){return qt.
 define(()=>({}),{eventHandlers:t})}static domEventObservers(t){return qt.define(()=>({}),{eventObservers:t})}static theme(t,e){
 let i=wt.newName(),s=[ln.of(i),si.of(Gs(`.${i}`,t))];return e&&e.dark&&s.push($s.of(!0)),s}static baseTheme(t){return ii.
-lowest(si.of(Gs("."+Us,t,la)))}static findFromDOM(t){var e;let i=t.querySelector(".cm-content"),s=i&&K.get(i)||K.get(t);
-return((e=s?.rootView)===null||e===void 0?void 0:e.view)||null}};E.styleModule=si;E.inputHandler=Rl;E.clipboardInputFilter=
-er;E.clipboardOutputFilter=ir;E.scrollHandler=Fl;E.focusChangeEffect=Il;E.perLineTextDirection=Nl;E.exceptionSink=Pl;E.updateListener=
-Bs;E.editable=Yt;E.mouseSelectionStyle=Ol;E.dragMovesSelection=El;E.clickAddsSelectionRange=Bl;E.decorations=yi;E.outerDecorations=
-Wl;E.atomicRanges=Si;E.bidiIsolatedRanges=ql;E.scrollMargins=Kl;E.darkTheme=$s;E.cspNonce=B.define({combine:n=>n.length?
-n[0]:""});E.contentAttributes=nr;E.editorAttributes=zl;E.lineWrapping=E.contentAttributes.of({class:"cm-lineWrapping"});
-E.announce=j.define();var Cc=4096,ll={},vn=class n{constructor(t,e,i,s,r,o){this.from=t,this.to=e,this.dir=i,this.isolates=
+lowest(si.of(Gs("."+Us,t,aa)))}static findFromDOM(t){var e;let i=t.querySelector(".cm-content"),s=i&&K.get(i)||K.get(t);
+return((e=s?.rootView)===null||e===void 0?void 0:e.view)||null}};E.styleModule=si;E.inputHandler=Il;E.clipboardInputFilter=
+er;E.clipboardOutputFilter=ir;E.scrollHandler=Vl;E.focusChangeEffect=Nl;E.perLineTextDirection=Hl;E.exceptionSink=Rl;E.updateListener=
+Bs;E.editable=Yt;E.mouseSelectionStyle=Pl;E.dragMovesSelection=Ol;E.clickAddsSelectionRange=El;E.decorations=yi;E.outerDecorations=
+ql;E.atomicRanges=Si;E.bidiIsolatedRanges=Kl;E.scrollMargins=jl;E.darkTheme=$s;E.cspNonce=B.define({combine:n=>n.length?
+n[0]:""});E.contentAttributes=nr;E.editorAttributes=Wl;E.lineWrapping=E.contentAttributes.of({class:"cm-lineWrapping"});
+E.announce=j.define();var Mc=4096,al={},vn=class n{constructor(t,e,i,s,r,o){this.from=t,this.to=e,this.dir=i,this.isolates=
 s,this.fresh=r,this.order=o}static update(t,e){if(e.empty&&!t.some(r=>r.fresh))return t;let i=[],s=t.length?t[t.length-1].
 dir:X.LTR;for(let r=Math.max(0,t.length-10);r<t.length;r++){let o=t[r];o.dir==s&&!e.touchesRange(o.from,o.to)&&i.push(new n(
-e.mapPos(o.from,1),e.mapPos(o.to,-1),o.dir,o.isolates,!1,o.order))}return i}};function al(n,t,e){for(let i=n.state.facet(
-t),s=i.length-1;s>=0;s--){let r=i[s],o=typeof r=="function"?r(n):r;o&&As(o,e)}return e}var Ac=M.mac?"mac":M.windows?"win":
-M.linux?"linux":"key";function Mc(n,t){let e=n.split(/-(?!$)/),i=e[e.length-1];i=="Space"&&(i=" ");let s,r,o,l;for(let a=0;a<
+e.mapPos(o.from,1),e.mapPos(o.to,-1),o.dir,o.isolates,!1,o.order))}return i}};function hl(n,t,e){for(let i=n.state.facet(
+t),s=i.length-1;s>=0;s--){let r=i[s],o=typeof r=="function"?r(n):r;o&&As(o,e)}return e}var Dc=M.mac?"mac":M.windows?"win":
+M.linux?"linux":"key";function Lc(n,t){let e=n.split(/-(?!$)/),i=e[e.length-1];i=="Space"&&(i=" ");let s,r,o,l;for(let a=0;a<
 e.length-1;++a){let f=e[a];if(/^(cmd|meta|m)$/i.test(f))l=!0;else if(/^a(lt)?$/i.test(f))s=!0;else if(/^(c|ctrl|control)$/i.
 test(f))r=!0;else if(/^s(hift)?$/i.test(f))o=!0;else if(/^mod$/i.test(f))t=="mac"?l=!0:r=!0;else throw new Error("Unreco\
 gnized modifier name: "+f)}return s&&(i="Alt-"+i),r&&(i="Ctrl-"+i),l&&(i="Meta-"+i),o&&(i="Shift-"+i),i}function an(n,t,e){
-return t.altKey&&(n="Alt-"+n),t.ctrlKey&&(n="Ctrl-"+n),t.metaKey&&(n="Meta-"+n),e!==!1&&t.shiftKey&&(n="Shift-"+n),n}var Dc=ii.
-default(E.domEventHandlers({keydown(n,t){return Ec(Tc(t.state),n,t,"editor")}})),rr=B.define({enables:Dc}),hl=new WeakMap;
-function Tc(n){let t=n.facet(rr),e=hl.get(t);return e||hl.set(t,e=Bc(t.reduce((i,s)=>i.concat(s),[]))),e}var ie=null,Lc=4e3;function Bc(n,t=Ac){let e=Object.create(null),i=Object.create(null),s=(o,l)=>{let a=i[o];if(a==null)i[o]=
+return t.altKey&&(n="Alt-"+n),t.ctrlKey&&(n="Ctrl-"+n),t.metaKey&&(n="Meta-"+n),e!==!1&&t.shiftKey&&(n="Shift-"+n),n}var Tc=ii.
+default(E.domEventHandlers({keydown(n,t){return Pc(Bc(t.state),n,t,"editor")}})),rr=B.define({enables:Tc}),fl=new WeakMap;
+function Bc(n){let t=n.facet(rr),e=fl.get(t);return e||fl.set(t,e=Oc(t.reduce((i,s)=>i.concat(s),[]))),e}var ie=null,Ec=4e3;function Oc(n,t=Dc){let e=Object.create(null),i=Object.create(null),s=(o,l)=>{let a=i[o];if(a==null)i[o]=
 l;else if(a!=l)throw new Error("Key binding "+o+" is used both as a regular binding and as a multi-stroke prefix")},r=(o,l,a,f,h)=>{
-var c,u;let d=e[o]||(e[o]=Object.create(null)),p=l.split(/ (?!$)/).map(b=>Mc(b,t));for(let b=1;b<p.length;b++){let S=p.slice(
-0,b).join(" ");s(S,!0),d[S]||(d[S]={preventDefault:!0,stopPropagation:!1,run:[C=>{let T=ie={view:C,prefix:S,scope:o};return setTimeout(
-()=>{ie==T&&(ie=null)},Lc),!0}]})}let m=p.join(" ");s(m,!1);let g=d[m]||(d[m]={preventDefault:!1,stopPropagation:!1,run:((u=
+var c,u;let d=e[o]||(e[o]=Object.create(null)),p=l.split(/ (?!$)/).map(b=>Lc(b,t));for(let b=1;b<p.length;b++){let k=p.slice(
+0,b).join(" ");s(k,!0),d[k]||(d[k]={preventDefault:!0,stopPropagation:!1,run:[x=>{let L=ie={view:x,prefix:k,scope:o};return setTimeout(
+()=>{ie==L&&(ie=null)},Ec),!0}]})}let m=p.join(" ");s(m,!1);let g=d[m]||(d[m]={preventDefault:!1,stopPropagation:!1,run:((u=
 (c=d._any)===null||c===void 0?void 0:c.run)===null||u===void 0?void 0:u.slice())||[]});a&&g.run.push(a),f&&(g.preventDefault=
 !0),h&&(g.stopPropagation=!0)};for(let o of n){let l=o.scope?o.scope.split(" "):["editor"];if(o.any)for(let f of l){let h=e[f]||
 (e[f]=Object.create(null));h._any||(h._any={preventDefault:!1,stopPropagation:!1,run:[]});let{any:c}=o;for(let u in h)h[u].
 run.push(d=>c(d,Js))}let a=o[t]||o.key;if(a)for(let f of l)r(f,a,o.run,o.preventDefault,o.stopPropagation),o.shift&&r(f,
-"Shift-"+a,o.shift,o.preventDefault,o.stopPropagation)}return e}var Js=null;function Ec(n,t,e,i){Js=t;let s=Oo(t),r=go(s,
-0),o=bo(r)==s.length&&s!=" ",l="",a=!1,f=!1,h=!1;ie&&ie.view==e&&ie.scope==i&&(l=ie.prefix+" ",Ql.indexOf(t.keyCode)<0&&
+"Shift-"+a,o.shift,o.preventDefault,o.stopPropagation)}return e}var Js=null;function Pc(n,t,e,i){Js=t;let s=Po(t),r=bo(s,
+0),o=yo(r)==s.length&&s!=" ",l="",a=!1,f=!1,h=!1;ie&&ie.view==e&&ie.scope==i&&(l=ie.prefix+" ",Zl.indexOf(t.keyCode)<0&&
 (f=!0,ie=null));let c=new Set,u=g=>{if(g){for(let b of g.run)if(!c.has(b)&&(c.add(b),b(e)))return g.stopPropagation&&(h=
 !0),!0;g.preventDefault&&(g.stopPropagation&&(h=!0),f=!0)}return!1},d=n[i],p,m;return d&&(u(d[l+an(s,t,!o)])?a=!0:o&&(t.
 altKey||t.metaKey||t.ctrlKey)&&!(M.windows&&t.ctrlKey&&t.altKey)&&!(M.mac&&t.altKey&&!(t.ctrlKey||t.metaKey))&&(p=Jt[t.keyCode])&&
@@ -1605,28 +1605,28 @@ this.className=t,this.left=e,this.top=i,this.width=s,this.height=r}draw(){let t=
 this.className,this.adjust(t),t}update(t,e){return e.className!=this.className?!1:(this.adjust(t),!0)}adjust(t){t.style.
 left=this.left+"px",t.style.top=this.top+"px",this.width!=null&&(t.style.width=this.width+"px"),t.style.height=this.height+
 "px"}eq(t){return this.left==t.left&&this.top==t.top&&this.width==t.width&&this.height==t.height&&this.className==t.className}static forRange(t,e,i){
-if(i.empty){let s=t.coordsAtPos(i.head,i.assoc||1);if(!s)return[];let r=aa(t);return[new n(e,s.left-r.left,s.top-r.top,null,
-s.bottom-s.top)]}else return Oc(t,e,i)}};function aa(n){let t=n.scrollDOM.getBoundingClientRect();return{left:(n.textDirection==
+if(i.empty){let s=t.coordsAtPos(i.head,i.assoc||1);if(!s)return[];let r=ha(t);return[new n(e,s.left-r.left,s.top-r.top,null,
+s.bottom-s.top)]}else return Rc(t,e,i)}};function ha(n){let t=n.scrollDOM.getBoundingClientRect();return{left:(n.textDirection==
 X.LTR?t.left:t.right-n.scrollDOM.clientWidth*n.scaleX)-n.scrollDOM.scrollLeft*n.scaleX,top:t.top-n.scrollDOM.scrollTop*n.
-scaleY}}function fl(n,t,e,i){let s=n.coordsAtPos(t,e*2);if(!s)return i;let r=n.dom.getBoundingClientRect(),o=(s.top+s.bottom)/
+scaleY}}function cl(n,t,e,i){let s=n.coordsAtPos(t,e*2);if(!s)return i;let r=n.dom.getBoundingClientRect(),o=(s.top+s.bottom)/
 2,l=n.posAtCoords({x:r.left+1,y:o}),a=n.posAtCoords({x:r.right-1,y:o});return l==null||a==null?i:{from:Math.max(i.from,Math.
-min(l,a)),to:Math.min(i.to,Math.max(l,a))}}function Oc(n,t,e){if(e.to<=n.viewport.from||e.from>=n.viewport.to)return[];let i=Math.
+min(l,a)),to:Math.min(i.to,Math.max(l,a))}}function Rc(n,t,e){if(e.to<=n.viewport.from||e.from>=n.viewport.to)return[];let i=Math.
 max(e.from,n.viewport.from),s=Math.min(e.to,n.viewport.to),r=n.textDirection==X.LTR,o=n.contentDOM,l=o.getBoundingClientRect(),
-a=aa(n),f=o.querySelector(".cm-line"),h=f&&window.getComputedStyle(f),c=l.left+(h?parseInt(h.paddingLeft)+Math.min(0,parseInt(
+a=ha(n),f=o.querySelector(".cm-line"),h=f&&window.getComputedStyle(f),c=l.left+(h?parseInt(h.paddingLeft)+Math.min(0,parseInt(
 h.textIndent)):0),u=l.right-(h?parseInt(h.paddingRight):0),d=Os(n,i,1),p=Os(n,s,-1),m=d.type==pt.Text?d:null,g=p.type==pt.
-Text?p:null;if(m&&(n.lineWrapping||d.widgetLineBreaks)&&(m=fl(n,i,1,m)),g&&(n.lineWrapping||p.widgetLineBreaks)&&(g=fl(n,
-s,-1,g)),m&&g&&m.from==g.from&&m.to==g.to)return S(C(e.from,e.to,m));{let w=m?C(e.from,null,m):T(d,!1),D=g?C(null,e.to,g):
-T(p,!0),A=[];return(m||d).to<(g||p).from-(m&&g?1:0)||d.widgetLineBreaks>1&&w.bottom+n.defaultLineHeight/2<D.top?A.push(b(
-c,w.bottom,u,D.top)):w.bottom<D.top&&n.elementAtHeight((w.bottom+D.top)/2).type==pt.Text&&(w.bottom=D.top=(w.bottom+D.top)/
-2),S(w).concat(A).concat(S(D))}function b(w,D,A,H){return new ki(t,w-a.left,D-a.top,A-w,H-D)}function S({top:w,bottom:D,
-horizontal:A}){let H=[];for(let R=0;R<A.length;R+=2)H.push(b(A[R],w,A[R+1],D));return H}function C(w,D,A){let H=1e9,R=-1e9,
+Text?p:null;if(m&&(n.lineWrapping||d.widgetLineBreaks)&&(m=cl(n,i,1,m)),g&&(n.lineWrapping||p.widgetLineBreaks)&&(g=cl(n,
+s,-1,g)),m&&g&&m.from==g.from&&m.to==g.to)return k(x(e.from,e.to,m));{let v=m?x(e.from,null,m):L(d,!1),D=g?x(null,e.to,g):
+L(p,!0),A=[];return(m||d).to<(g||p).from-(m&&g?1:0)||d.widgetLineBreaks>1&&v.bottom+n.defaultLineHeight/2<D.top?A.push(b(
+c,v.bottom,u,D.top)):v.bottom<D.top&&n.elementAtHeight((v.bottom+D.top)/2).type==pt.Text&&(v.bottom=D.top=(v.bottom+D.top)/
+2),k(v).concat(A).concat(k(D))}function b(v,D,A,H){return new ki(t,v-a.left,D-a.top,A-v,H-D)}function k({top:v,bottom:D,
+horizontal:A}){let H=[];for(let R=0;R<A.length;R+=2)H.push(b(A[R],v,A[R+1],D));return H}function x(v,D,A){let H=1e9,R=-1e9,
 W=[];function P(F,$,ot,ut,Rt){let et=n.coordsAtPos(F,F==A.to?-2:2),bt=n.coordsAtPos(ot,ot==A.from?2:-2);!et||!bt||(H=Math.
 min(et.top,bt.top,H),R=Math.max(et.bottom,bt.bottom,R),Rt==X.LTR?W.push(r&&$?c:et.left,r&&ut?u:bt.right):W.push(!r&&ut?c:
-bt.left,!r&&$?u:et.right))}let L=w??A.from,V=D??A.to;for(let F of n.visibleRanges)if(F.to>L&&F.from<V)for(let $=Math.max(
-F.from,L),ot=Math.min(F.to,V);;){let ut=n.state.doc.lineAt($);for(let Rt of n.bidiSpans(ut)){let et=Rt.from+ut.from,bt=Rt.
-to+ut.from;if(et>=ot)break;bt>$&&P(Math.max(et,$),w==null&&et<=L,Math.min(bt,ot),D==null&&bt>=V,Rt.dir)}if($=ut.to+1,$>=
-ot)break}return W.length==0&&P(L,w==null,V,D==null,n.textDirection),{top:H,bottom:R,horizontal:W}}function T(w,D){let A=l.
-top+(D?w.top:w.bottom);return{top:A,bottom:A,horizontal:[]}}}function Pc(n,t){return n.constructor==t.constructor&&n.eq(
+bt.left,!r&&$?u:et.right))}let T=v??A.from,V=D??A.to;for(let F of n.visibleRanges)if(F.to>T&&F.from<V)for(let $=Math.max(
+F.from,T),ot=Math.min(F.to,V);;){let ut=n.state.doc.lineAt($);for(let Rt of n.bidiSpans(ut)){let et=Rt.from+ut.from,bt=Rt.
+to+ut.from;if(et>=ot)break;bt>$&&P(Math.max(et,$),v==null&&et<=T,Math.min(bt,ot),D==null&&bt>=V,Rt.dir)}if($=ut.to+1,$>=
+ot)break}return W.length==0&&P(T,v==null,V,D==null,n.textDirection),{top:H,bottom:R,horizontal:W}}function L(v,D){let A=l.
+top+(D?v.top:v.bottom);return{top:A,bottom:A,horizontal:[]}}}function Ic(n,t){return n.constructor==t.constructor&&n.eq(
 t)}var Ys=class{constructor(t,e){this.view=t,this.layer=e,this.drawn=[],this.scaleX=1,this.scaleY=1,this.measureReq={read:this.
 measure.bind(this),write:this.draw.bind(this)},this.dom=t.scrollDOM.appendChild(document.createElement("div")),this.dom.
 classList.add("cm-layer"),e.above&&this.dom.classList.add("cm-layer-above"),e.class&&this.dom.classList.add(e.class),this.
@@ -1636,41 +1636,41 @@ dom)||t.geometryChanged)&&(this.scale(),t.view.requestMeasure(this.measureReq))}
 !1&&t.requestMeasure(this.measureReq)}setOrder(t){let e=0,i=t.facet(un);for(;e<i.length&&i[e]!=this.layer;)e++;this.dom.
 style.zIndex=String((this.layer.above?150:-1)-e)}measure(){return this.layer.markers(this.view)}scale(){let{scaleX:t,scaleY:e}=this.
 view;(t!=this.scaleX||e!=this.scaleY)&&(this.scaleX=t,this.scaleY=e,this.dom.style.transform=`scale(${1/t}, ${1/e})`)}draw(t){
-if(t.length!=this.drawn.length||t.some((e,i)=>!Pc(e,this.drawn[i]))){let e=this.dom.firstChild,i=0;for(let s of t)s.update&&
+if(t.length!=this.drawn.length||t.some((e,i)=>!Ic(e,this.drawn[i]))){let e=this.dom.firstChild,i=0;for(let s of t)s.update&&
 e&&s.constructor&&this.drawn[i].constructor&&s.update(e,this.drawn[i])?(e=e.nextSibling,i++):this.dom.insertBefore(s.draw(),
 e);for(;e;){let s=e.nextSibling;e.remove(),e=s}this.drawn=t,M.safari&&M.safari_version>=26&&(this.dom.style.display=this.
 dom.firstChild?"":"none")}}destroy(){this.layer.destroy&&this.layer.destroy(this.dom,this.view),this.dom.remove()}},un=B.
-define();function ha(n){return[qt.define(t=>new Ys(t,n)),un.of(n)]}var wi=B.define({combine(n){return ni(n,{cursorBlinkRate:1200,
-drawRangeCursor:!0},{cursorBlinkRate:(t,e)=>Math.min(t,e),drawRangeCursor:(t,e)=>t||e})}});function fa(n={}){return[wi.of(
-n),Rc,Ic,Nc,Hl.of(!0)]}function ca(n){return n.startState.facet(wi)!=n.state.facet(wi)}var Rc=ha({above:!0,markers(n){let{state:t}=n,e=t.facet(
+define();function fa(n){return[qt.define(t=>new Ys(t,n)),un.of(n)]}var wi=B.define({combine(n){return ni(n,{cursorBlinkRate:1200,
+drawRangeCursor:!0},{cursorBlinkRate:(t,e)=>Math.min(t,e),drawRangeCursor:(t,e)=>t||e})}});function ca(n={}){return[wi.of(
+n),Nc,Hc,Fc,Fl.of(!0)]}function ua(n){return n.startState.facet(wi)!=n.state.facet(wi)}var Nc=fa({above:!0,markers(n){let{state:t}=n,e=t.facet(
 wi),i=[];for(let s of t.selection.ranges){let r=s==t.selection.main;if(s.empty||e.drawRangeCursor){let o=r?"cm-cursor cm\
--cursor-primary":"cm-cursor cm-cursor-secondary",l=s.empty?s:k.cursor(s.head,s.head>s.anchor?-1:1);for(let a of ki.forRange(
+-cursor-primary":"cm-cursor cm-cursor-secondary",l=s.empty?s:w.cursor(s.head,s.head>s.anchor?-1:1);for(let a of ki.forRange(
 n,o,l))i.push(a)}}return i},update(n,t){n.transactions.some(i=>i.selection)&&(t.style.animationName=t.style.animationName==
-"cm-blink"?"cm-blink2":"cm-blink");let e=ca(n);return e&&cl(n.state,t),n.docChanged||n.selectionSet||e},mount(n,t){cl(t.
-state,n)},class:"cm-cursorLayer"});function cl(n,t){t.style.animationDuration=n.facet(wi).cursorBlinkRate+"ms"}var Ic=ha(
+"cm-blink"?"cm-blink2":"cm-blink");let e=ua(n);return e&&ul(n.state,t),n.docChanged||n.selectionSet||e},mount(n,t){ul(t.
+state,n)},class:"cm-cursorLayer"});function ul(n,t){t.style.animationDuration=n.facet(wi).cursorBlinkRate+"ms"}var Hc=fa(
 {above:!1,markers(n){return n.state.selection.ranges.map(t=>t.empty?[]:ki.forRange(n,"cm-selectionBackground",t)).reduce(
-(t,e)=>t.concat(e))},update(n,t){return n.docChanged||n.selectionSet||n.viewportChanged||ca(n)},class:"cm-selectionLayer"}),
-Nc=ii.highest(E.theme({".cm-line":{"& ::selection, &::selection":{backgroundColor:"transparent !important"},caretColor:"\
+(t,e)=>t.concat(e))},update(n,t){return n.docChanged||n.selectionSet||n.viewportChanged||ua(n)},class:"cm-selectionLayer"}),
+Fc=ii.highest(E.theme({".cm-line":{"& ::selection, &::selection":{backgroundColor:"transparent !important"},caretColor:"\
 transparent !important"},".cm-content":{caretColor:"transparent !important","& :focus":{caretColor:"initial !important",
-"&::selection, & ::selection":{backgroundColor:"Highlight !important"}}}}));var _d=/x/.unicode!=null?"gu":"g";var Qs=class extends Qt{constructor(t){super(),this.content=t}toDOM(t){let e=document.createElement("span");return e.className=
+"&::selection, & ::selection":{backgroundColor:"Highlight !important"}}}}));var Qd=/x/.unicode!=null?"gu":"g";var Qs=class extends Qt{constructor(t){super(),this.content=t}toDOM(t){let e=document.createElement("span");return e.className=
 "cm-placeholder",e.style.pointerEvents="none",e.appendChild(typeof this.content=="string"?document.createTextNode(this.content):
 typeof this.content=="function"?this.content(t):this.content.cloneNode(!0)),e.setAttribute("aria-hidden","true"),e}coordsAt(t){
 let e=t.firstChild?We(t.firstChild):[];if(!e.length)return null;let i=window.getComputedStyle(t.parentNode),s=xi(e[0],i.
 direction!="rtl"),r=parseInt(i.lineHeight);return s.bottom-s.top>r*1.5?{left:s.left,right:s.right,top:s.top,bottom:s.top+
-r}:s}ignoreEvent(){return!1}};function ua(n){let t=qt.fromClass(class{constructor(e){this.view=e,this.placeholder=n?z.set(
+r}:s}ignoreEvent(){return!1}};function da(n){let t=qt.fromClass(class{constructor(e){this.view=e,this.placeholder=n?z.set(
 [z.widget({widget:new Qs(n),side:1}).range(0)]):z.none}get decorations(){return this.view.state.doc.length?z.none:this.placeholder}},
 {decorations:e=>e.decorations});return typeof n=="string"?[t,E.contentAttributes.of({"aria-placeholder":n})]:t}var Zt=class extends Xt{compare(t){return this==t||this.constructor==t.constructor&&this.eq(t)}eq(t){return!1}destroy(t){}};
 Zt.prototype.elementClass="";Zt.prototype.toDOM=void 0;Zt.prototype.mapMode=ft.TrackBefore;Zt.prototype.startSide=Zt.prototype.
-endSide=-1;Zt.prototype.point=!0;var Hc=0,vi=class{constructor(t,e){this.from=t,this.to=e}},O=class{constructor(t={}){this.id=Hc++,this.perNode=!!t.perNode,
+endSide=-1;Zt.prototype.point=!0;var Vc=0,vi=class{constructor(t,e){this.from=t,this.to=e}},O=class{constructor(t={}){this.id=Vc++,this.perNode=!!t.perNode,
 this.deserialize=t.deserialize||(()=>{throw new Error("This node type doesn't define a deserialize function")}),this.combine=
 t.combine||null}add(t){if(this.perNode)throw new RangeError("Can't add per-node props to node types");return typeof t!="\
 function"&&(t=tt.match(t)),e=>{let i=t(e);return i===void 0?null:[this,i]}}};O.closedBy=new O({deserialize:n=>n.split(" ")});
 O.openedBy=new O({deserialize:n=>n.split(" ")});O.group=new O({deserialize:n=>n.split(" ")});O.isolate=new O({deserialize:n=>{
 if(n&&n!="rtl"&&n!="ltr"&&n!="auto")throw new RangeError("Invalid value for isolate: "+n);return n||"auto"}});O.contextHash=
 new O({perNode:!0});O.lookAhead=new O({perNode:!0});O.mounted=new O({perNode:!0});var Se=class{constructor(t,e,i,s=!1){this.
-tree=t,this.overlay=e,this.parser=i,this.bracketed=s}static get(t){return t&&t.props&&t.props[O.mounted.id]}},Fc=Object.
+tree=t,this.overlay=e,this.parser=i,this.bracketed=s}static get(t){return t&&t.props&&t.props[O.mounted.id]}},zc=Object.
 create(null),tt=class n{constructor(t,e,i,s=0){this.name=t,this.props=e,this.id=i,this.flags=s}static define(t){let e=t.
-props&&t.props.length?Object.create(null):Fc,i=(t.top?1:0)|(t.skipped?2:0)|(t.error?4:0)|(t.name==null?8:0),s=new n(t.name||
+props&&t.props.length?Object.create(null):zc,i=(t.top?1:0)|(t.skipped?2:0)|(t.error?4:0)|(t.name==null?8:0),s=new n(t.name||
 "",e,t.id,i);if(t.props){for(let r of t.props)if(Array.isArray(r)||(r=r(s)),r){if(r[0].perNode)throw new RangeError("Can\
 't store a per-node prop on a node type");e[r[0].id]=r[1]}}return s}prop(t){return this.props[t.id]}get isTop(){return(this.
 flags&1)>0}get isSkipped(){return(this.flags&2)>0}get isError(){return(this.flags&4)>0}get isAnonymous(){return(this.flags&
@@ -1680,67 +1680,67 @@ prop(O.group),r=-1;r<(s?s.length:0);r++){let o=e[r<0?i.name:s[r]];if(o)return o}
 0,8);var Ke=class n{constructor(t){this.types=t;for(let e=0;e<t.length;e++)if(t[e].id!=e)throw new RangeError("Node type\
  ids should correspond to array positions when creating a node set")}extend(...t){let e=[];for(let i of this.types){let s=null;
 for(let r of t){let o=r(i);if(o){s||(s=Object.assign({},i.props));let l=o[1],a=o[0];a.combine&&a.id in s&&(l=a.combine(s[a.
-id],l)),s[a.id]=l}}e.push(s?new tt(i.name,s,i.id,i.flags):i)}return new n(e)}},Mn=new WeakMap,da=new WeakMap,J;(function(n){
+id],l)),s[a.id]=l}}e.push(s?new tt(i.name,s,i.id,i.flags):i)}return new n(e)}},Mn=new WeakMap,pa=new WeakMap,Y;(function(n){
 n[n.ExcludeBuffers=1]="ExcludeBuffers",n[n.IncludeAnonymous=2]="IncludeAnonymous",n[n.IgnoreMounts=4]="IgnoreMounts",n[n.
-IgnoreOverlays=8]="IgnoreOverlays",n[n.EnterBracketed=16]="EnterBracketed"})(J||(J={}));var _=class n{constructor(t,e,i,s,r){
+IgnoreOverlays=8]="IgnoreOverlays",n[n.EnterBracketed=16]="EnterBracketed"})(Y||(Y={}));var _=class n{constructor(t,e,i,s,r){
 if(this.type=t,this.children=e,this.positions=i,this.length=s,this.props=null,r&&r.length){this.props=Object.create(null);
 for(let[o,l]of r)this.props[typeof o=="number"?o:o.id]=l}}toString(){let t=Se.get(this);if(t&&!t.overlay)return t.tree.toString();
 let e="";for(let i of this.children){let s=i.toString();s&&(e&&(e+=","),e+=s)}return this.type.name?(/\W/.test(this.type.
 name)&&!this.type.isError?JSON.stringify(this.type.name):this.type.name)+(e.length?"("+e+")":""):e}cursor(t=0){return new Mi(
 this.topNode,t)}cursorAt(t,e=0,i=0){let s=Mn.get(this)||this.topNode,r=new Mi(s);return r.moveTo(t,e),Mn.set(this,r._tree),
 r}get topNode(){return new Kt(this,0,0,null)}resolve(t,e=0){let i=Ci(Mn.get(this)||this.topNode,t,e,!1);return Mn.set(this,
-i),i}resolveInner(t,e=0){let i=Ci(da.get(this)||this.topNode,t,e,!0);return da.set(this,i),i}resolveStack(t,e=0){return Vc(
-this,t,e)}iterate(t){let{enter:e,leave:i,from:s=0,to:r=this.length}=t,o=t.mode||0,l=(o&J.IncludeAnonymous)>0;for(let a=this.
-cursor(o|J.IncludeAnonymous);;){let f=!1;if(a.from<=r&&a.to>=s&&(!l&&a.type.isAnonymous||e(a)!==!1)){if(a.firstChild())continue;
+i),i}resolveInner(t,e=0){let i=Ci(pa.get(this)||this.topNode,t,e,!0);return pa.set(this,i),i}resolveStack(t,e=0){return Wc(
+this,t,e)}iterate(t){let{enter:e,leave:i,from:s=0,to:r=this.length}=t,o=t.mode||0,l=(o&Y.IncludeAnonymous)>0;for(let a=this.
+cursor(o|Y.IncludeAnonymous);;){let f=!1;if(a.from<=r&&a.to>=s&&(!l&&a.type.isAnonymous||e(a)!==!1)){if(a.firstChild())continue;
 f=!0}for(;f&&i&&(l||!a.type.isAnonymous)&&i(a),!a.nextSibling();){if(!a.parent())return;f=!0}}}prop(t){return t.perNode?
 this.props?this.props[t.id]:void 0:this.type.prop(t)}get propValues(){let t=[];if(this.props)for(let e in this.props)t.push(
 [+e,this.props[e]]);return t}balance(t={}){return this.children.length<=8?this:ur(tt.none,this.children,this.positions,0,
 this.children.length,0,this.length,(e,i,s)=>new n(this.type,e,i,s,this.propValues),t.makeTree||((e,i,s)=>new n(tt.none,e,
-i,s)))}static build(t){return zc(t)}};_.empty=new _(tt.none,[],[],0);var or=class n{constructor(t,e){this.buffer=t,this.
+i,s)))}static build(t){return qc(t)}};_.empty=new _(tt.none,[],[],0);var or=class n{constructor(t,e){this.buffer=t,this.
 index=e}get id(){return this.buffer[this.index-4]}get start(){return this.buffer[this.index-3]}get end(){return this.buffer[this.
 index-2]}get size(){return this.buffer[this.index-1]}get pos(){return this.index}next(){this.index-=4}fork(){return new n(
 this.buffer,this.index)}},le=class n{constructor(t,e,i){this.buffer=t,this.length=e,this.set=i}get type(){return tt.none}toString(){
 let t=[];for(let e=0;e<this.buffer.length;)t.push(this.childString(e)),e=this.buffer[e+3];return t.join(",")}childString(t){
 let e=this.buffer[t],i=this.buffer[t+3],s=this.set.types[e],r=s.name;if(/\W/.test(r)&&!s.isError&&(r=JSON.stringify(r)),
 t+=4,i==t)return r;let o=[];for(;t<i;)o.push(this.childString(t)),t=this.buffer[t+3];return r+"("+o.join(",")+")"}findChild(t,e,i,s,r){
-let{buffer:o}=this,l=-1;for(let a=t;a!=e&&!(ga(r,s,o[a+1],o[a+2])&&(l=a,i>0));a=o[a+3]);return l}slice(t,e,i){let s=this.
+let{buffer:o}=this,l=-1;for(let a=t;a!=e&&!(ba(r,s,o[a+1],o[a+2])&&(l=a,i>0));a=o[a+3]);return l}slice(t,e,i){let s=this.
 buffer,r=new Uint16Array(e-t),o=0;for(let l=t,a=0;l<e;){r[a++]=s[l++],r[a++]=s[l++]-i;let f=r[a++]=s[l++]-i;r[a++]=s[l++]-
-t,o=Math.max(o,f)}return new n(r,o,this.set)}};function ga(n,t,e,i){switch(n){case-2:return e<t;case-1:return i>=t&&e<t;case 0:
+t,o=Math.max(o,f)}return new n(r,o,this.set)}};function ba(n,t,e,i){switch(n){case-2:return e<t;case-1:return i>=t&&e<t;case 0:
 return e<t&&i>t;case 1:return e<=t&&i>t;case 2:return i>t;case 4:return!0}}function Ci(n,t,e,i){for(var s;n.from==n.to||
 (e<1?n.from>=t:n.from>t)||(e>-1?n.to<=t:n.to<t);){let o=!i&&n instanceof Kt&&n.index<0?null:n.parent;if(!o)return n;n=o}
-let r=i?0:J.IgnoreOverlays;if(i)for(let o=n,l=o.parent;l;o=l,l=o.parent)o instanceof Kt&&o.index<0&&((s=l.enter(t,e,r))===
-null||s===void 0?void 0:s.from)!=o.from&&(n=l);for(;;){let o=n.enter(t,e,r);if(!o)return n;n=o}}var Tn=class{cursor(t=0){
-return new Mi(this,t)}getChild(t,e=null,i=null){let s=pa(this,t,e,i);return s.length?s[0]:null}getChildren(t,e=null,i=null){
-return pa(this,t,e,i)}resolve(t,e=0){return Ci(this,t,e,!1)}resolveInner(t,e=0){return Ci(this,t,e,!0)}matchContext(t){return lr(
+let r=i?0:Y.IgnoreOverlays;if(i)for(let o=n,l=o.parent;l;o=l,l=o.parent)o instanceof Kt&&o.index<0&&((s=l.enter(t,e,r))===
+null||s===void 0?void 0:s.from)!=o.from&&(n=l);for(;;){let o=n.enter(t,e,r);if(!o)return n;n=o}}var Ln=class{cursor(t=0){
+return new Mi(this,t)}getChild(t,e=null,i=null){let s=ma(this,t,e,i);return s.length?s[0]:null}getChildren(t,e=null,i=null){
+return ma(this,t,e,i)}resolve(t,e=0){return Ci(this,t,e,!1)}resolveInner(t,e=0){return Ci(this,t,e,!0)}matchContext(t){return lr(
 this.parent,t)}enterUnfinishedNodesBefore(t){let e=this.childBefore(t),i=this;for(;e;){let s=e.lastChild;if(!s||s.to!=e.
 to)break;s.type.isError&&s.from==s.to?(i=e,e=s.prevSibling):e=s}return i}get node(){return this}get next(){return this.parent}},
-Kt=class n extends Tn{constructor(t,e,i,s){super(),this._tree=t,this.from=e,this.index=i,this._parent=s}get type(){return this.
+Kt=class n extends Ln{constructor(t,e,i,s){super(),this._tree=t,this.from=e,this.index=i,this._parent=s}get type(){return this.
 _tree.type}get name(){return this._tree.type.name}get to(){return this.from+this._tree.length}nextChild(t,e,i,s,r=0){for(let o=this;;){
-for(let{children:l,positions:a}=o._tree,f=e>0?l.length:-1;t!=f;t+=e){let h=l[t],c=a[t]+o.from,u;if(!(!(r&J.EnterBracketed&&
-h instanceof _&&(u=Se.get(h))&&!u.overlay&&u.bracketed&&i>=c&&i<=c+h.length)&&!ga(s,i,c,c+h.length))){if(h instanceof le){
-if(r&J.ExcludeBuffers)continue;let d=h.findChild(0,h.buffer.length,e,i-c,s);if(d>-1)return new Ai(new ar(o,h,t,c),null,d)}else if(r&
-J.IncludeAnonymous||!h.type.isAnonymous||cr(h)){let d;if(!(r&J.IgnoreMounts)&&(d=Se.get(h))&&!d.overlay)return new n(d.tree,
-c,t,o);let p=new n(h,c,t,o);return r&J.IncludeAnonymous||!p.type.isAnonymous?p:p.nextChild(e<0?h.children.length-1:0,e,i,
-s,r)}}}if(r&J.IncludeAnonymous||!o.type.isAnonymous||(o.index>=0?t=o.index+e:t=e<0?-1:o._parent._tree.children.length,o=
+for(let{children:l,positions:a}=o._tree,f=e>0?l.length:-1;t!=f;t+=e){let h=l[t],c=a[t]+o.from,u;if(!(!(r&Y.EnterBracketed&&
+h instanceof _&&(u=Se.get(h))&&!u.overlay&&u.bracketed&&i>=c&&i<=c+h.length)&&!ba(s,i,c,c+h.length))){if(h instanceof le){
+if(r&Y.ExcludeBuffers)continue;let d=h.findChild(0,h.buffer.length,e,i-c,s);if(d>-1)return new Ai(new ar(o,h,t,c),null,d)}else if(r&
+Y.IncludeAnonymous||!h.type.isAnonymous||cr(h)){let d;if(!(r&Y.IgnoreMounts)&&(d=Se.get(h))&&!d.overlay)return new n(d.tree,
+c,t,o);let p=new n(h,c,t,o);return r&Y.IncludeAnonymous||!p.type.isAnonymous?p:p.nextChild(e<0?h.children.length-1:0,e,i,
+s,r)}}}if(r&Y.IncludeAnonymous||!o.type.isAnonymous||(o.index>=0?t=o.index+e:t=e<0?-1:o._parent._tree.children.length,o=
 o._parent,!o))return null}}get firstChild(){return this.nextChild(0,1,0,4)}get lastChild(){return this.nextChild(this._tree.
 children.length-1,-1,0,4)}childAfter(t){return this.nextChild(0,1,t,2)}childBefore(t){return this.nextChild(this._tree.children.
-length-1,-1,t,-2)}prop(t){return this._tree.prop(t)}enter(t,e,i=0){let s;if(!(i&J.IgnoreOverlays)&&(s=Se.get(this._tree))&&
-s.overlay){let r=t-this.from,o=i&J.EnterBracketed&&s.bracketed;for(let{from:l,to:a}of s.overlay)if((e>0||o?l<=r:l<r)&&(e<
+length-1,-1,t,-2)}prop(t){return this._tree.prop(t)}enter(t,e,i=0){let s;if(!(i&Y.IgnoreOverlays)&&(s=Se.get(this._tree))&&
+s.overlay){let r=t-this.from,o=i&Y.EnterBracketed&&s.bracketed;for(let{from:l,to:a}of s.overlay)if((e>0||o?l<=r:l<r)&&(e<
 0||o?a>=r:a>r))return new n(s.tree,s.overlay[0].from+this.from,-1,this)}return this.nextChild(0,1,t,e,i)}nextSignificantParent(){
 let t=this;for(;t.type.isAnonymous&&t._parent;)t=t._parent;return t}get parent(){return this._parent?this._parent.nextSignificantParent():
 null}get nextSibling(){return this._parent&&this.index>=0?this._parent.nextChild(this.index+1,1,0,4):null}get prevSibling(){
 return this._parent&&this.index>=0?this._parent.nextChild(this.index-1,-1,0,4):null}get tree(){return this._tree}toTree(){
-return this._tree}toString(){return this._tree.toString()}};function pa(n,t,e,i){let s=n.cursor(),r=[];if(!s.firstChild())
+return this._tree}toString(){return this._tree.toString()}};function ma(n,t,e,i){let s=n.cursor(),r=[];if(!s.firstChild())
 return r;if(e!=null){for(let o=!1;!o;)if(o=s.type.is(e),!s.nextSibling())return r}for(;;){if(i!=null&&s.type.is(i))return r;
 if(s.type.is(t)&&r.push(s.node),!s.nextSibling())return i==null?r:[]}}function lr(n,t,e=t.length-1){for(let i=n;e>=0;i=i.
 parent){if(!i)return!1;if(!i.type.isAnonymous){if(t[e]&&t[e]!=i.name)return!1;e--}}return!0}var ar=class{constructor(t,e,i,s){
-this.parent=t,this.buffer=e,this.index=i,this.start=s}},Ai=class n extends Tn{get name(){return this.type.name}get from(){
+this.parent=t,this.buffer=e,this.index=i,this.start=s}},Ai=class n extends Ln{get name(){return this.type.name}get from(){
 return this.context.start+this.context.buffer.buffer[this.index+1]}get to(){return this.context.start+this.context.buffer.
 buffer[this.index+2]}constructor(t,e,i){super(),this.context=t,this._parent=e,this.index=i,this.type=t.buffer.set.types[t.
 buffer.buffer[i]]}child(t,e,i){let{buffer:s}=this.context,r=s.findChild(this.index+4,s.buffer[this.index+3],t,e-this.context.
 start,i);return r<0?null:new n(this.context,this,r)}get firstChild(){return this.child(1,0,4)}get lastChild(){return this.
 child(-1,0,4)}childAfter(t){return this.child(1,t,2)}childBefore(t){return this.child(-1,t,-2)}prop(t){return this.type.
-prop(t)}enter(t,e,i=0){if(i&J.ExcludeBuffers)return null;let{buffer:s}=this.context,r=s.findChild(this.index+4,s.buffer[this.
+prop(t)}enter(t,e,i=0){if(i&Y.ExcludeBuffers)return null;let{buffer:s}=this.context,r=s.findChild(this.index+4,s.buffer[this.
 index+3],e>0?1:-1,t-this.context.start,e);return r<0?null:new n(this.context,this,r)}get parent(){return this._parent||this.
 context.parent.nextSignificantParent()}externalSibling(t){return this._parent?null:this.context.parent.nextChild(this.context.
 index+t,t,0,4)}get nextSibling(){let{buffer:t}=this.context,e=t.buffer[this.index+3];return e<(this._parent?t.buffer[this.
@@ -1748,14 +1748,14 @@ _parent.index+3]:t.buffer.length)?new n(this.context,this._parent,e):this.extern
 context,e=this._parent?this._parent.index+4:0;return this.index==e?this.externalSibling(-1):new n(this.context,this._parent,
 t.findChild(e,this.index,-1,0,4))}get tree(){return null}toTree(){let t=[],e=[],{buffer:i}=this.context,s=this.index+4,r=i.
 buffer[this.index+3];if(r>s){let o=i.buffer[this.index+1];t.push(i.slice(s,r,o)),e.push(0)}return new _(this.type,t,e,this.
-to-this.from)}toString(){return this.context.buffer.childString(this.index)}};function ba(n){if(!n.length)return null;let t=0,
+to-this.from)}toString(){return this.context.buffer.childString(this.index)}};function ya(n){if(!n.length)return null;let t=0,
 e=n[0];for(let r=1;r<n.length;r++){let o=n[r];(o.from>e.from||o.to<e.to)&&(e=o,t=r)}let i=e instanceof Kt&&e.index<0?null:
 e.parent,s=n.slice();return i?s[t]=i:s.splice(t,1),new hr(s,e)}var hr=class{constructor(t,e){this.heads=t,this.node=e}get next(){
-return ba(this.heads)}};function Vc(n,t,e){let i=n.resolveInner(t,e),s=null;for(let r=i instanceof Kt?i:i.context.parent;r;r=
+return ya(this.heads)}};function Wc(n,t,e){let i=n.resolveInner(t,e),s=null;for(let r=i instanceof Kt?i:i.context.parent;r;r=
 r.parent)if(r.index<0){let o=r.parent;(s||(s=[i])).push(o.resolve(t,e)),r=o}else{let o=Se.get(r.tree);if(o&&o.overlay&&o.
 overlay[0].from<=t&&o.overlay[o.overlay.length-1].to>=t){let l=new Kt(o.tree,o.overlay[0].from+r.from,-1,r);(s||(s=[i])).
-push(Ci(l,t,e,!1))}}return s?ba(s):i}var Mi=class{get name(){return this.type.name}constructor(t,e=0){if(this.buffer=null,
-this.stack=[],this.index=0,this.bufferNode=null,this.mode=e&~J.EnterBracketed,t instanceof Kt)this.yieldNode(t);else{this.
+push(Ci(l,t,e,!1))}}return s?ya(s):i}var Mi=class{get name(){return this.type.name}constructor(t,e=0){if(this.buffer=null,
+this.stack=[],this.index=0,this.bufferNode=null,this.mode=e&~Y.EnterBracketed,t instanceof Kt)this.yieldNode(t);else{this.
 _tree=t.context.parent,this.buffer=t.context;for(let i=t._parent;i;i=i._parent)this.stack.unshift(i.index);this.bufferNode=
 t,this.yieldBuf(t.index)}}yieldNode(t){return t?(this._tree=t,this.type=t.type,this.from=t.from,this.to=t.to,!0):!1}yieldBuf(t,e){
 this.index=t;let{start:i,buffer:s}=this.buffer;return this.type=e||s.set.types[s.buffer[t]],this.from=i+s.buffer[t+1],this.
@@ -1764,10 +1764,10 @@ yieldBuf(t.index,t.type)):!1}toString(){return this.buffer?this.buffer.buffer.ch
 if(!this.buffer)return this.yield(this._tree.nextChild(t<0?this._tree._tree.children.length-1:0,t,e,i,this.mode));let{buffer:s}=this.
 buffer,r=s.findChild(this.index+4,s.buffer[this.index+3],t,e-this.buffer.start,i);return r<0?!1:(this.stack.push(this.index),
 this.yieldBuf(r))}firstChild(){return this.enterChild(1,0,4)}lastChild(){return this.enterChild(-1,0,4)}childAfter(t){return this.
-enterChild(1,t,2)}childBefore(t){return this.enterChild(-1,t,-2)}enter(t,e,i=this.mode){return this.buffer?i&J.ExcludeBuffers?
-!1:this.enterChild(1,t,e):this.yield(this._tree.enter(t,e,i))}parent(){if(!this.buffer)return this.yieldNode(this.mode&J.
+enterChild(1,t,2)}childBefore(t){return this.enterChild(-1,t,-2)}enter(t,e,i=this.mode){return this.buffer?i&Y.ExcludeBuffers?
+!1:this.enterChild(1,t,e):this.yield(this._tree.enter(t,e,i))}parent(){if(!this.buffer)return this.yieldNode(this.mode&Y.
 IncludeAnonymous?this._tree._parent:this._tree.parent);if(this.stack.length)return this.yieldBuf(this.stack.pop());let t=this.
-mode&J.IncludeAnonymous?this.buffer.parent:this.buffer.parent.nextSignificantParent();return this.buffer=null,this.yieldNode(
+mode&Y.IncludeAnonymous?this.buffer.parent:this.buffer.parent.nextSignificantParent();return this.buffer=null,this.yieldNode(
 t)}sibling(t){if(!this.buffer)return this._tree._parent?this.yield(this._tree.index<0?null:this._tree._parent.nextChild(
 this._tree.index+t,t,0,4,this.mode)):!1;let{buffer:e}=this.buffer,i=this.stack.length-1;if(t<0){let s=i<0?0:this.stack[i]+
 4;if(this.index!=s)return this.yieldBuf(e.findChild(s,this.index,-1,0,4))}else{let s=e.buffer[this.index+3];if(s<(i<0?e.
@@ -1775,7 +1775,7 @@ buffer.length:e.buffer[this.stack[i]+3]))return this.yieldBuf(s)}return i<0?this
 buffer.index+t,t,0,4,this.mode)):!1}nextSibling(){return this.sibling(1)}prevSibling(){return this.sibling(-1)}atLastNode(t){
 let e,i,{buffer:s}=this;if(s){if(t>0){if(this.index<s.buffer.buffer.length)return!1}else for(let r=0;r<this.index;r++)if(s.
 buffer.buffer[r+3]<this.index)return!1;({index:e,parent:i}=s)}else({index:e,_parent:i}=this._tree);for(;i;{index:e,_parent:i}=
-i)if(e>-1)for(let r=e+t,o=t<0?-1:i._tree.children.length;r!=o;r+=t){let l=i._tree.children[r];if(this.mode&J.IncludeAnonymous||
+i)if(e>-1)for(let r=e+t,o=t<0?-1:i._tree.children.length;r!=o;r+=t){let l=i._tree.children[r];if(this.mode&Y.IncludeAnonymous||
 l instanceof le||!l.type.isAnonymous||cr(l))return!1}return!0}move(t,e){if(e&&this.enterChild(t,0,4))return!0;for(;;){if(this.
 sibling(t))return!0;if(this.atLastNode(t)||!this.parent())return!1}}next(t=!0){return this.move(1,t)}prev(t=!0){return this.
 move(-1,t)}moveTo(t,e=0){for(;(this.from==this.to||(e<1?this.from>=t:this.from>t)||(e>-1?this.to<=t:this.to<t))&&this.parent();)
@@ -1787,35 +1787,35 @@ for(let i=0;;){let s=!1;if(this.type.isAnonymous||t(this)!==!1){if(this.firstChi
 (s=!0)}for(;;){if(s&&e&&e(this),s=this.type.isAnonymous,!i)return;if(this.nextSibling())break;this.parent(),i--,s=!0}}}matchContext(t){
 if(!this.buffer)return lr(this.node.parent,t);let{buffer:e}=this.buffer,{types:i}=e.set;for(let s=t.length-1,r=this.stack.
 length-1;s>=0;r--){if(r<0)return lr(this._tree,t,s);let o=i[e.buffer[this.stack[r]]];if(!o.isAnonymous){if(t[s]&&t[s]!=o.
-name)return!1;s--}}return!0}};function cr(n){return n.children.some(t=>t instanceof le||!t.type.isAnonymous||cr(t))}function zc(n){
+name)return!1;s--}}return!0}};function cr(n){return n.children.some(t=>t instanceof le||!t.type.isAnonymous||cr(t))}function qc(n){
 var t;let{buffer:e,nodeSet:i,maxBufferLength:s=1024,reused:r=[],minRepeatType:o=i.types.length}=n,l=Array.isArray(e)?new or(
-e,e.length):e,a=i.types,f=0,h=0;function c(w,D,A,H,R,W){let{id:P,start:L,end:V,size:F}=l,$=h,ot=f;if(F<0)if(l.next(),F==
--1){let Gt=r[P];A.push(Gt),H.push(L-w);return}else if(F==-3){f=P;return}else if(F==-4){h=P;return}else throw new RangeError(
-`Unrecognized record size: ${F}`);let ut=a[P],Rt,et,bt=L-w;if(V-L<=s&&(et=g(l.pos-D,R))){let Gt=new Uint16Array(et.size-
-et.skip),yt=l.pos-et.size,It=Gt.length;for(;l.pos>yt;)It=b(et.start,Gt,It);Rt=new le(Gt,V-et.start,i),bt=et.start-w}else{
+e,e.length):e,a=i.types,f=0,h=0;function c(v,D,A,H,R,W){let{id:P,start:T,end:V,size:F}=l,$=h,ot=f;if(F<0)if(l.next(),F==
+-1){let Gt=r[P];A.push(Gt),H.push(T-v);return}else if(F==-3){f=P;return}else if(F==-4){h=P;return}else throw new RangeError(
+`Unrecognized record size: ${F}`);let ut=a[P],Rt,et,bt=T-v;if(V-T<=s&&(et=g(l.pos-D,R))){let Gt=new Uint16Array(et.size-
+et.skip),yt=l.pos-et.size,It=Gt.length;for(;l.pos>yt;)It=b(et.start,Gt,It);Rt=new le(Gt,V-et.start,i),bt=et.start-v}else{
 let Gt=l.pos-F;l.next();let yt=[],It=[],ce=P>=o?P:-1,Be=0,Wi=V,Gn=$;for(;l.pos>Gt;)ce>=0&&l.id==ce&&l.size>=0?(l.end<=Wi-
-s&&(p(yt,It,L,Be,l.end,Wi,ce,Gn,ot),Be=yt.length,Wi=l.end,Gn=h),l.next()):W>2500?u(L,Gt,yt,It):c(L,Gt,yt,It,ce,W+1);if(ce>=
-0&&Be>0&&Be<yt.length&&p(yt,It,L,Be,L,Wi,ce,Gn,ot),yt.reverse(),It.reverse(),ce>-1&&Be>0){let eo=d(ut,ot);Rt=ur(ut,yt,It,
-0,yt.length,0,V-L,eo,eo)}else Rt=m(ut,yt,It,V-L,$-V,ot)}A.push(Rt),H.push(bt)}function u(w,D,A,H){let R=[],W=0,P=-1;for(;l.
-pos>D;){let{id:L,start:V,end:F,size:$}=l;if($>4)l.next();else{if(P>-1&&V<P)break;P<0&&(P=F-s),R.push(L,V,F),W++,l.next()}}
-if(W){let L=new Uint16Array(W*4),V=R[R.length-2];for(let F=R.length-3,$=0;F>=0;F-=3)L[$++]=R[F],L[$++]=R[F+1]-V,L[$++]=R[F+
-2]-V,L[$++]=$;A.push(new le(L,R[2]-V,i)),H.push(V-w)}}function d(w,D){return(A,H,R)=>{let W=0,P=A.length-1,L,V;if(P>=0&&
-(L=A[P])instanceof _){if(!P&&L.type==w&&L.length==R)return L;(V=L.prop(O.lookAhead))&&(W=H[P]+L.length+V-R)}return m(w,A,
-H,R,W,D)}}function p(w,D,A,H,R,W,P,L,V){let F=[],$=[];for(;w.length>H;)F.push(w.pop()),$.push(D.pop()+A-R);w.push(m(i.types[P],
-F,$,W-R,L-W,V)),D.push(R-A)}function m(w,D,A,H,R,W,P){if(W){let L=[O.contextHash,W];P=P?[L].concat(P):[L]}if(R>25){let L=[
-O.lookAhead,R];P=P?[L].concat(P):[L]}return new _(w,D,A,H,P)}function g(w,D){let A=l.fork(),H=0,R=0,W=0,P=A.end-s,L={size:0,
-start:0,skip:0};t:for(let V=A.pos-w;A.pos>V;){let F=A.size;if(A.id==D&&F>=0){L.size=H,L.start=R,L.skip=W,W+=4,H+=4,A.next();
+s&&(p(yt,It,T,Be,l.end,Wi,ce,Gn,ot),Be=yt.length,Wi=l.end,Gn=h),l.next()):W>2500?u(T,Gt,yt,It):c(T,Gt,yt,It,ce,W+1);if(ce>=
+0&&Be>0&&Be<yt.length&&p(yt,It,T,Be,T,Wi,ce,Gn,ot),yt.reverse(),It.reverse(),ce>-1&&Be>0){let io=d(ut,ot);Rt=ur(ut,yt,It,
+0,yt.length,0,V-T,io,io)}else Rt=m(ut,yt,It,V-T,$-V,ot)}A.push(Rt),H.push(bt)}function u(v,D,A,H){let R=[],W=0,P=-1;for(;l.
+pos>D;){let{id:T,start:V,end:F,size:$}=l;if($>4)l.next();else{if(P>-1&&V<P)break;P<0&&(P=F-s),R.push(T,V,F),W++,l.next()}}
+if(W){let T=new Uint16Array(W*4),V=R[R.length-2];for(let F=R.length-3,$=0;F>=0;F-=3)T[$++]=R[F],T[$++]=R[F+1]-V,T[$++]=R[F+
+2]-V,T[$++]=$;A.push(new le(T,R[2]-V,i)),H.push(V-v)}}function d(v,D){return(A,H,R)=>{let W=0,P=A.length-1,T,V;if(P>=0&&
+(T=A[P])instanceof _){if(!P&&T.type==v&&T.length==R)return T;(V=T.prop(O.lookAhead))&&(W=H[P]+T.length+V-R)}return m(v,A,
+H,R,W,D)}}function p(v,D,A,H,R,W,P,T,V){let F=[],$=[];for(;v.length>H;)F.push(v.pop()),$.push(D.pop()+A-R);v.push(m(i.types[P],
+F,$,W-R,T-W,V)),D.push(R-A)}function m(v,D,A,H,R,W,P){if(W){let T=[O.contextHash,W];P=P?[T].concat(P):[T]}if(R>25){let T=[
+O.lookAhead,R];P=P?[T].concat(P):[T]}return new _(v,D,A,H,P)}function g(v,D){let A=l.fork(),H=0,R=0,W=0,P=A.end-s,T={size:0,
+start:0,skip:0};t:for(let V=A.pos-v;A.pos>V;){let F=A.size;if(A.id==D&&F>=0){T.size=H,T.start=R,T.skip=W,W+=4,H+=4,A.next();
 continue}let $=A.pos-F;if(F<0||$<V||A.start<P)break;let ot=A.id>=o?4:0,ut=A.start;for(A.next();A.pos>$;){if(A.size<0)if(A.
-size==-3||A.size==-4)ot+=4;else break t;else A.id>=o&&(ot+=4);A.next()}R=ut,H+=F,W+=ot}return(D<0||H==w)&&(L.size=H,L.start=
-R,L.skip=W),L.size>4?L:void 0}function b(w,D,A){let{id:H,start:R,end:W,size:P}=l;if(l.next(),P>=0&&H<o){let L=A;if(P>4){
-let V=l.pos-(P-4);for(;l.pos>V;)A=b(w,D,A)}D[--A]=L,D[--A]=W-w,D[--A]=R-w,D[--A]=H}else P==-3?f=H:P==-4&&(h=H);return A}
-let S=[],C=[];for(;l.pos>0;)c(n.start||0,n.bufferStart||0,S,C,-1,0);let T=(t=n.length)!==null&&t!==void 0?t:S.length?C[0]+
-S[0].length:0;return new _(a[n.topID],S.reverse(),C.reverse(),T)}var ma=new WeakMap;function Dn(n,t){if(!n.isAnonymous||
-t instanceof le||t.type!=n)return 1;let e=ma.get(t);if(e==null){e=1;for(let i of t.children){if(i.type!=n||!(i instanceof
-_)){e=1;break}e+=Dn(n,i)}ma.set(t,e)}return e}function ur(n,t,e,i,s,r,o,l,a){let f=0;for(let p=i;p<s;p++)f+=Dn(n,t[p]);let h=Math.
-ceil(f*1.5/8),c=[],u=[];function d(p,m,g,b,S){for(let C=g;C<b;){let T=C,w=m[C],D=Dn(n,p[C]);for(C++;C<b;C++){let A=Dn(n,
-p[C]);if(D+A>=h)break;D+=A}if(C==T+1){if(D>h){let A=p[T];d(A.children,A.positions,0,A.children.length,m[T]+S);continue}c.
-push(p[T])}else{let A=m[C-1]+p[C-1].length-w;c.push(ur(n,p,m,T,C,w,A,null,a))}u.push(w+S-r)}}return d(t,e,i,s,0),(l||a)(
+size==-3||A.size==-4)ot+=4;else break t;else A.id>=o&&(ot+=4);A.next()}R=ut,H+=F,W+=ot}return(D<0||H==v)&&(T.size=H,T.start=
+R,T.skip=W),T.size>4?T:void 0}function b(v,D,A){let{id:H,start:R,end:W,size:P}=l;if(l.next(),P>=0&&H<o){let T=A;if(P>4){
+let V=l.pos-(P-4);for(;l.pos>V;)A=b(v,D,A)}D[--A]=T,D[--A]=W-v,D[--A]=R-v,D[--A]=H}else P==-3?f=H:P==-4&&(h=H);return A}
+let k=[],x=[];for(;l.pos>0;)c(n.start||0,n.bufferStart||0,k,x,-1,0);let L=(t=n.length)!==null&&t!==void 0?t:k.length?x[0]+
+k[0].length:0;return new _(a[n.topID],k.reverse(),x.reverse(),L)}var ga=new WeakMap;function Dn(n,t){if(!n.isAnonymous||
+t instanceof le||t.type!=n)return 1;let e=ga.get(t);if(e==null){e=1;for(let i of t.children){if(i.type!=n||!(i instanceof
+_)){e=1;break}e+=Dn(n,i)}ga.set(t,e)}return e}function ur(n,t,e,i,s,r,o,l,a){let f=0;for(let p=i;p<s;p++)f+=Dn(n,t[p]);let h=Math.
+ceil(f*1.5/8),c=[],u=[];function d(p,m,g,b,k){for(let x=g;x<b;){let L=x,v=m[x],D=Dn(n,p[x]);for(x++;x<b;x++){let A=Dn(n,
+p[x]);if(D+A>=h)break;D+=A}if(x==L+1){if(D>h){let A=p[L];d(A.children,A.positions,0,A.children.length,m[L]+k);continue}c.
+push(p[L])}else{let A=m[x-1]+p[x-1].length-v;c.push(ur(n,p,m,L,x,v,A,null,a))}u.push(v+k-r)}}return d(t,e,i,s,0),(l||a)(
 c,u,o)}var ve=class n{constructor(t,e,i,s,r=!1,o=!1){this.from=t,this.to=e,this.tree=i,this.offset=s,this.open=(r?1:0)|(o?2:0)}get openStart(){
 return(this.open&1)>0}get openEnd(){return(this.open&2)>0}static addTree(t,e=[],i=!1){let s=[new n(0,t.length,t,0,!1,i)];
 for(let r of e)r.to>t.length&&s.push(r);return s}static applyChanges(t,e,i=128){if(!e.length)return t;let s=[],r=1,o=t.length?
@@ -1825,41 +1825,41 @@ s.push(u),o.to>c)break;o=r<t.length?t[r++]:null}if(!h)break;a=h.toA,f=h.toA-h.to
 return typeof t=="string"&&(t=new fr(t)),i=i?i.length?i.map(s=>new vi(s.from,s.to)):[new vi(0,0)]:[new vi(0,t.length)],this.
 createParse(t,e||[],i)}parse(t,e,i){let s=this.startParse(t,e,i);for(;;){let r=s.advance();if(r)return r}}},fr=class{constructor(t){
 this.string=t}get length(){return this.string.length}chunk(t){return this.string.slice(t)}get lineChunks(){return!1}read(t,e){
-return this.string.slice(t,e)}};var Yd=new O({perNode:!0});var Wc=0,gt=class n{constructor(t,e,i,s){this.name=t,this.set=e,this.base=i,this.modified=s,this.id=Wc++}toString(){let{
+return this.string.slice(t,e)}};var ep=new O({perNode:!0});var Kc=0,gt=class n{constructor(t,e,i,s){this.name=t,this.set=e,this.base=i,this.modified=s,this.id=Kc++}toString(){let{
 name:t}=this;for(let e of this.modified)e.name&&(t=`${e.name}(${t})`);return t}static define(t,e){let i=typeof t=="strin\
 g"?t:"?";if(t instanceof n&&(e=t),e?.base)throw new Error("Can not derive from a modified tag");let s=new n(i,[],null,[]);
 if(s.set.push(s),e)for(let r of e.set)s.set.push(r);return s}static defineModifier(t){let e=new On(t);return i=>i.modified.
-indexOf(e)>-1?i:On.get(i.base||i,i.modified.concat(e).sort((s,r)=>s.id-r.id))}},qc=0,On=class n{constructor(t){this.name=
-t,this.instances=[],this.id=qc++}static get(t,e){if(!e.length)return t;let i=e[0].instances.find(l=>l.base==t&&Kc(e,l.modified));
-if(i)return i;let s=[],r=new gt(t.name,s,t,e);for(let l of e)l.instances.push(r);let o=jc(e);for(let l of t.set)if(!l.modified.
-length)for(let a of o)s.push(n.get(l,a));return r}};function Kc(n,t){return n.length==t.length&&n.every((e,i)=>e==t[i])}
-function jc(n){let t=[[]];for(let e=0;e<n.length;e++)for(let i=0,s=t.length;i<s;i++)t.push(t[i].concat(n[e]));return t.sort(
-(e,i)=>i.length-e.length)}function Ti(n){let t=Object.create(null);for(let e in n){let i=n[e];Array.isArray(i)||(i=[i]);
+indexOf(e)>-1?i:On.get(i.base||i,i.modified.concat(e).sort((s,r)=>s.id-r.id))}},jc=0,On=class n{constructor(t){this.name=
+t,this.instances=[],this.id=jc++}static get(t,e){if(!e.length)return t;let i=e[0].instances.find(l=>l.base==t&&$c(e,l.modified));
+if(i)return i;let s=[],r=new gt(t.name,s,t,e);for(let l of e)l.instances.push(r);let o=Uc(e);for(let l of t.set)if(!l.modified.
+length)for(let a of o)s.push(n.get(l,a));return r}};function $c(n,t){return n.length==t.length&&n.every((e,i)=>e==t[i])}
+function Uc(n){let t=[[]];for(let e=0;e<n.length;e++)for(let i=0,s=t.length;i<s;i++)t.push(t[i].concat(n[e]));return t.sort(
+(e,i)=>i.length-e.length)}function Li(n){let t=Object.create(null);for(let e in n){let i=n[e];Array.isArray(i)||(i=[i]);
 for(let s of e.split(" "))if(s){let r=[],o=2,l=s;for(let c=0;;){if(l=="..."&&c>0&&c+3==s.length){o=1;break}let u=/^"(?:[^"\\]|\\.)*?"|[^\/!]+/.
 exec(l);if(!u)throw new RangeError("Invalid path: "+s);if(r.push(u[0]=="*"?"":u[0][0]=='"'?JSON.parse(u[0]):u[0]),c+=u[0].
 length,c==s.length)break;let d=s[c++];if(c==s.length&&d=="!"){o=0;break}if(d!="/")throw new RangeError("Invalid path: "+
 s);l=s.slice(c)}let a=r.length-1,f=r[a];if(!f)throw new RangeError("Invalid path: "+s);let h=new $e(i,o,a>0?r.slice(0,a):
-null);t[f]=h.sort(t[f])}}return $c.add(t)}var $c=new O({combine(n,t){let e,i,s;for(;n||t;){if(!n||t&&n.depth<=t.depth?(s=
+null);t[f]=h.sort(t[f])}}return Gc.add(t)}var Gc=new O({combine(n,t){let e,i,s;for(;n||t;){if(!n||t&&n.depth<=t.depth?(s=
 t,t=t.next):(s=n,n=n.next),e&&e.mode==s.mode&&!s.context&&!e.context)continue;let r=new $e(s.tags,s.mode,s.context);e?e.
 next=r:i=r,e=r}return i}}),$e=class{constructor(t,e,i,s){this.tags=t,this.mode=e,this.context=i,this.next=s}get opaque(){
 return this.mode==0}get inherit(){return this.mode==1}sort(t){return!t||t.depth<this.depth?(this.next=t,this):(t.next=this.
 sort(t.next),t)}get depth(){return this.context?this.context.length:0}};$e.empty=new $e([],2,null);function mr(n,t){let e=Object.
 create(null);for(let r of n)if(!Array.isArray(r.tag))e[r.tag.id]=r.class;else for(let o of r.tag)e[o.id]=r.class;let{scope:i,
 all:s=null}=t||{};return{style:r=>{let o=s;for(let l of r)for(let a of l.set){let f=e[a.id];if(f){o=o?o+" "+f:f;break}}return o},
-scope:i}}var v=gt.define,Ln=v(),ae=v(),ya=v(ae),ka=v(ae),he=v(),Bn=v(he),dr=v(he),Ut=v(),Ce=v(Ut),jt=v(),$t=v(),pr=v(),Di=v(pr),En=v(),
-y={comment:Ln,lineComment:v(Ln),blockComment:v(Ln),docComment:v(Ln),name:ae,variableName:v(ae),typeName:ya,tagName:v(ya),
-propertyName:ka,attributeName:v(ka),className:v(ae),labelName:v(ae),namespace:v(ae),macroName:v(ae),literal:he,string:Bn,
-docString:v(Bn),character:v(Bn),attributeValue:v(Bn),number:dr,integer:v(dr),float:v(dr),bool:v(he),regexp:v(he),escape:v(
-he),color:v(he),url:v(he),keyword:jt,self:v(jt),null:v(jt),atom:v(jt),unit:v(jt),modifier:v(jt),operatorKeyword:v(jt),controlKeyword:v(
-jt),definitionKeyword:v(jt),moduleKeyword:v(jt),operator:$t,derefOperator:v($t),arithmeticOperator:v($t),logicOperator:v(
-$t),bitwiseOperator:v($t),compareOperator:v($t),updateOperator:v($t),definitionOperator:v($t),typeOperator:v($t),controlOperator:v(
-$t),punctuation:pr,separator:v(pr),bracket:Di,angleBracket:v(Di),squareBracket:v(Di),paren:v(Di),brace:v(Di),content:Ut,
-heading:Ce,heading1:v(Ce),heading2:v(Ce),heading3:v(Ce),heading4:v(Ce),heading5:v(Ce),heading6:v(Ce),contentSeparator:v(
-Ut),list:v(Ut),quote:v(Ut),emphasis:v(Ut),strong:v(Ut),link:v(Ut),monospace:v(Ut),strikethrough:v(Ut),inserted:v(),deleted:v(),
-changed:v(),invalid:v(),meta:En,documentMeta:v(En),annotation:v(En),processingInstruction:v(En),definition:gt.defineModifier(
+scope:i}}var C=gt.define,Tn=C(),ae=C(),ka=C(ae),wa=C(ae),he=C(),Bn=C(he),dr=C(he),Ut=C(),Ce=C(Ut),jt=C(),$t=C(),pr=C(),Di=C(pr),En=C(),
+y={comment:Tn,lineComment:C(Tn),blockComment:C(Tn),docComment:C(Tn),name:ae,variableName:C(ae),typeName:ka,tagName:C(ka),
+propertyName:wa,attributeName:C(wa),className:C(ae),labelName:C(ae),namespace:C(ae),macroName:C(ae),literal:he,string:Bn,
+docString:C(Bn),character:C(Bn),attributeValue:C(Bn),number:dr,integer:C(dr),float:C(dr),bool:C(he),regexp:C(he),escape:C(
+he),color:C(he),url:C(he),keyword:jt,self:C(jt),null:C(jt),atom:C(jt),unit:C(jt),modifier:C(jt),operatorKeyword:C(jt),controlKeyword:C(
+jt),definitionKeyword:C(jt),moduleKeyword:C(jt),operator:$t,derefOperator:C($t),arithmeticOperator:C($t),logicOperator:C(
+$t),bitwiseOperator:C($t),compareOperator:C($t),updateOperator:C($t),definitionOperator:C($t),typeOperator:C($t),controlOperator:C(
+$t),punctuation:pr,separator:C(pr),bracket:Di,angleBracket:C(Di),squareBracket:C(Di),paren:C(Di),brace:C(Di),content:Ut,
+heading:Ce,heading1:C(Ce),heading2:C(Ce),heading3:C(Ce),heading4:C(Ce),heading5:C(Ce),heading6:C(Ce),contentSeparator:C(
+Ut),list:C(Ut),quote:C(Ut),emphasis:C(Ut),strong:C(Ut),link:C(Ut),monospace:C(Ut),strikethrough:C(Ut),inserted:C(),deleted:C(),
+changed:C(),invalid:C(),meta:En,documentMeta:C(En),annotation:C(En),processingInstruction:C(En),definition:gt.defineModifier(
 "definition"),constant:gt.defineModifier("constant"),function:gt.defineModifier("function"),standard:gt.defineModifier("\
 standard"),local:gt.defineModifier("local"),special:gt.defineModifier("special")};for(let n in y){let t=y[n];t instanceof
-gt&&(t.name=n)}var tp=mr([{tag:y.link,class:"tok-link"},{tag:y.heading,class:"tok-heading"},{tag:y.emphasis,class:"tok-e\
+gt&&(t.name=n)}var sp=mr([{tag:y.link,class:"tok-link"},{tag:y.heading,class:"tok-heading"},{tag:y.emphasis,class:"tok-e\
 mphasis"},{tag:y.strong,class:"tok-strong"},{tag:y.keyword,class:"tok-keyword"},{tag:y.atom,class:"tok-atom"},{tag:y.bool,
 class:"tok-bool"},{tag:y.url,class:"tok-url"},{tag:y.labelName,class:"tok-labelName"},{tag:y.inserted,class:"tok-inserte\
 d"},{tag:y.deleted,class:"tok-deleted"},{tag:y.literal,class:"tok-literal"},{tag:y.string,class:"tok-string"},{tag:y.number,
@@ -1869,20 +1869,20 @@ k-variableName tok-definition"},{tag:y.special(y.variableName),class:"tok-variab
 class:"tok-propertyName tok-definition"},{tag:y.typeName,class:"tok-typeName"},{tag:y.namespace,class:"tok-namespace"},{
 tag:y.className,class:"tok-className"},{tag:y.macroName,class:"tok-macroName"},{tag:y.propertyName,class:"tok-propertyNa\
 me"},{tag:y.operator,class:"tok-operator"},{tag:y.comment,class:"tok-comment"},{tag:y.meta,class:"tok-meta"},{tag:y.invalid,
-class:"tok-invalid"},{tag:y.punctuation,class:"tok-punctuation"}]);var gr,Bi=new O;var Uc=new O,vt=class{constructor(t,e,i=[],s=""){this.data=t,this.name=s,U.prototype.hasOwnProperty("tree")||Object.defineProperty(
-U.prototype,"tree",{get(){return te(this)}}),this.parser=e,this.extension=[Ue.of(this),U.languageData.of((r,o,l)=>{let a=wa(
-r,o,l),f=a.type.prop(Bi);if(!f)return[];let h=r.facet(f),c=a.type.prop(Uc);if(c){let u=a.resolve(o-a.from,l);for(let d of c)
+class:"tok-invalid"},{tag:y.punctuation,class:"tok-punctuation"}]);var gr,Bi=new O;var _c=new O,vt=class{constructor(t,e,i=[],s=""){this.data=t,this.name=s,U.prototype.hasOwnProperty("tree")||Object.defineProperty(
+U.prototype,"tree",{get(){return te(this)}}),this.parser=e,this.extension=[Ue.of(this),U.languageData.of((r,o,l)=>{let a=xa(
+r,o,l),f=a.type.prop(Bi);if(!f)return[];let h=r.facet(f),c=a.type.prop(_c);if(c){let u=a.resolve(o-a.from,l);for(let d of c)
 if(d.test(u,r)){let p=r.facet(d.facet);return d.type=="replace"?p:p.concat(h)}}return h})].concat(i)}isActiveAt(t,e,i=-1){
-return wa(t,e,i).type.prop(Bi)==this.data}findRegions(t){let e=t.facet(Ue);if(e?.data==this.data)return[{from:0,to:t.doc.
+return xa(t,e,i).type.prop(Bi)==this.data}findRegions(t){let e=t.facet(Ue);if(e?.data==this.data)return[{from:0,to:t.doc.
 length}];if(!e||!e.allowsNesting)return[];let i=[],s=(r,o)=>{if(r.prop(Bi)==this.data){i.push({from:o,to:o+r.length});return}
 let l=r.prop(O.mounted);if(l){if(l.tree.prop(Bi)==this.data){if(l.overlay)for(let a of l.overlay)i.push({from:a.from+o,to:a.
 to+o});else i.push({from:o,to:o+r.length});return}else if(l.overlay){let a=i.length;if(s(l.tree,l.overlay[0].from+o),i.length>
 a)return}}for(let a=0;a<r.children.length;a++){let f=r.children[a];f instanceof _&&s(f,r.positions[a]+o)}};return s(te(t),
-0),i}get allowsNesting(){return!0}};vt.setState=j.define();function wa(n,t,e){let i=n.facet(Ue),s=te(n).topNode;if(!i||i.
-allowsNesting)for(let r=s;r;r=r.enter(t,e,J.ExcludeBuffers|J.EnterBracketed))r.type.isTop&&(s=r);return s}function te(n){let t=n.field(vt.state,!1);return t?t.tree:_.empty}var kr=class{constructor(t){this.doc=t,this.cursorPos=0,this.string="",this.cursor=t.iter()}get length(){return this.doc.
+0),i}get allowsNesting(){return!0}};vt.setState=j.define();function xa(n,t,e){let i=n.facet(Ue),s=te(n).topNode;if(!i||i.
+allowsNesting)for(let r=s;r;r=r.enter(t,e,Y.ExcludeBuffers|Y.EnterBracketed))r.type.isTop&&(s=r);return s}function te(n){let t=n.field(vt.state,!1);return t?t.tree:_.empty}var kr=class{constructor(t){this.doc=t,this.cursorPos=0,this.string="",this.cursor=t.iter()}get length(){return this.doc.
 length}syncTo(t){return this.string=this.cursor.next(t-this.cursorPos).value,this.cursorPos=t+this.string.length,this.cursorPos-
 this.string.length}chunk(t){return this.syncTo(t),this.string}get lineChunks(){return!0}read(t,e){let i=this.cursorPos-this.
-string.length;return t<i||e>=this.cursorPos?this.doc.sliceString(t,e):this.string.slice(t-i,e-i)}},Li=null,wr=class n{constructor(t,e,i=[],s,r,o,l,a){
+string.length;return t<i||e>=this.cursorPos?this.doc.sliceString(t,e):this.string.slice(t-i,e-i)}},Ti=null,wr=class n{constructor(t,e,i=[],s,r,o,l,a){
 this.parser=t,this.state=e,this.fragments=i,this.tree=s,this.treeLen=r,this.viewport=o,this.skipped=l,this.scheduleOn=a,
 this.parse=null,this.tempSkipped=[]}static create(t,e,i){return new n(t,e,[],_.empty,0,i,[],null)}startParse(){return this.
 parser.startParse(new kr(this.state.doc),this.fragments)}work(t,e){return e!=null&&e>=this.state.doc.length&&(e=void 0),
@@ -1894,46 +1894,46 @@ null&&i!==void 0?i:this.state.doc.length,this.tree=s,this.parse=null,this.treeLe
 this.startParse();else return!0;if(t())return!1}})}takeTree(){let t,e;this.parse&&(t=this.parse.parsedPos)>=this.treeLen&&
 ((this.parse.stoppedAt==null||this.parse.stoppedAt>t)&&this.parse.stopAt(t),this.withContext(()=>{for(;!(e=this.parse.advance());)
 ;}),this.treeLen=t,this.tree=e,this.fragments=this.withoutTempSkipped(ve.addTree(this.tree,this.fragments,!0)),this.parse=
-null)}withContext(t){let e=Li;Li=this;try{return t()}finally{Li=e}}withoutTempSkipped(t){for(let e;e=this.tempSkipped.pop();)
-t=xa(t,e.from,e.to);return t}changes(t,e){let{fragments:i,tree:s,treeLen:r,viewport:o,skipped:l}=this;if(this.takeTree(),
+null)}withContext(t){let e=Ti;Ti=this;try{return t()}finally{Ti=e}}withoutTempSkipped(t){for(let e;e=this.tempSkipped.pop();)
+t=Sa(t,e.from,e.to);return t}changes(t,e){let{fragments:i,tree:s,treeLen:r,viewport:o,skipped:l}=this;if(this.takeTree(),
 !t.empty){let a=[];if(t.iterChangedRanges((f,h,c,u)=>a.push({fromA:f,toA:h,fromB:c,toB:u})),i=ve.applyChanges(i,a),s=_.empty,
 r=0,o={from:t.mapPos(o.from,-1),to:t.mapPos(o.to,1)},this.skipped.length){l=[];for(let f of this.skipped){let h=t.mapPos(
 f.from,1),c=t.mapPos(f.to,-1);h<c&&l.push({from:h,to:c})}}}return new n(this.parser,e,i,s,r,o,l,this.scheduleOn)}updateViewport(t){
 if(this.viewport.from==t.from&&this.viewport.to==t.to)return!1;this.viewport=t;let e=this.skipped.length;for(let i=0;i<this.
-skipped.length;i++){let{from:s,to:r}=this.skipped[i];s<t.to&&r>t.from&&(this.fragments=xa(this.fragments,s,r),this.skipped.
+skipped.length;i++){let{from:s,to:r}=this.skipped[i];s<t.to&&r>t.from&&(this.fragments=Sa(this.fragments,s,r),this.skipped.
 splice(i--,1))}return this.skipped.length>=e?!1:(this.reset(),!0)}reset(){this.parse&&(this.takeTree(),this.parse=null)}skipUntilInView(t,e){
 this.skipped.push({from:t,to:e})}static getSkippingParser(t){return new class extends je{createParse(e,i,s){let r=s[0].from,
-o=s[s.length-1].to;return{parsedPos:r,advance(){let a=Li;if(a){for(let f of s)a.tempSkipped.push(f);t&&(a.scheduleOn=a.scheduleOn?
+o=s[s.length-1].to;return{parsedPos:r,advance(){let a=Ti;if(a){for(let f of s)a.tempSkipped.push(f);t&&(a.scheduleOn=a.scheduleOn?
 Promise.all([a.scheduleOn,t]):t)}return this.parsedPos=o,new _(tt.none,[],[],o-r)},stoppedAt:null,stopAt(){}}}}}isDone(t){
 t=Math.min(t,this.state.doc.length);let e=this.fragments;return this.treeLen>=t&&e.length&&e[0].from==0&&e[0].to>=t}static get(){
-return Li}};function xa(n,t,e){return ve.applyChanges(n,[{fromA:t,toA:e,fromB:t,toB:e}])}var Ei=class n{constructor(t){this.
+return Ti}};function Sa(n,t,e){return ve.applyChanges(n,[{fromA:t,toA:e,fromB:t,toB:e}])}var Ei=class n{constructor(t){this.
 context=t,this.tree=t.tree}apply(t){if(!t.docChanged&&this.tree==this.context.tree)return this;let e=this.context.changes(
 t.changes,t.state),i=this.context.treeLen==t.startState.doc.length?void 0:Math.max(t.changes.mapPos(this.context.treeLen),
 e.viewport.to);return e.work(20,i)||e.takeTree(),new n(e)}static init(t){let e=Math.min(3e3,t.doc.length),i=wr.create(t.
-facet(Ue).parser,t,{from:0,to:e});return i.work(20,e)||i.takeTree(),new n(i)}};vt.state=Tt.define({create:Ei.init,update(n,t){
+facet(Ue).parser,t,{from:0,to:e});return i.work(20,e)||i.takeTree(),new n(i)}};vt.state=Lt.define({create:Ei.init,update(n,t){
 for(let e of t.effects)if(e.is(vt.setState))return e.value;return t.startState.facet(Ue)!=t.state.facet(Ue)?Ei.init(t.state):
-n.apply(t)}});var Aa=n=>{let t=setTimeout(()=>n(),500);return()=>clearTimeout(t)};typeof requestIdleCallback<"u"&&(Aa=n=>{
+n.apply(t)}});var Ma=n=>{let t=setTimeout(()=>n(),500);return()=>clearTimeout(t)};typeof requestIdleCallback<"u"&&(Ma=n=>{
 let t=-1,e=setTimeout(()=>{t=requestIdleCallback(n,{timeout:400})},100);return()=>t<0?clearTimeout(e):cancelIdleCallback(
 t)});var br=typeof navigator<"u"&&(!((gr=navigator.scheduling)===null||gr===void 0)&&gr.isInputPending)?()=>navigator.scheduling.
-isInputPending():null,Gc=qt.fromClass(class{constructor(t){this.view=t,this.working=null,this.workScheduled=0,this.chunkEnd=
+isInputPending():null,Xc=qt.fromClass(class{constructor(t){this.view=t,this.working=null,this.workScheduled=0,this.chunkEnd=
 -1,this.chunkBudget=-1,this.work=this.work.bind(this),this.scheduleWork()}update(t){let e=this.view.state.field(vt.state).
 context;(e.updateViewport(t.view.viewport)||this.view.viewport.to>e.treeLen)&&this.scheduleWork(),(t.docChanged||t.selectionSet)&&
 (this.view.hasFocus&&(this.chunkBudget+=50),this.scheduleWork()),this.checkAsyncSchedule(e)}scheduleWork(){if(this.working)
 return;let{state:t}=this.view,e=t.field(vt.state);(e.tree!=e.context.tree||!e.context.isDone(t.doc.length))&&(this.working=
-Aa(this.work))}work(t){this.working=null;let e=Date.now();if(this.chunkEnd<e&&(this.chunkEnd<0||this.view.hasFocus)&&(this.
+Ma(this.work))}work(t){this.working=null;let e=Date.now();if(this.chunkEnd<e&&(this.chunkEnd<0||this.view.hasFocus)&&(this.
 chunkEnd=e+3e4,this.chunkBudget=3e3),this.chunkBudget<=0)return;let{state:i,viewport:{to:s}}=this.view,r=i.field(vt.state);
 if(r.tree==r.context.tree&&r.context.isDone(s+1e5))return;let o=Date.now()+Math.min(this.chunkBudget,100,t&&!br?Math.max(
 25,t.timeRemaining()-5):1e9),l=r.context.treeLen<s&&i.doc.length>s+1e3,a=r.context.work(()=>br&&br()||Date.now()>o,s+(l?
 0:1e5));this.chunkBudget-=Date.now()-e,(a||this.chunkBudget<=0)&&(r.context.takeTree(),this.view.dispatch({effects:vt.setState.
 of(new Ei(r.context))})),this.chunkBudget>0&&!(a&&!l)&&this.scheduleWork(),this.checkAsyncSchedule(r.context)}checkAsyncSchedule(t){
-t.scheduleOn&&(this.workScheduled++,t.scheduleOn.then(()=>this.scheduleWork()).catch(e=>Lt(this.view.state,e)).then(()=>this.
+t.scheduleOn&&(this.workScheduled++,t.scheduleOn.then(()=>this.scheduleWork()).catch(e=>Tt(this.view.state,e)).then(()=>this.
 workScheduled--),t.scheduleOn=null)}destroy(){this.working&&this.working()}isWorking(){return!!(this.working||this.workScheduled>
 0)}},{eventHandlers:{focus(){this.scheduleWork()}}}),Ue=B.define({combine(n){return n.length?n[0]:null},enables:n=>[vt.state,
-Gc,E.contentAttributes.compute([n],t=>{let e=t.facet(n);return e&&e.name?{"data-language":e.name}:{}})]});var _c=B.define(),Pn=B.define({combine:n=>{if(!n.length)return"  ";let t=n[0];if(!t||/\S/.test(t)||Array.from(t).some(e=>e!=
+Xc,E.contentAttributes.compute([n],t=>{let e=t.facet(n);return e&&e.name?{"data-language":e.name}:{}})]});var Jc=B.define(),Pn=B.define({combine:n=>{if(!n.length)return"  ";let t=n[0];if(!t||/\S/.test(t)||Array.from(t).some(e=>e!=
 t[0]))throw new Error("Invalid indent unit: "+JSON.stringify(n[0]));return t}});function Oi(n){let t=n.facet(Pn);return t.
 charCodeAt(0)==9?n.tabSize*t.length:t.length}function Pi(n,t){let e="",i=n.tabSize,s=n.facet(Pn)[0];if(s=="	"){for(;t>=i;)
 e+="	",t-=i;s=" "}for(let r=0;r<t;r++)e+=s;return e}function Ar(n,t){n instanceof U&&(n=new Ae(n));for(let i of n.state.
-facet(_c)){let s=i(n,t);if(s!==void 0)return s}let e=te(n.state);return e.length>=t?Jc(n,e,t):null}var Ae=class{constructor(t,e={}){this.state=t,this.options=e,this.unit=Oi(t)}lineAt(t,e=1){let i=this.state.doc.lineAt(t),
+facet(Jc)){let s=i(n,t);if(s!==void 0)return s}let e=te(n.state);return e.length>=t?Qc(n,e,t):null}var Ae=class{constructor(t,e={}){this.state=t,this.options=e,this.unit=Oi(t)}lineAt(t,e=1){let i=this.state.doc.lineAt(t),
 {simulateBreak:s,simulateDoubleBreak:r}=this.options;return s!=null&&s>=i.from&&s<=i.to?r&&s==t?{text:"",from:t}:(e<0?s<
 t:s<=t)?{text:i.text.slice(s-i.from),from:s}:{text:i.text.slice(0,s-i.from),from:i.from}:i}textAfterPos(t,e=1){if(this.options.
 simulateDoubleBreak&&t==this.options.simulateBreak)return"";let{text:i,from:s}=this.lineAt(t,e);return i.slice(t-s,Math.
@@ -1941,233 +1941,233 @@ min(i.length,t+100-s))}column(t,e=1){let{text:i,from:s}=this.lineAt(t,e),r=this.
 this.options.overrideIndentation(s):-1;return o>-1&&(r+=o-this.countColumn(i,i.search(/\S|$/))),r}countColumn(t,e=t.length){
 return ge(t,this.state.tabSize,e)}lineIndent(t,e=1){let{text:i,from:s}=this.lineAt(t,e),r=this.options.overrideIndentation;
 if(r){let o=r(s);if(o>-1)return o}return this.countColumn(i,i.search(/\S|$/))}get simulatedBreak(){return this.options.simulateBreak||
-null}},Xc=new O;function Jc(n,t,e){let i=t.resolveStack(e),s=t.resolveInner(e,-1).resolve(e,0).enterUnfinishedNodesBefore(
+null}},Yc=new O;function Qc(n,t,e){let i=t.resolveStack(e),s=t.resolveInner(e,-1).resolve(e,0).enterUnfinishedNodesBefore(
 e);if(s!=i.node){let r=[];for(let o=s;o&&!(o.from<i.node.from||o.to>i.node.to||o.from==i.node.from&&o.type==i.node.type);o=
-o.parent)r.push(o);for(let o=r.length-1;o>=0;o--)i={node:r[o],next:i}}return Ma(i,n,e)}function Ma(n,t,e){for(let i=n;i;i=
-i.next){let s=Qc(i.node);if(s)return s(xr.create(t,e,i))}return 0}function Yc(n){return n.pos==n.options.simulateBreak&&
-n.options.simulateDoubleBreak}function Qc(n){let t=n.type.prop(Xc);if(t)return t;let e=n.firstChild,i;if(e&&(i=e.type.prop(
-O.closedBy))){let s=n.lastChild,r=s&&i.indexOf(s.name)>-1;return o=>iu(o,!0,1,void 0,r&&!Yc(o)?s.from:void 0)}return n.parent==
-null?Zc:null}function Zc(){return 0}var xr=class n extends Ae{constructor(t,e,i){super(t.state,t.options),this.base=t,this.
+o.parent)r.push(o);for(let o=r.length-1;o>=0;o--)i={node:r[o],next:i}}return Da(i,n,e)}function Da(n,t,e){for(let i=n;i;i=
+i.next){let s=tu(i.node);if(s)return s(xr.create(t,e,i))}return 0}function Zc(n){return n.pos==n.options.simulateBreak&&
+n.options.simulateDoubleBreak}function tu(n){let t=n.type.prop(Yc);if(t)return t;let e=n.firstChild,i;if(e&&(i=e.type.prop(
+O.closedBy))){let s=n.lastChild,r=s&&i.indexOf(s.name)>-1;return o=>su(o,!0,1,void 0,r&&!Zc(o)?s.from:void 0)}return n.parent==
+null?eu:null}function eu(){return 0}var xr=class n extends Ae{constructor(t,e,i){super(t.state,t.options),this.base=t,this.
 pos=e,this.context=i}get node(){return this.context.node}static create(t,e,i){return new n(t,e,i)}get textAfter(){return this.
 textAfterPos(this.pos)}get baseIndent(){return this.baseIndentFor(this.node)}baseIndentFor(t){let e=this.state.doc.lineAt(
-t.from);for(;;){let i=t.resolve(e.from);for(;i.parent&&i.parent.from==i.from;)i=i.parent;if(tu(i,t))break;e=this.state.doc.
-lineAt(i.from)}return this.lineIndent(e.from)}continue(){return Ma(this.context.next,this.base,this.pos)}};function tu(n,t){
-for(let e=t;e;e=e.parent)if(n==e)return!0;return!1}function eu(n){let t=n.node,e=t.childAfter(t.from),i=t.lastChild;if(!e)
+t.from);for(;;){let i=t.resolve(e.from);for(;i.parent&&i.parent.from==i.from;)i=i.parent;if(iu(i,t))break;e=this.state.doc.
+lineAt(i.from)}return this.lineIndent(e.from)}continue(){return Da(this.context.next,this.base,this.pos)}};function iu(n,t){
+for(let e=t;e;e=e.parent)if(n==e)return!0;return!1}function nu(n){let t=n.node,e=t.childAfter(t.from),i=t.lastChild;if(!e)
 return null;let s=n.options.simulateBreak,r=n.state.doc.lineAt(e.from),o=s==null||s<=r.from?r.to:Math.min(r.to,s);for(let l=e.
 to;;){let a=t.childAfter(l);if(!a||a==i)return null;if(!a.type.isSkipped){if(a.from>=o)return null;let f=/^ */.exec(r.text.
-slice(e.to-r.from))[0].length;return{from:e.from,to:e.to+f}}l=a.to}}function iu(n,t,e,i,s){let r=n.textAfter,o=r.match(/^\s*/)[0].length,l=i&&r.slice(o,o+i.length)==i||s==n.pos+o,a=t?eu(n):
+slice(e.to-r.from))[0].length;return{from:e.from,to:e.to+f}}l=a.to}}function su(n,t,e,i,s){let r=n.textAfter,o=r.match(/^\s*/)[0].length,l=i&&r.slice(o,o+i.length)==i||s==n.pos+o,a=t?nu(n):
 null;return a?l?n.column(a.from):n.column(a.to):n.baseIndent+(l?0:n.unit*e)}var Sr=class n{constructor(t,e){this.specs=t;let i;function s(l){let a=wt.newName();return(i||(i=Object.create(null)))["\
 ."+a]=l,a}let r=typeof e.all=="string"?e.all:e.all?s(e.all):void 0,o=e.scope;this.scope=o instanceof vt?l=>l.prop(Bi)==o.
 data:o?l=>l==o:void 0,this.style=mr(t.map(l=>({tag:l.tag,class:l.class||s(Object.assign({},l,{tag:null}))})),{all:r}).style,
-this.module=i?new wt(i):null,this.themeType=e.themeType}static define(t,e){return new n(t,e||{})}};var fp=Sr.define([{tag:y.meta,color:"#404740"},{tag:y.link,textDecoration:"underline"},{tag:y.heading,textDecoration:"un\
+this.module=i?new wt(i):null,this.themeType=e.themeType}static define(t,e){return new n(t,e||{})}};var pp=Sr.define([{tag:y.meta,color:"#404740"},{tag:y.link,textDecoration:"underline"},{tag:y.heading,textDecoration:"un\
 derline",fontWeight:"bold"},{tag:y.emphasis,fontStyle:"italic"},{tag:y.strong,fontWeight:"bold"},{tag:y.strikethrough,textDecoration:"\
 line-through"},{tag:y.keyword,color:"#708"},{tag:[y.atom,y.bool,y.url,y.contentSeparator,y.labelName],color:"#219"},{tag:[
 y.literal,y.inserted],color:"#164"},{tag:[y.string,y.deleted],color:"#a11"},{tag:[y.regexp,y.escape,y.special(y.string)],
 color:"#e40"},{tag:y.definition(y.variableName),color:"#00f"},{tag:y.local(y.variableName),color:"#30a"},{tag:[y.typeName,
 y.namespace],color:"#085"},{tag:y.className,color:"#167"},{tag:[y.special(y.variableName),y.macroName],color:"#256"},{tag:y.
-definition(y.propertyName),color:"#00c"},{tag:y.comment,color:"#940"},{tag:y.invalid,color:"#f00"}]);var nu=1e4,su="()[]{}";var ru=new O;function vr(n,t,e){let i=n.prop(t<0?O.openedBy:O.closedBy);if(i)return i;if(n.name.length==1){let s=e.indexOf(
-n.name);if(s>-1&&s%2==(t<0?1:0))return[e[s+t]]}return null}function Cr(n){let t=n.type.prop(ru);return t?t(n.node):n}function Me(n,t,e,i={}){
-let s=i.maxScanDistance||nu,r=i.brackets||su,o=te(n),l=o.resolveInner(t,e);for(let a=l;a;a=a.parent){let f=vr(a.type,e,r);
-if(f&&a.from<a.to){let h=Cr(a);if(h&&(e>0?t>=h.from&&t<h.to:t>h.from&&t<=h.to))return ou(n,t,e,a,h,f,r)}}return lu(n,t,e,
-o,l.type,s,r)}function ou(n,t,e,i,s,r,o){let l=i.parent,a={from:s.from,to:s.to},f=0,h=l?.cursor();if(h&&(e<0?h.childBefore(
+definition(y.propertyName),color:"#00c"},{tag:y.comment,color:"#940"},{tag:y.invalid,color:"#f00"}]);var ru=1e4,ou="()[]{}";var lu=new O;function vr(n,t,e){let i=n.prop(t<0?O.openedBy:O.closedBy);if(i)return i;if(n.name.length==1){let s=e.indexOf(
+n.name);if(s>-1&&s%2==(t<0?1:0))return[e[s+t]]}return null}function Cr(n){let t=n.type.prop(lu);return t?t(n.node):n}function Me(n,t,e,i={}){
+let s=i.maxScanDistance||ru,r=i.brackets||ou,o=te(n),l=o.resolveInner(t,e);for(let a=l;a;a=a.parent){let f=vr(a.type,e,r);
+if(f&&a.from<a.to){let h=Cr(a);if(h&&(e>0?t>=h.from&&t<h.to:t>h.from&&t<=h.to))return au(n,t,e,a,h,f,r)}}return hu(n,t,e,
+o,l.type,s,r)}function au(n,t,e,i,s,r,o){let l=i.parent,a={from:s.from,to:s.to},f=0,h=l?.cursor();if(h&&(e<0?h.childBefore(
 i.from):h.childAfter(i.to)))do if(e<0?h.to<=i.from:h.from>=i.to){if(f==0&&r.indexOf(h.type.name)>-1&&h.from<h.to){let c=Cr(
 h);return{start:a,end:c?{from:c.from,to:c.to}:void 0,matched:!0}}else if(vr(h.type,e,o))f++;else if(vr(h.type,-e,o)){if(f==
 0){let c=Cr(h);return{start:a,end:c&&c.from<c.to?{from:c.from,to:c.to}:void 0,matched:!1}}f--}}while(e<0?h.prevSibling():
-h.nextSibling());return{start:a,matched:!1}}function lu(n,t,e,i,s,r,o){if(e<0?!t:t==n.doc.length)return null;let l=e<0?n.
+h.nextSibling());return{start:a,matched:!1}}function hu(n,t,e,i,s,r,o){if(e<0?!t:t==n.doc.length)return null;let l=e<0?n.
 sliceDoc(t-1,t):n.sliceDoc(t,t+1),a=o.indexOf(l);if(a<0||a%2==0!=e>0)return null;let f={from:e<0?t-1:t,to:e>0?t+1:t},h=n.
 doc.iterRange(t,e>0?n.doc.length:0),c=0;for(let u=0;!h.next().done&&u<=r;){let d=h.value;e<0&&(u+=d.length);let p=t+u*e;
 for(let m=e>0?0:d.length-1,g=e>0?d.length:-1;m!=g;m+=e){let b=o.indexOf(d[m]);if(!(b<0||i.resolveInner(p+m,1).type!=s))if(b%
 2==0==e>0)c++;else{if(c==1)return{start:f,end:{from:p+m,to:p+m+1},matched:b>>1==a>>1};c--}}e>0&&(u+=d.length)}return h.done?
-{start:f,matched:!1}:null}var au=Object.create(null),Sa=[tt.none];var va=[],Ca=Object.create(null),hu=Object.create(null);for(let[n,t]of[["variable","variableName"],["variable-2","variab\
+{start:f,matched:!1}:null}var fu=Object.create(null),va=[tt.none];var Ca=[],Aa=Object.create(null),cu=Object.create(null);for(let[n,t]of[["variable","variableName"],["variable-2","variab\
 leName.special"],["string-2","string.special"],["def","variableName.definition"],["tag","tagName"],["attribute","attribu\
 teName"],["type","typeName"],["builtin","variableName.standard"],["qualifier","modifier"],["error","invalid"],["header",
-"heading"],["property","propertyName"]])hu[n]=fu(au,t);function yr(n,t){va.indexOf(n)>-1||(va.push(n),console.warn(t))}function fu(n,t){let e=[];for(let l of t.split(" ")){let a=[];
+"heading"],["property","propertyName"]])cu[n]=uu(fu,t);function yr(n,t){Ca.indexOf(n)>-1||(Ca.push(n),console.warn(t))}function uu(n,t){let e=[];for(let l of t.split(" ")){let a=[];
 for(let f of l.split(".")){let h=n[f]||y[f];h?typeof h=="function"?a.length?a=a.map(h):yr(f,`Modifier ${f} used at start\
  of tag`):a.length?yr(f,`Tag ${f} used as modifier`):a=Array.isArray(h)?h:[h]:yr(f,`Unknown highlighting tag ${f}`)}for(let f of a)
-e.push(f)}if(!e.length)return 0;let i=t.replace(/ /g,"_"),s=i+" "+e.map(l=>l.id),r=Ca[s];if(r)return r.id;let o=Ca[s]=tt.
-define({id:Sa.length,name:i,props:[Ti({[i]:e})]});return Sa.push(o),o.id}var cp={rtl:z.mark({class:"cm-iso",inclusive:!0,attributes:{dir:"rtl"},bidiIsolate:X.RTL}),ltr:z.mark({class:"cm-iso",inclusive:!0,
-attributes:{dir:"ltr"},bidiIsolate:X.LTR}),auto:z.mark({class:"cm-iso",inclusive:!0,attributes:{dir:"auto"},bidiIsolate:null})};var cu=n=>{let{state:t}=n,e=t.doc.lineAt(t.selection.main.from),i=Er(n.state,e.from);return i.line?uu(n):i.block?pu(n):!1};
-function Br(n,t){return({state:e,dispatch:i})=>{if(e.readOnly)return!1;let s=n(t,e);return s?(i(e.update(s)),!0):!1}}var uu=Br(
-bu,0);var du=Br(Ia,0);var pu=Br((n,t)=>Ia(n,t,gu(t)),0);function Er(n,t){let e=n.languageDataAt("commentTokens",t,1);return e.length?e[0]:{}}var Ri=50;
-function mu(n,{open:t,close:e},i,s){let r=n.sliceDoc(i-Ri,i),o=n.sliceDoc(s,s+Ri),l=/\s*$/.exec(r)[0].length,a=/^\s*/.exec(
+e.push(f)}if(!e.length)return 0;let i=t.replace(/ /g,"_"),s=i+" "+e.map(l=>l.id),r=Aa[s];if(r)return r.id;let o=Aa[s]=tt.
+define({id:va.length,name:i,props:[Li({[i]:e})]});return va.push(o),o.id}var mp={rtl:z.mark({class:"cm-iso",inclusive:!0,attributes:{dir:"rtl"},bidiIsolate:X.RTL}),ltr:z.mark({class:"cm-iso",inclusive:!0,
+attributes:{dir:"ltr"},bidiIsolate:X.LTR}),auto:z.mark({class:"cm-iso",inclusive:!0,attributes:{dir:"auto"},bidiIsolate:null})};var du=n=>{let{state:t}=n,e=t.doc.lineAt(t.selection.main.from),i=Er(n.state,e.from);return i.line?pu(n):i.block?gu(n):!1};
+function Br(n,t){return({state:e,dispatch:i})=>{if(e.readOnly)return!1;let s=n(t,e);return s?(i(e.update(s)),!0):!1}}var pu=Br(
+ku,0);var mu=Br(Na,0);var gu=Br((n,t)=>Na(n,t,yu(t)),0);function Er(n,t){let e=n.languageDataAt("commentTokens",t,1);return e.length?e[0]:{}}var Ri=50;
+function bu(n,{open:t,close:e},i,s){let r=n.sliceDoc(i-Ri,i),o=n.sliceDoc(s,s+Ri),l=/\s*$/.exec(r)[0].length,a=/^\s*/.exec(
 o)[0].length,f=r.length-l;if(r.slice(f-t.length,f)==t&&o.slice(a,a+e.length)==e)return{open:{pos:i-l,margin:l&&1},close:{
 pos:s+a,margin:a&&1}};let h,c;s-i<=2*Ri?h=c=n.sliceDoc(i,s):(h=n.sliceDoc(i,i+Ri),c=n.sliceDoc(s-Ri,s));let u=/^\s*/.exec(
 h)[0].length,d=/\s*$/.exec(c)[0].length,p=c.length-d-e.length;return h.slice(u,u+t.length)==t&&c.slice(p,p+e.length)==e?
 {open:{pos:i+u+t.length,margin:/\s/.test(h.charAt(u+t.length))?1:0},close:{pos:s-d-e.length,margin:/\s/.test(c.charAt(p-
-1))?1:0}}:null}function gu(n){let t=[];for(let e of n.selection.ranges){let i=n.doc.lineAt(e.from),s=e.to<=i.to?i:n.doc.
+1))?1:0}}:null}function yu(n){let t=[];for(let e of n.selection.ranges){let i=n.doc.lineAt(e.from),s=e.to<=i.to?i:n.doc.
 lineAt(e.to);s.from>i.from&&s.from==e.to&&(s=e.to==i.to+1?i:n.doc.lineAt(e.to-1));let r=t.length-1;r>=0&&t[r].to>i.from?
-t[r].to=s.to:t.push({from:i.from+/^\s*/.exec(i.text)[0].length,to:s.to})}return t}function Ia(n,t,e=t.selection.ranges){
-let i=e.map(r=>Er(t,r.from).block);if(!i.every(r=>r))return null;let s=e.map((r,o)=>mu(t,i[o],r.from,r.to));if(n!=2&&!s.
+t[r].to=s.to:t.push({from:i.from+/^\s*/.exec(i.text)[0].length,to:s.to})}return t}function Na(n,t,e=t.selection.ranges){
+let i=e.map(r=>Er(t,r.from).block);if(!i.every(r=>r))return null;let s=e.map((r,o)=>bu(t,i[o],r.from,r.to));if(n!=2&&!s.
 every(r=>r))return{changes:t.changes(e.map((r,o)=>s[o]?[]:[{from:r.from,insert:i[o].open+" "},{from:r.to,insert:" "+i[o].
 close}]))};if(n!=1&&s.some(r=>r)){let r=[];for(let o=0,l;o<s.length;o++)if(l=s[o]){let a=i[o],{open:f,close:h}=l;r.push(
 {from:f.pos-a.open.length,to:f.pos+f.margin},{from:h.pos-h.margin,to:h.pos+a.close.length})}return{changes:r}}return null}
-function bu(n,t,e=t.selection.ranges){let i=[],s=-1;for(let{from:r,to:o}of e){let l=i.length,a=1e9,f=Er(t,r).line;if(f){
+function ku(n,t,e=t.selection.ranges){let i=[],s=-1;for(let{from:r,to:o}of e){let l=i.length,a=1e9,f=Er(t,r).line;if(f){
 for(let h=r;h<=o;){let c=t.doc.lineAt(h);if(c.from>s&&(r==o||o>c.from)){s=c.from;let u=/^\s*/.exec(c.text)[0].length,d=u==
 c.length,p=c.text.slice(u,u+f.length)==f?u:-1;u<c.text.length&&u<a&&(a=u),i.push({line:c,comment:p,token:f,indent:u,empty:d,
 single:!1})}h=c.to+1}if(a<1e9)for(let h=l;h<i.length;h++)i[h].indent<i[h].line.text.length&&(i[h].indent=a);i.length==l+
 1&&(i[l].single=!0)}}if(n!=2&&i.some(r=>r.comment<0&&(!r.empty||r.single))){let r=[];for(let{line:l,token:a,indent:f,empty:h,
 single:c}of i)(c||!h)&&r.push({from:l.from+f,insert:a+" "});let o=t.changes(r);return{changes:o,selection:t.selection.map(
 o,1)}}else if(n!=1&&i.some(r=>r.comment>=0)){let r=[];for(let{line:o,comment:l,token:a}of i)if(l>=0){let f=o.from+l,h=f+
-a.length;o.text[h-o.from]==" "&&h++,r.push({from:f,to:h})}return{changes:r}}return null}var Dr=kt.define(),yu=kt.define(),
-ku=B.define(),Na=B.define({combine(n){return ni(n,{minDepth:100,newGroupDelay:500,joinToEvent:(t,e)=>e},{minDepth:Math.max,
-newGroupDelay:Math.min,joinToEvent:(t,e)=>(i,s)=>t(i,s)||e(i,s)})}}),Ha=Tt.define({create(){return De.empty},update(n,t){
-let e=t.state.facet(Na),i=t.annotation(Dr);if(i){let a=Et.fromTransaction(t,i.selection),f=i.side,h=f==0?n.undone:n.done;
-return a?h=In(h,h.length,e.minDepth,a):h=za(h,t.startState.selection),new De(f==0?i.rest:h,f==0?h:i.rest)}let s=t.annotation(
-yu);if((s=="full"||s=="before")&&(n=n.isolate()),t.annotation(Y.addToHistory)===!1)return t.changes.empty?n:n.addMapping(
-t.changes.desc);let r=Et.fromTransaction(t),o=t.annotation(Y.time),l=t.annotation(Y.userEvent);return r?n=n.addChanges(r,
+a.length;o.text[h-o.from]==" "&&h++,r.push({from:f,to:h})}return{changes:r}}return null}var Dr=kt.define(),Or=kt.define(),
+wu=B.define(),Ha=B.define({combine(n){return ni(n,{minDepth:100,newGroupDelay:500,joinToEvent:(t,e)=>e},{minDepth:Math.max,
+newGroupDelay:Math.min,joinToEvent:(t,e)=>(i,s)=>t(i,s)||e(i,s)})}}),Fa=Lt.define({create(){return De.empty},update(n,t){
+let e=t.state.facet(Ha),i=t.annotation(Dr);if(i){let a=Et.fromTransaction(t,i.selection),f=i.side,h=f==0?n.undone:n.done;
+return a?h=In(h,h.length,e.minDepth,a):h=Wa(h,t.startState.selection),new De(f==0?i.rest:h,f==0?h:i.rest)}let s=t.annotation(
+Or);if((s=="full"||s=="before")&&(n=n.isolate()),t.annotation(J.addToHistory)===!1)return t.changes.empty?n:n.addMapping(
+t.changes.desc);let r=Et.fromTransaction(t),o=t.annotation(J.time),l=t.annotation(J.userEvent);return r?n=n.addChanges(r,
 o,l,e,t):t.selection&&(n=n.addSelection(t.startState.selection,o,l,e.newGroupDelay)),(s=="full"||s=="after")&&(n=n.isolate()),
 n},toJSON(n){return{done:n.done.map(t=>t.toJSON()),undone:n.undone.map(t=>t.toJSON())}},fromJSON(n){return new De(n.done.
-map(Et.fromJSON),n.undone.map(Et.fromJSON))}});function Fa(n={}){return[Ha,Na.of(n),E.domEventHandlers({beforeinput(t,e){
-let i=t.inputType=="historyUndo"?Hn:t.inputType=="historyRedo"?Ii:null;return i?(t.preventDefault(),i(e)):!1}})]}function Nn(n,t){return function({state:e,dispatch:i}){if(!t&&e.readOnly)return!1;let s=e.field(Ha,!1);if(!s)return!1;let r=s.
-pop(n,e,t);return r?(i(r),!0):!1}}var Hn=Nn(0,!1),Ii=Nn(1,!1),wu=Nn(0,!0),xu=Nn(1,!0);var Et=class n{constructor(t,e,i,s,r){this.changes=t,this.effects=e,this.mapped=i,this.startSelection=s,this.selectionsAfter=
+map(Et.fromJSON),n.undone.map(Et.fromJSON))}});function Va(n={}){return[Fa,Ha.of(n),E.domEventHandlers({beforeinput(t,e){
+let i=t.inputType=="historyUndo"?Hn:t.inputType=="historyRedo"?Ii:null;return i?(t.preventDefault(),i(e)):!1}})]}function Nn(n,t){return function({state:e,dispatch:i}){if(!t&&e.readOnly)return!1;let s=e.field(Fa,!1);if(!s)return!1;let r=s.
+pop(n,e,t);return r?(i(r),!0):!1}}var Hn=Nn(0,!1),Ii=Nn(1,!1),xu=Nn(0,!0),Su=Nn(1,!0);var Et=class n{constructor(t,e,i,s,r){this.changes=t,this.effects=e,this.mapped=i,this.startSelection=s,this.selectionsAfter=
 r}setSelAfter(t){return new n(this.changes,this.effects,this.mapped,this.startSelection,t)}toJSON(){var t,e,i;return{changes:(t=
 this.changes)===null||t===void 0?void 0:t.toJSON(),mapped:(e=this.mapped)===null||e===void 0?void 0:e.toJSON(),startSelection:(i=
 this.startSelection)===null||i===void 0?void 0:i.toJSON(),selectionsAfter:this.selectionsAfter.map(s=>s.toJSON())}}static fromJSON(t){
-return new n(t.changes&&lt.fromJSON(t.changes),[],t.mapped&&_t.fromJSON(t.mapped),t.startSelection&&k.fromJSON(t.startSelection),
-t.selectionsAfter.map(k.fromJSON))}static fromTransaction(t,e){let i=Ct;for(let s of t.startState.facet(ku)){let r=s(t);
+return new n(t.changes&&lt.fromJSON(t.changes),[],t.mapped&&_t.fromJSON(t.mapped),t.startSelection&&w.fromJSON(t.startSelection),
+t.selectionsAfter.map(w.fromJSON))}static fromTransaction(t,e){let i=Ct;for(let s of t.startState.facet(wu)){let r=s(t);
 r.length&&(i=i.concat(r))}return!i.length&&t.changes.empty?null:new n(t.changes.invert(t.startState.doc),i,void 0,e||t.startState.
 selection,Ct)}static selection(t){return new n(void 0,Ct,void 0,void 0,t)}};function In(n,t,e,i){let s=t+1>e+20?t-e-1:0,
-r=n.slice(s,t);return r.push(i),r}function Su(n,t){let e=[],i=!1;return n.iterChangedRanges((s,r)=>e.push(s,r)),t.iterChangedRanges(
-(s,r,o,l)=>{for(let a=0;a<e.length;){let f=e[a++],h=e[a++];l>=f&&o<=h&&(i=!0)}}),i}function vu(n,t){return n.ranges.length==
-t.ranges.length&&n.ranges.filter((e,i)=>e.empty!=t.ranges[i].empty).length===0}function Va(n,t){return n.length?t.length?
-n.concat(t):n:t}var Ct=[],Cu=200;function za(n,t){if(n.length){let e=n[n.length-1],i=e.selectionsAfter.slice(Math.max(0,
-e.selectionsAfter.length-Cu));return i.length&&i[i.length-1].eq(t)?n:(i.push(t),In(n,n.length-1,1e9,e.setSelAfter(i)))}else
-return[Et.selection([t])]}function Au(n){let t=n[n.length-1],e=n.slice();return e[n.length-1]=t.setSelAfter(t.selectionsAfter.
-slice(0,t.selectionsAfter.length-1)),e}function Mr(n,t){if(!n.length)return n;let e=n.length,i=Ct;for(;e;){let s=Mu(n[e-
+r=n.slice(s,t);return r.push(i),r}function vu(n,t){let e=[],i=!1;return n.iterChangedRanges((s,r)=>e.push(s,r)),t.iterChangedRanges(
+(s,r,o,l)=>{for(let a=0;a<e.length;){let f=e[a++],h=e[a++];l>=f&&o<=h&&(i=!0)}}),i}function Cu(n,t){return n.ranges.length==
+t.ranges.length&&n.ranges.filter((e,i)=>e.empty!=t.ranges[i].empty).length===0}function za(n,t){return n.length?t.length?
+n.concat(t):n:t}var Ct=[],Au=200;function Wa(n,t){if(n.length){let e=n[n.length-1],i=e.selectionsAfter.slice(Math.max(0,
+e.selectionsAfter.length-Au));return i.length&&i[i.length-1].eq(t)?n:(i.push(t),In(n,n.length-1,1e9,e.setSelAfter(i)))}else
+return[Et.selection([t])]}function Mu(n){let t=n[n.length-1],e=n.slice();return e[n.length-1]=t.setSelAfter(t.selectionsAfter.
+slice(0,t.selectionsAfter.length-1)),e}function Mr(n,t){if(!n.length)return n;let e=n.length,i=Ct;for(;e;){let s=Du(n[e-
 1],t,i);if(s.changes&&!s.changes.empty||s.effects.length){let r=n.slice(0,e);return r[e-1]=s,r}else t=s.mapped,e--,i=s.selectionsAfter}
-return i.length?[Et.selection(i)]:Ct}function Mu(n,t,e){let i=Va(n.selectionsAfter.length?n.selectionsAfter.map(l=>l.map(
+return i.length?[Et.selection(i)]:Ct}function Du(n,t,e){let i=za(n.selectionsAfter.length?n.selectionsAfter.map(l=>l.map(
 t)):Ct,e);if(!n.changes)return Et.selection(i);let s=n.changes.map(t),r=t.mapDesc(n.changes,!0),o=n.mapped?n.mapped.composeDesc(
-r):r;return new Et(s,j.mapEffects(n.effects,t),o,n.startSelection.map(r),i)}var Du=/^(input\.type|delete)($|\.)/,De=class n{constructor(t,e,i=0,s=void 0){
+r):r;return new Et(s,j.mapEffects(n.effects,t),o,n.startSelection.map(r),i)}var Lu=/^(input\.type|delete)($|\.)/,De=class n{constructor(t,e,i=0,s=void 0){
 this.done=t,this.undone=e,this.prevTime=i,this.prevUserEvent=s}isolate(){return this.prevTime?new n(this.done,this.undone):
-this}addChanges(t,e,i,s,r){let o=this.done,l=o[o.length-1];return l&&l.changes&&!l.changes.empty&&t.changes&&(!i||Du.test(
-i))&&(!l.selectionsAfter.length&&e-this.prevTime<s.newGroupDelay&&s.joinToEvent(r,Su(l.changes,t.changes))||i=="input.ty\
-pe.compose")?o=In(o,o.length-1,s.minDepth,new Et(t.changes.compose(l.changes),Va(j.mapEffects(t.effects,l.changes),l.effects),
+this}addChanges(t,e,i,s,r){let o=this.done,l=o[o.length-1];return l&&l.changes&&!l.changes.empty&&t.changes&&(!i||Lu.test(
+i))&&(!l.selectionsAfter.length&&e-this.prevTime<s.newGroupDelay&&s.joinToEvent(r,vu(l.changes,t.changes))||i=="input.ty\
+pe.compose")?o=In(o,o.length-1,s.minDepth,new Et(t.changes.compose(l.changes),za(j.mapEffects(t.effects,l.changes),l.effects),
 l.mapped,l.startSelection,Ct)):o=In(o,o.length,s.minDepth,t),new n(o,Ct,e,i)}addSelection(t,e,i,s){let r=this.done.length?
 this.done[this.done.length-1].selectionsAfter:Ct;return r.length>0&&e-this.prevTime<s&&i==this.prevUserEvent&&i&&/^select($|\.)/.
-test(i)&&vu(r[r.length-1],t)?this:new n(za(this.done,t),this.undone,e,i)}addMapping(t){return new n(Mr(this.done,t),Mr(this.
+test(i)&&Cu(r[r.length-1],t)?this:new n(Wa(this.done,t),this.undone,e,i)}addMapping(t){return new n(Mr(this.done,t),Mr(this.
 undone,t),this.prevTime,this.prevUserEvent)}pop(t,e,i){let s=t==0?this.done:this.undone;if(s.length==0)return null;let r=s[s.
 length-1],o=r.selectionsAfter[0]||e.selection;if(i&&r.selectionsAfter.length)return e.update({selection:r.selectionsAfter[r.
-selectionsAfter.length-1],annotations:Dr.of({side:t,rest:Au(s),selection:o}),userEvent:t==0?"select.undo":"select.redo",
+selectionsAfter.length-1],annotations:Dr.of({side:t,rest:Mu(s),selection:o}),userEvent:t==0?"select.undo":"select.redo",
 scrollIntoView:!0});if(r.changes){let l=s.length==1?Ct:s.slice(0,s.length-1);return r.mapped&&(l=Mr(l,r.mapped)),e.update(
 {changes:r.changes,selection:r.startSelection,effects:r.effects,annotations:Dr.of({side:t,rest:l,selection:o}),filter:!1,
-userEvent:t==0?"undo":"redo",scrollIntoView:!0})}else return null}};De.empty=new De(Ct,Ct);var Wa=[{key:"Mod-z",run:Hn,preventDefault:!0},
-{key:"Mod-y",mac:"Mod-Shift-z",run:Ii,preventDefault:!0},{linux:"Ctrl-Shift-z",run:Ii,preventDefault:!0},{key:"Mod-u",run:wu,
-preventDefault:!0},{key:"Alt-u",mac:"Mod-Shift-u",run:xu,preventDefault:!0}];function Ge(n,t){return k.create(n.ranges.map(
+userEvent:t==0?"undo":"redo",scrollIntoView:!0})}else return null}};De.empty=new De(Ct,Ct);var qa=[{key:"Mod-z",run:Hn,preventDefault:!0},
+{key:"Mod-y",mac:"Mod-Shift-z",run:Ii,preventDefault:!0},{linux:"Ctrl-Shift-z",run:Ii,preventDefault:!0},{key:"Mod-u",run:xu,
+preventDefault:!0},{key:"Alt-u",mac:"Mod-Shift-u",run:Su,preventDefault:!0}];function Ge(n,t){return w.create(n.ranges.map(
 t),n.mainIndex)}function Ot(n,t){return n.update({selection:t,scrollIntoView:!0,userEvent:"select"})}function Pt({state:n,
-dispatch:t},e){let i=Ge(n.selection,e);return i.eq(n.selection,!0)?!1:(t(Ot(n,i)),!0)}function Fn(n,t){return k.cursor(t?
-n.to:n.from)}function qa(n,t){return Pt(n,e=>e.empty?n.moveByChar(e,t):Fn(e,t))}function rt(n){return n.textDirectionAt(
-n.state.selection.main.head)==X.LTR}var Ka=n=>qa(n,!rt(n)),ja=n=>qa(n,rt(n));function $a(n,t){return Pt(n,e=>e.empty?n.moveByGroup(e,t):Fn(e,t))}var Tu=n=>$a(n,!rt(n)),Lu=n=>$a(n,rt(n));var yp=typeof Intl<"u"&&Intl.Segmenter?new Intl.Segmenter(void 0,{granularity:"word"}):null;function Bu(n,t,e){if(t.type.prop(e))return!0;let i=t.to-t.from;return i&&(i>2||/[^\s,.;:]/.test(n.sliceDoc(t.from,t.to)))||
+dispatch:t},e){let i=Ge(n.selection,e);return i.eq(n.selection,!0)?!1:(t(Ot(n,i)),!0)}function Fn(n,t){return w.cursor(t?
+n.to:n.from)}function Ka(n,t){return Pt(n,e=>e.empty?n.moveByChar(e,t):Fn(e,t))}function rt(n){return n.textDirectionAt(
+n.state.selection.main.head)==X.LTR}var ja=n=>Ka(n,!rt(n)),$a=n=>Ka(n,rt(n));function Ua(n,t){return Pt(n,e=>e.empty?n.moveByGroup(e,t):Fn(e,t))}var Tu=n=>Ua(n,!rt(n)),Bu=n=>Ua(n,rt(n));var Sp=typeof Intl<"u"&&Intl.Segmenter?new Intl.Segmenter(void 0,{granularity:"word"}):null;function Eu(n,t,e){if(t.type.prop(e))return!0;let i=t.to-t.from;return i&&(i>2||/[^\s,.;:]/.test(n.sliceDoc(t.from,t.to)))||
 t.firstChild}function Vn(n,t,e){let i=te(n).resolveInner(t.head),s=e?O.closedBy:O.openedBy;for(let a=t.head;;){let f=e?i.
-childAfter(a):i.childBefore(a);if(!f)break;Bu(n,f,s)?i=f:a=e?f.to:f.from}let r=i.type.prop(s),o,l;return r&&(o=e?Me(n,i.
-from,1):Me(n,i.to,-1))&&o.matched?l=e?o.end.to:o.end.from:l=e?i.to:i.from,k.cursor(l,e?-1:1)}var Eu=n=>Pt(n,t=>Vn(n.state,
-t,!rt(n))),Ou=n=>Pt(n,t=>Vn(n.state,t,rt(n)));function Ua(n,t){return Pt(n,e=>{if(!e.empty)return Fn(e,t);let i=n.moveVertically(
-e,t);return i.head!=e.head?i:n.moveToLineBoundary(e,t)})}var Ga=n=>Ua(n,!1),_a=n=>Ua(n,!0);function Xa(n){let t=n.scrollDOM.
+childAfter(a):i.childBefore(a);if(!f)break;Eu(n,f,s)?i=f:a=e?f.to:f.from}let r=i.type.prop(s),o,l;return r&&(o=e?Me(n,i.
+from,1):Me(n,i.to,-1))&&o.matched?l=e?o.end.to:o.end.from:l=e?i.to:i.from,w.cursor(l,e?-1:1)}var Ou=n=>Pt(n,t=>Vn(n.state,
+t,!rt(n))),Pu=n=>Pt(n,t=>Vn(n.state,t,rt(n)));function Ga(n,t){return Pt(n,e=>{if(!e.empty)return Fn(e,t);let i=n.moveVertically(
+e,t);return i.head!=e.head?i:n.moveToLineBoundary(e,t)})}var _a=n=>Ga(n,!1),Xa=n=>Ga(n,!0);function Ja(n){let t=n.scrollDOM.
 clientHeight<n.scrollDOM.scrollHeight-2,e=0,i=0,s;if(t){for(let r of n.state.facet(E.scrollMargins)){let o=r(n);o?.top&&
 (e=Math.max(o?.top,e)),o?.bottom&&(i=Math.max(o?.bottom,i))}s=n.scrollDOM.clientHeight-e-i}else s=(n.dom.ownerDocument.defaultView||
-window).innerHeight;return{marginTop:e,marginBottom:i,selfScroll:t,height:Math.max(n.defaultLineHeight,s-5)}}function Ja(n,t){
-let e=Xa(n),{state:i}=n,s=Ge(i.selection,o=>o.empty?n.moveVertically(o,t,e.height):Fn(o,t));if(s.eq(i.selection))return!1;
+window).innerHeight;return{marginTop:e,marginBottom:i,selfScroll:t,height:Math.max(n.defaultLineHeight,s-5)}}function Ya(n,t){
+let e=Ja(n),{state:i}=n,s=Ge(i.selection,o=>o.empty?n.moveVertically(o,t,e.height):Fn(o,t));if(s.eq(i.selection))return!1;
 let r;if(e.selfScroll){let o=n.coordsAtPos(i.selection.main.head),l=n.scrollDOM.getBoundingClientRect(),a=l.top+e.marginTop,
 f=l.bottom-e.marginBottom;o&&o.top>a&&o.bottom<f&&(r=E.scrollIntoView(s.main.head,{y:"start",yMargin:o.top-a}))}return n.
-dispatch(Ot(i,s),{effects:r}),!0}var Da=n=>Ja(n,!1),Tr=n=>Ja(n,!0);function fe(n,t,e){let i=n.lineBlockAt(t.head),s=n.moveToLineBoundary(
+dispatch(Ot(i,s),{effects:r}),!0}var La=n=>Ya(n,!1),Lr=n=>Ya(n,!0);function fe(n,t,e){let i=n.lineBlockAt(t.head),s=n.moveToLineBoundary(
 t,e);if(s.head==t.head&&s.head!=(e?i.to:i.from)&&(s=n.moveToLineBoundary(t,e,!1)),!e&&s.head==i.from&&i.length){let r=/^\s*/.
-exec(n.state.sliceDoc(i.from,Math.min(i.from+100,i.to)))[0].length;r&&t.head!=i.from+r&&(s=k.cursor(i.from+r))}return s}
-var Pu=n=>Pt(n,t=>fe(n,t,!0)),Ru=n=>Pt(n,t=>fe(n,t,!1)),Iu=n=>Pt(n,t=>fe(n,t,!rt(n))),Nu=n=>Pt(n,t=>fe(n,t,rt(n))),Hu=n=>Pt(
-n,t=>k.cursor(n.lineBlockAt(t.head).from,1)),Fu=n=>Pt(n,t=>k.cursor(n.lineBlockAt(t.head).to,-1));function Vu(n,t,e){let i=!1,
+exec(n.state.sliceDoc(i.from,Math.min(i.from+100,i.to)))[0].length;r&&t.head!=i.from+r&&(s=w.cursor(i.from+r))}return s}
+var Ru=n=>Pt(n,t=>fe(n,t,!0)),Iu=n=>Pt(n,t=>fe(n,t,!1)),Nu=n=>Pt(n,t=>fe(n,t,!rt(n))),Hu=n=>Pt(n,t=>fe(n,t,rt(n))),Fu=n=>Pt(
+n,t=>w.cursor(n.lineBlockAt(t.head).from,1)),Vu=n=>Pt(n,t=>w.cursor(n.lineBlockAt(t.head).to,-1));function zu(n,t,e){let i=!1,
 s=Ge(n.selection,r=>{let o=Me(n,r.head,-1)||Me(n,r.head,1)||r.head>0&&Me(n,r.head-1,1)||r.head<n.doc.length&&Me(n,r.head+
-1,-1);if(!o||!o.end)return r;i=!0;let l=o.start.from==r.head?o.end.to:o.end.from;return e?k.range(r.anchor,l):k.cursor(l)});
-return i?(t(Ot(n,s)),!0):!1}var zu=({state:n,dispatch:t})=>Vu(n,t,!1);function At(n,t){let e=Ge(n.state.selection,i=>{let s=t(i);return k.range(i.anchor,s.head,s.goalColumn,s.bidiLevel||void 0)});
-return e.eq(n.state.selection)?!1:(n.dispatch(Ot(n.state,e)),!0)}function Ya(n,t){return At(n,e=>n.moveByChar(e,t))}var Qa=n=>Ya(
-n,!rt(n)),Za=n=>Ya(n,rt(n));function th(n,t){return At(n,e=>n.moveByGroup(e,t))}var Wu=n=>th(n,!rt(n)),qu=n=>th(n,rt(n));var Ku=n=>At(n,t=>Vn(n.state,t,!rt(n))),ju=n=>At(n,t=>Vn(n.state,t,rt(n)));function eh(n,t){return At(n,e=>n.moveVertically(
-e,t))}var ih=n=>eh(n,!1),nh=n=>eh(n,!0);function sh(n,t){return At(n,e=>n.moveVertically(e,t,Xa(n).height))}var Ta=n=>sh(
-n,!1),La=n=>sh(n,!0),$u=n=>At(n,t=>fe(n,t,!0)),Uu=n=>At(n,t=>fe(n,t,!1)),Gu=n=>At(n,t=>fe(n,t,!rt(n))),_u=n=>At(n,t=>fe(
-n,t,rt(n))),Xu=n=>At(n,t=>k.cursor(n.lineBlockAt(t.head).from)),Ju=n=>At(n,t=>k.cursor(n.lineBlockAt(t.head).to)),Ba=({state:n,
-dispatch:t})=>(t(Ot(n,{anchor:0})),!0),Ea=({state:n,dispatch:t})=>(t(Ot(n,{anchor:n.doc.length})),!0),Oa=({state:n,dispatch:t})=>(t(
-Ot(n,{anchor:n.selection.main.anchor,head:0})),!0),Pa=({state:n,dispatch:t})=>(t(Ot(n,{anchor:n.selection.main.anchor,head:n.
-doc.length})),!0),Yu=({state:n,dispatch:t})=>(t(n.update({selection:{anchor:0,head:n.doc.length},userEvent:"select"})),!0),
-Qu=({state:n,dispatch:t})=>{let e=zn(n).map(({from:i,to:s})=>k.range(i,Math.min(s+1,n.doc.length)));return t(n.update({selection:k.
-create(e),userEvent:"select"})),!0},Zu=({state:n,dispatch:t})=>{let e=Ge(n.selection,i=>{let s=te(n),r=s.resolveStack(i.
+1,-1);if(!o||!o.end)return r;i=!0;let l=o.start.from==r.head?o.end.to:o.end.from;return e?w.range(r.anchor,l):w.cursor(l)});
+return i?(t(Ot(n,s)),!0):!1}var Wu=({state:n,dispatch:t})=>zu(n,t,!1);function At(n,t){let e=Ge(n.state.selection,i=>{let s=t(i);return w.range(i.anchor,s.head,s.goalColumn,s.bidiLevel||void 0)});
+return e.eq(n.state.selection)?!1:(n.dispatch(Ot(n.state,e)),!0)}function Qa(n,t){return At(n,e=>n.moveByChar(e,t))}var Za=n=>Qa(
+n,!rt(n)),th=n=>Qa(n,rt(n));function eh(n,t){return At(n,e=>n.moveByGroup(e,t))}var qu=n=>eh(n,!rt(n)),Ku=n=>eh(n,rt(n));var ju=n=>At(n,t=>Vn(n.state,t,!rt(n))),$u=n=>At(n,t=>Vn(n.state,t,rt(n)));function ih(n,t){return At(n,e=>n.moveVertically(
+e,t))}var nh=n=>ih(n,!1),sh=n=>ih(n,!0);function rh(n,t){return At(n,e=>n.moveVertically(e,t,Ja(n).height))}var Ta=n=>rh(
+n,!1),Ba=n=>rh(n,!0),Uu=n=>At(n,t=>fe(n,t,!0)),Gu=n=>At(n,t=>fe(n,t,!1)),_u=n=>At(n,t=>fe(n,t,!rt(n))),Xu=n=>At(n,t=>fe(
+n,t,rt(n))),Ju=n=>At(n,t=>w.cursor(n.lineBlockAt(t.head).from)),Yu=n=>At(n,t=>w.cursor(n.lineBlockAt(t.head).to)),Ea=({state:n,
+dispatch:t})=>(t(Ot(n,{anchor:0})),!0),Oa=({state:n,dispatch:t})=>(t(Ot(n,{anchor:n.doc.length})),!0),Pa=({state:n,dispatch:t})=>(t(
+Ot(n,{anchor:n.selection.main.anchor,head:0})),!0),Ra=({state:n,dispatch:t})=>(t(Ot(n,{anchor:n.selection.main.anchor,head:n.
+doc.length})),!0),Qu=({state:n,dispatch:t})=>(t(n.update({selection:{anchor:0,head:n.doc.length},userEvent:"select"})),!0),
+Zu=({state:n,dispatch:t})=>{let e=zn(n).map(({from:i,to:s})=>w.range(i,Math.min(s+1,n.doc.length)));return t(n.update({selection:w.
+create(e),userEvent:"select"})),!0},td=({state:n,dispatch:t})=>{let e=Ge(n.selection,i=>{let s=te(n),r=s.resolveStack(i.
 from,1);if(i.empty){let o=s.resolveStack(i.from,-1);o.node.from>=r.node.from&&o.node.to<=r.node.to&&(r=o)}for(let o=r;o;o=
-o.next){let{node:l}=o;if((l.from<i.from&&l.to>=i.to||l.to>i.to&&l.from<=i.from)&&o.next)return k.range(l.to,l.from)}return i});
-return e.eq(n.selection)?!1:(t(Ot(n,e)),!0)};function rh(n,t){let{state:e}=n,i=e.selection,s=e.selection.ranges.slice();
+o.next){let{node:l}=o;if((l.from<i.from&&l.to>=i.to||l.to>i.to&&l.from<=i.from)&&o.next)return w.range(l.to,l.from)}return i});
+return e.eq(n.selection)?!1:(t(Ot(n,e)),!0)};function oh(n,t){let{state:e}=n,i=e.selection,s=e.selection.ranges.slice();
 for(let r of e.selection.ranges){let o=e.doc.lineAt(r.head);if(t?o.to<n.state.doc.length:o.from>0)for(let l=r;;){let a=n.
 moveVertically(l,t);if(a.head<o.from||a.head>o.to){s.some(f=>f.head==a.head)||s.push(a);break}else{if(a.head==l.head)break;
-l=a}}}return s.length==i.ranges.length?!1:(n.dispatch(Ot(e,k.create(s,s.length-1))),!0)}var td=n=>rh(n,!1),ed=n=>rh(n,!0),
-id=({state:n,dispatch:t})=>{let e=n.selection,i=null;return e.ranges.length>1?i=k.create([e.main]):e.main.empty||(i=k.create(
-[k.cursor(e.main.head)])),i?(t(Ot(n,i)),!0):!1};function Ni(n,t){if(n.state.readOnly)return!1;let e="delete.selection",{
+l=a}}}return s.length==i.ranges.length?!1:(n.dispatch(Ot(e,w.create(s,s.length-1))),!0)}var ed=n=>oh(n,!1),id=n=>oh(n,!0),
+nd=({state:n,dispatch:t})=>{let e=n.selection,i=null;return e.ranges.length>1?i=w.create([e.main]):e.main.empty||(i=w.create(
+[w.cursor(e.main.head)])),i?(t(Ot(n,i)),!0):!1};function Ni(n,t){if(n.state.readOnly)return!1;let e="delete.selection",{
 state:i}=n,s=i.changeByRange(r=>{let{from:o,to:l}=r;if(o==l){let a=t(r);a<o?(e="delete.backward",a=Rn(n,a,!1)):a>o&&(e="\
 delete.forward",a=Rn(n,a,!0)),o=Math.min(o,a),l=Math.max(l,a)}else o=Rn(n,o,!1),l=Rn(n,l,!0);return o==l?{range:r}:{changes:{
-from:o,to:l},range:k.cursor(o,o<r.head?-1:1)}});return s.changes.empty?!1:(n.dispatch(i.update(s,{scrollIntoView:!0,userEvent:e,
+from:o,to:l},range:w.cursor(o,o<r.head?-1:1)}});return s.changes.empty?!1:(n.dispatch(i.update(s,{scrollIntoView:!0,userEvent:e,
 effects:e=="delete.selection"?E.announce.of(i.phrase("Selection deleted")):void 0})),!0)}function Rn(n,t,e){if(n instanceof
-E)for(let i of n.state.facet(E.atomicRanges).map(s=>s(n)))i.between(t,t,(s,r)=>{s<t&&r>t&&(t=e?r:s)});return t}var oh=(n,t,e)=>Ni(
+E)for(let i of n.state.facet(E.atomicRanges).map(s=>s(n)))i.between(t,t,(s,r)=>{s<t&&r>t&&(t=e?r:s)});return t}var lh=(n,t,e)=>Ni(
 n,i=>{let s=i.from,{state:r}=n,o=r.doc.lineAt(s),l,a;if(e&&!t&&s>o.from&&s<o.from+200&&!/[^ \t]/.test(l=o.text.slice(0,s-
 o.from))){if(l[l.length-1]=="	")return s-1;let f=ge(l,r.tabSize),h=f%Oi(r)||Oi(r);for(let c=0;c<h&&l[l.length-1-c]==" ";c++)
 s--;a=s}else a=it(o.text,s-o.from,t,t)+o.from,a==s&&o.number!=(t?r.doc.lines:1)?a+=t?1:-1:!t&&/[\ufe00-\ufe0f]/.test(o.text.
-slice(a-o.from,s-o.from))&&(a=it(o.text,a-o.from,!1,!1)+o.from);return a}),Lr=n=>oh(n,!1,!0);var lh=n=>oh(n,!0,!1),ah=(n,t)=>Ni(n,e=>{let i=e.head,{state:s}=n,r=s.doc.lineAt(i),o=s.charCategorizer(i);for(let l=null;;){
+slice(a-o.from,s-o.from))&&(a=it(o.text,a-o.from,!1,!1)+o.from);return a}),Tr=n=>lh(n,!1,!0);var ah=n=>lh(n,!0,!1),hh=(n,t)=>Ni(n,e=>{let i=e.head,{state:s}=n,r=s.doc.lineAt(i),o=s.charCategorizer(i);for(let l=null;;){
 if(i==(t?r.to:r.from)){i==e.head&&r.number!=(t?s.doc.lines:1)&&(i+=t?1:-1);break}let a=it(r.text,i-r.from,t)+r.from,f=r.
 text.slice(Math.min(i,a)-r.from,Math.max(i,a)-r.from),h=o(f);if(l!=null&&h!=l)break;(f!=" "||i!=e.head)&&(l=h),i=a}return i}),
-hh=n=>ah(n,!1),nd=n=>ah(n,!0);var sd=n=>Ni(n,t=>{let e=n.lineBlockAt(t.head).to;return t.head<e?e:Math.min(n.state.doc.length,t.head+1)});var rd=n=>Ni(n,t=>{let e=n.moveToLineBoundary(t,!1).head;return t.head>e?e:Math.max(0,t.head-1)}),od=n=>Ni(n,t=>{let e=n.
-moveToLineBoundary(t,!0).head;return t.head<e?e:Math.min(n.state.doc.length,t.head+1)});var ld=({state:n,dispatch:t})=>{if(n.readOnly)return!1;let e=n.changeByRange(i=>({changes:{from:i.from,to:i.to,insert:I.
-of(["",""])},range:k.cursor(i.from)}));return t(n.update(e,{scrollIntoView:!0,userEvent:"input"})),!0},ad=({state:n,dispatch:t})=>{
+fh=n=>hh(n,!1),sd=n=>hh(n,!0);var rd=n=>Ni(n,t=>{let e=n.lineBlockAt(t.head).to;return t.head<e?e:Math.min(n.state.doc.length,t.head+1)});var od=n=>Ni(n,t=>{let e=n.moveToLineBoundary(t,!1).head;return t.head>e?e:Math.max(0,t.head-1)}),ld=n=>Ni(n,t=>{let e=n.
+moveToLineBoundary(t,!0).head;return t.head<e?e:Math.min(n.state.doc.length,t.head+1)});var ad=({state:n,dispatch:t})=>{if(n.readOnly)return!1;let e=n.changeByRange(i=>({changes:{from:i.from,to:i.to,insert:I.
+of(["",""])},range:w.cursor(i.from)}));return t(n.update(e,{scrollIntoView:!0,userEvent:"input"})),!0},hd=({state:n,dispatch:t})=>{
 if(n.readOnly)return!1;let e=n.changeByRange(i=>{if(!i.empty||i.from==0||i.from==n.doc.length)return{range:i};let s=i.from,
 r=n.doc.lineAt(s),o=s==r.from?s-1:it(r.text,s-r.from,!1)+r.from,l=s==r.to?s+1:it(r.text,s-r.from,!0)+r.from;return{changes:{
-from:o,to:l,insert:n.doc.slice(s,l).append(n.doc.slice(o,s))},range:k.cursor(l)}});return e.changes.empty?!1:(t(n.update(
+from:o,to:l,insert:n.doc.slice(s,l).append(n.doc.slice(o,s))},range:w.cursor(l)}});return e.changes.empty?!1:(t(n.update(
 e,{scrollIntoView:!0,userEvent:"move.character"})),!0)};function zn(n){let t=[],e=-1;for(let i of n.selection.ranges){let s=n.
 doc.lineAt(i.from),r=n.doc.lineAt(i.to);if(!i.empty&&i.to==r.from&&(r=n.doc.lineAt(i.to-1)),e>=s.number){let o=t[t.length-
-1];o.to=r.to,o.ranges.push(i)}else t.push({from:s.from,to:r.to,ranges:[i]});e=r.number+1}return t}function fh(n,t,e){if(n.
+1];o.to=r.to,o.ranges.push(i)}else t.push({from:s.from,to:r.to,ranges:[i]});e=r.number+1}return t}function ch(n,t,e){if(n.
 readOnly)return!1;let i=[],s=[];for(let r of zn(n)){if(e?r.to==n.doc.length:r.from==0)continue;let o=n.doc.lineAt(e?r.to+
 1:r.from-1),l=o.length+1;if(e){i.push({from:r.to,to:o.to},{from:r.from,insert:o.text+n.lineBreak});for(let a of r.ranges)
-s.push(k.range(Math.min(n.doc.length,a.anchor+l),Math.min(n.doc.length,a.head+l)))}else{i.push({from:o.from,to:r.from},{
-from:r.to,insert:n.lineBreak+o.text});for(let a of r.ranges)s.push(k.range(a.anchor-l,a.head-l))}}return i.length?(t(n.update(
-{changes:i,scrollIntoView:!0,selection:k.create(s,n.selection.mainIndex),userEvent:"move.line"})),!0):!1}var hd=({state:n,
-dispatch:t})=>fh(n,t,!1),fd=({state:n,dispatch:t})=>fh(n,t,!0);function ch(n,t,e){if(n.readOnly)return!1;let i=[];for(let r of zn(
+s.push(w.range(Math.min(n.doc.length,a.anchor+l),Math.min(n.doc.length,a.head+l)))}else{i.push({from:o.from,to:r.from},{
+from:r.to,insert:n.lineBreak+o.text});for(let a of r.ranges)s.push(w.range(a.anchor-l,a.head-l))}}return i.length?(t(n.update(
+{changes:i,scrollIntoView:!0,selection:w.create(s,n.selection.mainIndex),userEvent:"move.line"})),!0):!1}var fd=({state:n,
+dispatch:t})=>ch(n,t,!1),cd=({state:n,dispatch:t})=>ch(n,t,!0);function uh(n,t,e){if(n.readOnly)return!1;let i=[];for(let r of zn(
 n))e?i.push({from:r.from,insert:n.doc.slice(r.from,r.to)+n.lineBreak}):i.push({from:r.to,insert:n.lineBreak+n.doc.slice(
 r.from,r.to)});let s=n.changes(i);return t(n.update({changes:s,selection:n.selection.map(s,e?1:-1),scrollIntoView:!0,userEvent:"\
-input.copyline"})),!0}var cd=({state:n,dispatch:t})=>ch(n,t,!1),ud=({state:n,dispatch:t})=>ch(n,t,!0),dd=n=>{if(n.state.
+input.copyline"})),!0}var ud=({state:n,dispatch:t})=>uh(n,t,!1),dd=({state:n,dispatch:t})=>uh(n,t,!0),pd=n=>{if(n.state.
 readOnly)return!1;let{state:t}=n,e=t.changes(zn(t).map(({from:s,to:r})=>(s>0?s--:r<t.doc.length&&r++,{from:s,to:r}))),i=Ge(
 t.selection,s=>{let r;if(n.lineWrapping){let o=n.lineBlockAt(s.head),l=n.coordsAtPos(s.head,s.assoc||1);l&&(r=o.bottom+n.
 documentTop-l.bottom+n.defaultLineHeight/2)}return n.moveVertically(s,!0,r)}).map(e);return n.dispatch({changes:e,selection:i,
-scrollIntoView:!0,userEvent:"delete.line"}),!0};function pd(n,t){if(/\(\)|\[\]|\{\}/.test(n.sliceDoc(t-1,t+1)))return{from:t,to:t};let e=te(n).resolveInner(t),i=e.childBefore(
+scrollIntoView:!0,userEvent:"delete.line"}),!0};function md(n,t){if(/\(\)|\[\]|\{\}/.test(n.sliceDoc(t-1,t+1)))return{from:t,to:t};let e=te(n).resolveInner(t),i=e.childBefore(
 t),s=e.childAfter(t),r;return i&&s&&i.to<=t&&s.from>=t&&(r=i.type.prop(O.closedBy))&&r.indexOf(s.name)>-1&&n.doc.lineAt(
-i.to).from==n.doc.lineAt(s.from).from&&!/\S/.test(n.sliceDoc(i.to,s.from))?{from:i.to,to:s.from}:null}var Ra=uh(!1),md=uh(
-!0);function uh(n){return({state:t,dispatch:e})=>{if(t.readOnly)return!1;let i=t.changeByRange(s=>{let{from:r,to:o}=s,l=t.
-doc.lineAt(r),a=!n&&r==o&&pd(t,r);n&&(r=o=(o<=l.to?l:t.doc.lineAt(o)).to);let f=new Ae(t,{simulateBreak:r,simulateDoubleBreak:!!a}),
+i.to).from==n.doc.lineAt(s.from).from&&!/\S/.test(n.sliceDoc(i.to,s.from))?{from:i.to,to:s.from}:null}var Ia=dh(!1),gd=dh(
+!0);function dh(n){return({state:t,dispatch:e})=>{if(t.readOnly)return!1;let i=t.changeByRange(s=>{let{from:r,to:o}=s,l=t.
+doc.lineAt(r),a=!n&&r==o&&md(t,r);n&&(r=o=(o<=l.to?l:t.doc.lineAt(o)).to);let f=new Ae(t,{simulateBreak:r,simulateDoubleBreak:!!a}),
 h=Ar(f,r);for(h==null&&(h=ge(/^\s*/.exec(t.doc.lineAt(r).text)[0],t.tabSize));o<l.to&&/\s/.test(l.text[o-l.from]);)o++;a?
 {from:r,to:o}=a:r>l.from&&r<l.from+100&&!/\S/.test(l.text.slice(0,r))&&(r=l.from);let c=["",Pi(t,h)];return a&&c.push(Pi(
-t,f.lineIndent(l.from,-1))),{changes:{from:r,to:o,insert:I.of(c)},range:k.cursor(r+1+c[1].length)}});return e(t.update(i,
-{scrollIntoView:!0,userEvent:"input"})),!0}}function Or(n,t){let e=-1;return n.changeByRange(i=>{let s=[];for(let o=i.from;o<=
+t,f.lineIndent(l.from,-1))),{changes:{from:r,to:o,insert:I.of(c)},range:w.cursor(r+1+c[1].length)}});return e(t.update(i,
+{scrollIntoView:!0,userEvent:"input"})),!0}}function Pr(n,t){let e=-1;return n.changeByRange(i=>{let s=[];for(let o=i.from;o<=
 i.to;){let l=n.doc.lineAt(o);l.number>e&&(i.empty||i.to>l.from)&&(t(l,s,i),e=l.number),o=l.to+1}let r=n.changes(s);return{
-changes:s,range:k.range(r.mapPos(i.anchor,1),r.mapPos(i.head,1))}})}var gd=({state:n,dispatch:t})=>{if(n.readOnly)return!1;
-let e=Object.create(null),i=new Ae(n,{overrideIndentation:r=>{let o=e[r];return o??-1}}),s=Or(n,(r,o,l)=>{let a=Ar(i,r.from);
+changes:s,range:w.range(r.mapPos(i.anchor,1),r.mapPos(i.head,1))}})}var bd=({state:n,dispatch:t})=>{if(n.readOnly)return!1;
+let e=Object.create(null),i=new Ae(n,{overrideIndentation:r=>{let o=e[r];return o??-1}}),s=Pr(n,(r,o,l)=>{let a=Ar(i,r.from);
 if(a==null)return;/\S/.test(r.text)||(a=0);let f=/^\s*/.exec(r.text)[0],h=Pi(n,a);(f!=h||l.from<r.from+f.length)&&(e[r.from]=
-a,o.push({from:r.from,to:r.from+f.length,insert:h}))});return s.changes.empty||t(n.update(s,{userEvent:"indent"})),!0},bd=({
-state:n,dispatch:t})=>n.readOnly?!1:(t(n.update(Or(n,(e,i)=>{i.push({from:e.from,insert:n.facet(Pn)})}),{userEvent:"inpu\
-t.indent"})),!0),yd=({state:n,dispatch:t})=>n.readOnly?!1:(t(n.update(Or(n,(e,i)=>{let s=/^\s*/.exec(e.text)[0];if(!s)return;
+a,o.push({from:r.from,to:r.from+f.length,insert:h}))});return s.changes.empty||t(n.update(s,{userEvent:"indent"})),!0},yd=({
+state:n,dispatch:t})=>n.readOnly?!1:(t(n.update(Pr(n,(e,i)=>{i.push({from:e.from,insert:n.facet(Pn)})}),{userEvent:"inpu\
+t.indent"})),!0),kd=({state:n,dispatch:t})=>n.readOnly?!1:(t(n.update(Pr(n,(e,i)=>{let s=/^\s*/.exec(e.text)[0];if(!s)return;
 let r=ge(s,n.tabSize),o=0,l=Pi(n,Math.max(0,r-Oi(n)));for(;o<s.length&&o<l.length&&s.charCodeAt(o)==l.charCodeAt(o);)o++;
-i.push({from:e.from+o,to:e.from+s.length,insert:l.slice(o)})}),{userEvent:"delete.dedent"})),!0),kd=n=>(n.setTabFocusMode(),
-!0);var wd=[{key:"Ctrl-b",run:Ka,shift:Qa,preventDefault:!0},{key:"Ctrl-f",run:ja,shift:Za},{key:"Ctrl-p",run:Ga,shift:ih},{
-key:"Ctrl-n",run:_a,shift:nh},{key:"Ctrl-a",run:Hu,shift:Xu},{key:"Ctrl-e",run:Fu,shift:Ju},{key:"Ctrl-d",run:lh},{key:"\
-Ctrl-h",run:Lr},{key:"Ctrl-k",run:sd},{key:"Ctrl-Alt-h",run:hh},{key:"Ctrl-o",run:ld},{key:"Ctrl-t",run:ad},{key:"Ctrl-v",
-run:Tr}],xd=[{key:"ArrowLeft",run:Ka,shift:Qa,preventDefault:!0},{key:"Mod-ArrowLeft",mac:"Alt-ArrowLeft",run:Tu,shift:Wu,
-preventDefault:!0},{mac:"Cmd-ArrowLeft",run:Iu,shift:Gu,preventDefault:!0},{key:"ArrowRight",run:ja,shift:Za,preventDefault:!0},
-{key:"Mod-ArrowRight",mac:"Alt-ArrowRight",run:Lu,shift:qu,preventDefault:!0},{mac:"Cmd-ArrowRight",run:Nu,shift:_u,preventDefault:!0},
-{key:"ArrowUp",run:Ga,shift:ih,preventDefault:!0},{mac:"Cmd-ArrowUp",run:Ba,shift:Oa},{mac:"Ctrl-ArrowUp",run:Da,shift:Ta},
-{key:"ArrowDown",run:_a,shift:nh,preventDefault:!0},{mac:"Cmd-ArrowDown",run:Ea,shift:Pa},{mac:"Ctrl-ArrowDown",run:Tr,shift:La},
-{key:"PageUp",run:Da,shift:Ta},{key:"PageDown",run:Tr,shift:La},{key:"Home",run:Ru,shift:Uu,preventDefault:!0},{key:"Mod\
--Home",run:Ba,shift:Oa},{key:"End",run:Pu,shift:$u,preventDefault:!0},{key:"Mod-End",run:Ea,shift:Pa},{key:"Enter",run:Ra,
-shift:Ra},{key:"Mod-a",run:Yu},{key:"Backspace",run:Lr,shift:Lr,preventDefault:!0},{key:"Delete",run:lh,preventDefault:!0},
-{key:"Mod-Backspace",mac:"Alt-Backspace",run:hh,preventDefault:!0},{key:"Mod-Delete",mac:"Alt-Delete",run:nd,preventDefault:!0},
-{mac:"Mod-Backspace",run:rd,preventDefault:!0},{mac:"Mod-Delete",run:od,preventDefault:!0}].concat(wd.map(n=>({mac:n.key,
-run:n.run,shift:n.shift}))),dh=[{key:"Alt-ArrowLeft",mac:"Ctrl-ArrowLeft",run:Eu,shift:Ku},{key:"Alt-ArrowRight",mac:"Ct\
-rl-ArrowRight",run:Ou,shift:ju},{key:"Alt-ArrowUp",run:hd},{key:"Shift-Alt-ArrowUp",run:cd},{key:"Alt-ArrowDown",run:fd},
-{key:"Shift-Alt-ArrowDown",run:ud},{key:"Mod-Alt-ArrowUp",run:td},{key:"Mod-Alt-ArrowDown",run:ed},{key:"Escape",run:id},
-{key:"Mod-Enter",run:md},{key:"Alt-l",mac:"Ctrl-l",run:Qu},{key:"Mod-i",run:Zu,preventDefault:!0},{key:"Mod-[",run:yd},{
-key:"Mod-]",run:bd},{key:"Mod-Alt-\\",run:gd},{key:"Shift-Mod-k",run:dd},{key:"Shift-Mod-\\",run:zu},{key:"Mod-/",run:cu},
-{key:"Alt-A",run:du},{key:"Ctrl-m",mac:"Shift-Alt-m",run:kd}].concat(xd);var Kn=class n{static create(t,e,i,s,r){let o=s+(s<<8)+t+(e<<4)|0;return new n(t,e,i,o,r,[],[])}constructor(t,e,i,s,r,o,l){
+i.push({from:e.from+o,to:e.from+s.length,insert:l.slice(o)})}),{userEvent:"delete.dedent"})),!0),wd=n=>(n.setTabFocusMode(),
+!0);var xd=[{key:"Ctrl-b",run:ja,shift:Za,preventDefault:!0},{key:"Ctrl-f",run:$a,shift:th},{key:"Ctrl-p",run:_a,shift:nh},{
+key:"Ctrl-n",run:Xa,shift:sh},{key:"Ctrl-a",run:Fu,shift:Ju},{key:"Ctrl-e",run:Vu,shift:Yu},{key:"Ctrl-d",run:ah},{key:"\
+Ctrl-h",run:Tr},{key:"Ctrl-k",run:rd},{key:"Ctrl-Alt-h",run:fh},{key:"Ctrl-o",run:ad},{key:"Ctrl-t",run:hd},{key:"Ctrl-v",
+run:Lr}],Sd=[{key:"ArrowLeft",run:ja,shift:Za,preventDefault:!0},{key:"Mod-ArrowLeft",mac:"Alt-ArrowLeft",run:Tu,shift:qu,
+preventDefault:!0},{mac:"Cmd-ArrowLeft",run:Nu,shift:_u,preventDefault:!0},{key:"ArrowRight",run:$a,shift:th,preventDefault:!0},
+{key:"Mod-ArrowRight",mac:"Alt-ArrowRight",run:Bu,shift:Ku,preventDefault:!0},{mac:"Cmd-ArrowRight",run:Hu,shift:Xu,preventDefault:!0},
+{key:"ArrowUp",run:_a,shift:nh,preventDefault:!0},{mac:"Cmd-ArrowUp",run:Ea,shift:Pa},{mac:"Ctrl-ArrowUp",run:La,shift:Ta},
+{key:"ArrowDown",run:Xa,shift:sh,preventDefault:!0},{mac:"Cmd-ArrowDown",run:Oa,shift:Ra},{mac:"Ctrl-ArrowDown",run:Lr,shift:Ba},
+{key:"PageUp",run:La,shift:Ta},{key:"PageDown",run:Lr,shift:Ba},{key:"Home",run:Iu,shift:Gu,preventDefault:!0},{key:"Mod\
+-Home",run:Ea,shift:Pa},{key:"End",run:Ru,shift:Uu,preventDefault:!0},{key:"Mod-End",run:Oa,shift:Ra},{key:"Enter",run:Ia,
+shift:Ia},{key:"Mod-a",run:Qu},{key:"Backspace",run:Tr,shift:Tr,preventDefault:!0},{key:"Delete",run:ah,preventDefault:!0},
+{key:"Mod-Backspace",mac:"Alt-Backspace",run:fh,preventDefault:!0},{key:"Mod-Delete",mac:"Alt-Delete",run:sd,preventDefault:!0},
+{mac:"Mod-Backspace",run:od,preventDefault:!0},{mac:"Mod-Delete",run:ld,preventDefault:!0}].concat(xd.map(n=>({mac:n.key,
+run:n.run,shift:n.shift}))),ph=[{key:"Alt-ArrowLeft",mac:"Ctrl-ArrowLeft",run:Ou,shift:ju},{key:"Alt-ArrowRight",mac:"Ct\
+rl-ArrowRight",run:Pu,shift:$u},{key:"Alt-ArrowUp",run:fd},{key:"Shift-Alt-ArrowUp",run:ud},{key:"Alt-ArrowDown",run:cd},
+{key:"Shift-Alt-ArrowDown",run:dd},{key:"Mod-Alt-ArrowUp",run:ed},{key:"Mod-Alt-ArrowDown",run:id},{key:"Escape",run:nd},
+{key:"Mod-Enter",run:gd},{key:"Alt-l",mac:"Ctrl-l",run:Zu},{key:"Mod-i",run:td,preventDefault:!0},{key:"Mod-[",run:kd},{
+key:"Mod-]",run:yd},{key:"Mod-Alt-\\",run:bd},{key:"Shift-Mod-k",run:pd},{key:"Shift-Mod-\\",run:Wu},{key:"Mod-/",run:du},
+{key:"Alt-A",run:mu},{key:"Ctrl-m",mac:"Shift-Alt-m",run:wd}].concat(Sd);var Kn=class n{static create(t,e,i,s,r){let o=s+(s<<8)+t+(e<<4)|0;return new n(t,e,i,o,r,[],[])}constructor(t,e,i,s,r,o,l){
 this.type=t,this.value=e,this.from=i,this.hash=s,this.end=r,this.children=o,this.positions=l,this.hashProp=[[O.contextHash,
 s]]}addChild(t,e){t.prop(O.contextHash)!=this.hash&&(t=new _(t.type,t.children,t.positions,t.length,this.hashProp)),this.
 children.push(t),this.positions.push(e)}toTree(t,e=this.end){let i=this.children.length-1;return i>=0&&(e=Math.max(e,this.
 positions[i]+this.children[i].length+this.from)),new _(t.types[this.type],this.children,this.positions,e-this.from).balance(
-{makeTree:(s,r,o)=>new _(tt.none,s,r,o,this.hashProp)})}},x;(function(n){n[n.Document=1]="Document",n[n.CodeBlock=2]="Co\
+{makeTree:(s,r,o)=>new _(tt.none,s,r,o,this.hashProp)})}},S;(function(n){n[n.Document=1]="Document",n[n.CodeBlock=2]="Co\
 deBlock",n[n.FencedCode=3]="FencedCode",n[n.Blockquote=4]="Blockquote",n[n.HorizontalRule=5]="HorizontalRule",n[n.BulletList=
 6]="BulletList",n[n.OrderedList=7]="OrderedList",n[n.ListItem=8]="ListItem",n[n.ATXHeading1=9]="ATXHeading1",n[n.ATXHeading2=
 10]="ATXHeading2",n[n.ATXHeading3=11]="ATXHeading3",n[n.ATXHeading4=12]="ATXHeading4",n[n.ATXHeading5=13]="ATXHeading5",
@@ -2179,7 +2179,7 @@ mage",n[n.InlineCode=29]="InlineCode",n[n.HTMLTag=30]="HTMLTag",n[n.Comment=31]=
 "ProcessingInstruction",n[n.Autolink=33]="Autolink",n[n.HeaderMark=34]="HeaderMark",n[n.QuoteMark=35]="QuoteMark",n[n.ListMark=
 36]="ListMark",n[n.LinkMark=37]="LinkMark",n[n.EmphasisMark=38]="EmphasisMark",n[n.CodeMark=39]="CodeMark",n[n.CodeText=
 40]="CodeText",n[n.CodeInfo=41]="CodeInfo",n[n.LinkTitle=42]="LinkTitle",n[n.LinkLabel=43]="LinkLabel",n[n.URL=44]="URL"})(
-x||(x={}));var Ir=class{constructor(t,e){this.start=t,this.content=e,this.marks=[],this.parsers=[]}},Nr=class{constructor(){
+S||(S={}));var Nr=class{constructor(t,e){this.start=t,this.content=e,this.marks=[],this.parsers=[]}},Hr=class{constructor(){
 this.text="",this.baseIndent=0,this.basePos=0,this.depth=0,this.markers=[],this.pos=0,this.indent=0,this.next=-1}forward(){
 this.basePos>this.pos&&this.forwardInner()}forwardInner(){let t=this.skipSpace(this.basePos);this.indent=this.countIndent(
 t,this.pos,this.indent),this.pos=t,this.next=t==this.text.length?-1:this.text.charCodeAt(t)}skipSpace(t){return Fi(this.
@@ -2188,101 +2188,101 @@ markers.length;)this.markers.pop()}moveBase(t){this.basePos=t,this.baseIndent=th
 this.baseIndent=t,this.basePos=this.findColumn(t)}addMarker(t){this.markers.push(t)}countIndent(t,e=0,i=0){for(let s=e;s<
 t;s++)i+=this.text.charCodeAt(s)==9?4-i%4:1;return i}findColumn(t){let e=0;for(let i=0;e<this.text.length&&i<t;e++)i+=this.
 text.charCodeAt(e)==9?4-i%4:1;return e}scrub(){if(!this.baseIndent)return this.text;let t="";for(let e=0;e<this.basePos;e++)
-t+=" ";return t+this.text.slice(this.basePos)}};function ph(n,t,e){if(e.pos==e.text.length||n!=t.block&&e.indent>=t.stack[e.
-depth+1].value+e.baseIndent)return!0;if(e.indent>=e.baseIndent+4)return!1;let i=(n.type==x.OrderedList?Yr:Jr)(e,t,!1);return i>
-0&&(n.type!=x.BulletList||Xr(e,t,!1)<0)&&e.text.charCodeAt(e.pos+i-1)==n.value}var Ah={[x.Blockquote](n,t,e){return e.next!=
-62?!1:(e.markers.push(N(x.QuoteMark,t.lineStart+e.pos,t.lineStart+e.pos+1)),e.moveBase(e.pos+(Mt(e.text.charCodeAt(e.pos+
-1))?2:1)),n.end=t.lineStart+e.text.length,!0)},[x.ListItem](n,t,e){return e.indent<e.baseIndent+n.value&&e.next>-1?!1:(e.
-moveBaseColumn(e.baseIndent+n.value),!0)},[x.OrderedList]:ph,[x.BulletList]:ph,[x.Document](){return!0}};function Mt(n){
-return n==32||n==9||n==10||n==13}function Fi(n,t=0){for(;t<n.length&&Mt(n.charCodeAt(t));)t++;return t}function mh(n,t,e){
-for(;t>e&&Mt(n.charCodeAt(t-1));)t--;return t}function Mh(n){if(n.next!=96&&n.next!=126)return-1;let t=n.pos+1;for(;t<n.
+t+=" ";return t+this.text.slice(this.basePos)}};function mh(n,t,e){if(e.pos==e.text.length||n!=t.block&&e.indent>=t.stack[e.
+depth+1].value+e.baseIndent)return!0;if(e.indent>=e.baseIndent+4)return!1;let i=(n.type==S.OrderedList?Qr:Yr)(e,t,!1);return i>
+0&&(n.type!=S.BulletList||Jr(e,t,!1)<0)&&e.text.charCodeAt(e.pos+i-1)==n.value}var Mh={[S.Blockquote](n,t,e){return e.next!=
+62?!1:(e.markers.push(N(S.QuoteMark,t.lineStart+e.pos,t.lineStart+e.pos+1)),e.moveBase(e.pos+(Mt(e.text.charCodeAt(e.pos+
+1))?2:1)),n.end=t.lineStart+e.text.length,!0)},[S.ListItem](n,t,e){return e.indent<e.baseIndent+n.value&&e.next>-1?!1:(e.
+moveBaseColumn(e.baseIndent+n.value),!0)},[S.OrderedList]:mh,[S.BulletList]:mh,[S.Document](){return!0}};function Mt(n){
+return n==32||n==9||n==10||n==13}function Fi(n,t=0){for(;t<n.length&&Mt(n.charCodeAt(t));)t++;return t}function gh(n,t,e){
+for(;t>e&&Mt(n.charCodeAt(t-1));)t--;return t}function Dh(n){if(n.next!=96&&n.next!=126)return-1;let t=n.pos+1;for(;t<n.
 text.length&&n.text.charCodeAt(t)==n.next;)t++;if(t<n.pos+3)return-1;if(n.next==96){for(let e=t;e<n.text.length;e++)if(n.
-text.charCodeAt(e)==96)return-1}return t}function Dh(n){return n.next!=62?-1:n.text.charCodeAt(n.pos+1)==32?2:1}function Xr(n,t,e){
+text.charCodeAt(e)==96)return-1}return t}function Lh(n){return n.next!=62?-1:n.text.charCodeAt(n.pos+1)==32?2:1}function Jr(n,t,e){
 if(n.next!=42&&n.next!=45&&n.next!=95)return-1;let i=1;for(let s=n.pos+1;s<n.text.length;s++){let r=n.text.charCodeAt(s);
-if(r==n.next)i++;else if(!Mt(r))return-1}return e&&n.next==45&&Bh(n)>-1&&n.depth==t.stack.length&&t.parser.leafBlockParsers.
-indexOf(Rh.SetextHeading)>-1||i<3?-1:1}function Th(n,t){for(let e=n.stack.length-1;e>=0;e--)if(n.stack[e].type==t)return!0;
-return!1}function Jr(n,t,e){return(n.next==45||n.next==43||n.next==42)&&(n.pos==n.text.length-1||Mt(n.text.charCodeAt(n.
-pos+1)))&&(!e||Th(t,x.BulletList)||n.skipSpace(n.pos+2)<n.text.length)?1:-1}function Yr(n,t,e){let i=n.pos,s=n.next;for(;s>=
+if(r==n.next)i++;else if(!Mt(r))return-1}return e&&n.next==45&&Eh(n)>-1&&n.depth==t.stack.length&&t.parser.leafBlockParsers.
+indexOf(Ih.SetextHeading)>-1||i<3?-1:1}function Th(n,t){for(let e=n.stack.length-1;e>=0;e--)if(n.stack[e].type==t)return!0;
+return!1}function Yr(n,t,e){return(n.next==45||n.next==43||n.next==42)&&(n.pos==n.text.length-1||Mt(n.text.charCodeAt(n.
+pos+1)))&&(!e||Th(t,S.BulletList)||n.skipSpace(n.pos+2)<n.text.length)?1:-1}function Qr(n,t,e){let i=n.pos,s=n.next;for(;s>=
 48&&s<=57;){i++;if(i==n.text.length)return-1;s=n.text.charCodeAt(i)}return i==n.pos||i>n.pos+9||s!=46&&s!=41||i<n.text.length-
-1&&!Mt(n.text.charCodeAt(i+1))||e&&!Th(t,x.OrderedList)&&(n.skipSpace(i+1)==n.text.length||i>n.pos+1||n.next!=49)?-1:i+1-
-n.pos}function Lh(n){if(n.next!=35)return-1;let t=n.pos+1;for(;t<n.text.length&&n.text.charCodeAt(t)==35;)t++;if(t<n.text.
-length&&n.text.charCodeAt(t)!=32)return-1;let e=t-n.pos;return e>6?-1:e}function Bh(n){if(n.next!=45&&n.next!=61||n.indent>=
+1&&!Mt(n.text.charCodeAt(i+1))||e&&!Th(t,S.OrderedList)&&(n.skipSpace(i+1)==n.text.length||i>n.pos+1||n.next!=49)?-1:i+1-
+n.pos}function Bh(n){if(n.next!=35)return-1;let t=n.pos+1;for(;t<n.text.length&&n.text.charCodeAt(t)==35;)t++;if(t<n.text.
+length&&n.text.charCodeAt(t)!=32)return-1;let e=t-n.pos;return e>6?-1:e}function Eh(n){if(n.next!=45&&n.next!=61||n.indent>=
 n.baseIndent+4)return-1;let t=n.pos+1;for(;t<n.text.length&&n.text.charCodeAt(t)==n.next;)t++;let e=t;for(;t<n.text.length&&
-Mt(n.text.charCodeAt(t));)t++;return t==n.text.length?e:-1}var Hr=/^[ \t]*$/,Eh=/-->/,Oh=/\?>/,Fr=[[/^<(?:script|pre|style)(?:\s|>|$)/i,
-/<\/(?:script|pre|style)>/i],[/^\s*<!--/,Eh],[/^\s*<\?/,Oh],[/^\s*<![A-Z]/,/>/],[/^\s*<!\[CDATA\[/,/\]\]>/],[/^\s*<\/?(?:address|article|aside|base|basefont|blockquote|body|caption|center|col|colgroup|dd|details|dialog|dir|div|dl|dt|fieldset|figcaption|figure|footer|form|frame|frameset|h1|h2|h3|h4|h5|h6|head|header|hr|html|iframe|legend|li|link|main|menu|menuitem|nav|noframes|ol|optgroup|option|p|param|section|source|summary|table|tbody|td|tfoot|th|thead|title|tr|track|ul)(?:\s|\/?>|$)/i,
-Hr],[/^\s*(?:<\/[a-z][\w-]*\s*>|<[a-z][\w-]*(\s+[a-z:_][\w-.]*(?:\s*=\s*(?:[^\s"'=<>`]+|'[^']*'|"[^"]*"))?)*\s*>)\s*$/i,
-Hr]];function Ph(n,t,e){if(n.next!=60)return-1;let i=n.text.slice(n.pos);for(let s=0,r=Fr.length-(e?1:0);s<r;s++)if(Fr[s][0].
-test(i))return s;return-1}function gh(n,t){let e=n.countIndent(t,n.pos,n.indent),i=n.countIndent(n.skipSpace(t),t,e);return i>=
-e+5?e+1:i}function Te(n,t,e){let i=n.length-1;i>=0&&n[i].to==t&&n[i].type==x.CodeText?n[i].to=e:n.push(N(x.CodeText,t,e))}
+Mt(n.text.charCodeAt(t));)t++;return t==n.text.length?e:-1}var Fr=/^[ \t]*$/,Oh=/-->/,Ph=/\?>/,Vr=[[/^<(?:script|pre|style)(?:\s|>|$)/i,
+/<\/(?:script|pre|style)>/i],[/^\s*<!--/,Oh],[/^\s*<\?/,Ph],[/^\s*<![A-Z]/,/>/],[/^\s*<!\[CDATA\[/,/\]\]>/],[/^\s*<\/?(?:address|article|aside|base|basefont|blockquote|body|caption|center|col|colgroup|dd|details|dialog|dir|div|dl|dt|fieldset|figcaption|figure|footer|form|frame|frameset|h1|h2|h3|h4|h5|h6|head|header|hr|html|iframe|legend|li|link|main|menu|menuitem|nav|noframes|ol|optgroup|option|p|param|section|source|summary|table|tbody|td|tfoot|th|thead|title|tr|track|ul)(?:\s|\/?>|$)/i,
+Fr],[/^\s*(?:<\/[a-z][\w-]*\s*>|<[a-z][\w-]*(\s+[a-z:_][\w-.]*(?:\s*=\s*(?:[^\s"'=<>`]+|'[^']*'|"[^"]*"))?)*\s*>)\s*$/i,
+Fr]];function Rh(n,t,e){if(n.next!=60)return-1;let i=n.text.slice(n.pos);for(let s=0,r=Vr.length-(e?1:0);s<r;s++)if(Vr[s][0].
+test(i))return s;return-1}function bh(n,t){let e=n.countIndent(t,n.pos,n.indent),i=n.countIndent(n.skipSpace(t),t,e);return i>=
+e+5?e+1:i}function Le(n,t,e){let i=n.length-1;i>=0&&n[i].to==t&&n[i].type==S.CodeText?n[i].to=e:n.push(N(S.CodeText,t,e))}
 var Wn={LinkReference:void 0,IndentedCode(n,t){let e=t.baseIndent+4;if(t.indent<e)return!1;let i=t.findColumn(e),s=n.lineStart+
-i,r=n.lineStart+t.text.length,o=[],l=[];for(Te(o,s,r);n.nextLine()&&t.depth>=n.stack.length;)if(t.pos==t.text.length){Te(
+i,r=n.lineStart+t.text.length,o=[],l=[];for(Le(o,s,r);n.nextLine()&&t.depth>=n.stack.length;)if(t.pos==t.text.length){Le(
 l,n.lineStart-1,n.lineStart);for(let a of t.markers)l.push(a)}else{if(t.indent<e)break;{if(l.length){for(let f of l)f.type==
-x.CodeText?Te(o,f.from,f.to):o.push(f);l=[]}Te(o,n.lineStart-1,n.lineStart);for(let f of t.markers)o.push(f);r=n.lineStart+
-t.text.length;let a=n.lineStart+t.findColumn(t.baseIndent+4);a<r&&Te(o,a,r)}}return l.length&&(l=l.filter(a=>a.type!=x.CodeText),
-l.length&&(t.markers=l.concat(t.markers))),n.addNode(n.buffer.writeElements(o,-s).finish(x.CodeBlock,r-s),s),!0},FencedCode(n,t){
-let e=Mh(t);if(e<0)return!1;let i=n.lineStart+t.pos,s=t.next,r=e-t.pos,o=t.skipSpace(e),l=mh(t.text,t.text.length,o),a=[
-N(x.CodeMark,i,i+r)];o<l&&a.push(N(x.CodeInfo,n.lineStart+o,n.lineStart+l));for(let f=!0;n.nextLine()&&t.depth>=n.stack.
+S.CodeText?Le(o,f.from,f.to):o.push(f);l=[]}Le(o,n.lineStart-1,n.lineStart);for(let f of t.markers)o.push(f);r=n.lineStart+
+t.text.length;let a=n.lineStart+t.findColumn(t.baseIndent+4);a<r&&Le(o,a,r)}}return l.length&&(l=l.filter(a=>a.type!=S.CodeText),
+l.length&&(t.markers=l.concat(t.markers))),n.addNode(n.buffer.writeElements(o,-s).finish(S.CodeBlock,r-s),s),!0},FencedCode(n,t){
+let e=Dh(t);if(e<0)return!1;let i=n.lineStart+t.pos,s=t.next,r=e-t.pos,o=t.skipSpace(e),l=gh(t.text,t.text.length,o),a=[
+N(S.CodeMark,i,i+r)];o<l&&a.push(N(S.CodeInfo,n.lineStart+o,n.lineStart+l));for(let f=!0;n.nextLine()&&t.depth>=n.stack.
 length;f=!1){let h=t.pos;if(t.indent-t.baseIndent<4)for(;h<t.text.length&&t.text.charCodeAt(h)==s;)h++;if(h-t.pos>=r&&t.
-skipSpace(h)==t.text.length){for(let c of t.markers)a.push(c);a.push(N(x.CodeMark,n.lineStart+t.pos,n.lineStart+h)),n.nextLine();
-break}else{f||Te(a,n.lineStart-1,n.lineStart);for(let d of t.markers)a.push(d);let c=n.lineStart+t.basePos,u=n.lineStart+
-t.text.length;c<u&&Te(a,c,u)}}return n.addNode(n.buffer.writeElements(a,-i).finish(x.FencedCode,n.prevLineEnd()-i),i),!0},
-Blockquote(n,t){let e=Dh(t);return e<0?!1:(n.startContext(x.Blockquote,t.pos),n.addNode(x.QuoteMark,n.lineStart+t.pos,n.
-lineStart+t.pos+1),t.moveBase(t.pos+e),null)},HorizontalRule(n,t){if(Xr(t,n,!1)<0)return!1;let e=n.lineStart+t.pos;return n.
-nextLine(),n.addNode(x.HorizontalRule,e),!0},BulletList(n,t){let e=Jr(t,n,!1);if(e<0)return!1;n.block.type!=x.BulletList&&
-n.startContext(x.BulletList,t.basePos,t.next);let i=gh(t,t.pos+1);return n.startContext(x.ListItem,t.basePos,i-t.baseIndent),
-n.addNode(x.ListMark,n.lineStart+t.pos,n.lineStart+t.pos+e),t.moveBaseColumn(i),null},OrderedList(n,t){let e=Yr(t,n,!1);
-if(e<0)return!1;n.block.type!=x.OrderedList&&n.startContext(x.OrderedList,t.basePos,t.text.charCodeAt(t.pos+e-1));let i=gh(
-t,t.pos+e);return n.startContext(x.ListItem,t.basePos,i-t.baseIndent),n.addNode(x.ListMark,n.lineStart+t.pos,n.lineStart+
-t.pos+e),t.moveBaseColumn(i),null},ATXHeading(n,t){let e=Lh(t);if(e<0)return!1;let i=t.pos,s=n.lineStart+i,r=mh(t.text,t.
+skipSpace(h)==t.text.length){for(let c of t.markers)a.push(c);a.push(N(S.CodeMark,n.lineStart+t.pos,n.lineStart+h)),n.nextLine();
+break}else{f||Le(a,n.lineStart-1,n.lineStart);for(let d of t.markers)a.push(d);let c=n.lineStart+t.basePos,u=n.lineStart+
+t.text.length;c<u&&Le(a,c,u)}}return n.addNode(n.buffer.writeElements(a,-i).finish(S.FencedCode,n.prevLineEnd()-i),i),!0},
+Blockquote(n,t){let e=Lh(t);return e<0?!1:(n.startContext(S.Blockquote,t.pos),n.addNode(S.QuoteMark,n.lineStart+t.pos,n.
+lineStart+t.pos+1),t.moveBase(t.pos+e),null)},HorizontalRule(n,t){if(Jr(t,n,!1)<0)return!1;let e=n.lineStart+t.pos;return n.
+nextLine(),n.addNode(S.HorizontalRule,e),!0},BulletList(n,t){let e=Yr(t,n,!1);if(e<0)return!1;n.block.type!=S.BulletList&&
+n.startContext(S.BulletList,t.basePos,t.next);let i=bh(t,t.pos+1);return n.startContext(S.ListItem,t.basePos,i-t.baseIndent),
+n.addNode(S.ListMark,n.lineStart+t.pos,n.lineStart+t.pos+e),t.moveBaseColumn(i),null},OrderedList(n,t){let e=Qr(t,n,!1);
+if(e<0)return!1;n.block.type!=S.OrderedList&&n.startContext(S.OrderedList,t.basePos,t.text.charCodeAt(t.pos+e-1));let i=bh(
+t,t.pos+e);return n.startContext(S.ListItem,t.basePos,i-t.baseIndent),n.addNode(S.ListMark,n.lineStart+t.pos,n.lineStart+
+t.pos+e),t.moveBaseColumn(i),null},ATXHeading(n,t){let e=Bh(t);if(e<0)return!1;let i=t.pos,s=n.lineStart+i,r=gh(t.text,t.
 text.length,i),o=r;for(;o>i&&t.text.charCodeAt(o-1)==t.next;)o--;(o==r||o==i||!Mt(t.text.charCodeAt(o-1)))&&(o=t.text.length);
-let l=n.buffer.write(x.HeaderMark,0,e).writeElements(n.parser.parseInline(t.text.slice(i+e+1,o),s+e+1),-s);o<t.text.length&&
-l.write(x.HeaderMark,o-i,r-i);let a=l.finish(x.ATXHeading1-1+e,t.text.length-i);return n.nextLine(),n.addNode(a,s),!0},HTMLBlock(n,t){
-let e=Ph(t,n,!1);if(e<0)return!1;let i=n.lineStart+t.pos,s=Fr[e][1],r=[],o=s!=Hr;for(;!s.test(t.text)&&n.nextLine();){if(t.
-depth<n.stack.length){o=!1;break}for(let f of t.markers)r.push(f)}o&&n.nextLine();let l=s==Eh?x.CommentBlock:s==Oh?x.ProcessingInstructionBlock:
-x.HTMLBlock,a=n.prevLineEnd();return n.addNode(n.buffer.writeElements(r,-i).finish(l,a-i),i),!0},SetextHeading:void 0},Vr=class{constructor(t){
+let l=n.buffer.write(S.HeaderMark,0,e).writeElements(n.parser.parseInline(t.text.slice(i+e+1,o),s+e+1),-s);o<t.text.length&&
+l.write(S.HeaderMark,o-i,r-i);let a=l.finish(S.ATXHeading1-1+e,t.text.length-i);return n.nextLine(),n.addNode(a,s),!0},HTMLBlock(n,t){
+let e=Rh(t,n,!1);if(e<0)return!1;let i=n.lineStart+t.pos,s=Vr[e][1],r=[],o=s!=Fr;for(;!s.test(t.text)&&n.nextLine();){if(t.
+depth<n.stack.length){o=!1;break}for(let f of t.markers)r.push(f)}o&&n.nextLine();let l=s==Oh?S.CommentBlock:s==Ph?S.ProcessingInstructionBlock:
+S.HTMLBlock,a=n.prevLineEnd();return n.addNode(n.buffer.writeElements(r,-i).finish(l,a-i),i),!0},SetextHeading:void 0},zr=class{constructor(t){
 this.stage=0,this.elts=[],this.pos=0,this.start=t.start,this.advance(t.content)}nextLine(t,e,i){if(this.stage==-1)return!1;
 let s=i.content+`
 `+e.scrub(),r=this.advance(s);return r>-1&&r<s.length?this.complete(t,i,r):!1}finish(t,e){return(this.stage==2||this.stage==
 3)&&Fi(e.content,this.pos)==e.content.length?this.complete(t,e,e.content.length):!1}complete(t,e,i){return t.addLeafElement(
-e,N(x.LinkReference,this.start,this.start+i,this.elts)),!0}nextStage(t){return t?(this.pos=t.to-this.start,this.elts.push(
+e,N(S.LinkReference,this.start,this.start+i,this.elts)),!0}nextStage(t){return t?(this.pos=t.to-this.start,this.elts.push(
 t),this.stage++,!0):(t===!1&&(this.stage=-1),!1)}advance(t){for(;;){if(this.stage==-1)return-1;if(this.stage==0){if(!this.
-nextStage(Wh(t,this.pos,this.start,!0)))return-1;if(t.charCodeAt(this.pos)!=58)return this.stage=-1;this.elts.push(N(x.LinkMark,
-this.pos+this.start,this.pos+this.start+1)),this.pos++}else if(this.stage==1){if(!this.nextStage(Vh(t,Fi(t,this.pos),this.
-start)))return-1}else if(this.stage==2){let e=Fi(t,this.pos),i=0;if(e>this.pos){let s=zh(t,e,this.start);if(s){let r=Pr(
-t,s.to-this.start);r>0&&(this.nextStage(s),i=r)}}return i||(i=Pr(t,this.pos)),i>0&&i<t.length?i:-1}else return Pr(t,this.
-pos)}}};function Pr(n,t){for(;t<n.length;t++){let e=n.charCodeAt(t);if(e==10)break;if(!Mt(e))return-1}return t}var zr=class{nextLine(t,e,i){
-let s=e.depth<t.stack.length?-1:Bh(e),r=e.next;if(s<0)return!1;let o=N(x.HeaderMark,t.lineStart+e.pos,t.lineStart+s);return t.
-nextLine(),t.addLeafElement(i,N(r==61?x.SetextHeading1:x.SetextHeading2,i.start,t.prevLineEnd(),[...t.parser.parseInline(
-i.content,i.start),o])),!0}finish(){return!1}},Rh={LinkReference(n,t){return t.content.charCodeAt(0)==91?new Vr(t):null},
-SetextHeading(){return new zr}},Sd=[(n,t)=>Lh(t)>=0,(n,t)=>Mh(t)>=0,(n,t)=>Dh(t)>=0,(n,t)=>Jr(t,n,!0)>=0,(n,t)=>Yr(t,n,!0)>=
-0,(n,t)=>Xr(t,n,!0)>=0,(n,t)=>Ph(t,n,!0)>=0],vd={text:"",end:0},Wr=class{constructor(t,e,i,s){this.parser=t,this.input=e,
-this.ranges=s,this.line=new Nr,this.atEnd=!1,this.reusePlaceholders=new Map,this.stoppedAt=null,this.rangeI=0,this.to=s[s.
-length-1].to,this.lineStart=this.absoluteLineStart=this.absoluteLineEnd=s[0].from,this.block=Kn.create(x.Document,0,this.
-lineStart,0,0),this.stack=[this.block],this.fragments=i.length?new Gr(i,e):null,this.readLine()}get parsedPos(){return this.
+nextStage(qh(t,this.pos,this.start,!0)))return-1;if(t.charCodeAt(this.pos)!=58)return this.stage=-1;this.elts.push(N(S.LinkMark,
+this.pos+this.start,this.pos+this.start+1)),this.pos++}else if(this.stage==1){if(!this.nextStage(zh(t,Fi(t,this.pos),this.
+start)))return-1}else if(this.stage==2){let e=Fi(t,this.pos),i=0;if(e>this.pos){let s=Wh(t,e,this.start);if(s){let r=Rr(
+t,s.to-this.start);r>0&&(this.nextStage(s),i=r)}}return i||(i=Rr(t,this.pos)),i>0&&i<t.length?i:-1}else return Rr(t,this.
+pos)}}};function Rr(n,t){for(;t<n.length;t++){let e=n.charCodeAt(t);if(e==10)break;if(!Mt(e))return-1}return t}var Wr=class{nextLine(t,e,i){
+let s=e.depth<t.stack.length?-1:Eh(e),r=e.next;if(s<0)return!1;let o=N(S.HeaderMark,t.lineStart+e.pos,t.lineStart+s);return t.
+nextLine(),t.addLeafElement(i,N(r==61?S.SetextHeading1:S.SetextHeading2,i.start,t.prevLineEnd(),[...t.parser.parseInline(
+i.content,i.start),o])),!0}finish(){return!1}},Ih={LinkReference(n,t){return t.content.charCodeAt(0)==91?new zr(t):null},
+SetextHeading(){return new Wr}},vd=[(n,t)=>Bh(t)>=0,(n,t)=>Dh(t)>=0,(n,t)=>Lh(t)>=0,(n,t)=>Yr(t,n,!0)>=0,(n,t)=>Qr(t,n,!0)>=
+0,(n,t)=>Jr(t,n,!0)>=0,(n,t)=>Rh(t,n,!0)>=0],Cd={text:"",end:0},qr=class{constructor(t,e,i,s){this.parser=t,this.input=e,
+this.ranges=s,this.line=new Hr,this.atEnd=!1,this.reusePlaceholders=new Map,this.stoppedAt=null,this.rangeI=0,this.to=s[s.
+length-1].to,this.lineStart=this.absoluteLineStart=this.absoluteLineEnd=s[0].from,this.block=Kn.create(S.Document,0,this.
+lineStart,0,0),this.stack=[this.block],this.fragments=i.length?new _r(i,e):null,this.readLine()}get parsedPos(){return this.
 absoluteLineStart}advance(){if(this.stoppedAt!=null&&this.absoluteLineStart>this.stoppedAt)return this.finish();let{line:t}=this;
 for(;;){for(let i=0;;){let s=t.depth<this.stack.length?this.stack[this.stack.length-1]:null;for(;i<t.markers.length&&(!s||
 t.markers[i].from<s.end);){let r=t.markers[i++];this.addNode(r.type,r.from,r.to)}if(!s)break;this.finishContext()}if(t.pos<
 t.text.length)break;if(!this.nextLine())return this.finish()}if(this.fragments&&this.reuseFragment(t.basePos))return null;
 t:for(;;){for(let i of this.parser.blockParsers)if(i){let s=i(this,t);if(s!=!1){if(s==!0)return null;t.forward();continue t}}
-break}let e=new Ir(this.lineStart+t.pos,t.text.slice(t.pos));for(let i of this.parser.leafBlockParsers)if(i){let s=i(this,
+break}let e=new Nr(this.lineStart+t.pos,t.text.slice(t.pos));for(let i of this.parser.leafBlockParsers)if(i){let s=i(this,
 e);s&&e.parsers.push(s)}t:for(;this.nextLine()&&t.pos!=t.text.length;){if(t.indent<t.baseIndent+4){for(let i of this.parser.
 endLeafBlock)if(i(this,t,e))break t}for(let i of e.parsers)if(i.nextLine(this,t,e))return null;e.content+=`
 `+t.scrub();for(let i of t.markers)e.marks.push(i)}return this.finishLeaf(e),null}stopAt(t){if(this.stoppedAt!=null&&this.
 stoppedAt<t)throw new RangeError("Can't move stoppedAt forward");this.stoppedAt=t}reuseFragment(t){if(!this.fragments.moveTo(
 this.absoluteLineStart+t,this.absoluteLineStart)||!this.fragments.matches(this.block.hash))return!1;let e=this.fragments.
-takeNodes(this);return e?(this.absoluteLineStart+=e,this.lineStart=qh(this.absoluteLineStart,this.ranges),this.moveRangeI(),
+takeNodes(this);return e?(this.absoluteLineStart+=e,this.lineStart=Kh(this.absoluteLineStart,this.ranges),this.moveRangeI(),
 this.absoluteLineStart<this.to?(this.lineStart++,this.absoluteLineStart++,this.readLine()):(this.atEnd=!0,this.readLine()),
 !0):!1}get depth(){return this.stack.length}parentType(t=this.depth-1){return this.parser.nodeSet.types[this.stack[t].type]}nextLine(){
 return this.lineStart+=this.line.text.length,this.absoluteLineEnd>=this.to?(this.absoluteLineStart=this.absoluteLineEnd,
 this.atEnd=!0,this.readLine(),!1):(this.lineStart++,this.absoluteLineStart=this.absoluteLineEnd+1,this.moveRangeI(),this.
 readLine(),!0)}peekLine(){return this.scanLine(this.absoluteLineEnd+1).text}moveRangeI(){for(;this.rangeI<this.ranges.length-
 1&&this.absoluteLineStart>=this.ranges[this.rangeI].to;)this.rangeI++,this.absoluteLineStart=Math.max(this.absoluteLineStart,
-this.ranges[this.rangeI].from)}scanLine(t){let e=vd;if(e.end=t,t>=this.to)e.text="";else if(e.text=this.lineChunkAt(t),e.
+this.ranges[this.rangeI].from)}scanLine(t){let e=Cd;if(e.end=t,t>=this.to)e.text="";else if(e.text=this.lineChunkAt(t),e.
 end+=e.text.length,this.ranges.length>1){let i=this.absoluteLineStart,s=this.rangeI;for(;this.ranges[s].to<e.end;){s++;let r=this.
 ranges[s].from,o=this.lineChunkAt(r);e.end=r+o.length,e.text=e.text.slice(0,this.ranges[s-1].to-i)+o,i=e.end-e.text.length}}
 return e}readLine(){let{line:t}=this,{text:e,end:i}=this.scanLine(this.absoluteLineStart);for(this.absoluteLineEnd=i,t.reset(
 e);t.depth<this.stack.length;t.depth++){let s=this.stack[t.depth],r=this.parser.skipContextMarkup[s.type];if(!r)throw new Error(
-"Unhandled block context "+x[s.type]);if(!r(s,this,t))break;t.forward()}}lineChunkAt(t){let e=this.input.chunk(t),i;if(this.
+"Unhandled block context "+S[s.type]);if(!r(s,this,t))break;t.forward()}}lineChunkAt(t){let e=this.input.chunk(t),i;if(this.
 input.lineChunks)i=e==`
 `?"":e;else{let s=e.indexOf(`
 `);i=s<0?e:e.slice(0,s)}return t+i.length>this.to?i.slice(0,this.to-t):i}prevLineEnd(){return this.atEnd?this.lineStart:
@@ -2290,97 +2290,97 @@ this.lineStart-1}startContext(t,e,i=0){this.block=Kn.create(t,i,this.lineStart+e
 text.length),this.stack.push(this.block)}startComposite(t,e,i=0){this.startContext(this.parser.getNodeType(t),e,i)}addNode(t,e,i){
 typeof t=="number"&&(t=new _(this.parser.nodeSet.types[t],Xe,Xe,(i??this.prevLineEnd())-e)),this.block.addChild(t,e-this.
 block.from)}addElement(t){this.block.addChild(t.toTree(this.parser.nodeSet),t.from-this.block.from)}addLeafElement(t,e){
-this.addNode(this.buffer.writeElements(Ur(e.children,t.marks),-e.from).finish(e.type,e.to-e.from),e.from)}finishContext(){
+this.addNode(this.buffer.writeElements(Gr(e.children,t.marks),-e.from).finish(e.type,e.to-e.from),e.from)}finishContext(){
 let t=this.stack.pop(),e=this.stack[this.stack.length-1];e.addChild(t.toTree(this.parser.nodeSet),t.from-e.from),this.block=
 e}finish(){for(;this.stack.length>1;)this.finishContext();return this.addGaps(this.block.toTree(this.parser.nodeSet,this.
-lineStart))}addGaps(t){return this.ranges.length>1?Ih(this.ranges,0,t.topNode,this.ranges[0].from,this.reusePlaceholders):
-t}finishLeaf(t){for(let i of t.parsers)if(i.finish(this,t))return;let e=Ur(this.parser.parseInline(t.content,t.start),t.
-marks);this.addNode(this.buffer.writeElements(e,-t.start).finish(x.Paragraph,t.content.length),t.start)}elt(t,e,i,s){return typeof t==
-"string"?N(this.parser.getNodeType(t),e,i,s):new $n(t,e)}get buffer(){return new jn(this.parser.nodeSet)}};function Ih(n,t,e,i,s){
+lineStart))}addGaps(t){return this.ranges.length>1?Nh(this.ranges,0,t.topNode,this.ranges[0].from,this.reusePlaceholders):
+t}finishLeaf(t){for(let i of t.parsers)if(i.finish(this,t))return;let e=Gr(this.parser.parseInline(t.content,t.start),t.
+marks);this.addNode(this.buffer.writeElements(e,-t.start).finish(S.Paragraph,t.content.length),t.start)}elt(t,e,i,s){return typeof t==
+"string"?N(this.parser.getNodeType(t),e,i,s):new $n(t,e)}get buffer(){return new jn(this.parser.nodeSet)}};function Nh(n,t,e,i,s){
 let r=n[t].to,o=[],l=[],a=e.from+i;function f(h,c){for(;c?h>=r:h>r;){let u=n[t+1].from-r;i+=u,h+=u,t++,r=n[t].to}}for(let h=e.
-firstChild;h;h=h.nextSibling){f(h.from+i,!0);let c=h.from+i,u,d=s.get(h.tree);d?u=d:h.to+i>r?(u=Ih(n,t,h,i,s),f(h.to+i,!1)):
-u=h.toTree(),o.push(u),l.push(c-a)}return f(e.to+i,!1),new _(e.type,o,l,e.to+i-a,e.tree?e.tree.propValues:void 0)}var qr=class n extends je{constructor(t,e,i,s,r,o,l,a,f){
+firstChild;h;h=h.nextSibling){f(h.from+i,!0);let c=h.from+i,u,d=s.get(h.tree);d?u=d:h.to+i>r?(u=Nh(n,t,h,i,s),f(h.to+i,!1)):
+u=h.toTree(),o.push(u),l.push(c-a)}return f(e.to+i,!1),new _(e.type,o,l,e.to+i-a,e.tree?e.tree.propValues:void 0)}var Kr=class n extends je{constructor(t,e,i,s,r,o,l,a,f){
 super(),this.nodeSet=t,this.blockParsers=e,this.leafBlockParsers=i,this.blockNames=s,this.endLeafBlock=r,this.skipContextMarkup=
 o,this.inlineParsers=l,this.inlineNames=a,this.wrappers=f,this.nodeTypes=Object.create(null);for(let h of t.types)this.nodeTypes[h.
-name]=h.id}createParse(t,e,i){let s=new Wr(this,t,e,i);for(let r of this.wrappers)s=r(s,t,e,i);return s}configure(t){let e=Kr(
+name]=h.id}createParse(t,e,i){let s=new qr(this,t,e,i);for(let r of this.wrappers)s=r(s,t,e,i);return s}configure(t){let e=jr(
 t);if(!e)return this;let{nodeSet:i,skipContextMarkup:s}=this,r=this.blockParsers.slice(),o=this.leafBlockParsers.slice(),
 l=this.blockNames.slice(),a=this.inlineParsers.slice(),f=this.inlineNames.slice(),h=this.endLeafBlock.slice(),c=this.wrappers;
 if(Hi(e.defineNodes)){s=Object.assign({},s);let u=i.types.slice(),d;for(let p of e.defineNodes){let{name:m,block:g,composite:b,
-style:S}=typeof p=="string"?{name:p}:p;if(u.some(w=>w.name==m))continue;b&&(s[u.length]=(w,D,A)=>b(D,A,w.value));let C=u.
-length,T=b?["Block","BlockContext"]:g?C>=x.ATXHeading1&&C<=x.SetextHeading2?["Block","LeafBlock","Heading"]:["Block","Le\
-afBlock"]:void 0;u.push(tt.define({id:C,name:m,props:T&&[[O.group,T]]})),S&&(d||(d={}),Array.isArray(S)||S instanceof gt?
-d[m]=S:Object.assign(d,S))}i=new Ke(u),d&&(i=i.extend(Ti(d)))}if(Hi(e.props)&&(i=i.extend(...e.props)),Hi(e.remove))for(let u of e.
+style:k}=typeof p=="string"?{name:p}:p;if(u.some(v=>v.name==m))continue;b&&(s[u.length]=(v,D,A)=>b(D,A,v.value));let x=u.
+length,L=b?["Block","BlockContext"]:g?x>=S.ATXHeading1&&x<=S.SetextHeading2?["Block","LeafBlock","Heading"]:["Block","Le\
+afBlock"]:void 0;u.push(tt.define({id:x,name:m,props:L&&[[O.group,L]]})),k&&(d||(d={}),Array.isArray(k)||k instanceof gt?
+d[m]=k:Object.assign(d,k))}i=new Ke(u),d&&(i=i.extend(Li(d)))}if(Hi(e.props)&&(i=i.extend(...e.props)),Hi(e.remove))for(let u of e.
 remove){let d=this.blockNames.indexOf(u),p=this.inlineNames.indexOf(u);d>-1&&(r[d]=o[d]=void 0),p>-1&&(a[p]=void 0)}if(Hi(
 e.parseBlock))for(let u of e.parseBlock){let d=l.indexOf(u.name);if(d>-1)r[d]=u.parse,o[d]=u.leaf;else{let p=u.before?qn(
 l,u.before):u.after?qn(l,u.after)+1:l.length-1;r.splice(p,0,u.parse),o.splice(p,0,u.leaf),l.splice(p,0,u.name)}u.endLeaf&&
 h.push(u.endLeaf)}if(Hi(e.parseInline))for(let u of e.parseInline){let d=f.indexOf(u.name);if(d>-1)a[d]=u.parse;else{let p=u.
 before?qn(f,u.before):u.after?qn(f,u.after)+1:f.length-1;a.splice(p,0,u.parse),f.splice(p,0,u.name)}}return e.wrap&&(c=c.
 concat(e.wrap)),new n(i,r,o,l,h,s,a,f,c)}getNodeType(t){let e=this.nodeTypes[t];if(e==null)throw new RangeError(`Unknown\
- node type '${t}'`);return e}parseInline(t,e){let i=new $r(this,t,e);t:for(let s=e;s<i.end;){let r=i.char(s);for(let o of this.
+ node type '${t}'`);return e}parseInline(t,e){let i=new Ur(this,t,e);t:for(let s=e;s<i.end;){let r=i.char(s);for(let o of this.
 inlineParsers)if(o){let l=o(i,r,s);if(l>=0){s=l;continue t}}s++}return i.resolveMarkers(0)}};function Hi(n){return n!=null&&
-n.length>0}function Kr(n){if(!Array.isArray(n))return n;if(n.length==0)return null;let t=Kr(n[0]);if(n.length==1)return t;
-let e=Kr(n.slice(1));if(!e||!t)return t||e;let i=(o,l)=>(o||Xe).concat(l||Xe),s=t.wrap,r=e.wrap;return{props:i(t.props,e.
+n.length>0}function jr(n){if(!Array.isArray(n))return n;if(n.length==0)return null;let t=jr(n[0]);if(n.length==1)return t;
+let e=jr(n.slice(1));if(!e||!t)return t||e;let i=(o,l)=>(o||Xe).concat(l||Xe),s=t.wrap,r=e.wrap;return{props:i(t.props,e.
 props),defineNodes:i(t.defineNodes,e.defineNodes),parseBlock:i(t.parseBlock,e.parseBlock),parseInline:i(t.parseInline,e.
 parseInline),remove:i(t.remove,e.remove),wrap:s?r?(o,l,a,f)=>s(r(o,l,a,f),l,a,f):s:r}}function qn(n,t){let e=n.indexOf(t);
-if(e<0)throw new RangeError(`Position specified relative to unknown parser ${t}`);return e}var Nh=[tt.none];for(let n=1,
-t;t=x[n];n++)Nh[n]=tt.define({id:n,name:t,props:n>=x.Escape?[]:[[O.group,n in Ah?["Block","BlockContext"]:["Block","Leaf\
+if(e<0)throw new RangeError(`Position specified relative to unknown parser ${t}`);return e}var Hh=[tt.none];for(let n=1,
+t;t=S[n];n++)Hh[n]=tt.define({id:n,name:t,props:n>=S.Escape?[]:[[O.group,n in Mh?["Block","BlockContext"]:["Block","Leaf\
 Block"]]],top:t=="Document"});var Xe=[],jn=class{constructor(t){this.nodeSet=t,this.content=[],this.nodes=[]}write(t,e,i,s=0){
 return this.content.push(t,e,i,4+s*4),this}writeElements(t,e=0){for(let i of t)i.writeTo(this,e);return this}finish(t,e){
-return _.build({buffer:this.content,nodeSet:this.nodeSet,reused:this.nodes,topID:t,length:e})}},Le=class{constructor(t,e,i,s=Xe){
+return _.build({buffer:this.content,nodeSet:this.nodeSet,reused:this.nodes,topID:t,length:e})}},Te=class{constructor(t,e,i,s=Xe){
 this.type=t,this.from=e,this.to=i,this.children=s}writeTo(t,e){let i=t.content.length;t.writeElements(this.children,e),t.
 content.push(this.type,this.from+e,this.to+e,t.content.length+4-i)}toTree(t){return new jn(t).writeElements(this.children,
 -this.from).finish(this.type,this.to-this.from)}},$n=class{constructor(t,e){this.tree=t,this.from=e}get to(){return this.
 from+this.tree.length}get type(){return this.tree.type.id}get children(){return Xe}writeTo(t,e){t.nodes.push(this.tree),
-t.content.push(t.nodes.length-1,this.from+e,this.to+e,-1)}toTree(){return this.tree}};function N(n,t,e,i){return new Le(
-n,t,e,i)}var Hh={resolve:"Emphasis",mark:"EmphasisMark"},Fh={resolve:"Emphasis",mark:"EmphasisMark"},_e={},jr={},ct=class{constructor(t,e,i,s){
-this.type=t,this.from=e,this.to=i,this.side=s}},bh="!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",zi=/[!"#$%&'()*+,\-.\/:;<=>?@\[\\\]^_`{|}~\xA1\u2010-\u2027]/;
-try{zi=new RegExp("[\\p{S}|\\p{P}]","u")}catch{}var Rr={Escape(n,t,e){if(t!=92||e==n.end-1)return-1;let i=n.char(e+1);for(let s=0;s<
-bh.length;s++)if(bh.charCodeAt(s)==i)return n.append(N(x.Escape,e,e+2));return-1},Entity(n,t,e){if(t!=38)return-1;let i=/^(?:#\d+|#x[a-f\d]+|\w+);/i.
-exec(n.slice(e+1,e+31));return i?n.append(N(x.Entity,e,e+1+i[0].length)):-1},InlineCode(n,t,e){if(t!=96||e&&n.char(e-1)==
+t.content.push(t.nodes.length-1,this.from+e,this.to+e,-1)}toTree(){return this.tree}};function N(n,t,e,i){return new Te(
+n,t,e,i)}var Fh={resolve:"Emphasis",mark:"EmphasisMark"},Vh={resolve:"Emphasis",mark:"EmphasisMark"},_e={},$r={},ct=class{constructor(t,e,i,s){
+this.type=t,this.from=e,this.to=i,this.side=s}},yh="!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",zi=/[!"#$%&'()*+,\-.\/:;<=>?@\[\\\]^_`{|}~\xA1\u2010-\u2027]/;
+try{zi=new RegExp("[\\p{S}|\\p{P}]","u")}catch{}var Ir={Escape(n,t,e){if(t!=92||e==n.end-1)return-1;let i=n.char(e+1);for(let s=0;s<
+yh.length;s++)if(yh.charCodeAt(s)==i)return n.append(N(S.Escape,e,e+2));return-1},Entity(n,t,e){if(t!=38)return-1;let i=/^(?:#\d+|#x[a-f\d]+|\w+);/i.
+exec(n.slice(e+1,e+31));return i?n.append(N(S.Entity,e,e+1+i[0].length)):-1},InlineCode(n,t,e){if(t!=96||e&&n.char(e-1)==
 96)return-1;let i=e+1;for(;i<n.end&&n.char(i)==96;)i++;let s=i-e,r=0;for(;i<n.end;i++)if(n.char(i)==96){if(r++,r==s&&n.char(
-i+1)!=96)return n.append(N(x.InlineCode,e,i+1,[N(x.CodeMark,e,e+s),N(x.CodeMark,i+1-s,i+1)]))}else r=0;return-1},HTMLTag(n,t,e){
+i+1)!=96)return n.append(N(S.InlineCode,e,i+1,[N(S.CodeMark,e,e+s),N(S.CodeMark,i+1-s,i+1)]))}else r=0;return-1},HTMLTag(n,t,e){
 if(t!=60||e==n.end-1)return-1;let i=n.slice(e+1,n.end),s=/^(?:[a-z][-\w+.]+:[^\s>]+|[a-z\d.!#$%&'*+/=?^_`{|}~-]+@[a-z\d](?:[a-z\d-]{0,61}[a-z\d])?(?:\.[a-z\d](?:[a-z\d-]{0,61}[a-z\d])?)*)>/i.
-exec(i);if(s)return n.append(N(x.Autolink,e,e+1+s[0].length,[N(x.LinkMark,e,e+1),N(x.URL,e+1,e+s[0].length),N(x.LinkMark,
-e+s[0].length,e+1+s[0].length)]));let r=/^!--[^>](?:-[^-]|[^-])*?-->/i.exec(i);if(r)return n.append(N(x.Comment,e,e+1+r[0].
-length));let o=/^\?[^]*?\?>/.exec(i);if(o)return n.append(N(x.ProcessingInstruction,e,e+1+o[0].length));let l=/^(?:![A-Z][^]*?>|!\[CDATA\[[^]*?\]\]>|\/\s*[a-zA-Z][\w-]*\s*>|\s*[a-zA-Z][\w-]*(\s+[a-zA-Z:_][\w-.:]*(?:\s*=\s*(?:[^\s"'=<>`]+|'[^']*'|"[^"]*"))?)*\s*(\/\s*)?>)/.
-exec(i);return l?n.append(N(x.HTMLTag,e,e+1+l[0].length)):-1},Emphasis(n,t,e){if(t!=95&&t!=42)return-1;let i=e+1;for(;n.
+exec(i);if(s)return n.append(N(S.Autolink,e,e+1+s[0].length,[N(S.LinkMark,e,e+1),N(S.URL,e+1,e+s[0].length),N(S.LinkMark,
+e+s[0].length,e+1+s[0].length)]));let r=/^!--[^>](?:-[^-]|[^-])*?-->/i.exec(i);if(r)return n.append(N(S.Comment,e,e+1+r[0].
+length));let o=/^\?[^]*?\?>/.exec(i);if(o)return n.append(N(S.ProcessingInstruction,e,e+1+o[0].length));let l=/^(?:![A-Z][^]*?>|!\[CDATA\[[^]*?\]\]>|\/\s*[a-zA-Z][\w-]*\s*>|\s*[a-zA-Z][\w-]*(\s+[a-zA-Z:_][\w-.:]*(?:\s*=\s*(?:[^\s"'=<>`]+|'[^']*'|"[^"]*"))?)*\s*(\/\s*)?>)/.
+exec(i);return l?n.append(N(S.HTMLTag,e,e+1+l[0].length)):-1},Emphasis(n,t,e){if(t!=95&&t!=42)return-1;let i=e+1;for(;n.
 char(i)==t;)i++;let s=n.slice(e-1,e),r=n.slice(i,i+1),o=zi.test(s),l=zi.test(r),a=/\s|^$/.test(s),f=/\s|^$/.test(r),h=!f&&
-(!l||a||o),c=!a&&(!o||f||l),u=h&&(t==42||!c||o),d=c&&(t==42||!h||l);return n.append(new ct(t==95?Hh:Fh,e,i,(u?1:0)|(d?2:
-0)))},HardBreak(n,t,e){if(t==92&&n.char(e+1)==10)return n.append(N(x.HardBreak,e,e+2));if(t==32){let i=e+1;for(;n.char(i)==
-32;)i++;if(n.char(i)==10&&i>=e+2)return n.append(N(x.HardBreak,e,i+1))}return-1},Link(n,t,e){return t==91?n.append(new ct(
-_e,e,e+1,1)):-1},Image(n,t,e){return t==33&&n.char(e+1)==91?n.append(new ct(jr,e,e+2,1)):-1},LinkEnd(n,t,e){if(t!=93)return-1;
-for(let i=n.parts.length-1;i>=0;i--){let s=n.parts[i];if(s instanceof ct&&(s.type==_e||s.type==jr)){if(!s.side||n.skipSpace(
-s.to)==e&&!/[(\[]/.test(n.slice(e+1,e+2)))return n.parts[i]=null,-1;let r=n.takeContent(i),o=n.parts[i]=Cd(n,r,s.type==_e?
-x.Link:x.Image,s.from,e+1);if(s.type==_e)for(let l=0;l<i;l++){let a=n.parts[l];a instanceof ct&&a.type==_e&&(a.side=0)}return o.
-to}}return-1}};function Cd(n,t,e,i,s){let{text:r}=n,o=n.char(s),l=s;if(t.unshift(N(x.LinkMark,i,i+(e==x.Image?2:1))),t.push(
-N(x.LinkMark,s-1,s)),o==40){let a=n.skipSpace(s+1),f=Vh(r,a-n.offset,n.offset),h;f&&(a=n.skipSpace(f.to),a!=f.to&&(h=zh(
-r,a-n.offset,n.offset),h&&(a=n.skipSpace(h.to)))),n.char(a)==41&&(t.push(N(x.LinkMark,s,s+1)),l=a+1,f&&t.push(f),h&&t.push(
-h),t.push(N(x.LinkMark,a,l)))}else if(o==91){let a=Wh(r,s-n.offset,n.offset,!1);a&&(t.push(a),l=a.to)}return N(e,i,l,t)}
-function Vh(n,t,e){if(n.charCodeAt(t)==60){for(let s=t+1;s<n.length;s++){let r=n.charCodeAt(s);if(r==62)return N(x.URL,t+
+(!l||a||o),c=!a&&(!o||f||l),u=h&&(t==42||!c||o),d=c&&(t==42||!h||l);return n.append(new ct(t==95?Fh:Vh,e,i,(u?1:0)|(d?2:
+0)))},HardBreak(n,t,e){if(t==92&&n.char(e+1)==10)return n.append(N(S.HardBreak,e,e+2));if(t==32){let i=e+1;for(;n.char(i)==
+32;)i++;if(n.char(i)==10&&i>=e+2)return n.append(N(S.HardBreak,e,i+1))}return-1},Link(n,t,e){return t==91?n.append(new ct(
+_e,e,e+1,1)):-1},Image(n,t,e){return t==33&&n.char(e+1)==91?n.append(new ct($r,e,e+2,1)):-1},LinkEnd(n,t,e){if(t!=93)return-1;
+for(let i=n.parts.length-1;i>=0;i--){let s=n.parts[i];if(s instanceof ct&&(s.type==_e||s.type==$r)){if(!s.side||n.skipSpace(
+s.to)==e&&!/[(\[]/.test(n.slice(e+1,e+2)))return n.parts[i]=null,-1;let r=n.takeContent(i),o=n.parts[i]=Ad(n,r,s.type==_e?
+S.Link:S.Image,s.from,e+1);if(s.type==_e)for(let l=0;l<i;l++){let a=n.parts[l];a instanceof ct&&a.type==_e&&(a.side=0)}return o.
+to}}return-1}};function Ad(n,t,e,i,s){let{text:r}=n,o=n.char(s),l=s;if(t.unshift(N(S.LinkMark,i,i+(e==S.Image?2:1))),t.push(
+N(S.LinkMark,s-1,s)),o==40){let a=n.skipSpace(s+1),f=zh(r,a-n.offset,n.offset),h;f&&(a=n.skipSpace(f.to),a!=f.to&&(h=Wh(
+r,a-n.offset,n.offset),h&&(a=n.skipSpace(h.to)))),n.char(a)==41&&(t.push(N(S.LinkMark,s,s+1)),l=a+1,f&&t.push(f),h&&t.push(
+h),t.push(N(S.LinkMark,a,l)))}else if(o==91){let a=qh(r,s-n.offset,n.offset,!1);a&&(t.push(a),l=a.to)}return N(e,i,l,t)}
+function zh(n,t,e){if(n.charCodeAt(t)==60){for(let s=t+1;s<n.length;s++){let r=n.charCodeAt(s);if(r==62)return N(S.URL,t+
 e,s+1+e);if(r==60||r==10)return!1}return null}else{let s=0,r=t;for(let o=!1;r<n.length;r++){let l=n.charCodeAt(r);if(Mt(
-l))break;if(o)o=!1;else if(l==40)s++;else if(l==41){if(!s)break;s--}else l==92&&(o=!0)}return r>t?N(x.URL,t+e,r+e):r==n.
-length?null:!1}}function zh(n,t,e){let i=n.charCodeAt(t);if(i!=39&&i!=34&&i!=40)return!1;let s=i==40?41:i;for(let r=t+1,
-o=!1;r<n.length;r++){let l=n.charCodeAt(r);if(o)o=!1;else{if(l==s)return N(x.LinkTitle,t+e,r+1+e);l==92&&(o=!0)}}return null}
-function Wh(n,t,e,i){for(let s=!1,r=t+1,o=Math.min(n.length,r+999);r<o;r++){let l=n.charCodeAt(r);if(s)s=!1;else{if(l==93)
-return i?!1:N(x.LinkLabel,t+e,r+1+e);if(i&&!Mt(l)&&(i=!1),l==91)return!1;l==92&&(s=!0)}}return null}var $r=class{constructor(t,e,i){
+l))break;if(o)o=!1;else if(l==40)s++;else if(l==41){if(!s)break;s--}else l==92&&(o=!0)}return r>t?N(S.URL,t+e,r+e):r==n.
+length?null:!1}}function Wh(n,t,e){let i=n.charCodeAt(t);if(i!=39&&i!=34&&i!=40)return!1;let s=i==40?41:i;for(let r=t+1,
+o=!1;r<n.length;r++){let l=n.charCodeAt(r);if(o)o=!1;else{if(l==s)return N(S.LinkTitle,t+e,r+1+e);l==92&&(o=!0)}}return null}
+function qh(n,t,e,i){for(let s=!1,r=t+1,o=Math.min(n.length,r+999);r<o;r++){let l=n.charCodeAt(r);if(s)s=!1;else{if(l==93)
+return i?!1:N(S.LinkLabel,t+e,r+1+e);if(i&&!Mt(l)&&(i=!1),l==91)return!1;l==92&&(s=!0)}}return null}var Ur=class{constructor(t,e,i){
 this.parser=t,this.text=e,this.offset=i,this.parts=[]}char(t){return t>=this.end?-1:this.text.charCodeAt(t-this.offset)}get end(){
 return this.offset+this.text.length}slice(t,e){return this.text.slice(t-this.offset,e-this.offset)}append(t){return this.
 parts.push(t),t.to}addDelimiter(t,e,i,s,r){return this.append(new ct(t,e,i,(s?1:0)|(r?2:0)))}get hasOpenLink(){for(let t=this.
-parts.length-1;t>=0;t--){let e=this.parts[t];if(e instanceof ct&&(e.type==_e||e.type==jr))return!0}return!1}addElement(t){
+parts.length-1;t>=0;t--){let e=this.parts[t];if(e instanceof ct&&(e.type==_e||e.type==$r))return!0}return!1}addElement(t){
 return this.append(t)}resolveMarkers(t){for(let i=t;i<this.parts.length;i++){let s=this.parts[i];if(!(s instanceof ct&&s.
-type.resolve&&s.side&2))continue;let r=s.type==Hh||s.type==Fh,o=s.to-s.from,l,a=i-1;for(;a>=t;a--){let m=this.parts[a];if(m instanceof
+type.resolve&&s.side&2))continue;let r=s.type==Fh||s.type==Vh,o=s.to-s.from,l,a=i-1;for(;a>=t;a--){let m=this.parts[a];if(m instanceof
 ct&&m.side&1&&m.type==s.type&&!(r&&(s.side&1||m.side&2)&&(m.to-m.from+o)%3==0&&((m.to-m.from)%3||o%3))){l=m;break}}if(!l)
 continue;let f=s.type.resolve,h=[],c=l.from,u=s.to;if(r){let m=Math.min(2,l.to-l.from,o);c=l.to-m,u=s.from+m,f=m==1?"Emp\
-hasis":"StrongEmphasis"}l.type.mark&&h.push(this.elt(l.type.mark,c,l.to));for(let m=a+1;m<i;m++)this.parts[m]instanceof Le&&
+hasis":"StrongEmphasis"}l.type.mark&&h.push(this.elt(l.type.mark,c,l.to));for(let m=a+1;m<i;m++)this.parts[m]instanceof Te&&
 h.push(this.parts[m]),this.parts[m]=null;s.type.mark&&h.push(this.elt(s.type.mark,s.from,u));let d=this.elt(f,c,u,h);this.
 parts[a]=r&&l.from!=c?new ct(l.type,l.from,c,l.side):null,(this.parts[i]=r&&s.to!=u?new ct(s.type,u,s.to,s.side):null)?this.
-parts.splice(i,0,d):this.parts[i]=d}let e=[];for(let i=t;i<this.parts.length;i++){let s=this.parts[i];s instanceof Le&&e.
+parts.splice(i,0,d):this.parts[i]=d}let e=[];for(let i=t;i<this.parts.length;i++){let s=this.parts[i];s instanceof Te&&e.
 push(s)}return e}findOpeningDelimiter(t){for(let e=this.parts.length-1;e>=0;e--){let i=this.parts[e];if(i instanceof ct&&
 i.type==t)return e}return null}takeContent(t){let e=this.resolveMarkers(t);return this.parts.length=t,e}skipSpace(t){return Fi(
 this.text,t-this.offset)+this.offset}elt(t,e,i,s){return typeof t=="string"?N(this.parser.getNodeType(t),e,i,s):new $n(t,
-e)}};function Ur(n,t){if(!t.length)return n;if(!n.length)return t;let e=n.slice(),i=0;for(let s of t){for(;i<e.length&&e[i].
-to<s.to;)i++;if(i<e.length&&e[i].from<s.from){let r=e[i];r instanceof Le&&(e[i]=new Le(r.type,r.from,r.to,Ur(r.children,
-[s])))}else e.splice(i++,0,s)}return e}var Ad=[x.CodeBlock,x.ListItem,x.OrderedList,x.BulletList],Gr=class{constructor(t,e){
+e)}};function Gr(n,t){if(!t.length)return n;if(!n.length)return t;let e=n.slice(),i=0;for(let s of t){for(;i<e.length&&e[i].
+to<s.to;)i++;if(i<e.length&&e[i].from<s.from){let r=e[i];r instanceof Te&&(e[i]=new Te(r.type,r.from,r.to,Gr(r.children,
+[s])))}else e.splice(i++,0,s)}return e}var Md=[S.CodeBlock,S.ListItem,S.OrderedList,S.BulletList],_r=class{constructor(t,e){
 this.fragments=t,this.input=e,this.i=0,this.fragment=null,this.fragmentEnd=-1,this.cursor=null,t.length&&(this.fragment=
 t[this.i++])}nextFragment(){this.fragment=this.i<this.fragments.length?this.fragments[this.i++]:null,this.cursor=null,this.
 fragmentEnd=-1}moveTo(t,e){for(;this.fragment&&this.fragment.to<=t;)this.nextFragment();if(!this.fragment||this.fragment.
@@ -2389,64 +2389,64 @@ from>(t?t-1:0))return!1;if(this.fragmentEnd<0){let r=this.fragment.to;for(;r>0&&
 this.fragment.offset;for(;i.to<=s;)if(!i.parent())return!1;for(;;){if(i.from>=s)return this.fragment.from<=e;if(!i.childAfter(
 s))return!1}}matches(t){let e=this.cursor.tree;return e&&e.prop(O.contextHash)==t}takeNodes(t){let e=this.cursor,i=this.
 fragment.offset,s=this.fragmentEnd-(this.fragment.openEnd?1:0),r=t.absoluteLineStart,o=r,l=t.block.children.length,a=o,f=l;
-for(;;){if(e.to-i>s){if(e.type.isAnonymous&&e.firstChild())continue;break}let h=qh(e.from-i,t.ranges);if(e.to-i<=t.ranges[t.
-rangeI].to)t.addNode(e.tree,h);else{let c=new _(t.parser.nodeSet.types[x.Paragraph],[],[],0,t.block.hashProp);t.reusePlaceholders.
-set(c,e.tree),t.addNode(c,h)}if(e.type.is("Block")&&(Ad.indexOf(e.type.id)<0?(o=e.to-i,l=t.block.children.length):(o=a,l=
+for(;;){if(e.to-i>s){if(e.type.isAnonymous&&e.firstChild())continue;break}let h=Kh(e.from-i,t.ranges);if(e.to-i<=t.ranges[t.
+rangeI].to)t.addNode(e.tree,h);else{let c=new _(t.parser.nodeSet.types[S.Paragraph],[],[],0,t.block.hashProp);t.reusePlaceholders.
+set(c,e.tree),t.addNode(c,h)}if(e.type.is("Block")&&(Md.indexOf(e.type.id)<0?(o=e.to-i,l=t.block.children.length):(o=a,l=
 f,a=e.to-i,f=t.block.children.length)),!e.nextSibling())break}for(;t.block.children.length>l;)t.block.children.pop(),t.block.
-positions.pop();return o-r}};function qh(n,t){let e=n;for(let i=1;i<t.length;i++){let s=t[i-1].to,r=t[i].from;s<n&&(e-=r-
-s)}return e}var Md=Ti({"Blockquote/...":y.quote,HorizontalRule:y.contentSeparator,"ATXHeading1/... SetextHeading1/...":y.
+positions.pop();return o-r}};function Kh(n,t){let e=n;for(let i=1;i<t.length;i++){let s=t[i-1].to,r=t[i].from;s<n&&(e-=r-
+s)}return e}var Dd=Li({"Blockquote/...":y.quote,HorizontalRule:y.contentSeparator,"ATXHeading1/... SetextHeading1/...":y.
 heading1,"ATXHeading2/... SetextHeading2/...":y.heading2,"ATXHeading3/...":y.heading3,"ATXHeading4/...":y.heading4,"ATXH\
 eading5/...":y.heading5,"ATXHeading6/...":y.heading6,"Comment CommentBlock":y.comment,Escape:y.escape,Entity:y.character,
 "Emphasis/...":y.emphasis,"StrongEmphasis/...":y.strong,"Link/... Image/...":y.link,"OrderedList/... BulletList/...":y.list,
 "BlockQuote/...":y.quote,"InlineCode CodeText":y.monospace,"URL Autolink":y.url,"HeaderMark HardBreak QuoteMark ListMark\
  LinkMark EmphasisMark CodeMark":y.processingInstruction,"CodeInfo LinkLabel":y.labelName,LinkTitle:y.string,Paragraph:y.
-content}),Kh=new qr(new Ke(Nh).extend(Md),Object.keys(Wn).map(n=>Wn[n]),Object.keys(Wn).map(n=>Rh[n]),Object.keys(Wn),Sd,
-Ah,Object.keys(Rr).map(n=>Rr[n]),Object.keys(Rr),[]);var Dd={resolve:"Strikethrough",mark:"StrikethroughMark"},Td={defineNodes:[{name:"Strikethrough",style:{"Strikethrough/.\
+content}),jh=new Kr(new Ke(Hh).extend(Dd),Object.keys(Wn).map(n=>Wn[n]),Object.keys(Wn).map(n=>Ih[n]),Object.keys(Wn),vd,
+Mh,Object.keys(Ir).map(n=>Ir[n]),Object.keys(Ir),[]);var Ld={resolve:"Strikethrough",mark:"StrikethroughMark"},Td={defineNodes:[{name:"Strikethrough",style:{"Strikethrough/.\
 ..":y.strikethrough}},{name:"StrikethroughMark",style:y.processingInstruction}],parseInline:[{name:"Strikethrough",parse(n,t,e){
 if(t!=126||n.char(e+1)!=126||n.char(e+2)==126)return-1;let i=n.slice(e-1,e),s=n.slice(e+2,e+3),r=/\s|^$/.test(i),o=/\s|^$/.
-test(s),l=zi.test(i),a=zi.test(s);return n.addDelimiter(Dd,e,e+2,!o&&(!a||r||l),!r&&(!l||o||a))},after:"Emphasis"}]};function Vi(n,t,e=0,i,s=0){
+test(s),l=zi.test(i),a=zi.test(s);return n.addDelimiter(Ld,e,e+2,!o&&(!a||r||l),!r&&(!l||o||a))},after:"Emphasis"}]};function Vi(n,t,e=0,i,s=0){
 let r=0,o=!0,l=-1,a=-1,f=!1,h=()=>{i.push(n.elt("TableCell",s+l,s+a,n.parser.parseInline(t.slice(l,a),s+l)))};for(let c=e;c<
 t.length;c++){let u=t.charCodeAt(c);u==124&&!f?((!o||l>-1)&&r++,o=!1,i&&(l>-1&&h(),i.push(n.elt("TableDelimiter",c+s,c+s+
-1))),l=a=-1):(f||u!=32&&u!=9)&&(l<0&&(l=c),a=c+1),f=!f&&u==92}return l>-1&&(r++,i&&h()),r}function yh(n,t){for(let e=t;e<
-n.length;e++){let i=n.charCodeAt(e);if(i==124)return!0;i==92&&e++}return!1}var jh=/^\|?(\s*:?-+:?\s*\|)+(\s*:?-+:?\s*)?$/,
+1))),l=a=-1):(f||u!=32&&u!=9)&&(l<0&&(l=c),a=c+1),f=!f&&u==92}return l>-1&&(r++,i&&h()),r}function kh(n,t){for(let e=t;e<
+n.length;e++){let i=n.charCodeAt(e);if(i==124)return!0;i==92&&e++}return!1}var $h=/^\|?(\s*:?-+:?\s*\|)+(\s*:?-+:?\s*)?$/,
 Un=class{constructor(){this.rows=null}nextLine(t,e,i){if(this.rows==null){this.rows=!1;let s;if((e.next==45||e.next==58||
-e.next==124)&&jh.test(s=e.text.slice(e.pos))){let r=[];Vi(t,i.content,0,r,i.start)==Vi(t,s,e.pos)&&(this.rows=[t.elt("Ta\
+e.next==124)&&$h.test(s=e.text.slice(e.pos))){let r=[];Vi(t,i.content,0,r,i.start)==Vi(t,s,e.pos)&&(this.rows=[t.elt("Ta\
 bleHeader",i.start,i.start+i.content.length,r),t.elt("TableDelimiter",t.lineStart+e.pos,t.lineStart+e.text.length)])}}else if(this.
 rows){let s=[];Vi(t,e.text,e.pos,s,t.lineStart),this.rows.push(t.elt("TableRow",t.lineStart+e.pos,t.lineStart+e.text.length,
 s))}return!1}finish(t,e){return this.rows?(t.addLeafElement(e,t.elt("Table",e.start,e.start+e.content.length,this.rows)),
-!0):!1}},Ld={defineNodes:[{name:"Table",block:!0},{name:"TableHeader",style:{"TableHeader/...":y.heading}},"TableRow",{name:"\
-TableCell",style:y.content},{name:"TableDelimiter",style:y.processingInstruction}],parseBlock:[{name:"Table",leaf(n,t){return yh(
-t.content,0)?new Un:null},endLeaf(n,t,e){if(e.parsers.some(s=>s instanceof Un)||!yh(t.text,t.basePos))return!1;let i=n.peekLine();
-return jh.test(i)&&Vi(n,t.text,t.basePos)==Vi(n,i,t.basePos)},before:"SetextHeading"}]},_r=class{nextLine(){return!1}finish(t,e){
+!0):!1}},Bd={defineNodes:[{name:"Table",block:!0},{name:"TableHeader",style:{"TableHeader/...":y.heading}},"TableRow",{name:"\
+TableCell",style:y.content},{name:"TableDelimiter",style:y.processingInstruction}],parseBlock:[{name:"Table",leaf(n,t){return kh(
+t.content,0)?new Un:null},endLeaf(n,t,e){if(e.parsers.some(s=>s instanceof Un)||!kh(t.text,t.basePos))return!1;let i=n.peekLine();
+return $h.test(i)&&Vi(n,t.text,t.basePos)==Vi(n,i,t.basePos)},before:"SetextHeading"}]},Xr=class{nextLine(){return!1}finish(t,e){
 return t.addLeafElement(e,t.elt("Task",e.start,e.start+e.content.length,[t.elt("TaskMarker",e.start,e.start+3),...t.parser.
-parseInline(e.content.slice(3),e.start+3)])),!0}},Bd={defineNodes:[{name:"Task",block:!0,style:y.list},{name:"TaskMarker",
+parseInline(e.content.slice(3),e.start+3)])),!0}},Ed={defineNodes:[{name:"Task",block:!0,style:y.list},{name:"TaskMarker",
 style:y.atom}],parseBlock:[{name:"TaskList",leaf(n,t){return/^\[[ xX]\][ \t]/.test(t.content)&&n.parentType().name=="Lis\
-tItem"?new _r:null},after:"SetextHeading"}]},kh=/(www\.)|(https?:\/\/)|([\w.+-]{1,100}@)|(mailto:|xmpp:)/gy,wh=/[\w-]+(\.[\w-]+)+(\/[^\s<]*)?/gy,
-Ed=/[\w-]+\.[\w-]+($|\/)/,xh=/[\w.+-]+@[\w-]+(\.[\w.-]+)+/gy,Sh=/\/[a-zA-Z\d@.]+/gy;function vh(n,t,e,i){let s=0;for(let r=t;r<
-e;r++)n[r]==i&&s++;return s}function Od(n,t){wh.lastIndex=t;let e=wh.exec(n);if(!e||Ed.exec(e[0])[0].indexOf("_")>-1)return-1;
-let i=t+e[0].length;for(;;){let s=n[i-1],r;if(/[?!.,:*_~]/.test(s)||s==")"&&vh(n,t,i,")")>vh(n,t,i,"("))i--;else if(s=="\
-;"&&(r=/&(?:#\d+|#x[a-f\d]+|\w+);$/.exec(n.slice(t,i))))i=t+r.index;else break}return i}function Ch(n,t){xh.lastIndex=t;
-let e=xh.exec(n);if(!e)return-1;let i=e[0][e[0].length-1];return i=="_"||i=="-"?-1:t+e[0].length-(i=="."?1:0)}var Pd={parseInline:[
-{name:"Autolink",parse(n,t,e){let i=e-n.offset;if(i&&/\w/.test(n.text[i-1]))return-1;kh.lastIndex=i;let s=kh.exec(n.text),
-r=-1;if(!s)return-1;if(s[1]||s[2]){if(r=Od(n.text,i+s[0].length),r>-1&&n.hasOpenLink){let o=/([^\[\]]|\[[^\]]*\])*/.exec(
-n.text.slice(i,r));r=i+o[0].length}}else s[3]?r=Ch(n.text,i):(r=Ch(n.text,i+s[0].length),r>-1&&s[0]=="xmpp:"&&(Sh.lastIndex=
-r,s=Sh.exec(n.text),s&&(r=s.index+s[0].length)));return r<0?-1:(n.addElement(n.elt("URL",e,r+n.offset)),r+n.offset)}}]},
-$h=[Ld,Bd,Td,Pd];function Uh(n,t,e){return(i,s,r)=>{if(s!=n||i.char(r+1)==n)return-1;let o=[i.elt(e,r,r+1)];for(let l=r+
+tItem"?new Xr:null},after:"SetextHeading"}]},wh=/(www\.)|(https?:\/\/)|([\w.+-]{1,100}@)|(mailto:|xmpp:)/gy,xh=/[\w-]+(\.[\w-]+)+(\/[^\s<]*)?/gy,
+Od=/[\w-]+\.[\w-]+($|\/)/,Sh=/[\w.+-]+@[\w-]+(\.[\w.-]+)+/gy,vh=/\/[a-zA-Z\d@.]+/gy;function Ch(n,t,e,i){let s=0;for(let r=t;r<
+e;r++)n[r]==i&&s++;return s}function Pd(n,t){xh.lastIndex=t;let e=xh.exec(n);if(!e||Od.exec(e[0])[0].indexOf("_")>-1)return-1;
+let i=t+e[0].length;for(;;){let s=n[i-1],r;if(/[?!.,:*_~]/.test(s)||s==")"&&Ch(n,t,i,")")>Ch(n,t,i,"("))i--;else if(s=="\
+;"&&(r=/&(?:#\d+|#x[a-f\d]+|\w+);$/.exec(n.slice(t,i))))i=t+r.index;else break}return i}function Ah(n,t){Sh.lastIndex=t;
+let e=Sh.exec(n);if(!e)return-1;let i=e[0][e[0].length-1];return i=="_"||i=="-"?-1:t+e[0].length-(i=="."?1:0)}var Rd={parseInline:[
+{name:"Autolink",parse(n,t,e){let i=e-n.offset;if(i&&/\w/.test(n.text[i-1]))return-1;wh.lastIndex=i;let s=wh.exec(n.text),
+r=-1;if(!s)return-1;if(s[1]||s[2]){if(r=Pd(n.text,i+s[0].length),r>-1&&n.hasOpenLink){let o=/([^\[\]]|\[[^\]]*\])*/.exec(
+n.text.slice(i,r));r=i+o[0].length}}else s[3]?r=Ah(n.text,i):(r=Ah(n.text,i+s[0].length),r>-1&&s[0]=="xmpp:"&&(vh.lastIndex=
+r,s=vh.exec(n.text),s&&(r=s.index+s[0].length)));return r<0?-1:(n.addElement(n.elt("URL",e,r+n.offset)),r+n.offset)}}]},
+Uh=[Bd,Ed,Td,Rd];function Gh(n,t,e){return(i,s,r)=>{if(s!=n||i.char(r+1)==n)return-1;let o=[i.elt(e,r,r+1)];for(let l=r+
 1;l<i.end;l++){let a=i.char(l);if(a==n)return i.addElement(i.elt(t,r,l+1,o.concat(i.elt(e,l,l+1))));if(a==92&&o.push(i.elt(
-"Escape",l,l+++2)),Mt(a))break}return-1}}var vp={defineNodes:[{name:"Superscript",style:y.special(y.content)},{name:"Sup\
-erscriptMark",style:y.processingInstruction}],parseInline:[{name:"Superscript",parse:Uh(94,"Superscript","SuperscriptMar\
-k")}]},Cp={defineNodes:[{name:"Subscript",style:y.special(y.content)},{name:"SubscriptMark",style:y.processingInstruction}],
-parseInline:[{name:"Subscript",parse:Uh(126,"Subscript","SubscriptMark")}]},Ap={defineNodes:[{name:"Emoji",style:y.character}],
+"Escape",l,l+++2)),Mt(a))break}return-1}}var Dp={defineNodes:[{name:"Superscript",style:y.special(y.content)},{name:"Sup\
+erscriptMark",style:y.processingInstruction}],parseInline:[{name:"Superscript",parse:Gh(94,"Superscript","SuperscriptMar\
+k")}]},Lp={defineNodes:[{name:"Subscript",style:y.special(y.content)},{name:"SubscriptMark",style:y.processingInstruction}],
+parseInline:[{name:"Subscript",parse:Gh(126,"Subscript","SubscriptMark")}]},Tp={defineNodes:[{name:"Emoji",style:y.character}],
 parseInline:[{name:"Emoji",parse(n,t,e){let i;return t!=58||!(i=/^[a-zA-Z_0-9]+:/.exec(n.slice(e+1,n.end)))?-1:n.addElement(
-n.elt("Emoji",e,e+1+i[0].length))}}]};var Rd=Kh.configure($h),Gh=n=>n.replace(/\r\n?|\n/g,`
+n.elt("Emoji",e,e+1+i[0].length))}}]};var Id=jh.configure(Uh),_h=n=>n.replace(/\r\n?|\n/g,`
 `),Je=class{constructor(t){this.raw=t,this.eol=t.match(/\r\n|\r|\n/)?.[0]||`
-`}get text(){return Gh(this.raw)}offset(t){let e=0,i=0;for(;e<t&&i<this.raw.length;)this.raw[i]==="\r"&&this.raw[i+1]===
+`}get text(){return _h(this.raw)}offset(t){let e=0,i=0;for(;e<t&&i<this.raw.length;)this.raw[i]==="\r"&&this.raw[i+1]===
 `
 `&&i++,i++,e++;return i}apply(t){let e="",i=0;for(let{from:s,to:r,insert:o}of t){let l=this.offset(s),a=this.offset(r);e+=
-this.raw.slice(i,l)+Gh(o).replace(/\n/g,this.eol),i=a}return this.raw=e+this.raw.slice(i),this.raw}};function Qr(n,t=[]){
+this.raw.slice(i,l)+_h(o).replace(/\n/g,this.eol),i=a}return this.raw=e+this.raw.slice(i),this.raw}};function Zr(n,t=[]){
 let e=[],i=0;for(let d of n.split(`
 `)){let p=i+d.length;e.push({from:i,to:p,value:d,active:t.some(m=>m.from<=p&&m.to>=i),classes:[]}),i=p+1}let s=d=>{let p=0,
-m=e.length-1;for(;p<m;){let g=p+m+1>>1;e[g].from<=d?p=g:m=g-1}return e[p]},r=[],o=[],l=[];Rd.parse(n).iterate({enter(d){
+m=e.length-1;for(;p<m;){let g=p+m+1>>1;e[g].from<=d?p=g:m=g-1}return e[p]},r=[],o=[],l=[];Id.parse(n).iterate({enter(d){
 l.push({name:d.name,from:d.from,to:d.to,parent:d.node.parent?.name})}});let a=l.filter(d=>["FencedCode","CodeBlock","Inl\
 ineCode"].includes(d.name)),f=(d,p)=>a.some(m=>d>=m.from&&p<=m.to),h=[];for(let d of n.matchAll(/\[\[([^\]\n]+)\]\]/g)){
 if(f(d.index,d.index+d[0].length)||/\\$/.test(n.slice(0,d.index)))continue;let[p,...m]=d[1].split("|"),g={from:d.index,to:d.
@@ -2454,9 +2454,9 @@ index+d[0].length,kind:"wiki",target:p,label:m.join("|")||p};h.push(g),s(g.from)
 m-lp-wiki-source"})}for(let d of l){let p=s(d.from);if(/^ATXHeading[1-6]$/.test(d.name)&&p.classes.push("cm-lp-h"+d.name.
 at(-1)),["FencedCode","CodeBlock"].includes(d.name))for(let m of e)m.from>=p.from&&m.from<d.to&&m.classes.push("cm-lp-co\
 de");if(d.name==="QuoteMark"&&(p.classes.push("cm-lp-quote"),p.active||o.push({from:d.from,to:d.to+(n[d.to]===" "?1:0),kind:"\
-hide"})),d.name==="ListMark"){let m=l.find(T=>T.name==="TaskMarker"&&T.from>=d.to&&T.to<=p.to),g=m?m.to:d.to;p.classes.push(
+hide"})),d.name==="ListMark"){let m=l.find(L=>L.name==="TaskMarker"&&L.from>=d.to&&L.to<=p.to),g=m?m.to:d.to;p.classes.push(
 "cm-lp-list"),p.indent=n.slice(p.from,d.from).replace(/\t/g,"    ").length;let b=/^\s*$/.test(n.slice(p.from,d.from))?p.
-from:d.from,S=g+(n[g]===" "?1:0),C=p.active&&(S===g||t.some(T=>T.from<S&&T.to>b));C||(p.bullet=!0),C||o.push({from:b,to:S,
+from:d.from,k=g+(n[g]===" "?1:0),x=p.active&&(k===g||t.some(L=>L.from<k&&L.to>b));x||(p.bullet=!0),x||o.push({from:b,to:k,
 kind:m?"task":"bullet",checked:m?n.slice(m.from,m.to).toLowerCase()==="[x]":!1,taskAt:m?.from,label:m?p.value.slice(g-p.
 from).trim():void 0,marker:/^\d/.test(n.slice(d.from,d.to))?n.slice(d.from,d.to):"\u2022"})}["StrongEmphasis","Emphasis",
 "InlineCode","Strikethrough"].includes(d.name)&&r.push({from:d.from,to:d.to,class:d.name==="StrongEmphasis"?"cm-lp-stron\
@@ -2467,38 +2467,54 @@ from,to:d.to,kind:"hide"}):(p.classes.push("cm-lp-fence"),p.active||o.push({from
 "Link"&&!h.some(m=>m.from<d.to&&m.to>d.from)&&r.push({from:d.from,to:d.to,class:"cm-lp-link"})}for(let d of e){let p=d.active&&
 !d.classes.includes("cm-lp-list")&&/^(\s*)([-*+]) $/.exec(d.value);!p||f(d.from,d.to)||(d.classes.push("cm-lp-list"),d.bullet=
 !0,d.indent=p[1].replace(/\t/g,"    ").length,o.push({from:d.from,to:d.to,kind:"bullet",marker:"\u2022"}))}o.sort((d,p)=>d.
-from-p.from||p.to-d.to);let c=[],u=-1;for(let d of o)d.from>=u&&d.to>d.from&&(c.push(d),u=d.to);return{lines:e,marks:r,replacements:c}}var Zr=j.define(),to=class extends Qt{constructor(t,e){super(),this.item=t,this.options=e}eq(t){return JSON.stringify(this.
+from-p.from||p.to-d.to);let c=[],u=-1;for(let d of o)d.from>=u&&d.to>d.from&&(c.push(d),u=d.to);return{lines:e,marks:r,replacements:c}}
+var Nd=/^\s*(?:(?:[-*+]|\d+[.)])\s+(?:\[[ xX]\]\s+)?|>\s*|#{1,6}\s+)*$/,Hd=/(?:^|\s)(?:e\.g|i\.e|etc|vs|cf|approx|incl|no|p|pp|ca)\.$/i;
+function Xh(n,t,e){let i=[],s=n.lastIndexOf(`
+`,Math.max(0,t-1))+1;for(;s<=e;){let r=n.indexOf(`
+`,s);if(r<0&&(r=n.length),Fd(n,s,n.slice(s,r),t,e,i),r>=n.length)break;s=r+1}return i}function Fd(n,t,e,i,s,r){if(!((n.slice(
+0,t).match(/^\s*```/gm)||[]).length%2||/^\s*```/.test(e)||/^( {4}|\t)(?!\s*([-*+]|\d+[.)])\s)/.test(e)))for(let o of e.matchAll(
+new RegExp("\\p{L}[\\p{L}\\p{M}\\d]*(?:['\u2019\\-.:\\/@][\\p{L}\\p{M}\\d]+)*","gu"))){let l=t+o.index,a=l+o[0].length,f=o[0];
+if(a<i||l>s)continue;let h=e.slice(0,o.index);if((h.match(/`/g)||[]).length%2||/[\[(<]$/.test(h)&&/\[\[[^\]]*$/.test(h)||
+new RegExp("^\\p{Ll}","u").test(f)===!1)continue;let c=/^i(?:['’](?:m|ll|ve|d|s))?$/.test(f)&&a<=t+e.length&&(a<s||/[\s.,!?;:]/.
+test(n[a]||"")),u=/^[\p{Ll}\p{M}'’-]+$/u.test(f)&&!/^(?::\/|[@.:][\p{L}\d])/u.test(n.slice(a,a+2)),d=l>=i&&l<s&&u&&(Nd.
+test(h)||/[.!?]["'’”)]*\s+$/.test(h)&&!Hd.test(h.trimEnd())&&!/\.\.\.\s+$/.test(h));(c||d)&&r.push({from:l,to:l+1,insert:f[0].
+toUpperCase()})}}var to=j.define(),eo=class extends Qt{constructor(t,e){super(),this.item=t,this.options=e}eq(t){return JSON.stringify(this.
 item)===JSON.stringify(t.item)}toDOM(t){let e=this.item;if(e.kind==="wiki"){let s=document.createElement("button");return s.
 type="button",s.className="cm-lp-wiki",s.textContent=e.label,s.setAttribute("aria-label","Open linked note "+e.label),s.
 onmousedown=r=>r.preventDefault(),s.onclick=r=>{r.preventDefault(),this.options.onWiki(e.target)},s}let i=document.createElement(
 "span");if(i.className="cm-lp-marker",e.kind==="task"){let s=document.createElement("input");s.type="checkbox",s.checked=
 e.checked,s.setAttribute("aria-label",e.label||"Task"),s.onmousedown=r=>r.preventDefault(),s.onchange=()=>{t.composing||
-t.dispatch({changes:{from:e.taskAt+1,to:e.taskAt+2,insert:s.checked?"x":" "},annotations:Y.userEvent.of("input.task")})},
-i.append(s)}else i.textContent=e.marker;return i}ignoreEvent(){return!0}};function Id(n){return qt.fromClass(class{constructor(t){
+t.dispatch({changes:{from:e.taskAt+1,to:e.taskAt+2,insert:s.checked?"x":" "},annotations:J.userEvent.of("input.task")})},
+i.append(s)}else i.textContent=e.marker;return i}ignoreEvent(){return!0}};function Vd(n){return qt.fromClass(class{constructor(t){
 this.decorations=this.build(t)}update(t){if(t.view.composing){this.decorations=this.decorations.map(t.changes);return}(t.
-docChanged||t.selectionSet||t.focusChanged||t.transactions.some(e=>e.effects.some(i=>i.is(Zr))))&&(this.decorations=this.
-build(t.view))}build(t){let e=t.hasFocus?t.state.selection.ranges.map(r=>({from:r.from,to:r.to})):[],i=Qr(t.state.doc.toString(),
+docChanged||t.selectionSet||t.focusChanged||t.transactions.some(e=>e.effects.some(i=>i.is(to))))&&(this.decorations=this.
+build(t.view))}build(t){let e=t.hasFocus?t.state.selection.ranges.map(r=>({from:r.from,to:r.to})):[],i=Zr(t.state.doc.toString(),
 e),s=[];for(let r of i.lines){let o=[...r.classes,...r.active?["cm-lp-active"]:[],...r.bullet?["cm-lp-bullet"]:[]],l={class:o.
 join(" ")};r.indent!==void 0&&r.bullet&&(l.style=`--lp-indent:${Math.floor(r.indent/2)*22}px`),o.length&&s.push(z.line({
 attributes:l}).range(r.from))}for(let r of i.marks)r.to>r.from&&s.push(z.mark({class:r.class}).range(r.from,r.to));for(let r of i.
-replacements)s.push(z.replace({widget:r.kind==="hide"?void 0:new to(r,n)}).range(r.from,r.to));return z.set(s,!0)}},{decorations:t=>t.
-decorations})}function Pp(n,t){let e=new Je(""),i,s=new Map,r,o=()=>{clearTimeout(r);let u=()=>{if(i.dom.isConnected){if(i.
-composing){r=setTimeout(u,60);return}i.dispatch({effects:Zr.of(null)}),t.onChange(e.raw,!1)}};r=setTimeout(u,80)},l=()=>{
-s.set(e.text,e.raw),s.size>160&&s.delete(s.keys().next().value)},a=u=>{if(!u||i.composing)return!1;let d=i.state.doc.toString(),
-p=0,m=d.length,g=u.text.length;for(;p<m&&p<g&&d[p]===u.text[p];)p++;for(;m>p&&g>p&&d[m-1]===u.text[g-1];)m--,g--;return i.
-dispatch({changes:{from:p,to:m,insert:u.text.slice(p,g)},selection:k.range(u.start,u.end),annotations:Y.userEvent.of("in\
-put.format"),scrollIntoView:!0}),i.focus(),!0},f=u=>{if(i.composing)return!1;if(u==="undo"||u==="redo")return i.focus(),
-(u==="undo"?Hn:Ii)(i);let d=i.state.selection.main;return a(t.transform(i.state.doc.toString(),d.from,d.to,u))},h=()=>{if(i.
-composing)return!1;let u=i.state.selection.main;return Qr(i.state.doc.toString()).lines.find(p=>p.from<=u.from&&p.to>=u.
-from)?.classes.includes("cm-lp-code")?!1:a(t.continueList(i.state.doc.toString(),u.from,u.to))},c=[Fa(),fa(),E.lineWrapping,
-ua("Start writing\u2026"),E.contentAttributes.of({"aria-label":"Live Preview editor",spellcheck:"true",autocorrect:"on",
-autocapitalize:"sentences"}),Id(t),rr.of([{key:"Tab",run:()=>f("indent"),shift:()=>f("outdent")},{key:"Enter",run:h},{key:"\
-Mod-b",run:()=>f("bold")},{key:"Mod-i",run:()=>f("italic")},...Wa,...dh]),E.domEventHandlers({beforeinput(u){return!u.isComposing&&
-!i.composing&&u.cancelable&&["insertParagraph","insertLineBreak"].includes(u.inputType)&&h()?(u.preventDefault(),!0):!1},
-compositionend(){return o(),!1}}),E.updateListener.of(u=>{if(u.docChanged){l();for(let d of u.transactions)if(d.docChanged){
-let p=d.newDoc.toString(),m=(d.isUserEvent("undo")||d.isUserEvent("redo"))&&s.get(p);if(m!==!1&&m!==void 0)e=new Je(m);else{
-let g=[];d.changes.iterChanges((b,S,C,T,w)=>g.push({from:b,to:S,insert:w.toString()})),e.apply(g)}}l(),t.onChange(e.raw,
-i.composing),i.composing&&o()}})];return i=new E({parent:n,state:U.create({doc:"",extensions:c})}),{view:i,format:f,get value(){
-return e.raw},get composing(){return i.composing},setValue(u){clearTimeout(r),e=new Je(u),s=new Map,l(),i.setState(U.create(
-{doc:e.text,extensions:c}))},focus(){i.focus()},select(u,d=u){i.dispatch({selection:k.range(u,d),effects:Zr.of(null)}),i.
-focus()},replace(u){return a(u)},destroy(){clearTimeout(r),i.destroy()}}}export{E as EditorView,Pp as createLiveEditor};
+replacements)s.push(z.replace({widget:r.kind==="hide"?void 0:new eo(r,n)}).range(r.from,r.to));return z.set(s,!0)}},{decorations:t=>t.
+decorations})}function Hp(n,t){let e=new Je(""),i,s=new Map,r,o=()=>{clearTimeout(r);let p=()=>{if(i.dom.isConnected){if(i.
+composing){r=setTimeout(p,60);return}u(),i.dispatch({effects:to.of(null)}),t.onChange(e.raw,!1)}};r=setTimeout(p,80)},l=()=>{
+s.set(e.text,e.raw),s.size>160&&s.delete(s.keys().next().value)},a=p=>{if(!p||i.composing)return!1;let m=i.state.doc.toString(),
+g=0,b=m.length,k=p.text.length;for(;g<b&&g<k&&m[g]===p.text[g];)g++;for(;b>g&&k>g&&m[b-1]===p.text[k-1];)b--,k--;return i.
+dispatch({changes:{from:g,to:b,insert:p.text.slice(g,k)},selection:w.range(p.start,p.end),annotations:J.userEvent.of("in\
+put.format"),scrollIntoView:!0}),i.focus(),!0},f=p=>{if(i.composing)return!1;if(p==="undo"||p==="redo")return i.focus(),
+(p==="undo"?Hn:Ii)(i);let m=i.state.selection.main;return a(t.transform(i.state.doc.toString(),m.from,m.to,p))},h=()=>{if(i.
+composing)return!1;let p=i.state.selection.main;return Zr(i.state.doc.toString()).lines.find(g=>g.from<=p.from&&g.to>=p.
+from)?.classes.includes("cm-lp-code")?!1:a(t.continueList(i.state.doc.toString(),p.from,p.to))},c=[],u=()=>{if(!c.length||
+i.composing)return;let p=c;c=[];let m=i.state.doc.toString(),g=new Set,b=[];for(let k of p)for(let x of Xh(m,k.from,k.to))
+g.has(x.from)||(g.add(x.from),b.push(x));b.length&&i.dispatch({changes:b,annotations:[J.userEvent.of("input.autocap"),Or.
+of("full")]})},d=[Va(),ca(),E.lineWrapping,da("Start writing\u2026"),E.contentAttributes.of({"aria-label":"Live Preview \
+editor",spellcheck:"true",autocorrect:"on",autocapitalize:"sentences"}),Vd(t),rr.of([{key:"Tab",run:()=>f("indent"),shift:()=>f(
+"outdent")},{key:"Enter",run:h},{key:"Mod-b",run:()=>f("bold")},{key:"Mod-i",run:()=>f("italic")},...qa,...ph]),E.domEventHandlers(
+{beforeinput(p){return!p.isComposing&&!i.composing&&p.cancelable&&["insertParagraph","insertLineBreak"].includes(p.inputType)&&
+h()?(p.preventDefault(),!0):!1},compositionend(){return o(),!1}}),E.updateListener.of(p=>{if(p.docChanged){l();for(let m of p.
+transactions)if(m.docChanged){let g=m.newDoc.toString(),b=(m.isUserEvent("undo")||m.isUserEvent("redo"))&&s.get(g);if(b!==
+!1&&b!==void 0)e=new Je(b);else{let k=[];m.changes.iterChanges((x,L,v,D,A)=>k.push({from:x,to:L,insert:A.toString()})),e.
+apply(k)}}for(let m of p.transactions)m.docChanged&&(c=c.map(g=>({from:m.changes.mapPos(g.from,-1),to:m.changes.mapPos(g.
+to,1)})),m.isUserEvent("input")&&!m.isUserEvent("input.autocap")&&!m.isUserEvent("input.task")&&m.changes.iterChangedRanges(
+(g,b,k,x)=>{x>k&&c.push({from:k,to:x})}));c.length&&!i.composing&&queueMicrotask(u),l(),t.onChange(e.raw,i.composing),i.
+composing&&o()}})];return i=new E({parent:n,state:U.create({doc:"",extensions:d})}),{view:i,format:f,get value(){return e.
+raw},get composing(){return i.composing},setValue(p){clearTimeout(r),e=new Je(p),s=new Map,l(),i.setState(U.create({doc:e.
+text,extensions:d}))},focus(){i.focus()},select(p,m=p){i.dispatch({selection:w.range(p,m),effects:to.of(null)}),i.focus()},
+replace(p){return a(p)},destroy(){clearTimeout(r),i.destroy()}}}export{E as EditorView,Hp as createLiveEditor};

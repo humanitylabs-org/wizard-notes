@@ -34,10 +34,11 @@ fs.mkdirSync(out,{recursive:true});
   await select((await get()).length);
   const typed='# Typed heading\n\nA **bold thought** and *small steps*.\n\n- parent\n  - nested\n- [ ] New task\n\n[[Home/Quick Notes|Quick Notes]]\n\nIME: ';
   await p.keyboard.insertText(typed);
+  const typedCap=typed.replace('- parent','- Parent').replace('- nested','- Nested');
   const lfInitial=initial.replace(/\r\n?/g,'\n');
-  expect(await get()).toBe(lfInitial+typed);
+  expect(await get()).toBe(lfInitial+typedCap);
   expect(await p.evaluate(()=>WizAppServices.inspect().some(s=>s.holds.some(h=>h.startsWith('Unsaved note: '))))).toBe(true);
-  let expected=initial+typed.replace(/\n/g,'\r\n');await waitSaved(expected);
+  let expected=initial+typedCap.replace(/\n/g,'\r\n');await waitSaved(expected);
   await expect.poll(()=>p.evaluate(()=>WizAppServices.inspect().flatMap(s=>s.holds))).toEqual([]);
   const unchanged=expected.slice(0,initial.length);expect(unchanged).toBe(initial);
   report.checks.push('native insertText types heading, emphasis, nested lists, checkbox and wiki; original bytes unchanged, autosave readback exact');
@@ -47,38 +48,53 @@ fs.mkdirSync(out,{recursive:true});
   await cdp.send('Input.imeSetComposition',{text:'に',selectionStart:1,selectionEnd:1});await p.waitForTimeout(40);
   await cdp.send('Input.imeSetComposition',{text:'日本',selectionStart:2,selectionEnd:2});await p.waitForTimeout(40);
   await cdp.send('Input.insertText',{text:'日本語'});await p.waitForTimeout(150);
-  expect(await get()).toBe(lfInitial+typed+'日本語');expected+='日本語';await waitSaved(expected);
+  expect(await get()).toBe(lfInitial+typedCap+'日本語');expected+='日本語';await waitSaved(expected);
   report.checks.push('CDP composition に → 日本 → 日本語 commits once; no duplicated/dropped text');
   // Cancellation must leave no intermediate composing text behind.
   await cdp.send('Input.imeSetComposition',{text:'cancel',selectionStart:6,selectionEnd:6});await p.waitForTimeout(40);
   await cdp.send('Input.imeSetComposition',{text:'',selectionStart:0,selectionEnd:0});await p.waitForTimeout(150);
-  expect(await get()).toBe(lfInitial+typed+'日本語');await waitSaved(expected);
+  expect(await get()).toBe(lfInitial+typedCap+'日本語');await waitSaved(expected);
   report.checks.push('composition cancellation removes the interim text only');
   // Android keyboards may send a cancelable beforeinput line break without keydown.
   await p.keyboard.insertText('\n- Android item');
   const prevented=await f.locator('.cm-content').evaluate(e=>!e.dispatchEvent(new InputEvent('beforeinput',{inputType:'insertLineBreak',bubbles:true,cancelable:true})));
   expect(prevented).toBe(true);expect((await get()).endsWith('- Android item\n- ')).toBe(true);
-  await p.keyboard.insertText('child');await p.keyboard.press('Tab');expect((await get()).endsWith('\n  - child')).toBe(true);
-  await p.keyboard.press('Shift+Tab');expect((await get()).endsWith('\n- child')).toBe(true);
+  await p.keyboard.insertText('child');await p.keyboard.press('Tab');expect((await get()).endsWith('\n  - Child')).toBe(true);
+  await p.keyboard.press('Shift+Tab');expect((await get()).endsWith('\n- Child')).toBe(true);
   report.checks.push('Android beforeinput-only Enter continues once; Tab/Shift-Tab indent and outdent');
   // Obsidian: "- " becomes a bullet immediately on the caret line, and stays one while indenting there.
   const caretBullet=()=>f.locator('.cm-line.cm-lp-active').last().evaluate(e=>({bullet:!!e.querySelector('.cm-lp-bullet-widget,[class*=bullet]')||e.classList.contains('cm-lp-bullet'),text:e.textContent}));
-  await p.keyboard.press('Enter');let cb=await caretBullet();expect(cb.bullet).toBe(true);expect((await get()).endsWith('\n- child\n- ')).toBe(true);
-  await p.keyboard.insertText('instant');await p.keyboard.press('Tab');cb=await caretBullet();expect(cb.bullet).toBe(true);expect((await get()).endsWith('\n  - instant')).toBe(true);
-  await p.keyboard.press('Shift+Tab');expect((await caretBullet()).bullet).toBe(true);expect((await get()).endsWith('\n- instant')).toBe(true);
+  await p.keyboard.press('Enter');let cb=await caretBullet();expect(cb.bullet).toBe(true);expect((await get()).endsWith('\n- Child\n- ')).toBe(true);
+  await p.keyboard.insertText('instant');await p.keyboard.press('Tab');cb=await caretBullet();expect(cb.bullet).toBe(true);expect((await get()).endsWith('\n  - Instant')).toBe(true);
+  await p.keyboard.press('Shift+Tab');expect((await caretBullet()).bullet).toBe(true);expect((await get()).endsWith('\n- Instant')).toBe(true);
   // Fresh "- " typed under a plain paragraph line (CommonMark would not call it a list yet).
   await f.evaluate(async()=>{const {EditorView}=await import('./vendor/live-preview.js');const v=EditorView.findFromDOM(document.querySelector('.cm-editor'));const n=v.state.doc.length;v.dispatch({changes:{from:n,insert:'\n\nPlain line\n'},selection:{anchor:n+13}});v.focus();});await p.waitForTimeout(50);
   await p.keyboard.insertText('-');expect((await caretBullet()).bullet).toBe(false);
   await p.keyboard.insertText(' ');cb=await caretBullet();expect(cb.bullet).toBe(true);expect(cb.text.includes('-')).toBe(false);
-  await p.keyboard.insertText('typed');expect((await caretBullet()).bullet).toBe(true);expect((await get()).endsWith('\nPlain line\n- typed')).toBe(true);
+  await p.keyboard.insertText('typed');expect((await caretBullet()).bullet).toBe(true);expect((await get()).endsWith('\nPlain line\n- Typed')).toBe(true);
   report.checks.push('typing "- " renders a bullet on the caret line at once; Tab/Shift-Tab keep it rendered');
+  // Auto-capitalisation that does not depend on the keyboard seeing the hidden list marker.
+  await p.keyboard.press('Enter');await p.keyboard.insertText('buy eggs. then milk, i think');
+  expect((await get()).endsWith('\n- Buy eggs. Then milk, I think')).toBe(true);
+  await p.keyboard.press('ControlOrMeta+z');expect((await get()).endsWith('\n- buy eggs. then milk, i think')).toBe(true);
+  await p.keyboard.press('ControlOrMeta+Shift+z');expect((await get()).endsWith('\n- Buy eggs. Then milk, I think')).toBe(true);
+  // Composing keyboards: the word is capitalised once, after the composition commits, with no doubling.
+  await p.keyboard.press('Enter');
+  await cdp.send('Input.imeSetComposition',{text:'w',selectionStart:1,selectionEnd:1});await p.waitForTimeout(40);
+  await cdp.send('Input.imeSetComposition',{text:'wor',selectionStart:3,selectionEnd:3});await p.waitForTimeout(40);
+  expect((await get()).endsWith('\n- wor')).toBe(true);
+  await cdp.send('Input.insertText',{text:'word'});await p.waitForTimeout(250);
+  expect((await get()).endsWith('\n- Word')).toBe(true);
+  await p.keyboard.insertText(' ok. ');await cdp.send('Input.imeSetComposition',{text:'nex',selectionStart:3,selectionEnd:3});await p.waitForTimeout(40);await cdp.send('Input.insertText',{text:'next'});await p.waitForTimeout(250);
+  expect((await get()).endsWith('\n- Word ok. Next')).toBe(true);
+  report.checks.push('new bullets, new sentences and "i" auto-capitalise (typed and IME-composed, once, undoable)');
   // Simulate native autocorrect/voice replacement on a selected range, not event replay.
   await p.keyboard.insertText('\nteh');let value=await get();await select(value.length-3,value.length);
-  await cdp.send('Input.insertText',{text:'the'});expect((await get()).endsWith('\nthe')).toBe(true);
+  await cdp.send('Input.insertText',{text:'the'});expect((await get()).endsWith('\nThe')).toBe(true);
   value=await get();await select(value.length-3,value.length);await f.getByRole('button',{name:'Bold',exact:true}).click();
-  expect((await get()).endsWith('\n**the**')).toBe(true);
-  await f.getByRole('button',{name:'Undo',exact:true}).click();expect((await get()).endsWith('\nthe')).toBe(true);
-  await f.getByRole('button',{name:'Redo',exact:true}).click();expect((await get()).endsWith('\n**the**')).toBe(true);
+  expect((await get()).endsWith('\n**The**')).toBe(true);
+  await f.getByRole('button',{name:'Undo',exact:true}).click();expect((await get()).endsWith('\nThe')).toBe(true);
+  await f.getByRole('button',{name:'Redo',exact:true}).click();expect((await get()).endsWith('\n**The**')).toBe(true);
   report.checks.push('native selected replacement, floating toolbar bold, undo and redo use the same transaction history');
   // Place caret elsewhere so task is a tappable widget; toggling changes one byte.
   await select(4);value=await get();await f.locator('.cm-lp-marker input[aria-label="New task"]').check();

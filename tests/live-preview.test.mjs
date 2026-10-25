@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {RawMarkdown,normalize,previewModel} from '../editor/live-preview-model.mjs';
+import {RawMarkdown,normalize,previewModel,autocapEdits} from '../editor/live-preview-model.mjs';
 const model=(t,pos)=>previewModel(t,pos===undefined?[]:[{from:pos,to:pos}]);
 test('headings render while active line reveals only its own marks',()=>{const t='# Heading\n## Second\nPlain';const m=model(t,12);assert.ok(m.lines[0].classes.includes('cm-lp-h1'));assert.ok(m.lines[1].classes.includes('cm-lp-h2'));assert.ok(m.replacements.some(r=>r.from===0&&r.to===2));assert.ok(!m.replacements.some(r=>r.from===10));assert.ok(m.lines[1].active);});
 test('emphasis, nested emphasis, strike and inline code are decorated not serialized',()=>{const t='**bold and *italic*** ~~done~~ `code`';const m=model(t);assert.ok(m.marks.some(r=>r.class==='cm-lp-strong'));assert.ok(m.marks.some(r=>r.class==='cm-lp-em'));assert.ok(m.marks.some(r=>r.class==='cm-lp-inline-code'));assert.ok(m.marks.some(r=>r.class==='cm-lp-strike'));assert.equal(model(t,5).replacements.length,0);assert.equal(new RawMarkdown(t).raw,t);});
@@ -26,4 +26,23 @@ test('bullet renders on the caret line as soon as "- " is typed',()=>{
 test('bare "- " under a paragraph renders on the caret line only',()=>{
   const t='Plain\n- ';assert.equal(previewModel(t,[{from:t.length,to:t.length}]).lines[1].bullet,true);
   assert.equal(previewModel(t,[]).lines[1].bullet,undefined);
+});
+test('autocapitalises sentence starts, list items and the pronoun i, but not code, links or urls',()=>{
+  const cap=(t,from=0,to=t.length)=>{let s=t;for(const e of autocapEdits(t,from,to).reverse())s=s.slice(0,e.from)+e.insert+s.slice(e.to);return s;};
+  assert.equal(cap('hello there. next one! and? yes'),'Hello there. Next one! And? Yes');
+  assert.equal(cap('- milk'),'- Milk');assert.equal(cap('  - [ ] call mum'),'  - [ ] Call mum');
+  assert.equal(cap('1. first'),'1. First');assert.equal(cap('> quote'),'> Quote');assert.equal(cap('## heading'),'## Heading');
+  assert.equal(cap('so i think i\'m done'),'So I think I\'m done');assert.equal(cap('in it'),'In it');
+  assert.equal(cap('ok e.g. this'),'Ok e.g. this');assert.equal(cap('wait... and'),'Wait... and');
+  assert.equal(cap('`code here`'),'`code here`');assert.equal(cap('```\nplain code\n```'.slice(4),4,14).length>0,true);
+  assert.equal(cap('```\nfoo bar',4),'```\nfoo bar');
+  assert.equal(cap('see [[my note]]'),'See [[my note]]');assert.equal(cap('https://x.com hi'),'https://x.com hi');
+  assert.equal(cap('iPhone is'),'iPhone is');
+  // Only the typed range: an earlier lowercase start the user kept stays as it is.
+  const t='keep this. new';assert.equal(cap(t,11,14),'keep this. New');
+});
+test('autocap handles multi-line pastes line by line and skips fenced code',()=>{
+  const t='- parent\n  - nested\n```\nlower code\n```\nafter';
+  const out=autocapEdits(t,0,t.length).map(e=>t.slice(e.from,e.from+6));
+  assert.deepEqual(out,['parent','nested','after']);
 });

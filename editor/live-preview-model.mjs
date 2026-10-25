@@ -105,3 +105,38 @@ export function previewModel(text, active = []) {
   for (const r of replacements) if (r.from >= end && r.to > r.from) { clean.push(r); end = r.to; }
   return {lines, marks, replacements:clean};
 }
+
+// Keyboard-independent sentence capitalisation. Some Android keyboards cannot see the text before the
+// caret once Live Preview replaces list markers with widgets, so they stop capitalising. Given a changed
+// range in the new text, return single-letter uppercase edits for: the first word of a line or list/task/
+// quote/heading item, the first word after ". ", "! " or "? ", and the pronoun "i" (i, i'm, i'll...).
+const PREFIX = /^\s*(?:(?:[-*+]|\d+[.)])\s+(?:\[[ xX]\]\s+)?|>\s*|#{1,6}\s+)*$/;
+const ABBREV = /(?:^|\s)(?:e\.g|i\.e|etc|vs|cf|approx|incl|no|p|pp|ca)\.$/i;
+export function autocapEdits(text, from, to) {
+  const edits = [];
+  let lineStart = text.lastIndexOf('\n', Math.max(0, from - 1)) + 1;
+  while (lineStart <= to) {
+    let lineEnd = text.indexOf('\n', lineStart); if (lineEnd < 0) lineEnd = text.length;
+    capLine(text, lineStart, text.slice(lineStart, lineEnd), from, to, edits);
+    if (lineEnd >= text.length) break;
+    lineStart = lineEnd + 1;
+  }
+  return edits;
+}
+function capLine(text, lineStart, line, from, to, edits) {
+  // Skip fenced code (odd number of ``` fences before this line) and indented code blocks.
+  if (((text.slice(0, lineStart).match(/^\s*```/gm) || []).length % 2) || /^\s*```/.test(line) || /^( {4}|\t)(?!\s*([-*+]|\d+[.)])\s)/.test(line)) return;
+  for (const m of line.matchAll(/\p{L}[\p{L}\p{M}\d]*(?:['’\-.:\/@][\p{L}\p{M}\d]+)*/gu)) {
+    const start = lineStart + m.index, end = start + m[0].length, word = m[0];
+    if (end < from || start > to) continue;
+    const before = line.slice(0, m.index);
+    if ((before.match(/`/g) || []).length % 2) continue;            // inline code
+    if (/[\[(<]$/.test(before) && /\[\[[^\]]*$/.test(before)) continue; // inside [[wikilink]]
+    if (/^\p{Ll}/u.test(word) === false) continue;
+    const pronoun = /^i(?:['’](?:m|ll|ve|d|s))?$/.test(word) && end <= lineStart + line.length && (end < to || /[\s.,!?;:]/.test(text[end] || ''));
+    const plain = /^[\p{Ll}\p{M}'’-]+$/u.test(word) && !/^(?::\/|[@.:][\p{L}\d])/u.test(text.slice(end, end + 2));                  // not urls, emails, iPhone, file.md
+    const sentence = start >= from && start < to && plain &&
+      (PREFIX.test(before) || (/[.!?]["'’”)]*\s+$/.test(before) && !ABBREV.test(before.trimEnd()) && !/\.\.\.\s+$/.test(before)));
+    if (pronoun || sentence) edits.push({from: start, to: start + 1, insert: word[0].toUpperCase()});
+  }
+}
