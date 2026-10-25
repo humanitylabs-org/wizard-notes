@@ -51,6 +51,20 @@ Build/release images on your configured build worker using `python3 scripts/rele
 - EXTEND: the app-owned tree drawer with touch intent consistent with shell swipe thresholds. No shell navigation code is copied or modified.
 - NEW: none in the shared shell. The app owns only vault/domain state and callbacks.
 
+## Live Preview & offline dependencies
+
+Live Preview is the default editor: headings, emphasis, nested list markers, tasks, quotes, fenced code and wiki links render in place. Markdown syntax appears on the caret/selection lines; tap a rendered wiki link to navigate, or move the caret onto that line to edit its source. The book button is a separate non-editable Reading view. Backlinks remain below both views.
+
+- REUSE: CodeMirror 6's native editable DOM, Android/IME handling, selection, history and keymaps; the existing `WizardApp.update.hold`, revision-conflict recovery, appearance, Back and sharing services.
+- EXTEND: the existing Notes editor adapter, formatting transforms, list continuation and drawer intent guard. A Lezer Markdown parse supplies disposable decorations without rewriting the document. Composition updates map existing decorations; they never replace the composing DOM or replay native text. Autosave waits for composition to settle.
+- NEW: no parallel shell capability. The app-owned Markdown projection/model lives in `editor/`, and its offline bundle in `web/vendor/`. The shared shell has no Live Preview service to reuse; this is a domain editor, not a replacement for `WizardApp.editor` transforms.
+
+CodeMirror was chosen over a home-grown contenteditable line model because preserving native Android composition/autocorrect is the primary risk. It handles platform input; our code only decorates and routes transactions. The raw-string adapter applies LF-indexed editor changes back to original Markdown, preserving untouched BOM, mixed line endings, whitespace and final-newline bytes. Undo/redo retains exact recent raw snapshots, not HTML serialization. The server already reads/writes UTF-8 bytes atomically.
+
+The minified MIT-only editor bundle is committed. No CDN, network font, `node_modules` or Node process is needed at runtime. All bundled dependencies, versions and license texts are in **[NOTICE](web/vendor/NOTICE.txt)**. `package-lock.json` pins build inputs; regenerate with `npm ci --ignore-scripts && npm run build:editor`. CI regenerates it and rejects drift. Run `npm test` for original transforms plus the Live Preview model tests. Browser acceptance uses `tests/live-preview.browser.cjs` and `tests/live-preview-input.browser.cjs` against a disposable scratch host; never use an owner's vault for typing tests. `tests/swipe.test.cjs` keeps the real hosted Back and CDP touch checks.
+
+Synthetic Chromium composition is regression coverage, **not proof of Gboard, Samsung Keyboard, voice typing or WebView on a real phone**. Physical-device keyboard checks remain required before making that claim.
+
 ## Roadmap
 
 Sharing (later): the vault is private by default. You can share single notes or whole folders with a standard agent on an ongoing basis (e.g. an "Archimedes" folder: anything moved in is readable/editable by that agent). Moving a note into a shared folder first runs a private-agent redaction pass that marks what you may want to remove; you approve, then it is shared. Access is per agent, per path, revocable.

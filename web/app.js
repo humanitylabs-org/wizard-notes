@@ -1,13 +1,15 @@
+import {createLiveEditor} from './vendor/live-preview.js';
 const $=id=>document.getElementById(id), W=window.WizardApp;
 if(!W) throw new Error('Wizard shared client is unavailable. Open Notes inside Wizard.');
 W.ready({name:'notes',version:'0.1.0'});
 W.theme.get(); W.theme.onChange(()=>{});
 const stored=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key)||'null')??fallback;}catch{return fallback;}};
 const store=(key,value)=>{try{localStorage.setItem(key,JSON.stringify(value));}catch{notice('Local draft recovery is unavailable. Keep this window open until saved.');}};
-const state={folder:'',note:null,tree:[],search:false,read:false,drawer:false,trail:[],sort:stored('notes.sort','name'),sidebarHidden:stored('notes.sidebarHidden',false),expanded:new Set(stored('notes.expanded',[]))};
+const state={folder:'',note:null,tree:[],search:false,read:false,drawer:false,trail:[],sort:stored('notes.sort','name'),sidebarHidden:stored('notes.sidebarHidden',true),expanded:new Set(stored('notes.expanded',[]))};
 const phone=()=>matchMedia('(max-width:760px)').matches;
 const collator=new Intl.Collator(undefined,{numeric:true,sensitivity:'base'});
 const drafts=new Map(); let sheetBack=null,searchTimer,searchSeq=0,noticeTimer,navSeq=0;
+const editor=createLiveEditor($('source'),{transform:transformText,continueList,onWiki:target=>act(()=>wiki(target)),onChange:content=>{const n=state.note;if(!n)return;n.content=content;changed(n);}});
 const parent=p=>p.includes('/')?p.slice(0,p.lastIndexOf('/')):'', base=p=>p.split('/').pop(), join=(a,b)=>a?a+'/'+b:b;
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
 const button=(text,fn,label)=>{const b=el('button',text);b.type='button';b.onclick=async()=>{if(b.disabled)return;b.disabled=true;try{await act(fn);}finally{b.disabled=false;}};if(label)b.setAttribute('aria-label',label);return b;};
@@ -48,23 +50,24 @@ function renderViews(){
 }
 function showDrawer(open){state.drawer=!!open&&!!state.note;renderViews();if(open)document.activeElement?.blur();}
 function openFolder(path){++navSeq;state.search=false;state.note=null;state.trail=[];state.folder=path;state.drawer=false;renderViews();}
-async function openNote(path,editing=false,viaLink=false,restoring=false){const ticket=++navSeq;state.search=false;let n=drafts.get(path);if(!n||(!dirty(n)&&!n.busy)){const raw=await api('note?path='+encodeURIComponent(path));n={...raw,titleDraft:raw.title,saved:raw.content,hold:null,timer:null,busy:null,error:null};drafts.set(path,n);}if(ticket!==navSeq)return;if(!restoring){if(viaLink&&state.note&&state.note.path!==path)state.trail.push({path:state.note.path,read:state.read,scroll:$('main').scrollTop});else if(!viaLink)state.trail=[];}state.note=n;state.drawer=false;state.folder=parent(path);let ancestor=state.folder;while(ancestor){state.expanded.add(ancestor);ancestor=parent(ancestor);}store('notes.expanded',[...state.expanded]);state.read=!!n.content.trim()&&!editing;$('title').value=n.titleDraft;$('source').value=n.content;resetUndo();renderNote();renderViews();$('main').scrollTop=0;if(editing){$('title').focus();$('title').select();}}
-function autoSize(){const t=$('source');t.style.height='auto';t.style.height=Math.max(t.scrollHeight,240)+'px';}
-function renderNote(){const n=state.note;if(!n)return;$('source').hidden=state.read;$('read').hidden=!state.read;$('backlinks').hidden=!state.read;$('mode').replaceChildren(icon(state.read?'edit':'book'));$('mode').setAttribute('aria-label',state.read?'Edit note':'Read note');$('formatting').hidden=state.read||state.search;if(state.read){markdown(n.content,$('read'));loadBacklinks(n);}else requestAnimationFrame(autoSize);saveStatus(n);}
+async function openNote(path,editing=false,viaLink=false,restoring=false){const ticket=++navSeq;state.search=false;let n=drafts.get(path);if(!n||(!dirty(n)&&!n.busy)){const raw=await api('note?path='+encodeURIComponent(path));n={...raw,titleDraft:raw.title,saved:raw.content,hold:null,timer:null,busy:null,error:null};drafts.set(path,n);}if(ticket!==navSeq)return;if(!restoring){if(viaLink&&state.note&&state.note.path!==path)state.trail.push({path:state.note.path,read:state.read,scroll:$('main').scrollTop});else if(!viaLink)state.trail=[];}state.note=n;state.drawer=false;state.folder=parent(path);let ancestor=state.folder;while(ancestor){state.expanded.add(ancestor);ancestor=parent(ancestor);}store('notes.expanded',[...state.expanded]);state.read=false;$('title').value=n.titleDraft;editor.setValue(n.content);renderNote();renderViews();$('main').scrollTop=0;if(editing){$('title').focus();$('title').select();}}
+function autoSize(){editor.view.requestMeasure();}
+function renderNote(){const n=state.note;if(!n)return;$('source').hidden=state.read;$('read').hidden=!state.read;$('backlinks').hidden=false;$('mode').replaceChildren(icon(state.read?'edit':'book'));$('mode').setAttribute('aria-label',state.read?'Live Preview':'Read note');$('formatting').hidden=state.read||state.search;if(state.read)markdown(n.content,$('read'));else requestAnimationFrame(autoSize);loadBacklinks(n);saveStatus(n);}
 async function loadBacklinks(n){try{const data=await api('backlinks?path='+encodeURIComponent(n.path));if(state.note!==n)return;const dest=$('backlinks');dest.replaceChildren();if(data.notes.length){dest.append(el('h2','Linked from'));for(const a of data.notes)dest.append(button(a.title,()=>openNote(a.path,false,true)));}}catch(e){notice(e.message);}}
 function dirty(n){return n.content!==n.saved||n.titleDraft!==n.title;}
 function saveStatus(n){if(state.note!==n)return;const b=$('save');b.hidden=!n.error;b.textContent=n.error?'Retry save':'';b.title=n.error||'Retry saving';}
 function persistDrafts(){store('notes.drafts',[...drafts.values()].filter(dirty).map(({path,content,rev,title,titleDraft,saved})=>({path,content,rev,title,titleDraft,saved})));}
-function changed(n){n.error=null;persistDrafts();if(!n.hold)n.hold=W.update.hold('Unsaved note: '+n.path);clearTimeout(n.timer);n.timer=setTimeout(()=>act(()=>save(n)),600);saveStatus(n);}
+function changed(n){n.error=null;persistDrafts();if(!n.hold)n.hold=W.update.hold('Unsaved note: '+n.path);clearTimeout(n.timer);n.timer=editor.composing?null:setTimeout(()=>act(()=>save(n)),600);saveStatus(n);}
 async function save(n,keepalive=false){clearTimeout(n.timer);if(n.busy){await n.busy;if(dirty(n)&&!n.error)return save(n,keepalive);return;}if(!dirty(n)){n.hold?.release();n.hold=null;saveStatus(n);return;}const content=n.content,title=n.titleDraft.trim();if(!title||/[\/\\]/.test(title)||title.startsWith('.')){n.error='Use a visible title without / or \\.';saveStatus(n);throw new Error(n.error);}n.busy=(async()=>{await Promise.resolve();try{if(content!==n.saved){const r=await api('note',{path:n.path,rev:n.rev,content},'PUT',keepalive);const readback=await api('note?path='+encodeURIComponent(n.path));if(readback.rev!==r.rev||readback.content!==content)throw new Error('Save readback changed. Your draft is retained.');n.rev=r.rev;n.saved=content;}if(title!==n.title){const old=n.path,to=join(parent(old),title+'.md');await api('move',{from:old,to},'POST',keepalive);n.path=to;n.title=title;drafts.delete(old);drafts.set(to,n);}if(n.titleDraft.trim()===title)n.titleDraft=title;if(n.error)$('notice').textContent='';n.error=null;if(!dirty(n)){n.hold?.release();n.hold=null;}await refresh();}catch(e){n.conflict=e.status===409;n.error=e.status===409?'Changed elsewhere or name taken. Your draft is kept. Retry after reconciling.':e.message;notice(n.error);throw e;}finally{n.busy=null;persistDrafts();saveStatus(n);}})();saveStatus(n);return n.busy;}
 async function flush(){await Promise.all([...drafts.values()].filter(dirty).map(n=>save(n)));}
-$('source').oninput=()=>{const n=state.note;n.content=$('source').value;recordUndo();changed(n);autoSize();};
+// CodeMirror owns beforeinput, composition and history; never replay native text.
+$('title').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();editor.select(0);}};
 $('title').oninput=()=>{const n=state.note;n.titleDraft=$('title').value;changed(n);};
 $('save').onclick=()=>act(()=>state.note.conflict?resolveConflict(state.note):save(state.note));
 async function resolveConflict(n){const body=sheet('Note changed elsewhere');body.append(el('p','Your local text is safe. Keep both versions by saving your draft as a new note, or cancel and reconcile before retrying.'));try{const latest=await api('note?path='+encodeURIComponent(n.path));const details=el('details'),summary=el('summary','Latest saved version'),pre=el('pre',latest.content);details.append(summary,pre);body.append(details);}catch{body.append(el('p','The original note may have moved or is temporarily unavailable.'));}body.append(button('Save draft as a new note',async()=>{const folder=parent(n.path);for(let i=1;i<=100;i++){const title=n.titleDraft.trim()+' (copy'+(i>1?' '+i:'')+')',path=join(folder,title+'.md');try{await api('note',{path,content:n.content});n.hold?.release();n.hold=null;clearTimeout(n.timer);drafts.delete(n.path);persistDrafts();closeSheet();await refresh();await openNote(path);notice('Draft saved as a separate note. Original unchanged.');return;}catch(e){if(e.status!==409)throw e;}}throw new Error('Choose a different title for your copy.');}),button('Cancel',closeSheet));}
-$('mode').onclick=()=>{state.read=!state.read;renderNote();if(!state.read)$('source').focus();};
-$('read').onclick=e=>{if(e.target.closest('button,a,input'))return;state.read=false;renderNote();$('source').focus();};
-$('read').onkeydown=e=>{if(e.key==='Enter'&&e.target===$('read')){state.read=false;renderNote();$('source').focus();}};
+$('mode').onclick=()=>{state.read=!state.read;renderNote();if(!state.read)editor.focus();};
+// Reading is deliberately non-editable. Only the book/pencil control changes view.
+
 function shareNote(){const n=state.note;W.share.text({title:n.titleDraft,text:'# '+n.titleDraft+'\n\n'+n.content}).then(out=>notice(out==='copied'?'Copied':out==='shared'?'Shared':out==='cancelled'?'Sharing cancelled':'Sharing unavailable')).catch(()=>notice('Sharing unavailable'));}
 $('note-menu').onclick=()=>{const b=sheet(state.note.titleDraft);b.append(button('Search',()=>{closeSheet();openSearch();}),button('Today',()=>{closeSheet();return today();}),button('Share',()=>{closeSheet();shareNote();}),button('Note actions…',()=>itemMenu({path:state.note.path,name:state.note.title,type:'note'})));};
 function closeSheet(){if($('sheet').open)$('sheet').close();sheetBack?.release();sheetBack=null;}
@@ -94,7 +97,7 @@ $('back').onclick=()=>{if(phone())showDrawer(!state.drawer);else{state.sidebarHi
 $('backdrop').onclick=()=>showDrawer(false);
 // App-frame domain gesture: shell thread-swipe-back is bound to Chats, not frames.
 // Keep shell swipe-intent's deliberate 120px drag / 80px, .6px/ms flick rule.
-// Axis locks at 10px; editable caret/selection drags keep all but the 24px edge.
+// Axis locks at 10px; an active text selection or composition keeps its drag.
 let drawerSwipe=null,suppressDrawerClickUntil=0;
 function drawerPreview(s,dx){
  const progress=Math.max(0,Math.min(1,((s.open?s.width:0)+dx)/s.width));
@@ -115,10 +118,12 @@ $('app').addEventListener('touchstart',e=>{
  const t=e.touches[0],target=e.target,open=state.drawer;
  if(open?!target.closest('#sidebar,#backdrop'):!target.closest('#main'))return;
  if(!open){
-  const editing=document.activeElement?.matches('textarea,input,[contenteditable="true"]');
-  if(editing&&t.clientX>24)return;
-  if(target.closest('button,a,select,input,[contenteditable="true"]'))return;
-  if(String(window.getSelection())&&t.clientX>24)return;
+  // Live Preview makes the whole note body editable, so a swipe over the text must still open the
+  // drawer (as in Obsidian). Touch drags never select text (long-press does), so only a live text
+  // selection, IME composition or a horizontal scroller (formatting bar, code, title) opts out.
+  // No edge-only rule: Android's system Back owns the screen edge.
+  if(editor.composing||!editor.view.state.selection.main.empty||String(window.getSelection()))return;
+  if(target.closest('#formatting,pre,table,input,select,textarea,.cm-scroller[data-hscroll]'))return;
  }
  drawerSwipe={open,x:t.clientX,y:t.clientY,time:performance.now(),width:$('sidebar').getBoundingClientRect().width,dx:0,dy:0,axis:null,tracking:false};
 },{passive:true});
@@ -149,7 +154,7 @@ async function wiki(target){const result=await api('resolve?target='+encodeURICo
 // Build DOM from text; raw HTML is never interpreted. Links use a protocol allowlist.
 function inline(text,dest){const rx=/(`[^`]+`|\[\[[^\]\n]+\]\]|\[[^\]\n]+\]\([^\s)]+\)|\*\*[^*]+\*\*|__[^_]+__|\*[^*]+\*|_[^_]+_)/g;let start=0,m;while((m=rx.exec(text))){dest.append(document.createTextNode(text.slice(start,m.index)));const t=m[0];if(t.startsWith('[[')){const bits=t.slice(2,-2).split('|');const b=button(bits[1]||bits[0],()=>wiki(bits[0]));b.className='wiki';dest.append(b);}else if(t.startsWith('`'))dest.append(el('code',t.slice(1,-1)));else if(t.startsWith('[')){const link=t.match(/^\[([^\]]+)\]\(([^)]+)\)$/);let url;try{url=new URL(link[2],location.href);}catch{}if(url&&['https:','http:','mailto:'].includes(url.protocol)){const a=el('a',link[1]);a.href=url.href;a.rel='noopener noreferrer';dest.append(a);}else dest.append(document.createTextNode(t));}else{const strong=t.startsWith('**')||t.startsWith('__'),n=el(strong?'strong':'em');n.textContent=t.slice(strong?2:1,strong?-2:-1);dest.append(n);}start=rx.lastIndex;}dest.append(document.createTextNode(text.slice(start)));}
 function markdown(text,dest){
- dest.replaceChildren();const lines=text.split('\n'),note=state.note;let code=null,stack=[],paragraph=null;
+ dest.replaceChildren();const lines=text.replace(/\r\n?/g,'\n').split('\n'),note=state.note;let code=null,stack=[],paragraph=null;
  const reset=()=>{stack=[];paragraph=null;};
  for(let index=0;index<lines.length;index++){
   const line=lines[index];
@@ -166,7 +171,7 @@ function markdown(text,dest){
    const level=stack.at(-1),item=el('li'),task=li[3].match(/^\[([ xX])\]\s(.*)$/);
    if(task){
     item.className='task';const check=el('input');check.type='checkbox';check.checked=task[1]!==' ';check.setAttribute('aria-label',task[2]);
-    check.onchange=()=>{if(state.note!==note)return;const current=note.content.split('\n');current[index]=current[index].replace(/^(\s*[-*+] \[)[ xX](\])/,'$1'+(check.checked?'x':' ')+'$2');note.content=current.join('\n');$('source').value=note.content;recordUndo();changed(note);};
+    check.onchange=()=>{if(state.note!==note)return;const current=editor.view.state.doc.toString().split('\n'),match=current[index].match(/^(\s*[-*+] \[)[ xX]\]/);if(!match)return;const at=current.slice(0,index).reduce((n,line)=>n+line.length+1,0)+match[1].length;editor.view.dispatch({changes:{from:at,to:at+1,insert:check.checked?'x':' '}});};
     item.append(check);inline(task[2],item);
    }else inline(li[3],item);
    level.list.append(item);level.item=item;
@@ -203,19 +208,7 @@ function continueList(text,start,end){
  const value='\n'+prefix,pos=start+value.length;
  return {text:text.slice(0,start)+value+text.slice(end),start:pos,end:pos};
 }
-function snapshot(){const t=$('source');return {text:t.value,start:t.selectionStart,end:t.selectionEnd};}
-function resetUndo(){state.note.undo=[snapshot()];state.note.undoAt=0;}
-function recordUndo(){const n=state.note;if(!n)return;if(!n.undo)resetUndo();const shot=snapshot();if(n.undo[n.undoAt]?.text===shot.text)return;n.undo=n.undo.slice(0,n.undoAt+1);n.undo.push(shot);if(n.undo.length>150)n.undo.shift();n.undoAt=n.undo.length-1;}
-function applyEdit(result){if(!result)return;const t=$('source'),n=state.note;n.undo[n.undoAt]=snapshot();t.value=result.text;t.focus({preventScroll:true});t.setSelectionRange(result.start,result.end);n.content=t.value;recordUndo();changed(n);autoSize();}
-function format(kind){const n=state.note,t=$('source');if(!n)return;if(kind==='undo'||kind==='redo'){const at=n.undoAt+(kind==='undo'?-1:1);if(at<0||at>=n.undo.length)return;n.undoAt=at;const shot=n.undo[at];t.value=shot.text;t.focus({preventScroll:true});t.setSelectionRange(shot.start,shot.end);n.content=t.value;changed(n);autoSize();return;}applyEdit(transformText(t.value,t.selectionStart,t.selectionEnd,kind));}
-$('source').addEventListener('keydown',e=>{
- if(e.isComposing)return;
- if(e.key==='Tab'){e.preventDefault();format(e.shiftKey?'outdent':'indent');}
- else if(e.key==='Enter'&&!e.shiftKey&&!e.ctrlKey&&!e.metaKey){const t=e.target,result=continueList(t.value,t.selectionStart,t.selectionEnd);if(result){e.preventDefault();applyEdit(result);}}
- else if((e.ctrlKey||e.metaKey)&&['z','y','b','i'].includes(e.key.toLowerCase())){e.preventDefault();const k=e.key.toLowerCase();format(k==='b'?'bold':k==='i'?'italic':k==='y'||e.shiftKey?'redo':'undo');}
-});
-// Mobile IMEs may emit beforeinput without an Enter keydown.
-$('source').addEventListener('beforeinput',e=>{if(e.inputType!=='insertLineBreak'||e.isComposing)return;const t=e.target,result=continueList(t.value,t.selectionStart,t.selectionEnd);if(result){e.preventDefault();applyEdit(result);}});
+function format(kind){if(state.note)editor.format(kind);}
 const paths={sidebar:'M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1ZM8 3v18',book:'M12 5v16M12 5C9 2 4 3 2 3v16c5 0 8 0 10 2 2-2 5-2 10-2V3c-5 0-8 0-10 2Z',edit:'m15 4 5 5M4 16 16 4a2 2 0 0 1 4 4L8 20l-5 1 1-5Z',more:'M12 5h.01M12 12h.01M12 19h.01',note:'M14 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-9M10 14l9-9 2 2-9 9-3 1 1-3Z',folder:'M3 7V5h7l2 2h9v14H3V7ZM12 11v6M9 14h6',sort:'M7 3v18M3 7l4-4 4 4M13 8h4M13 13h6M13 18h8',collapse:'m7 3 5 5 5-5M7 21l5-5 5 5',search:'M16 16l5 5M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z',gear:'M9 3h6l1 3 3 1 2 5-2 5-3 1-1 3H9l-1-3-3-1-2-5 2-5 3-1 1-3ZM16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z',indent:'m3 8 4 4-4 4M11 5h10M11 12h10M11 19h10',outdent:'m7 8-4 4 4 4M11 5h10M11 12h10M11 19h10',undo:'m8 4-5 5 5 5M3 9h11a6 6 0 1 1 0 12',redo:'m16 4 5 5-5 5M21 9H10a6 6 0 1 0 0 12',bullet:'M3 5h.01M3 12h.01M3 19h.01M8 5h13M8 12h13M8 19h13',numbered:'M2 3h2v6M2 9h4M2 15c0-3 4-3 4 0 0 2-4 3-4 6h4M10 5h11M10 12h11M10 19h11'};
 function icon(name){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('class','icon');svg.setAttribute('aria-hidden','true');const path=document.createElementNS(svg.namespaceURI,'path');path.setAttribute('d',paths[name]||paths.more);svg.append(path);return svg;}
 for(const [id,name] of Object.entries({back:'sidebar',add:'note','add-folder':'folder',sort:'sort',collapse:'collapse',find:'search','vault-menu':'gear','note-menu':'more'}))$(id).append(icon(name));
