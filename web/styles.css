@@ -9,3 +9,26 @@ dialog{width:min(440px,calc(100% - 28px));max-height:85dvh;overflow:auto;padding
 @media(max-width:760px){#main{padding:0 24px 100px}#canvas-tools{margin:0 -12px 22px;padding-top:12px}#sidebar{position:absolute;inset:0 auto 0 0;width:85%;max-width:360px;transform:translateX(-101%);transition:transform .18s ease;padding:22px 10px 18px}.drawer-open #sidebar,.no-note #sidebar{transform:translateX(0)}.no-note #sidebar{width:100%;max-width:none}.sidebar-hidden #sidebar{display:flex}.no-note:not(.search-open) #main{visibility:hidden}.drawer-open:not(.no-note) #backdrop{display:block;position:absolute;inset:0;z-index:4;width:100%;height:100%;background:var(--ink);opacity:.3;border-radius:0}.entry .more{display:none}.entry .open{font-size:17px;min-height:44px;gap:3px}.vault-tools{padding:2px 0 14px}.vault-footer{padding-top:10px}.vault-footer strong{font-size:20px}.vault-footer small{font-size:13px}#formatting{left:50%;max-width:calc(100% - 16px);bottom:calc(var(--keyboard-inset,0px) + 8px);width:max-content}#formatting button{min-width:44px}.drawer-open #formatting{visibility:hidden}.search-open #sidebar{transform:translateX(-101%)}#title{font-size:30px}.note-head{padding-bottom:28px}#read,#source{font-size:17px;line-height:1.6}}
 @media(max-width:760px){.drawer-dragging #sidebar{transition:none!important;will-change:transform}.drawer-dragging:not(.no-note) #backdrop{display:block;position:absolute;inset:0;z-index:4;width:100%;height:100%;background:var(--ink);border-radius:0}.drawer-dragging #formatting{visibility:hidden}}
 @media(prefers-reduced-motion:reduce){#sidebar{transition:none}}
+/* Live Preview: plain text owns edits; decorations alone supply the reading look. */
+#source{overflow:visible;min-height:240px}
+#source .cm-editor{font:inherit;color:var(--wz-text);background:transparent;outline:0!important}
+#source .cm-scroller{font:inherit;line-height:1.6;overflow:visible}
+#source .cm-content{padding:0 0 32px;min-height:240px;caret-color:var(--wz-accent);overflow-wrap:anywhere}
+#source .cm-line{padding:0;line-height:1.6}
+#source .cm-cursor{border-left-color:var(--wz-accent)}
+#source .cm-selectionBackground{background:color-mix(in srgb,var(--wz-accent) 22%,transparent)}
+#source .cm-lp-h1,#source .cm-lp-h2,#source .cm-lp-h3,#source .cm-lp-h4,#source .cm-lp-h5,#source .cm-lp-h6{font-weight:650;line-height:1.35;letter-spacing:-.02em;padding-top:.25em;padding-bottom:.15em}
+#source .cm-lp-h1{font-size:28px}#source .cm-lp-h2{font-size:23px}#source .cm-lp-h3{font-size:20px}#source .cm-lp-h4{font-size:18px}
+#source .cm-lp-strong{font-weight:700}#source .cm-lp-em{font-style:italic}#source .cm-lp-strike{text-decoration:line-through}
+#source .cm-lp-list:not(.cm-lp-active){padding-left:calc(var(--lp-indent,0px) + 24px);text-indent:-24px}
+#source .cm-lp-marker{display:inline-block;width:24px;text-indent:0;text-align:center;color:var(--wz-text-secondary);vertical-align:baseline}
+#source .cm-lp-marker input{appearance:auto;width:16px;height:16px;min-height:0;padding:0;margin:0;accent-color:var(--wz-accent);cursor:pointer;vertical-align:-2px}
+#source .cm-lp-wiki{font:inherit;display:inline;min-width:0;min-height:0;padding:0;margin:0;border:0;border-radius:0;background:none;color:var(--wz-accent);text-align:left;text-indent:0;text-decoration:underline;text-underline-offset:3px;vertical-align:baseline}
+#source .cm-lp-wiki-source,#source .cm-lp-link{color:var(--wz-accent)}
+#source .cm-lp-quote{border-left:3px solid var(--wz-border);padding-left:16px;color:var(--wz-text-secondary)}
+#source .cm-lp-code,#source .cm-lp-inline-code{font-family:var(--wz-font-mono,monospace);background:var(--wz-surface);font-size:.9em}
+#source .cm-lp-code{padding-left:12px;padding-right:12px}
+#source .cm-lp-fence:not(.cm-lp-active){font-size:0;line-height:0;height:8px}
+#source .cm-lp-active.cm-lp-fence{font-size:.9em;line-height:1.6;height:auto}
+#source .cm-lp-inline-code{padding:1px 2px;border-radius:3px}
+#source .cm-placeholder{color:var(--wz-text-muted)}

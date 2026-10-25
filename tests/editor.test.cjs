@@ -1,7 +1,7 @@
 // Pure editor transforms are exercised without mocking the Wizard facade.
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const source=fs.readFileSync(__dirname+'/../web/app.js','utf8');
-const context=vm.createContext({});vm.runInContext(source.slice(source.indexOf('function transformText('),source.indexOf('function snapshot(')),context);
+const context=vm.createContext({});vm.runInContext(source.slice(source.indexOf('function transformText('),source.indexOf('function format(')),context);
 const edit=(text,start,end,kind)=>context.transformText(text,start,end,kind);
 test('format selection and insert link placeholder',()=>{assert.equal(edit('hello',0,5,'bold').text,'**hello**');assert.equal(edit('',0,0,'link').text,'[[Note]]');assert.equal(edit('hello',0,5,'italic').text,'*hello*');});
 test('line lists preserve indent and natural numbering',()=>{assert.equal(edit('  one\ntwo',0,9,'checkbox').text,'  - [ ] one\n- [ ] two');assert.equal(edit('one\ntwo',0,7,'numbered').text,'1. one\n2. two');assert.equal(edit('- one',2,2,'bullet').text,'- one');});
