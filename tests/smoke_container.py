@@ -34,7 +34,7 @@ try:
         time.sleep(.5)
     else:raise AssertionError('Container health did not become ready')
     assert b'Wizard Notes' in request('/')[1]
-    credential=run('exec',name,'python','-c',"from pathlib import Path;print(Path('/data/agent.token').read_text().strip())")
+    credential=run('exec','--user','1000:1000',name,'python','-c',"from pathlib import Path;print(Path('/data/agent.token').read_text().strip())")
     rpc={'jsonrpc':'2.0','id':1,'method':'tools/list'}
     assert request('/mcp',rpc)[0]==401
     code,body=request('/mcp',rpc,{'Authorization':'Bearer '+credential})
@@ -52,8 +52,8 @@ try:
         except OSError:pass
         time.sleep(.5)
     assert json.loads(request('/api/note?path=Smoke.md')[1])['content']=='temporary fixture'
-    assert run('exec',name,'python','-c',"from pathlib import Path;print(Path('/data/agent.token').read_text().strip())")==credential
-    state=run('exec',name,'python','-c',"from pathlib import Path;print(Path('/proc/1/status').read_text())")
+    assert run('exec','--user','1000:1000',name,'python','-c',"from pathlib import Path;print(Path('/data/agent.token').read_text().strip())")==credential
+    state=run('exec','--user','1000:1000',name,'python','-c',"from pathlib import Path;print(Path('/proc/1/status').read_text())")
     fields=dict(line.split(':',1) for line in state.splitlines() if ':' in line)
     assert set(fields['Uid'].split())=={'1000'} and int(fields['CapEff'].strip(),16)==0
     print(json.dumps({'passed':True,'image':a.image,'checks':['health','view','MCP 7 tools','tokenless 401','foreign-origin 403','internal gateway transport','CRUD restart retention','Uid 1000','CapEff 0','root-owned data mount']}))
