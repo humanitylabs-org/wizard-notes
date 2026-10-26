@@ -16,7 +16,7 @@ from urllib.parse import parse_qs, unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 PORT = int(os.environ.get('PORT', '8799'))
-VERSION = '0.1.0-alpha.2'
+VERSION = '0.1.0-alpha.3'
 # Explicit allowlists replace development defaults, never silently re-add loopback.
 HOSTS = set(filter(None, os.environ.get('WIZARD_TRUSTED_HOSTS', '').split(',')))
 ORIGINS = set(filter(None, os.environ.get('WIZARD_TRUSTED_ORIGINS', '').split(',')))
