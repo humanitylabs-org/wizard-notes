@@ -32,3 +32,6 @@ dialog{width:min(440px,calc(100% - 28px));max-height:85dvh;overflow:auto;padding
 #source .cm-lp-active.cm-lp-fence{font-size:.9em;line-height:1.6;height:auto}
 #source .cm-lp-inline-code{padding:1px 2px;border-radius:3px}
 #source .cm-placeholder{color:var(--wz-text-muted)}
+
+/* Room to scroll the last line above the formatting bar and the on-screen keyboard. */
+#main{padding-bottom:calc(var(--keyboard-inset,0px) + 160px)}

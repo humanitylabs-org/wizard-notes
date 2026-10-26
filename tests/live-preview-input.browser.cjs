@@ -95,6 +95,13 @@ fs.mkdirSync(out,{recursive:true});
   for(const ch of ' i')await p.keyboard.type(ch);await p.waitForTimeout(80);expect((await get()).endsWith(' if i')).toBe(true);
   for(const ch of " think i'm ok")await p.keyboard.type(ch);await p.waitForTimeout(80);expect((await get()).endsWith("\n- So in it if I think I'm ok")).toBe(true);
   report.checks.push('"i" capitalises only after a space or punctuation; "in", "it", "if" typed letter by letter stay lowercase');
+  // Typing down the page keeps the caret line clear of the floating formatting bar, with breathing room.
+  const caretGap=()=>f.evaluate(()=>{const c=document.querySelector('.cm-cursor-primary,.cm-cursor'),bar=document.getElementById('formatting');const sel=getSelection();let r=c&&c.getBoundingClientRect();if((!r||!r.height)&&sel.rangeCount){const rr=sel.getRangeAt(0).getClientRects();r=rr[rr.length-1]||sel.getRangeAt(0).startContainer.parentElement.getBoundingClientRect();}const b=bar&&!bar.hidden?bar.getBoundingClientRect():null;const bottom=b&&b.height?b.top:(visualViewport?visualViewport.offsetTop+visualViewport.height:innerHeight);return {gap:Math.round(bottom-r.bottom),scrolled:document.getElementById('main').scrollTop};});
+  let worst=Infinity,lastScroll=0;
+  for(let n=0;n<45;n++){await p.keyboard.press('Enter');await p.keyboard.insertText('Line '+n+' of a long note');await p.waitForTimeout(25);const g=await caretGap();worst=Math.min(worst,g.gap);lastScroll=g.scrolled;}
+  expect(lastScroll).toBeGreaterThan(0);expect(worst).toBeGreaterThanOrEqual(40);
+  report.caretGap={worst,lastScroll};
+  report.checks.push('typing past the bottom keeps the caret at least 40px above the formatting bar (min gap '+worst+'px)');
   // Simulate native autocorrect/voice replacement on a selected range, not event replay.
   await p.keyboard.insertText('\nteh');let value=await get();await select(value.length-3,value.length);
   await cdp.send('Input.insertText',{text:'the'});expect((await get()).endsWith('\nThe')).toBe(true);

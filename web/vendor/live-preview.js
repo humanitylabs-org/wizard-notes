@@ -2508,13 +2508,16 @@ of("full")]})},d=[Va(),ca(),E.lineWrapping,da("Start writing\u2026"),E.contentAt
 editor",spellcheck:"true",autocorrect:"on",autocapitalize:"sentences"}),Vd(t),rr.of([{key:"Tab",run:()=>f("indent"),shift:()=>f(
 "outdent")},{key:"Enter",run:h},{key:"Mod-b",run:()=>f("bold")},{key:"Mod-i",run:()=>f("italic")},...qa,...ph]),E.domEventHandlers(
 {beforeinput(p){return!p.isComposing&&!i.composing&&p.cancelable&&["insertParagraph","insertLineBreak"].includes(p.inputType)&&
-h()?(p.preventDefault(),!0):!1},compositionend(){return o(),!1}}),E.updateListener.of(p=>{if(p.docChanged){l();for(let m of p.
-transactions)if(m.docChanged){let g=m.newDoc.toString(),b=(m.isUserEvent("undo")||m.isUserEvent("redo"))&&s.get(g);if(b!==
-!1&&b!==void 0)e=new Je(b);else{let k=[];m.changes.iterChanges((x,L,v,D,A)=>k.push({from:x,to:L,insert:A.toString()})),e.
-apply(k)}}for(let m of p.transactions)m.docChanged&&(c=c.map(g=>({from:m.changes.mapPos(g.from,-1),to:m.changes.mapPos(g.
-to,1)})),m.isUserEvent("input")&&!m.isUserEvent("input.autocap")&&!m.isUserEvent("input.task")&&m.changes.iterChangedRanges(
-(g,b,k,x)=>{x>k&&c.push({from:k,to:x})}));c.length&&!i.composing&&queueMicrotask(u),l(),t.onChange(e.raw,i.composing),i.
-composing&&o()}})];return i=new E({parent:n,state:U.create({doc:"",extensions:d})}),{view:i,format:f,get value(){return e.
-raw},get composing(){return i.composing},setValue(p){clearTimeout(r),e=new Je(p),s=new Map,l(),i.setState(U.create({doc:e.
-text,extensions:d}))},focus(){i.focus()},select(p,m=p){i.dispatch({selection:w.range(p,m),effects:to.of(null)}),i.focus()},
-replace(p){return a(p)},destroy(){clearTimeout(r),i.destroy()}}}export{E as EditorView,Hp as createLiveEditor};
+h()?(p.preventDefault(),!0):!1},compositionend(){return o(),!1}}),E.updateListener.of(p=>{!t.keepCaretVisible||!i.hasFocus||
+!(p.docChanged||p.selectionSet||p.geometryChanged)||i.requestMeasure({key:"notes-caret-guard",read:m=>m.coordsAtPos(m.state.
+selection.main.head,-1)||m.coordsAtPos(m.state.selection.main.head,1),write:m=>{m&&t.keepCaretVisible(m)}})}),E.updateListener.
+of(p=>{if(p.docChanged){l();for(let m of p.transactions)if(m.docChanged){let g=m.newDoc.toString(),b=(m.isUserEvent("und\
+o")||m.isUserEvent("redo"))&&s.get(g);if(b!==!1&&b!==void 0)e=new Je(b);else{let k=[];m.changes.iterChanges((x,L,v,D,A)=>k.
+push({from:x,to:L,insert:A.toString()})),e.apply(k)}}for(let m of p.transactions)m.docChanged&&(c=c.map(g=>({from:m.changes.
+mapPos(g.from,-1),to:m.changes.mapPos(g.to,1)})),m.isUserEvent("input")&&!m.isUserEvent("input.autocap")&&!m.isUserEvent(
+"input.task")&&m.changes.iterChangedRanges((g,b,k,x)=>{x>k&&c.push({from:k,to:x})}));c.length&&!i.composing&&queueMicrotask(
+u),l(),t.onChange(e.raw,i.composing),i.composing&&o()}})];return i=new E({parent:n,state:U.create({doc:"",extensions:d})}),
+{view:i,format:f,get value(){return e.raw},get composing(){return i.composing},setValue(p){clearTimeout(r),e=new Je(p),s=
+new Map,l(),i.setState(U.create({doc:e.text,extensions:d}))},caretRect(){return i.coordsAtPos(i.state.selection.main.head,
+-1)||i.coordsAtPos(i.state.selection.main.head,1)},focus(){i.focus()},select(p,m=p){i.dispatch({selection:w.range(p,m),effects:to.
+of(null)}),i.focus()},replace(p){return a(p)},destroy(){clearTimeout(r),i.destroy()}}}export{E as EditorView,Hp as createLiveEditor};

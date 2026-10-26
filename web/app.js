@@ -9,7 +9,17 @@ const state={folder:'',note:null,tree:[],search:false,read:false,drawer:false,tr
 const phone=()=>matchMedia('(max-width:760px)').matches;
 const collator=new Intl.Collator(undefined,{numeric:true,sensitivity:'base'});
 const drafts=new Map(); let sheetBack=null,searchTimer,searchSeq=0,noticeTimer,navSeq=0;
-const editor=createLiveEditor($('source'),{transform:transformText,continueList,onWiki:target=>act(()=>wiki(target)),onChange:content=>{const n=state.note;if(!n)return;n.content=content;changed(n);}});
+const editor=createLiveEditor($('source'),{transform:transformText,continueList,onWiki:target=>act(()=>wiki(target)),onChange:content=>{const n=state.note;if(!n)return;n.content=content;changed(n);},keepCaretVisible:rect=>keepCaretClear(rect)});
+// Keep the caret line clear of the floating formatting bar and the keyboard, with a line of breathing room.
+const CARET_ROOM=56;
+function keepCaretClear(rect){
+  if(!rect||state.read)return;const main=$('main');if(!main)return;
+  const v=window.visualViewport,bar=$('formatting');
+  let bottom=v?v.offsetTop+v.height:innerHeight;
+  if(bar&&!bar.hidden){const b=bar.getBoundingClientRect();if(b.height)bottom=Math.min(bottom,b.top);}
+  const over=rect.bottom-(bottom-CARET_ROOM);
+  if(over>0)main.scrollTop+=Math.ceil(over);
+}
 const parent=p=>p.includes('/')?p.slice(0,p.lastIndexOf('/')):'', base=p=>p.split('/').pop(), join=(a,b)=>a?a+'/'+b:b;
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
 const button=(text,fn,label)=>{const b=el('button',text);b.type='button';b.onclick=async()=>{if(b.disabled)return;b.disabled=true;try{await act(fn);}finally{b.disabled=false;}};if(label)b.setAttribute('aria-label',label);return b;};
@@ -217,7 +227,7 @@ for(const [kind,label,display]of [['checkbox','Checkbox','[ ]'],['indent','Inden
 }
 document.addEventListener('visibilitychange',()=>{if(document.hidden)for(const n of drafts.values())if(dirty(n))act(()=>save(n,true));});
 window.addEventListener('pagehide',()=>{for(const n of drafts.values())if(dirty(n))act(()=>save(n,true));});
-function viewportChanged(){const v=window.visualViewport;const inset=v?Math.max(0,innerHeight-v.height-v.offsetTop):0;$('app').style.setProperty('--keyboard-inset',inset+'px');if(!state.read)autoSize();renderViews();}
+function viewportChanged(){const v=window.visualViewport;const inset=v?Math.max(0,innerHeight-v.height-v.offsetTop):0;$('app').style.setProperty('--keyboard-inset',inset+'px');if(!state.read)autoSize();renderViews();if(!state.read&&document.activeElement?.closest?.('#source'))requestAnimationFrame(()=>keepCaretClear(editor.caretRect()));}
 window.addEventListener('resize',viewportChanged);window.visualViewport?.addEventListener('resize',viewportChanged);window.visualViewport?.addEventListener('scroll',viewportChanged);
 // No repeated app title/header tools: every action remains in the floating pill.
 W.titlebar?.set?.([]).catch(()=>{});

@@ -111,6 +111,12 @@ export function createLiveEditor(parent, options) {
       },
       compositionend() {settleComposition();return false;}
     }),
+    // Host-supplied caret guard: after typing or moving the caret, let the host keep it clear of
+    // overlays CodeMirror cannot see (the floating formatting bar, the on-screen keyboard).
+    EditorView.updateListener.of(update=>{
+      if(!options.keepCaretVisible||!view.hasFocus||!(update.docChanged||update.selectionSet||update.geometryChanged))return;
+      view.requestMeasure({key:'notes-caret-guard',read:v=>v.coordsAtPos(v.state.selection.main.head,-1)||v.coordsAtPos(v.state.selection.main.head,1),write:rect=>{if(rect)options.keepCaretVisible(rect);}});
+    }),
     EditorView.updateListener.of(update=>{
       if(!update.docChanged)return;
       remember();
@@ -138,6 +144,7 @@ export function createLiveEditor(parent, options) {
     get value(){return raw.raw;},
     get composing(){return view.composing;},
     setValue(value){clearTimeout(settleTimer);raw=new RawMarkdown(value);knownRaw=new Map();remember();view.setState(EditorState.create({doc:raw.text,extensions}));},
+    caretRect(){return view.coordsAtPos(view.state.selection.main.head,-1)||view.coordsAtPos(view.state.selection.main.head,1);},
     focus(){view.focus();},
     select(from,to=from){view.dispatch({selection:EditorSelection.range(from,to),effects:refresh.of(null)});view.focus();},
     replace(result){return apply(result);},
