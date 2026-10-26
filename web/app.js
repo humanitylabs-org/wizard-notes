@@ -1,5 +1,7 @@
 import {createLiveEditor} from './vendor/live-preview.js';
 const $=id=>document.getElementById(id), W=window.WizardApp;
+// Opened from the home screen (not inside the Wizard shell): leave room under the phone's status bar.
+if(window.top===window&&matchMedia('(pointer: coarse),(display-mode: standalone),(display-mode: fullscreen)').matches)document.documentElement.classList.add('own-window');
 if(!W) throw new Error('Wizard shared client is unavailable. Open Notes inside Wizard.');
 W.ready({name:'notes',version:'0.1.0'});
 W.theme.get(); W.theme.onChange(()=>{});
