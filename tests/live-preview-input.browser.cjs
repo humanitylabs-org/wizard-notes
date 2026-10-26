@@ -102,6 +102,13 @@ fs.mkdirSync(out,{recursive:true});
   expect(lastScroll).toBeGreaterThan(0);expect(worst).toBeGreaterThanOrEqual(40);
   report.caretGap={worst,lastScroll};
   report.checks.push('typing past the bottom keeps the caret at least 40px above the formatting bar (min gap '+worst+'px)');
+  // Notes restarting mid-save (empty 502 from the proxy) retries quietly; no raw JSON error is shown.
+  let failed=0,landed=0;await p.route('**/api/note*',async route=>{if(route.request().method()==='PUT'){if(failed<2){failed++;return route.fulfill({status:502,body:''});}landed++;}return route.fallback();});
+  await p.keyboard.insertText(' restart-proof');
+  await expect.poll(async()=>landed,{timeout:15000}).toBeGreaterThan(0);expect(failed).toBe(2);
+  await expect.poll(async()=>{const t=await f.evaluate(()=>document.getElementById('notice')?.textContent||'');return /JSON|Unable/.test(t);},{timeout:500}).toBe(false);
+  await p.unroute('**/api/note*');
+  report.checks.push('an empty 502 while saving retries quietly with no raw error shown');
   // Simulate native autocorrect/voice replacement on a selected range, not event replay.
   await p.keyboard.insertText('\nteh');let value=await get();await select(value.length-3,value.length);
   await cdp.send('Input.insertText',{text:'the'});expect((await get()).endsWith('\nThe')).toBe(true);

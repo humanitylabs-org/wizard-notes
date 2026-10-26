@@ -57,3 +57,10 @@ test('"i" waits for a following space before capitalising, never mid-word',()=>{
   t='so in ';assert.deepEqual(at(t,5,6),[]);                        // "in " stays lowercase
   t='so i rest';assert.deepEqual(at(t,3,4),[]);                     // typed i before an existing space
 });
+test('only a full sentence end capitalises: not after "?)" or ")" inside a sentence',()=>{
+  const cap=t=>{let s=t;for(const e of autocapEdits(t,0,t.length).reverse())s=s.slice(0,e.from)+e.insert+s.slice(e.to);return s;};
+  assert.equal(cap('a young kid (his son?) comes up'),'A young kid (his son?) comes up');
+  assert.equal(cap('see (above) then'),'See (above) then');
+  assert.equal(cap('he said "go." then'),'He said "go." Then');
+  assert.equal(cap('done. next'),'Done. Next');
+});
