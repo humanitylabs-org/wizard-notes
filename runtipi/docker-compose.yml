@@ -1,6 +1,6 @@
 services:
   wizard-notes:
-    image: ghcr.io/humanitylabs-org/wizard-notes:0.1.0-alpha.2
+    image: ghcr.io/humanitylabs-org/wizard-notes:0.1.0-alpha.3
     restart: unless-stopped
     cap_drop: [ALL]
     cap_add: [CHOWN, SETUID, SETGID]

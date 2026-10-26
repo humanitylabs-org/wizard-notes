@@ -1,13 +1,46 @@
 {
-  "name": "Wizard Notes", "id": "wizard-notes", "wizard_type": "service", "available": true,
-  "short_desc": "Your private, connected Markdown vault.", "author": "Humanity Labs", "port": 9257,
-  "categories": ["app"], "description": "Private-by-default plain Markdown notes, nested folders, linked thoughts and search.",
-  "tipi_version": 2, "version": "0.1.0-alpha.2", "source": "https://github.com/humanitylabs-org/wizard-notes",
-  "exposable": false, "supported_architectures": ["amd64", "arm64"],
-  "created_at": 1792886400000, "updated_at": 1792886400000, "dynamic_config": true,
-  "min_tipi_version": "4.8.0", "uid": 1000, "gid": 1000, "no_gui": false,
+  "name": "Wizard Notes",
+  "id": "wizard-notes",
+  "wizard_type": "service",
+  "available": true,
+  "short_desc": "Your private, connected Markdown vault.",
+  "author": "Humanity Labs",
+  "port": 9257,
+  "categories": [
+    "app"
+  ],
+  "description": "Private-by-default plain Markdown notes, nested folders, linked thoughts and search.",
+  "tipi_version": 3,
+  "version": "0.1.0-alpha.3",
+  "source": "https://github.com/humanitylabs-org/wizard-notes",
+  "exposable": false,
+  "supported_architectures": [
+    "amd64",
+    "arm64"
+  ],
+  "created_at": 1792886400000,
+  "updated_at": 1792886400000,
+  "dynamic_config": true,
+  "min_tipi_version": "4.8.0",
+  "uid": 1000,
+  "gid": 1000,
+  "no_gui": false,
   "form_fields": [
-    {"type":"text","label":"Trusted ingress hosts (optional)","env_variable":"WIZARD_TRUSTED_HOSTS","required":false,"default":"","hint":"Comma-separated host:port values. Blank uses the owner-authenticated Wizard ingress."},
-    {"type":"text","label":"Additional trusted browser origins (optional)","env_variable":"WIZARD_TRUSTED_ORIGINS","required":false,"default":"","hint":"Same-host origins work automatically. Add exact origins only if needed."}
+    {
+      "type": "text",
+      "label": "Trusted ingress hosts (optional)",
+      "env_variable": "WIZARD_TRUSTED_HOSTS",
+      "required": false,
+      "default": "",
+      "hint": "Comma-separated host:port values. Blank uses the owner-authenticated Wizard ingress."
+    },
+    {
+      "type": "text",
+      "label": "Additional trusted browser origins (optional)",
+      "env_variable": "WIZARD_TRUSTED_ORIGINS",
+      "required": false,
+      "default": "",
+      "hint": "Same-host origins work automatically. Add exact origins only if needed."
+    }
   ]
 }

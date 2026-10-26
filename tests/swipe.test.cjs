@@ -32,7 +32,7 @@ if(!core)throw new Error('WIZARD_CORE must point to the approved shell web/core 
   await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await p.waitForTimeout(450);
  }
  const opened=()=>expect(f.locator('#app')).toHaveClass(/drawer-open/),closed=()=>expect(f.locator('#app')).not.toHaveClass(/drawer-open/);
- await swipe(90,350,180,4,320,async()=>{const x=await f.locator('#sidebar').evaluate(e=>e.getBoundingClientRect().x);expect(x).toBeGreaterThan(-300);expect(x).toBeLessThan(-50);});await opened();report.checks.push('swipe right opens and follows finger');
+ await swipe(90,350,180,4,320,async()=>{const x=await f.locator('#sidebar').evaluate(e=>e.getBoundingClientRect().x);expect(x).toBeGreaterThan(-385);expect(x).toBeLessThan(-50);});await opened();report.checks.push('swipe right opens and follows finger');
  await swipe(270,350,-180,3,320,async()=>{expect(await f.locator('#sidebar').evaluate(e=>e.getBoundingClientRect().x)).toBeLessThan(-30);});await closed();report.checks.push('drawer swipe left closes and follows finger');
  await swipe(100,350,55,1,600);await closed();report.checks.push('partial slow swipe snaps closed');
  await swipe(100,350,95,1,1);await opened();report.checks.push('intentional fast flick opens');
@@ -44,7 +44,8 @@ if(!core)throw new Error('WIZARD_CORE must point to the approved shell web/core 
  const mainBefore=await f.locator('#main').evaluate(e=>e.scrollTop);await swipe(180,500,3,-250);expect(await f.locator('#main').evaluate(e=>e.scrollTop)).toBeGreaterThan(mainBefore);await closed();report.checks.push('reader vertical scroll remains native');
  await f.locator('#main').evaluate(e=>e.scrollTop=0);await f.locator('#mode').click();await f.locator('.cm-content').blur();
  await swipe(120,350,180,0);await opened();report.checks.push('swipe over Live Preview text opens');
- await f.locator('#backdrop').click({position:{x:370,y:400}});await closed();report.checks.push('tap outside closes');
+ expect(await f.locator('#sidebar').evaluate(e=>Math.round(e.getBoundingClientRect().width))).toBe(await f.evaluate(()=>innerWidth));report.checks.push('notes list is full width on phone');
+ await f.locator('#tree .entry[data-path$=".md"] .open').first().click();await closed();report.checks.push('tapping a note closes the list');
  await f.locator('.cm-content').focus();await swipe(120,350,180,0);await opened();report.checks.push('swipe over text opens while editing');
  await swipe(250,350,-170,1);await closed();report.checks.push('reverse swipe closes after editing');
  await f.locator('.cm-content').focus();
