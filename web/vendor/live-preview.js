@@ -2475,8 +2475,8 @@ function Xh(n,t,e){let i=[],s=n.lastIndexOf(`
 0,t).match(/^\s*```/gm)||[]).length%2||/^\s*```/.test(e)||/^( {4}|\t)(?!\s*([-*+]|\d+[.)])\s)/.test(e)))for(let o of e.matchAll(
 new RegExp("\\p{L}[\\p{L}\\p{M}\\d]*(?:['\u2019\\-.:\\/@][\\p{L}\\p{M}\\d]+)*","gu"))){let l=t+o.index,a=l+o[0].length,f=o[0];
 if(a<i||l>s)continue;let h=e.slice(0,o.index);if((h.match(/`/g)||[]).length%2||/[\[(<]$/.test(h)&&/\[\[[^\]]*$/.test(h)||
-new RegExp("^\\p{Ll}","u").test(f)===!1)continue;let c=/^i(?:['’](?:m|ll|ve|d|s))?$/.test(f)&&a<=t+e.length&&(a<s||/[\s.,!?;:]/.
-test(n[a]||"")),u=/^[\p{Ll}\p{M}'’-]+$/u.test(f)&&!/^(?::\/|[@.:][\p{L}\d])/u.test(n.slice(a,a+2)),d=l>=i&&l<s&&u&&(Nd.
+new RegExp("^\\p{Ll}","u").test(f)===!1)continue;let c=/^i(?:['’](?:m|ll|ve|d|s))?$/.test(f)&&a>=i&&a<s&&/[ \t\n.,!?;:)]/.
+test(n[a]||""),u=/^[\p{Ll}\p{M}'’-]+$/u.test(f)&&!/^(?::\/|[@.:][\p{L}\d])/u.test(n.slice(a,a+2)),d=l>=i&&l<s&&u&&(Nd.
 test(h)||/[.!?]["'’”)]*\s+$/.test(h)&&!Hd.test(h.trimEnd())&&!/\.\.\.\s+$/.test(h));(c||d)&&r.push({from:l,to:l+1,insert:f[0].
 toUpperCase()})}}var to=j.define(),eo=class extends Qt{constructor(t,e){super(),this.item=t,this.options=e}eq(t){return JSON.stringify(this.
 item)===JSON.stringify(t.item)}toDOM(t){let e=this.item;if(e.kind==="wiki"){let s=document.createElement("button");return s.

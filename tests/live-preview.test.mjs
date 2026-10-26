@@ -46,3 +46,14 @@ test('autocap handles multi-line pastes line by line and skips fenced code',()=>
   const out=autocapEdits(t,0,t.length).map(e=>t.slice(e.from,e.from+6));
   assert.deepEqual(out,['parent','nested','after']);
 });
+test('"i" waits for a following space before capitalising, never mid-word',()=>{
+  const at=(t,from,to)=>autocapEdits(t,from,to).map(e=>t.slice(e.from,e.to));
+  let t='so i\nnext';assert.deepEqual(at(t,3,4),[]);              // just typed "i" at a line end
+  t='so i';assert.deepEqual(at(t,3,4),[]);                          // just typed "i" at the doc end
+  t='so in\n';assert.deepEqual(at(t,4,5),[]);                      // continued into "in"
+  t='so i ';assert.deepEqual(at(t,4,5),['i']);                      // space after a standalone i
+  t="so i'm ";assert.deepEqual(at(t,6,7),['i']);                    // i'm finished with a space
+  t='so i, ok';assert.deepEqual(at(t,4,5),['i']);                   // punctuation finishes it
+  t='so in ';assert.deepEqual(at(t,5,6),[]);                        // "in " stays lowercase
+  t='so i rest';assert.deepEqual(at(t,3,4),[]);                     // typed i before an existing space
+});

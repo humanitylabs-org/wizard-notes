@@ -88,6 +88,13 @@ fs.mkdirSync(out,{recursive:true});
   await p.keyboard.insertText(' ok. ');await cdp.send('Input.imeSetComposition',{text:'nex',selectionStart:3,selectionEnd:3});await p.waitForTimeout(40);await cdp.send('Input.insertText',{text:'next'});await p.waitForTimeout(250);
   expect((await get()).endsWith('\n- Word ok. Next')).toBe(true);
   report.checks.push('new bullets, new sentences and "i" auto-capitalise (typed and IME-composed, once, undoable)');
+  // Letter by letter at a line end: "i" only becomes "I" once a space follows; "in"/"it" never change.
+  await p.keyboard.press('Enter');for(const ch of 'so i')await p.keyboard.type(ch);await p.waitForTimeout(80);
+  expect((await get()).endsWith('\n- So i')).toBe(true);
+  for(const ch of 'n it if')await p.keyboard.type(ch);await p.waitForTimeout(80);expect((await get()).endsWith('\n- So in it if')).toBe(true);
+  for(const ch of ' i')await p.keyboard.type(ch);await p.waitForTimeout(80);expect((await get()).endsWith(' if i')).toBe(true);
+  for(const ch of " think i'm ok")await p.keyboard.type(ch);await p.waitForTimeout(80);expect((await get()).endsWith("\n- So in it if I think I'm ok")).toBe(true);
+  report.checks.push('"i" capitalises only after a space or punctuation; "in", "it", "if" typed letter by letter stay lowercase');
   // Simulate native autocorrect/voice replacement on a selected range, not event replay.
   await p.keyboard.insertText('\nteh');let value=await get();await select(value.length-3,value.length);
   await cdp.send('Input.insertText',{text:'the'});expect((await get()).endsWith('\nThe')).toBe(true);

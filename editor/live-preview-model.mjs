@@ -133,7 +133,10 @@ function capLine(text, lineStart, line, from, to, edits) {
     if ((before.match(/`/g) || []).length % 2) continue;            // inline code
     if (/[\[(<]$/.test(before) && /\[\[[^\]]*$/.test(before)) continue; // inside [[wikilink]]
     if (/^\p{Ll}/u.test(word) === false) continue;
-    const pronoun = /^i(?:['’](?:m|ll|ve|d|s))?$/.test(word) && end <= lineStart + line.length && (end < to || /[\s.,!?;:]/.test(text[end] || ''));
+    // The pronoun waits for the word to be finished: the space/punctuation after it must be part of this
+    // edit. A newline or space that was already there (typing at a line end) never counts, so "in", "it",
+    // "if" are never capitalised mid-word.
+    const pronoun = /^i(?:['’](?:m|ll|ve|d|s))?$/.test(word) && end >= from && end < to && /[ \t\n.,!?;:)]/.test(text[end] || '');
     const plain = /^[\p{Ll}\p{M}'’-]+$/u.test(word) && !/^(?::\/|[@.:][\p{L}\d])/u.test(text.slice(end, end + 2));                  // not urls, emails, iPhone, file.md
     const sentence = start >= from && start < to && plain &&
       (PREFIX.test(before) || (/[.!?]["'’”)]*\s+$/.test(before) && !ABBREV.test(before.trimEnd()) && !/\.\.\.\s+$/.test(before)));
