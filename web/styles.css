@@ -32,3 +32,12 @@ dialog{width:min(440px,calc(100% - 28px));max-height:85dvh;overflow:auto;padding
 #source .cm-lp-active.cm-lp-fence{font-size:.9em;line-height:1.6;height:auto}
 #source .cm-lp-inline-code{padding:1px 2px;border-radius:3px}
 #source .cm-placeholder{color:var(--wz-text-muted)}
+
+/* Room to scroll the last line above the formatting bar and the on-screen keyboard. */
+#main{padding-bottom:calc(var(--keyboard-inset,0px) + 160px)}
+
+/* Home-screen app: clear the status bar (safe area when drawn edge-to-edge) plus breathing room. */
+html.own-window{--top-room:calc(max(env(safe-area-inset-top,0px),32px) + 14px)}
+html.own-window #sidebar{padding-top:calc(var(--top-room) + 22px)}
+html.own-window #canvas-tools{padding-top:calc(var(--top-room) + 12px)}
+html.own-window #search{padding-top:var(--top-room)}

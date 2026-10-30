@@ -139,7 +139,7 @@ function capLine(text, lineStart, line, from, to, edits) {
     const pronoun = /^i(?:['’](?:m|ll|ve|d|s))?$/.test(word) && end >= from && end < to && /[ \t\n.,!?;:)]/.test(text[end] || '');
     const plain = /^[\p{Ll}\p{M}'’-]+$/u.test(word) && !/^(?::\/|[@.:][\p{L}\d])/u.test(text.slice(end, end + 2));                  // not urls, emails, iPhone, file.md
     const sentence = start >= from && start < to && plain &&
-      (PREFIX.test(before) || (/[.!?]["'’”)]*\s+$/.test(before) && !ABBREV.test(before.trimEnd()) && !/\.\.\.\s+$/.test(before)));
+      (PREFIX.test(before) || (/[.!?]["'’”]*\s+$/.test(before) && !ABBREV.test(before.trimEnd()) && !/\.\.\.\s+$/.test(before)));
     if (pronoun || sentence) edits.push({from: start, to: start + 1, insert: word[0].toUpperCase()});
   }
 }

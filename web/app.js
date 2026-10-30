@@ -1,5 +1,7 @@
 import {createLiveEditor} from './vendor/live-preview.js';
 const $=id=>document.getElementById(id), W=window.WizardApp;
+// Opened from the home screen (not inside the Wizard shell): leave room under the phone's status bar.
+if(window.top===window&&matchMedia('(pointer: coarse),(display-mode: standalone),(display-mode: fullscreen)').matches)document.documentElement.classList.add('own-window');
 if(!W) throw new Error('Wizard shared client is unavailable. Open Notes inside Wizard.');
 W.ready({name:'notes',version:'0.1.0'});
 W.theme.get(); W.theme.onChange(()=>{});
@@ -9,13 +11,25 @@ const state={folder:'',note:null,tree:[],search:false,read:false,drawer:false,tr
 const phone=()=>matchMedia('(max-width:760px)').matches;
 const collator=new Intl.Collator(undefined,{numeric:true,sensitivity:'base'});
 const drafts=new Map(); let sheetBack=null,searchTimer,searchSeq=0,noticeTimer,navSeq=0;
-const editor=createLiveEditor($('source'),{transform:transformText,continueList,onWiki:target=>act(()=>wiki(target)),onChange:content=>{const n=state.note;if(!n)return;n.content=content;changed(n);}});
+const editor=createLiveEditor($('source'),{transform:transformText,continueList,onWiki:target=>act(()=>wiki(target)),onChange:content=>{const n=state.note;if(!n)return;n.content=content;changed(n);},keepCaretVisible:rect=>keepCaretClear(rect)});
+// Keep the caret line clear of the floating formatting bar and the keyboard, with a line of breathing room.
+const CARET_ROOM=56;
+function keepCaretClear(rect){
+  if(!rect||state.read)return;const main=$('main');if(!main)return;
+  const v=window.visualViewport,bar=$('formatting');
+  let bottom=v?v.offsetTop+v.height:innerHeight;
+  if(bar&&!bar.hidden){const b=bar.getBoundingClientRect();if(b.height)bottom=Math.min(bottom,b.top);}
+  const over=rect.bottom-(bottom-CARET_ROOM);
+  if(over>0)main.scrollTop+=Math.ceil(over);
+}
 const parent=p=>p.includes('/')?p.slice(0,p.lastIndexOf('/')):'', base=p=>p.split('/').pop(), join=(a,b)=>a?a+'/'+b:b;
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
 const button=(text,fn,label)=>{const b=el('button',text);b.type='button';b.onclick=async()=>{if(b.disabled)return;b.disabled=true;try{await act(fn);}finally{b.disabled=false;}};if(label)b.setAttribute('aria-label',label);return b;};
 function notice(text){$('notice').textContent=text;clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>$('notice').textContent='',6500);}
 async function act(fn){try{await fn();}catch(e){notice(e.message);}}
-async function api(route,body,method='POST',keepalive=false){const r=await fetch('api/'+route,{method:body===undefined?'GET':method,headers:body===undefined?{}:{'Content-Type':'application/json'},body:body===undefined?undefined:JSON.stringify(body),keepalive});const v=await r.json();if(!r.ok){const e=new Error(v.error||'Unable to save. Retry.');e.status=r.status;throw e;}return v;}
+async function api(route,body,method='POST',keepalive=false){let r;try{r=await fetch('api/'+route,{method:body===undefined?'GET':method,headers:body===undefined?{}:{'Content-Type':'application/json'},body:body===undefined?undefined:JSON.stringify(body),keepalive});}catch(err){const e=new Error('Notes is unreachable.');e.transient=true;throw e;}const text=await r.text();let v=null;try{v=text?JSON.parse(text):null;}catch{}
+  // An empty or non-JSON reply (Notes restarting, proxy 502) or a 5xx is temporary: the caller retries.
+  if(!r.ok||!v){const e=new Error(v?.error||'Unable to save. Retry.');e.status=r.status;e.transient=!v||r.status>=500;throw e;}return v;}
 function allEntries(nodes=state.tree){return nodes.flatMap(n=>[n,...(n.children?allEntries(n.children):[])]);}
 function folderChildren(path){return path?allEntries().find(n=>n.path===path)?.children||[]:state.tree;}
 async function refresh(){state.tree=(await api('tree')).children;renderTree();}
@@ -58,7 +72,10 @@ function dirty(n){return n.content!==n.saved||n.titleDraft!==n.title;}
 function saveStatus(n){if(state.note!==n)return;const b=$('save');b.hidden=!n.error;b.textContent=n.error?'Retry save':'';b.title=n.error||'Retry saving';}
 function persistDrafts(){store('notes.drafts',[...drafts.values()].filter(dirty).map(({path,content,rev,title,titleDraft,saved})=>({path,content,rev,title,titleDraft,saved})));}
 function changed(n){n.error=null;persistDrafts();if(!n.hold)n.hold=W.update.hold('Unsaved note: '+n.path);clearTimeout(n.timer);n.timer=editor.composing?null:setTimeout(()=>act(()=>save(n)),600);saveStatus(n);}
-async function save(n,keepalive=false){clearTimeout(n.timer);if(n.busy){await n.busy;if(dirty(n)&&!n.error)return save(n,keepalive);return;}if(!dirty(n)){n.hold?.release();n.hold=null;saveStatus(n);return;}const content=n.content,title=n.titleDraft.trim();if(!title||/[\/\\]/.test(title)||title.startsWith('.')){n.error='Use a visible title without / or \\.';saveStatus(n);throw new Error(n.error);}n.busy=(async()=>{await Promise.resolve();try{if(content!==n.saved){const r=await api('note',{path:n.path,rev:n.rev,content},'PUT',keepalive);const readback=await api('note?path='+encodeURIComponent(n.path));if(readback.rev!==r.rev||readback.content!==content)throw new Error('Save readback changed. Your draft is retained.');n.rev=r.rev;n.saved=content;}if(title!==n.title){const old=n.path,to=join(parent(old),title+'.md');await api('move',{from:old,to},'POST',keepalive);n.path=to;n.title=title;drafts.delete(old);drafts.set(to,n);}if(n.titleDraft.trim()===title)n.titleDraft=title;if(n.error)$('notice').textContent='';n.error=null;if(!dirty(n)){n.hold?.release();n.hold=null;}await refresh();}catch(e){n.conflict=e.status===409;n.error=e.status===409?'Changed elsewhere or name taken. Your draft is kept. Retry after reconciling.':e.message;notice(n.error);throw e;}finally{n.busy=null;persistDrafts();saveStatus(n);}})();saveStatus(n);return n.busy;}
+async function save(n,keepalive=false){clearTimeout(n.timer);if(n.busy){await n.busy;if(dirty(n)&&!n.error)return save(n,keepalive);return;}if(!dirty(n)){n.hold?.release();n.hold=null;saveStatus(n);return;}const content=n.content,title=n.titleDraft.trim();if(!title||/[\/\\]/.test(title)||title.startsWith('.')){n.error='Use a visible title without / or \\.';saveStatus(n);throw new Error(n.error);}n.busy=(async()=>{await Promise.resolve();try{if(content!==n.saved){const r=await api('note',{path:n.path,rev:n.rev,content},'PUT',keepalive);const readback=await api('note?path='+encodeURIComponent(n.path));if(readback.rev!==r.rev||readback.content!==content)throw new Error('Save readback changed. Your draft is retained.');n.rev=r.rev;n.saved=content;}if(title!==n.title){const old=n.path,to=join(parent(old),title+'.md');await api('move',{from:old,to},'POST',keepalive);n.path=to;n.title=title;drafts.delete(old);drafts.set(to,n);}if(n.titleDraft.trim()===title)n.titleDraft=title;if(n.error||n.retries)$('notice').textContent='';n.error=null;n.retries=0;if(!dirty(n)){n.hold?.release();n.hold=null;}await refresh();}catch(e){if(e.transient){// Quietly retry while Notes restarts or the network blips; the draft stays saved on this device.
+  n.retries=(n.retries||0)+1;clearTimeout(n.timer);n.timer=setTimeout(()=>act(()=>save(n)),Math.min(30000,1000*2**Math.min(n.retries-1,5)));
+  if(n.retries>=4){n.error='Notes is unreachable right now. Your note is kept here and will save when it is back.';notice(n.error);}return;}
+  n.conflict=e.status===409;n.error=e.status===409?'Changed elsewhere or name taken. Your draft is kept. Retry after reconciling.':e.message;notice(n.error);throw e;}finally{n.busy=null;persistDrafts();saveStatus(n);}})();saveStatus(n);return n.busy;}
 async function flush(){await Promise.all([...drafts.values()].filter(dirty).map(n=>save(n)));}
 // CodeMirror owns beforeinput, composition and history; never replay native text.
 $('title').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();editor.select(0);}};
@@ -217,7 +234,7 @@ for(const [kind,label,display]of [['checkbox','Checkbox','[ ]'],['indent','Inden
 }
 document.addEventListener('visibilitychange',()=>{if(document.hidden)for(const n of drafts.values())if(dirty(n))act(()=>save(n,true));});
 window.addEventListener('pagehide',()=>{for(const n of drafts.values())if(dirty(n))act(()=>save(n,true));});
-function viewportChanged(){const v=window.visualViewport;const inset=v?Math.max(0,innerHeight-v.height-v.offsetTop):0;$('app').style.setProperty('--keyboard-inset',inset+'px');if(!state.read)autoSize();renderViews();}
+function viewportChanged(){const v=window.visualViewport;const inset=v?Math.max(0,innerHeight-v.height-v.offsetTop):0;$('app').style.setProperty('--keyboard-inset',inset+'px');if(!state.read)autoSize();renderViews();if(!state.read&&document.activeElement?.closest?.('#source'))requestAnimationFrame(()=>keepCaretClear(editor.caretRect()));}
 window.addEventListener('resize',viewportChanged);window.visualViewport?.addEventListener('resize',viewportChanged);window.visualViewport?.addEventListener('scroll',viewportChanged);
 // No repeated app title/header tools: every action remains in the floating pill.
 W.titlebar?.set?.([]).catch(()=>{});
