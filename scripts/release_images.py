@@ -38,7 +38,10 @@ if a.dry_run:
 if a.push_ghcr:
     registry='ghcr.io'
     repository='humanitylabs-org/wizard-notes'
-    with urllib.request.urlopen('https://'+registry+'/token?service='+registry+'&scope=repository:'+repository+':pull') as response:
+    token_request=urllib.request.Request('https://'+registry+'/token?service='+registry+'&scope=repository:'+repository+':pull,push')
+    # Anonymous tokens are refused (403) until the package exists, so a first publish must authenticate.
+    if os.environ.get('GH_TOKEN'):token_request.add_header('Authorization','Basic '+__import__('base64').b64encode((os.environ.get('GITHUB_ACTOR','x')+':'+os.environ['GH_TOKEN']).encode()).decode())
+    with urllib.request.urlopen(token_request) as response:
         read_token=json.load(response)['token']
     tags=['sha-'+a.commit]+['sha-'+a.commit+'-'+arch for arch in ['amd64','arm64']]
     if a.release_version:tags.append(version)
