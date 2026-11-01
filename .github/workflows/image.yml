@@ -15,8 +15,12 @@ permissions:
 jobs:
   image:
     if: github.repository == 'humanitylabs-org/wizard-notes' && (github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')))
-    runs-on: [self-hosted, macOS, ARM64, wizard-notes]
-    timeout-minutes: 15
+    # GitHub-hosted: the self-hosted Mac worker went offline and left the Store image unpublished.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    concurrency:
+      group: wizard-notes-image
+      cancel-in-progress: false
     permissions:
       contents: read
       packages: write
@@ -37,9 +41,17 @@ jobs:
               assert os.environ['EXPECTED_COMMIT']==os.environ['GITHUB_SHA']
               assert os.environ['CONFIRM_VERSION']==(version if os.environ['GITHUB_REF'].startswith('refs/tags/v') else 'main')
           PY
+      - uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+      - uses: docker/setup-buildx-action@v3
+        id: buildx
       - name: Build, smoke, archive and push exact images
         env:
           GH_TOKEN: ${{ github.token }}
+          RELEASE_DOCKER_CONTEXT: default
+          RELEASE_BUILDX_BUILDER: ${{ steps.buildx.outputs.name }}
+          WIZARD_WORKER_LOCK: ${{ runner.temp }}/wizard-notes.lock
         run: python3 scripts/ci_images.py
       - uses: actions/upload-artifact@v4
         with:

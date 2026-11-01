@@ -19,6 +19,6 @@ with lock.open('a') as held:
         config.write_text(json.dumps({'auths':{'ghcr.io':{'auth':base64.b64encode((os.environ['GITHUB_ACTOR']+':'+os.environ['GH_TOKEN']).encode()).decode()}},'cliPluginsExtraDirs':os.environ.get('DOCKER_CLI_PLUGIN_DIRS','').split(':')}))
         config.chmod(0o600)
         env={**os.environ,'DOCKER_CONFIG':auth}
-        args=[sys.executable,'scripts/release_images.py','--commit',os.environ['GITHUB_SHA'],'--output',str(Path(os.environ['RUNNER_TEMP'])/'notes-release'),'--push-ghcr']
+        args=[sys.executable,'scripts/release_images.py','--commit',os.environ['GITHUB_SHA'],'--output',str(Path(os.environ['RUNNER_TEMP'])/'notes-release'),'--push-ghcr','--context',os.environ.get('RELEASE_DOCKER_CONTEXT','colima'),'--builder',os.environ.get('RELEASE_BUILDX_BUILDER','colima')]
         if os.environ['GITHUB_REF'].startswith('refs/tags/v'):args.append('--release-version')
         subprocess.run(args,env=env,check=True)
