@@ -56,5 +56,13 @@ class LinkPathTests(unittest.TestCase):
         (self.v.root / 'OnlyHere.md').symlink_to(self.v.root / 'Target.md')
         self.assertEqual(self.resolve('./OnlyHere')['path'], 'Work/OnlyHere.md')
 
+    def test_relative_alias_fragments_and_missing_directory_do_not_fall_back(self):
+        self.assertEqual(self.resolve('../Target.md#Heading')['path'], 'Target.md')
+        self.assertEqual(self.resolve('../Target\\|alias')['path'], 'Target.md')
+        self.v.write('OnlyAtRoot.md', 'not the requested note', create=True)
+        with self.assertRaises(s.Problem) as missing:
+            self.resolve('./OnlyAtRoot')
+        self.assertEqual(missing.exception.status, 404)
+
 if __name__ == '__main__':
     unittest.main()
