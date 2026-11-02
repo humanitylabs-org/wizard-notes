@@ -2482,11 +2482,12 @@ EmphasisMark","StrikethroughMark"].includes(g.name)&&!y.active&&o.push({from:g.f
 Mark"&&(g.parent==="InlineCode"?y.active||o.push({from:g.from,to:g.to,kind:"hide"}):(y.classes.push("cm-lp-fence"),y.active||
 o.push({from:y.from,to:y.to,kind:"hide"}))),g.name==="Link"&&!d.some(w=>w.from<g.to&&w.to>g.from)){let w=[];for(let S=b+
 1;S<l.length&&l[S].from<g.to;S++)l[S].parent==="Link"&&w.push(l[S]);let L=w.find((S,C)=>S.name==="LinkMark"&&n[S.from]===
-"]"&&w[C+1]&&n[w[C+1].from]==="("),x=w.find(S=>S.name==="URL");!y.active&&L&&x&&L.from>g.from+1&&n[g.from]==="["?(r.push(
-{from:g.from,to:g.to,class:"cm-lp-link",href:n.slice(x.from,x.to).replace(/^<|>$/g,"")}),o.push({from:g.from,to:g.from+1,
-kind:"hide"},{from:L.from,to:g.to,kind:"hide"})):r.push({from:g.from,to:g.to,class:"cm-lp-link"})}}for(let b of e){let g=b.
-active&&!b.classes.includes("cm-lp-list")&&/^(\s*)([-*+]) $/.exec(b.value);!g||u(b.from,b.to)||(b.classes.push("cm-lp-li\
-st"),b.bullet=!0,b.indent=g[1].replace(/\t/g,"    ").length,o.push({from:b.from,to:b.to,kind:"bullet",marker:"\u2022"}))}
+"]"&&w[C+1]&&n[w[C+1].from]==="("),x=w.find(S=>S.name==="URL");!y.active&&L&&x&&L.from>g.from+1&&n[g.from]==="["&&!n.slice(
+g.from,g.to).includes(`
+`)?(r.push({from:g.from,to:g.to,class:"cm-lp-link",href:n.slice(x.from,x.to).replace(/^<|>$/g,"")}),o.push({from:g.from,
+to:g.from+1,kind:"hide"},{from:L.from,to:g.to,kind:"hide"})):r.push({from:g.from,to:g.to,class:"cm-lp-link"})}}for(let b of e){
+let g=b.active&&!b.classes.includes("cm-lp-list")&&/^(\s*)([-*+]) $/.exec(b.value);!g||u(b.from,b.to)||(b.classes.push("\
+cm-lp-list"),b.bullet=!0,b.indent=g[1].replace(/\t/g,"    ").length,o.push({from:b.from,to:b.to,kind:"bullet",marker:"\u2022"}))}
 o.sort((b,g)=>b.from-g.from||g.to-b.to);let p=[],m=-1;for(let b of o)b.from>=m&&b.to>b.from&&!h(b.from,b.to)&&(p.push(b),
 m=b.to);return{lines:e,marks:r.filter(b=>!h(b.from,b.to)),replacements:p,tables:f}}var qd=/^\s*(?:(?:[-*+]|\d+[.)])\s+(?:\[[ xX]\]\s+)?|>\s*|#{1,6}\s+)*$/,
 Kd=/(?:^|\s)(?:e\.g|i\.e|etc|vs|cf|approx|incl|no|p|pp|ca)\.$/i;function tf(n,t,e){let i=[],s=n.lastIndexOf(`
