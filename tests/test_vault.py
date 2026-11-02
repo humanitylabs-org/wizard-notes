@@ -25,6 +25,17 @@ class VaultTests(unittest.TestCase):
         self.assertEqual(set(p.name for p in self.v.root.iterdir()),{'Inbox','Welcome.md'})
         self.v.delete('Welcome.md');s.Vault(self.temp.name)
         self.assertFalse((self.v.root/'Welcome.md').exists())
+    def test_owner_chosen_vault_folder(self):
+        with tempfile.TemporaryDirectory(prefix='notes-vault-',dir=os.environ.get('TMPDIR')) as folder:
+            (Path(folder)/'Existing.md').write_text('kept',encoding='utf-8')
+            data=Path(self.temp.name)/'other-data'
+            v=s.Vault(data,folder)
+            self.assertEqual(v.root,Path(folder))
+            self.assertEqual(v.read('Existing.md')['content'],'kept')
+            self.assertEqual(sorted(p.name for p in Path(folder).iterdir()),['Existing.md'])  # no seed into a real vault
+            self.assertFalse((data/'vault').exists())
+            v.write('New.md','x',create=True);self.assertTrue((Path(folder)/'New.md').exists())
+            with self.assertRaises(SystemExit):s.Vault(data,Path(folder)/'missing')
     def test_paths(self):
         for p in ['../x.md','/x.md','a/../b.md','.secret.md','a//b.md','a\\b.md','a/.hidden/b.md','a\x00.md','C:/x.md','a/.','a/..','']:
             with self.subTest(path=p):self.bad(lambda:self.v.write(p,'x',create=True))

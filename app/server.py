@@ -28,9 +28,12 @@ class Problem(Exception):
     def __init__(self, status, message): self.status, self.message = status, message
 
 class Vault:
-    def __init__(self, data):
-        self.root = Path(data) / 'vault'
+    def __init__(self, data, root=None):
+        # root: an existing folder chosen by the owner (NOTES_VAULT_DIR); default is the app-owned data/vault.
+        self.root = Path(root) if root else Path(data) / 'vault'
+        if root and not self.root.is_dir(): raise SystemExit(f'NOTES_VAULT_DIR {root} is not a folder; mount it first.')
         self.root.mkdir(parents=True, exist_ok=True)
+        Path(data).mkdir(parents=True, exist_ok=True)
         self.lock = threading.RLock()
         self.cache = {}
         marker = Path(data) / '.initialized'
@@ -327,7 +330,9 @@ class Handler(BaseHTTPRequestHandler):
 
 if __name__ == '__main__':
     data = Path(os.environ.get('DATA_DIR',str(ROOT/'.data')))
-    VAULT = Vault(data)
+    vault_dir = os.environ.get('NOTES_VAULT_DIR','').strip()
+    if vault_dir and not os.path.isabs(vault_dir): raise SystemExit('NOTES_VAULT_DIR must be an absolute path.')
+    VAULT = Vault(data, vault_dir or None)
     credential = data/'agent.token'
     if not credential.exists():
         with open(credential,'x',opener=lambda path,flags: os.open(path,flags,0o600)) as f:
