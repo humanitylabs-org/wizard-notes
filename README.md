@@ -6,6 +6,32 @@ A private-by-default, Obsidian-compatible vault of plain `.md` files. Organise n
 
 The vault is plain `.md` on your disk in the app's data folder: `${APP_DATA_DIR}/data/vault` (mounted as `/data/vault`). It survives uninstall; include this app data folder in your Wizard backups. It is **not** the shared owner Files/media root and the package declares no `shares:` export.
 
+### Use an existing folder (for example a synced Obsidian vault)
+
+By default nothing changes: the app keeps its own vault in its data folder and runs as uid/gid 1000. Optional environment settings let an owner open a folder that already exists on the host instead:
+
+- `NOTES_VAULT_DIR`: absolute path of the vault inside the container (default `$DATA_DIR/vault`). It must already exist; Notes refuses to start rather than create a vault when the path is missing. An explicitly selected folder is never seeded, even when empty. An existing mountpoint directory alone does not prove that the intended host mount is present. Hidden entries such as `.obsidian` stay invisible to Notes and its agents.
+- `NOTES_UID` / `NOTES_GID`: the numeric ids the server drops to after preparing `/data` (default `1000`). Values must be ASCII decimal ids from `0` through `4294967294`, with at most 10 digits; both are validated before any startup filesystem or identity changes. The container namespace must also map the chosen ids. Pick the container ids that own the host folder, so files Notes writes stay owned by the folder's owner and sync tools keep full access:
+  - **Rootless Docker** (container root is the unprivileged host user who runs Docker): `0` and `0`. With the shipped capability restrictions, container root retains the configured `CHOWN`/`SETUID`/`SETGID` capabilities inside that user's namespace; it is not a capability-free runtime. This mode requires separate rootless-container verification.
+  - **Rootful Docker**: the host owner's ids, for example `1000`/`1000`. Never `0` there, because that is the real host root.
+
+Add both to the app's Runtipi user-config override (`user-config/wizardapps/wizard-notes/docker-compose.yml`). Keep the image's entrypoint and do not set `user:`:
+
+```yaml
+services:
+  wizard-notes:
+    environment:
+      NOTES_UID: '0'          # rootless Docker; use the owner's uid on rootful Docker
+      NOTES_GID: '0'
+      NOTES_VAULT_DIR: /vault
+    volumes:
+      - /home/owner/Obsidian Vault:/vault
+```
+
+The app's own data (`agent.token`) stays in `${APP_DATA_DIR}/data`; its top-level regular files follow the chosen ids on root startup (symlinks are skipped). Keep that app data directory separate from the owner-selected vault. Startup never recursively chowns directories or either vault. Consequently, changing ids does **not** migrate an existing default `/data/vault`: it can remain owned by the old id and become unreadable or unwritable. Keep its original ids or arrange an explicit owner-controlled ownership migration before switching; returning to the retained default vault also requires ids that can access it.
+
+The selected folder is shared with whatever else edits it (Obsidian, sync), so other devices may change notes between calls: Notes and its agents read before writing and refuse stale revisions. Notes uses its own id-based entries under the folder's `.trash`; restore handles Notes entries, not arbitrary Obsidian trash. Existing hidden files, including `.obsidian`, are not indexed or seeded over. Delete/restore reject symlinks at the trash root, entry, metadata and payload paths. These are current-path checks, not protection against a hostile concurrent disk writer or filesystem race. Remove the override to return to the app's own vault, which is kept.
+
 Wizard Notes joins private agents by default, never the main agent. The install sheet offers **Set up private agent** when none exists. The vault is readable/editable through Wizard only by agents you tick; the owner can explicitly tick other agents and revoke access later. The owner view remains available regardless of agent assignment. This is an app/gateway boundary, not protection against an administrator or a process with access to the owner's disk.
 
 The service accepts owner-authenticated, same-host Wizard browser requests. Optional trusted hosts/origins come from the Runtipi form, never baked-in owner addresses. The declared `/gateway/mcp` route is a box-trusted transport behind owner ingress and the agent-scoped Wizard gateway (which does not inject per-app credentials); browser requests cannot use that route. Direct `/mcp` integrations use the app-data `agent.token` bearer credential. Do not expose the container directly to the Internet.

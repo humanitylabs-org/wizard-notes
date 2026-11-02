@@ -25,6 +25,86 @@ class VaultTests(unittest.TestCase):
         self.assertEqual(set(p.name for p in self.v.root.iterdir()),{'Inbox','Welcome.md'})
         self.v.delete('Welcome.md');s.Vault(self.temp.name)
         self.assertFalse((self.v.root/'Welcome.md').exists())
+    def test_owner_chosen_vault_folder(self):
+        with tempfile.TemporaryDirectory(prefix='notes-vault-',dir=os.environ.get('TMPDIR')) as folder:
+            (Path(folder)/'Existing.md').write_text('kept',encoding='utf-8')
+            data=Path(self.temp.name)/'other-data'
+            v=s.Vault(data,folder)
+            self.assertEqual(v.root,Path(folder))
+            self.assertEqual(v.read('Existing.md')['content'],'kept')
+            self.assertEqual(sorted(p.name for p in Path(folder).iterdir()),['Existing.md'])  # no seed into a real vault
+            self.assertFalse((data/'vault').exists())
+            v.write('New.md','x',create=True);self.assertTrue((Path(folder)/'New.md').exists())
+            with self.assertRaises(SystemExit):s.Vault(data,Path(folder)/'missing')
+    def test_external_empty_vault_never_seeds_or_suppresses_default_seed(self):
+        with tempfile.TemporaryDirectory(prefix='notes-empty-',dir=os.environ.get('TMPDIR')) as folder:
+            data=Path(self.temp.name)/'external-data'
+            for _ in range(2):
+                s.Vault(data,folder)
+                self.assertEqual(list(Path(folder).iterdir()),[])
+            default=s.Vault(data)
+            self.assertEqual({p.name for p in default.root.iterdir()},{'Welcome.md','Inbox'})
+
+    def test_external_hidden_obsidian_files_untouched(self):
+        with tempfile.TemporaryDirectory(prefix='notes-hidden-',dir=os.environ.get('TMPDIR')) as folder:
+            root=Path(folder);(root/'.obsidian').mkdir()
+            config=root/'.obsidian'/'app.json';config.write_bytes(b'{"synthetic":true}')
+            v=s.Vault(Path(self.temp.name)/'hidden-data',root)
+            self.assertEqual(v.tree(),{'children':[]})
+            self.assertEqual(config.read_bytes(),b'{"synthetic":true}')
+            self.assertEqual({p.name for p in root.iterdir()},{'.obsidian'})
+            v.write('Ordinary.md','kept',create=True)
+            tid=v.delete('Ordinary.md')['trash_id'];v.restore(tid)
+            self.assertEqual(v.read('Ordinary.md')['content'],'kept')
+            self.assertEqual(config.read_bytes(),b'{"synthetic":true}')
+
+    def trash_vault(self,external):
+        if not external:return self.v
+        folder=Path(self.temp.name)/'external';folder.mkdir()
+        return s.Vault(Path(self.temp.name)/'external-data',folder)
+
+    def test_trash_root_symlink_delete_rejected_without_outside_writes(self):
+        for external in (False,True):
+            with self.subTest(external=external):
+                v=self.trash_vault(external)
+                outside=Path(self.temp.name)/('outside-delete-'+str(external));outside.mkdir()
+                (v.root/'.trash').symlink_to(outside,target_is_directory=True)
+                v.write('Keep.md','synthetic',create=True)
+                self.bad(lambda:v.delete('Keep.md'))
+                self.assertEqual(list(outside.iterdir()),[])
+                self.assertEqual(v.read('Keep.md')['content'],'synthetic')
+
+    def test_trash_root_symlink_restore_rejected_without_outside_writes(self):
+        for external in (False,True):
+            with self.subTest(external=external):
+                v=self.trash_vault(external)
+                outside=Path(self.temp.name)/('outside-restore-'+str(external));outside.mkdir()
+                tid='a'*32;slot=outside/tid;slot.mkdir()
+                (slot/'original.json').write_text(json.dumps({'path':'Back.md'}))
+                (slot/'Back.md').write_text('synthetic')
+                (v.root/'.trash').symlink_to(outside,target_is_directory=True)
+                before={p.name:p.read_bytes() for p in slot.iterdir()}
+                self.bad(lambda:v.restore(tid))
+                self.assertEqual({p.name:p.read_bytes() for p in slot.iterdir()},before)
+                self.assertFalse((v.root/'Back.md').exists())
+
+    def test_trash_restore_slot_metadata_payload_symlinks_rejected(self):
+        for part in ('slot','original.json','Back.md'):
+            with self.subTest(part=part), tempfile.TemporaryDirectory(prefix='notes-trash-links-',dir=os.environ.get('TMPDIR')) as data:
+                v=s.Vault(data);trash=v.root/'.trash';trash.mkdir()
+                outside=Path(data)/'outside';outside.mkdir()
+                tid='b'*32;slot=trash/tid
+                if part=='slot':slot.symlink_to(outside,target_is_directory=True)
+                else:slot.mkdir()
+                for name,content in [('original.json',json.dumps({'path':'Back.md'})),('Back.md','synthetic')]:
+                    if part==name:
+                        (outside/name).write_text(content);(slot/name).symlink_to(outside/name)
+                    else:(slot/name).write_text(content)
+                before={p.name:p.read_bytes() for p in outside.iterdir()}
+                self.bad(lambda:v.restore(tid))
+                self.assertEqual({p.name:p.read_bytes() for p in outside.iterdir()},before)
+                self.assertFalse((v.root/'Back.md').exists())
+
     def test_paths(self):
         for p in ['../x.md','/x.md','a/../b.md','.secret.md','a//b.md','a\\b.md','a/.hidden/b.md','a\x00.md','C:/x.md','a/.','a/..','']:
             with self.subTest(path=p):self.bad(lambda:self.v.write(p,'x',create=True))
