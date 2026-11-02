@@ -28,6 +28,53 @@ export class RawMarkdown {
   }
 }
 
+// GFM pipe tables at document level (tables nested in lists/quotes stay plain text). One parse
+// serves Reading and Live Preview. Cells come from the row's pipe delimiters, not TableCell nodes,
+// because Lezer emits no node for an empty cell. Cell text stays raw Markdown for inline rendering.
+export function tableBlocks(text, tree = markdown.parse(text)) {
+  const tables = [], top = tree.topNode;
+  for (let table = top.firstChild; table; table = table.nextSibling) {
+    if (table.name !== 'Table') continue;
+    const rows = [];
+    let align = [];
+    for (let row = table.firstChild; row; row = row.nextSibling) {
+      if (row.name === 'TableDelimiter') { // the |---|:--:| line
+        align = text.slice(row.from, row.to).replace(/^\s*\|/, '').replace(/\|\s*$/, '').split('|')
+          .map(c => { c = c.trim(); return c.startsWith(':') && c.endsWith(':') ? 'center' : c.endsWith(':') ? 'right' : c.startsWith(':') ? 'left' : ''; });
+        continue;
+      }
+      if (row.name !== 'TableHeader' && row.name !== 'TableRow') continue;
+      const pipes = [];
+      for (let c = row.firstChild; c; c = c.nextSibling) if (c.name === 'TableDelimiter') pipes.push(c.from);
+      const bounds = [row.from - 1, ...pipes, row.to], cells = [];
+      for (let i = 0; i + 1 < bounds.length; i++) {
+        const from = bounds[i] + 1, to = bounds[i + 1], raw = text.slice(from, to);
+        if (pipes.length && (i === 0 || i === bounds.length - 2) && !raw.trim()) continue; // outer pipes
+        const lead = raw.length - raw.trimStart().length;
+        cells.push({from: from + lead, to: from + lead + raw.trim().length, text: raw.trim().replace(/\\\|/g, '|')});
+      }
+      rows.push({from: row.from, to: row.to, header: row.name === 'TableHeader', cells});
+    }
+    const width = rows[0]?.cells.length || 0;
+    for (const r of rows) { r.cells = r.cells.slice(0, width); while (r.cells.length < width) r.cells.push({from: r.to, to: r.to, text: ''}); }
+    const startLine = text.slice(0, table.from).split('\n').length - 1;
+    tables.push({from: table.from, to: table.to, startLine, endLine: startLine + text.slice(table.from, table.to).split('\n').length - 1,
+      align: Array.from({length: width}, (_, i) => align[i] || ''), rows});
+  }
+  return tables;
+}
+
+// Whole-line table ranges for Live Preview. A table is active (shown as editable source) when the
+// caret or selection touches any of its lines. Cell offsets become relative to the table start so a
+// rendered widget survives edits elsewhere in the note.
+export function liveTables(text, active = [], tree) {
+  return tableBlocks(text, tree).map(t => {
+    const from = text.lastIndexOf('\n', t.from - 1) + 1, end = text.indexOf('\n', t.to), to = end < 0 ? text.length : end;
+    const rows = t.rows.map(r => ({header: r.header, cells: r.cells.map(c => ({from: c.from - from, text: c.text}))}));
+    return {from, to, align: t.align, rows, active: active.some(r => r.from <= to && r.to >= from)};
+  });
+}
+
 export function previewModel(text, active = []) {
   const lines = []; let from = 0;
   for (const value of text.split('\n')) {
@@ -40,20 +87,26 @@ export function previewModel(text, active = []) {
     while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (lines[mid].from <= pos) lo = mid; else hi = mid - 1; }
     return lines[lo];
   };
-  const marks = [], replacements = [], nodes = [];
-  markdown.parse(text).iterate({enter(n) { nodes.push({name: n.name, from: n.from, to: n.to, parent: n.node.parent?.name}); }});
+  const marks = [], replacements = [], nodes = [], tree = markdown.parse(text);
+  tree.iterate({enter(n) { nodes.push({name: n.name, from: n.from, to: n.to, parent: n.node.parent?.name}); }});
+  // A table renders as one block widget unless the caret/selection touches any of its lines;
+  // then its raw source is shown for editing, like every other construct here.
+  const tables = liveTables(text, active, tree);
+  // An active table is source as a whole: every row shows its raw Markdown so the pipes line up.
+  for (const t of tables) if (t.active) for (const l of lines) if (l.from >= t.from && l.to <= t.to) { l.active = true; l.classes.push('cm-lp-table-source'); }
+  const inTable = (a, b) => tables.some(t => !t.active && a < t.to && b > t.from);
   const codeRanges = nodes.filter(n => ['FencedCode', 'CodeBlock', 'InlineCode'].includes(n.name));
   const inCode = (a,b) => codeRanges.some(n => a >= n.from && b <= n.to);
   const wiki = [];
   for (const m of text.matchAll(/\[\[([^\]\n]+)\]\]/g)) {
     if (inCode(m.index, m.index + m[0].length) || /\\$/.test(text.slice(0,m.index))) continue;
-    const [target, ...alias] = m[1].split('|');
+    const [target, ...alias] = m[1].split(/\\?\|/); // [[Note\|alias]] is Obsidian's in-table form
     const item = {from:m.index, to:m.index+m[0].length, kind:'wiki', target, label:alias.join('|')||target};
     wiki.push(item);
     if (!lineAt(item.from).active) replacements.push(item);
     marks.push({...item, class:'cm-lp-wiki-source'});
   }
-  for (const n of nodes) {
+  for (const [index, n] of nodes.entries()) {
     const line = lineAt(n.from);
     if (/^ATXHeading[1-6]$/.test(n.name)) line.classes.push('cm-lp-h' + n.name.at(-1));
     if (['FencedCode','CodeBlock'].includes(n.name)) {
@@ -89,7 +142,18 @@ export function previewModel(text, active = []) {
       if (n.parent === 'InlineCode') { if (!line.active) replacements.push({from:n.from,to:n.to,kind:'hide'}); }
       else { line.classes.push('cm-lp-fence'); if (!line.active) replacements.push({from:line.from,to:line.to,kind:'hide'}); }
     }
-    if (n.name === 'Link' && !wiki.some(w=> w.from < n.to && w.to > n.from)) marks.push({from:n.from,to:n.to,class:'cm-lp-link'});
+    if (n.name === 'Link' && !wiki.some(w=> w.from < n.to && w.to > n.from)) {
+      // Obsidian: off the caret line an inline link shows only its text; the raw [text](url) returns
+      // on the active line. Reference/empty links keep their source.
+      const own = [];
+      for (let j = index + 1; j < nodes.length && nodes[j].from < n.to; j++) if (nodes[j].parent === 'Link') own.push(nodes[j]);
+      const close = own.find((c, i) => c.name === 'LinkMark' && text[c.from] === ']' && own[i + 1] && text[own[i + 1].from] === '(');
+      const url = own.find(c => c.name === 'URL');
+      if (!line.active && close && url && close.from > n.from + 1 && text[n.from] === '[') {
+        marks.push({from:n.from,to:n.to,class:'cm-lp-link',href:text.slice(url.from,url.to).replace(/^<|>$/g,'')});
+        replacements.push({from:n.from,to:n.from+1,kind:'hide'},{from:close.from,to:n.to,kind:'hide'});
+      } else marks.push({from:n.from,to:n.to,class:'cm-lp-link'});
+    }
   }
   // A bare "- " typed under a paragraph is not a list in CommonMark (an empty item cannot interrupt a
   // paragraph) but Obsidian shows a bullet at once; render the caret line's bare marker the same way.
@@ -102,8 +166,8 @@ export function previewModel(text, active = []) {
   // Non-overlapping replacements: list prefixes own task markers; fenced code owns info.
   replacements.sort((a,b)=>a.from-b.from || b.to-a.to);
   const clean = []; let end = -1;
-  for (const r of replacements) if (r.from >= end && r.to > r.from) { clean.push(r); end = r.to; }
-  return {lines, marks, replacements:clean};
+  for (const r of replacements) if (r.from >= end && r.to > r.from && !inTable(r.from, r.to)) { clean.push(r); end = r.to; }
+  return {lines, marks:marks.filter(m => !inTable(m.from, m.to)), replacements:clean, tables};
 }
 
 // Keyboard-independent sentence capitalisation. Some Android keyboards cannot see the text before the

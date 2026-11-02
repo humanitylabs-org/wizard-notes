@@ -183,7 +183,8 @@ class Vault:
             return {'notes':out[:100]}
 
     def resolve(self, target, current=''):
-        target = target.split('|')[0].split('#')[0].strip()
+        # Obsidian escapes the alias pipe inside tables: [[Note\|alias]].
+        target = re.split(r'\\?\|', target)[0].split('#')[0].strip()
         if target.endswith('.md'): target = target[:-3]
         self.path(target + '.md')
         notes = self.index()[1]
@@ -194,6 +195,11 @@ class Vault:
         matches = sorted((n for n in notes if n['title'].casefold() == target.casefold()),key=lambda n:n['path'])
         return {'path':matches[0]['path'] if matches else None,'target':target}
 
+    def link_target(self, target, current):
+        # One unusable link elsewhere in the vault (e.g. [[a:b]]) must not break every note's backlinks.
+        try: return self.resolve(target, current)['path']
+        except Problem: return None
+
     def backlinks(self, path):
         with self.lock:
             self.read(path)
@@ -201,7 +207,7 @@ class Vault:
             linked = []
             for n in notes:
                 if n['path'] == path: continue
-                if any(self.resolve(m.group(1),n['path'])['path'] == path for m in WIKI.finditer(n['content'])):
+                if any(self.link_target(m.group(1),n['path']) == path for m in WIKI.finditer(n['content'])):
                     linked.append({'path':n['path'],'title':n['title']})
             return {'notes':linked}
 
