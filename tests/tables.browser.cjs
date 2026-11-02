@@ -1,8 +1,8 @@
 // Tables + link acceptance in real Chromium. ONLY run against a scratch Notes server/vault.
 // QA_BASE is the Notes server root (e.g. a local container on a spare port); WIZARD_CORE is the shell
 // web/core directory (real app-client/app-services). The app runs framed in a minimal same-origin host
-// that sends the Appearance contract (light/dark Wizard kit palettes). Optional QA_SHOT_NOTE adds
-// screenshots of another scratch note (vault path) in Reading and Live Preview.
+// that sends the Appearance contract (light/dark Wizard kit palettes). Screenshots use the synthetic
+// tests/fixtures/wide-tables.md, or QA_SHOT_NOTE (another scratch-vault path) when set.
 const {chromium,expect}=require(process.env.QA_PLAYWRIGHT||'@playwright/test');
 const fs=require('node:fs'),path=require('node:path');
 const base=(process.env.QA_BASE||'http://127.0.0.1:18799').replace(/\/$/,''),out=process.env.QA_OUT||'qa-output',core=process.env.WIZARD_CORE;
@@ -24,8 +24,10 @@ WizAppServices.attach(frame,{appId:"wizard-notes",path:"/",isVisible:()=>true});
  const report={checks:[],screenshots:[],errors:[]};
  try{
   const seed=await browser.newContext(),api=seed.request;
-  const old=await api.get(base+'/api/note?path='+encodeURIComponent(note));
-  expect((await api.fetch(base+'/api/note',{method:old.ok()?'PUT':'POST',data:{path:note,content,...(old.ok()?{rev:(await old.json()).rev}:{})}})).ok()).toBe(true);
+  for(const [name,text] of [[note,content],['QA wide tables.md',fs.readFileSync(path.join(__dirname,'fixtures/wide-tables.md'),'utf8')]]){
+   const old=await api.get(base+'/api/note?path='+encodeURIComponent(name));
+   expect((await api.fetch(base+'/api/note',{method:old.ok()?'PUT':'POST',data:{path:name,content:text,...(old.ok()?{rev:(await old.json()).rev}:{})}})).ok()).toBe(true);
+  }
   await seed.close();
   for(const [width,height]of [[390,844],[1400,900]])for(const scheme of ['light','dark']){
    const label=(width===390?'phone':'desktop')+'-'+scheme,phone=width===390;
@@ -88,8 +90,8 @@ WizAppServices.attach(frame,{appId:"wizard-notes",path:"/",isVisible:()=>true});
    await expect(rt.locator('button.wiki')).toHaveText('alias');
    report.checks.push(label+': Reading renders table and links open in a new tab');
    await p.locator('#mode').click();
-   if(process.env.QA_SHOT_NOTE){
-    const name=process.env.QA_SHOT_NOTE.replace(/\.md$/,'');await open(name);if(!phone&&await p.locator('#tree').isVisible())await p.locator('#back').click();await p.evaluate(()=>{document.activeElement?.blur();});
+   {
+    const name=(process.env.QA_SHOT_NOTE||'QA wide tables').replace(/\.md$/,'');await open(name);if(!phone&&await p.locator('#tree').isVisible())await p.locator('#back').click();await p.evaluate(()=>{document.activeElement?.blur();});
     await page.waitForTimeout(150);
     const scroll=await p.locator('#source .md-table-wrap.cm-lp-table').first().evaluate(e=>({client:e.clientWidth,scroll:e.scrollWidth,overflow:getComputedStyle(e).overflowX}));
     if(phone){expect(scroll.scroll).toBeGreaterThan(scroll.client);expect(scroll.overflow).toBe('auto');report.checks.push(label+': wide table scrolls sideways ('+scroll.scroll+'px in '+scroll.client+'px)');
