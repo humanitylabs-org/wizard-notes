@@ -97,6 +97,13 @@ class VaultTests(unittest.TestCase):
         self.v.write('Target.md','local',create=True)
         self.assertEqual(self.v.resolve('Target','Source.md')['path'],'Target.md')
         self.assertEqual(self.v.resolve('Target','Work/Other.md')['path'],'Work/Target.md')
+
+    def test_backlinks_survive_an_unusable_link_elsewhere(self):
+        # Opening any note asked for its backlinks; one [[../x]] or [[a:b]] anywhere made every note show an error.
+        self.v.write('Target.md','target',create=True)
+        self.v.write('Odd.md','[[../Outside]] [[a:b]] [[.hidden]]',create=True)
+        self.v.write('Source.md','[[Target]]',create=True)
+        self.assertEqual(self.v.backlinks('Target.md')['notes'],[{'path':'Source.md','title':'Source'}])
     def test_today_idempotent_bangkok(self):
         expected=datetime.now(timezone(timedelta(hours=7))).date().isoformat()
         a=self.v.today();b=self.v.today()

@@ -16,7 +16,7 @@ from urllib.parse import parse_qs, unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 PORT = int(os.environ.get('PORT', '8799'))
-VERSION = '0.1.0-alpha.4'
+VERSION = '0.1.0-alpha.5'
 # Explicit allowlists replace development defaults, never silently re-add loopback.
 HOSTS = set(filter(None, os.environ.get('WIZARD_TRUSTED_HOSTS', '').split(',')))
 ORIGINS = set(filter(None, os.environ.get('WIZARD_TRUSTED_ORIGINS', '').split(',')))
@@ -194,6 +194,11 @@ class Vault:
         matches = sorted((n for n in notes if n['title'].casefold() == target.casefold()),key=lambda n:n['path'])
         return {'path':matches[0]['path'] if matches else None,'target':target}
 
+    def link_target(self, target, current):
+        # One unusable link elsewhere in the vault (e.g. [[a:b]]) must not break every note's backlinks.
+        try: return self.resolve(target, current)['path']
+        except Problem: return None
+
     def backlinks(self, path):
         with self.lock:
             self.read(path)
@@ -201,7 +206,7 @@ class Vault:
             linked = []
             for n in notes:
                 if n['path'] == path: continue
-                if any(self.resolve(m.group(1),n['path'])['path'] == path for m in WIKI.finditer(n['content'])):
+                if any(self.link_target(m.group(1),n['path']) == path for m in WIKI.finditer(n['content'])):
                     linked.append({'path':n['path'],'title':n['title']})
             return {'notes':linked}
 
