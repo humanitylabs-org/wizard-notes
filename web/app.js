@@ -1,9 +1,10 @@
 import {createLiveEditor} from './vendor/live-preview.js';
+import {replyPayload,replySupported,openReply} from './reply.js';
 const $=id=>document.getElementById(id), W=window.WizardApp;
 // Opened from the home screen (not inside the Wizard shell): leave room under the phone's status bar.
 if(window.top===window&&matchMedia('(pointer: coarse),(display-mode: standalone),(display-mode: fullscreen)').matches)document.documentElement.classList.add('own-window');
 if(!W) throw new Error('Wizard shared client is unavailable. Open Notes inside Wizard.');
-W.ready({name:'notes',version:'0.1.0'});
+W.ready({name:'notes',version:'0.1.0-alpha.6'});
 W.theme.get(); W.theme.onChange(()=>{});
 const stored=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key)||'null')??fallback;}catch{return fallback;}};
 const store=(key,value)=>{try{localStorage.setItem(key,JSON.stringify(value));}catch{notice('Local draft recovery is unavailable. Keep this window open until saved.');}};
@@ -55,7 +56,7 @@ function renderTree(){
  $('collapse').setAttribute('aria-label',state.expanded.size?'Collapse all folders':'Expand all folders');
 }
 function renderViews(){
- $('note').hidden=!state.note||state.search;$('note-controls').hidden=!state.note||state.search;$('search').hidden=!state.search;
+ $('note').hidden=!state.note||state.search;$('note-controls').hidden=!state.note||state.search;$('reply').hidden=!replySupported(W);$('search').hidden=!state.search;
  $('app').classList.toggle('no-note',!state.note);$('app').classList.toggle('drawer-open',state.drawer);$('app').classList.toggle('search-open',state.search);$('app').classList.toggle('sidebar-hidden',state.sidebarHidden&&!!state.note);
  $('backdrop').hidden=!state.drawer||!state.note;$('back').setAttribute('aria-expanded',String(phone()?state.drawer:!state.sidebarHidden));
  $('formatting').hidden=!state.note||state.read||state.search;renderTree();
@@ -82,6 +83,15 @@ $('title').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();editor.select(0)
 $('title').oninput=()=>{const n=state.note;n.titleDraft=$('title').value;changed(n);};
 $('save').onclick=()=>act(()=>state.note.conflict?resolveConflict(state.note):save(state.note));
 async function resolveConflict(n){const body=sheet('Note changed elsewhere');body.append(el('p','Your local text is safe. Keep both versions by saving your draft as a new note, or cancel and reconcile before retrying.'));try{const latest=await api('note?path='+encodeURIComponent(n.path));const details=el('details'),summary=el('summary','Latest saved version'),pre=el('pre',latest.content);details.append(summary,pre);body.append(details);}catch{body.append(el('p','The original note may have moved or is temporarily unavailable.'));}body.append(button('Save draft as a new note',async()=>{const folder=parent(n.path);for(let i=1;i<=100;i++){const title=n.titleDraft.trim()+' (copy'+(i>1?' '+i:'')+')',path=join(folder,title+'.md');try{await api('note',{path,content:n.content});n.hold?.release();n.hold=null;clearTimeout(n.timer);drafts.delete(n.path);persistDrafts();closeSheet();await refresh();await openNote(path);notice('Draft saved as a separate note. Original unchanged.');return;}catch(e){if(e.status!==409)throw e;}}throw new Error('Choose a different title for your copy.');}),button('Cancel',closeSheet));}
+// Reply: an UNSENT Chats draft with this note (or the selected passage) attached. Synchronous in the
+// click so the shell keeps user activation; the text is already loaded, so nothing is awaited first.
+function replySelection(){
+ const n=state.note;if(!n)return null;
+ if(state.read){const s=window.getSelection(),read=$('read');if(!s||s.isCollapsed||!s.rangeCount)return null;const r=s.getRangeAt(0);if(!read.contains(r.startContainer)||!read.contains(r.endContainer))return null;const before=r.cloneRange();before.selectNodeContents(read);before.setEnd(r.startContainer,r.startOffset);const text=s.toString(),start=before.toString().length;return text.trim()?{text,start,end:start+text.length}:null;}
+ const m=editor.view.state.selection.main;if(m.empty)return null;const text=editor.view.state.sliceDoc(m.from,m.to);return text.trim()?{text,start:m.from,end:m.to}:null;
+}
+$('reply').onpointerdown=e=>e.preventDefault();// keep the selected passage
+$('reply').onclick=()=>{const n=state.note;if(!n)return;let out;try{out=openReply(W,replyPayload({path:n.path,title:n.titleDraft,content:n.content,unsaved:dirty(n)},replySelection()));}catch(e){out={text:e.message||'Could not open Chats. Nothing sent.'};}notice(out.text);};
 $('mode').onclick=()=>{state.read=!state.read;renderNote();if(!state.read)editor.focus();};
 // Reading is deliberately non-editable. Only the book/pencil control changes view.
 
