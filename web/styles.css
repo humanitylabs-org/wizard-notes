@@ -41,3 +41,6 @@ html.own-window{--top-room:calc(max(env(safe-area-inset-top,0px),32px) + 14px)}
 html.own-window #sidebar{padding-top:calc(var(--top-room) + 22px)}
 html.own-window #canvas-tools{padding-top:calc(var(--top-room) + 12px)}
 html.own-window #search{padding-top:var(--top-room)}
+
+/* Reply sits in the note's action pill as a text control; nothing is sent from Notes. */
+#note-controls #reply{border-radius:var(--wz-radius-pill);padding:0 var(--wz-space-3);font-size:var(--wz-text-sm);font-weight:600;color:var(--wz-text-secondary)}
