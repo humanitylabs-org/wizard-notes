@@ -102,6 +102,9 @@ class VaultTests(unittest.TestCase):
         self.v.write('Odd.md','[[../Outside]] [[a:b]] [[.hidden]]',create=True)
         self.v.write('Source.md','[[Target]]',create=True)
         self.assertEqual(self.v.backlinks('Target.md')['notes'],[{'path':'Source.md','title':'Source'}])
+        self.v.write('Mixed.md','[[../Outside]] [[Target]]',create=True)
+        self.assertEqual(self.v.backlinks('Target.md')['notes'],[
+            {'path':'Mixed.md','title':'Mixed'}, {'path':'Source.md','title':'Source'}])
 
     def test_backlinks_target_admission_stays_strict(self):
         for target in ['../Outside.md','.hidden.md','Missing.md']:

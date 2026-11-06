@@ -2,4 +2,4 @@
 
 | Capability | Entry point | Responsibility |
 |---|---|---|
-| Notes backlinks invalid-link isolation | `Vault.backlinks`, `Vault.link_target`, `Vault.resolve` | EXTEND the existing vault resolver: skip rejected outgoing links while retaining requested-note validation. No shared shell capability or UI dependency. |
+| Notes backlinks invalid-link isolation | `Vault.backlinks`, `Vault.link_target`, `Vault.resolve` | Skips rejected outgoing links via the existing resolver; requested-note validation unchanged. No shared shell capability or UI dependency. |
