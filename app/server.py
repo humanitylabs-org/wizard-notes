@@ -194,6 +194,11 @@ class Vault:
         matches = sorted((n for n in notes if n['title'].casefold() == target.casefold()),key=lambda n:n['path'])
         return {'path':matches[0]['path'] if matches else None,'target':target}
 
+    def link_target(self, target, current):
+        # One unusable link elsewhere must not break every note's backlinks.
+        try: return self.resolve(target, current)['path']
+        except Problem: return None
+
     def backlinks(self, path):
         with self.lock:
             self.read(path)
@@ -201,7 +206,7 @@ class Vault:
             linked = []
             for n in notes:
                 if n['path'] == path: continue
-                if any(self.resolve(m.group(1),n['path'])['path'] == path for m in WIKI.finditer(n['content'])):
+                if any(self.link_target(m.group(1),n['path']) == path for m in WIKI.finditer(n['content'])):
                     linked.append({'path':n['path'],'title':n['title']})
             return {'notes':linked}
 
