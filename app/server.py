@@ -110,31 +110,42 @@ class Vault:
             a.rename(b)
             return {'path':target}
 
+    def trash_path(self, *parts):
+        # Hidden trash paths cannot use path(); apply the same symlink/confinement gate here.
+        # This checks the current disk state, not hostile concurrent filesystem changes.
+        path = self.root
+        for part in ('.trash', *parts):
+            path = path / part
+            if path.is_symlink(): raise Problem(400, 'Symbolic links are not allowed.')
+        if not path.resolve().is_relative_to(self.root.resolve()): raise Problem(400, 'Outside vault.')
+        return path
+
     def delete(self, path):
         with self.lock:
             p = self.path(path)
             if not p.exists(): raise Problem(404, 'Not found.')
             if p.is_file(): self.note_path(path)
-            trash = self.root / '.trash'
+            trash = self.trash_path()
             trash.mkdir(exist_ok=True)
             tid = uuid.uuid4().hex
-            slot = trash / tid
+            slot = self.trash_path(tid)
             slot.mkdir()
-            (slot / 'original.json').write_text(json.dumps({'path':path}), encoding='utf-8')
-            p.rename(slot / p.name)
+            self.trash_path(tid, 'original.json').write_text(json.dumps({'path':path}), encoding='utf-8')
+            p.rename(self.trash_path(tid, p.name))
             return {'trashed':path, 'trash_id':tid}
 
     def restore(self, trash_id):
         with self.lock:
             if not isinstance(trash_id, str) or not re.fullmatch('[a-f0-9]{32}', trash_id): raise Problem(400, 'Invalid trash id.')
-            slot = self.root / '.trash' / trash_id
-            if not (slot / 'original.json').is_file(): raise Problem(404, 'Trash entry not found.')
-            original = json.loads((slot / 'original.json').read_text())['path']
+            slot = self.trash_path(trash_id)
+            metadata = self.trash_path(trash_id, 'original.json')
+            if not metadata.is_file(): raise Problem(404, 'Trash entry not found.')
+            original = json.loads(metadata.read_text())['path']
             dest = self.path(original)
             if dest.exists(): raise Problem(409, 'Original name is occupied.')
             if not dest.parent.is_dir(): raise Problem(409, 'Restore the parent folder first.')
-            (slot / dest.name).rename(dest)
-            (slot / 'original.json').unlink(); slot.rmdir()
+            self.trash_path(trash_id, dest.name).rename(dest)
+            metadata.unlink(); slot.rmdir()
             return {'path':original}
 
     def index(self):
