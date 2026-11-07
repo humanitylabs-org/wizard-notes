@@ -53,4 +53,34 @@ class PackageStartup(unittest.TestCase):
                     finally:
                         service.terminate();service.wait(timeout=5)
 
+    def test_vault_folder_and_runtime_ids_are_validated(self):
+        root=Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory(prefix='notes-package-',dir=os.environ.get('TMPDIR')) as data:
+            for extra,needle in [({'NOTES_VAULT_DIR':'relative/vault'},'absolute'),({'NOTES_VAULT_DIR':data+'/missing'},'mount it first'),({'NOTES_UID':'oscar'},'numeric')]:
+                with self.subTest(**extra):
+                    r=subprocess.run([sys.executable,str(root/'start.py')],env={**os.environ,'DATA_DIR':data,'HOST':'127.0.0.1','PORT':'0',**extra},capture_output=True,text=True,timeout=15)
+                    self.assertNotEqual(r.returncode,0);self.assertIn(needle,r.stderr)
+                    self.assertFalse((Path(data)/'vault').exists())
+    def test_existing_vault_folder_is_served(self):
+        with tempfile.TemporaryDirectory(prefix='notes-package-',dir=os.environ.get('TMPDIR')) as data, tempfile.TemporaryDirectory(prefix='notes-obsidian-',dir=os.environ.get('TMPDIR')) as vault:
+            (Path(vault)/'Shopping').mkdir();(Path(vault)/'Shopping/List.md').write_text('# List\n',encoding='utf-8');(Path(vault)/'.obsidian').mkdir()
+            with socket.socket() as probe:
+                probe.bind(('127.0.0.1',0));port=probe.getsockname()[1]
+            env={**os.environ,'DATA_DIR':data,'NOTES_VAULT_DIR':vault,'HOST':'127.0.0.1','PORT':str(port)}
+            with subprocess.Popen([sys.executable,str(Path(__file__).resolve().parents[1]/'start.py')],env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE) as service:
+                try:
+                    deadline=time.monotonic()+15
+                    while time.monotonic()<deadline:
+                        if service.poll() is not None:self.fail(service.stderr.read().decode())
+                        try:
+                            with urlopen('http://127.0.0.1:'+str(port)+'/api/tree',timeout=2) as r:tree=json.loads(r.read());break
+                        except OSError:time.sleep(.05)
+                    else:self.fail('No response')
+                    self.assertEqual([n['path'] for n in tree['children']],['Shopping'])
+                    self.assertEqual(tree['children'][0]['children'][0]['path'],'Shopping/List.md')
+                    self.assertFalse((Path(data)/'vault').exists())
+                    self.assertTrue((Path(data)/'agent.token').exists())
+                finally:
+                    service.terminate();service.wait(timeout=5)
+
 if __name__=='__main__':unittest.main()

@@ -6,6 +6,30 @@ A private-by-default, Obsidian-compatible vault of plain `.md` files. Organise n
 
 The vault is plain `.md` on your disk in the app's data folder: `${APP_DATA_DIR}/data/vault` (mounted as `/data/vault`). It survives uninstall; include this app data folder in your Wizard backups. It is **not** the shared owner Files/media root and the package declares no `shares:` export.
 
+### Use an existing folder (for example a synced Obsidian vault)
+
+By default nothing changes: the app keeps its own vault in its data folder and runs as uid/gid 1000. Two optional environment variables let an owner open a folder that already exists on the host instead:
+
+- `NOTES_VAULT_DIR`: absolute path of the vault inside the container (default `$DATA_DIR/vault`). It must already exist; Notes refuses to start rather than create an empty vault when the mount is missing, and never seeds a welcome note into a folder that already has files. Hidden entries such as `.obsidian` stay invisible to Notes and its agents.
+- `NOTES_UID` / `NOTES_GID`: the numeric ids the server drops to after preparing `/data` (default `1000`). Pick the container ids that own the host folder, so files Notes writes stay owned by the folder's owner and sync tools keep full access:
+  - **Rootless Docker** (container root is the unprivileged host user who runs Docker): `0` and `0`. The server then keeps only the image's `CHOWN`/`SETUID`/`SETGID` capabilities, inside that user's namespace.
+  - **Rootful Docker**: the host owner's ids, for example `1000`/`1000`. Never `0` there, because that is the real host root.
+
+Add both to the app's Runtipi user-config override (`user-config/wizardapps/wizard-notes/docker-compose.yml`). Keep the image's entrypoint and do not set `user:`:
+
+```yaml
+services:
+  wizard-notes:
+    environment:
+      NOTES_UID: '0'          # rootless Docker; use the owner's uid on rootful Docker
+      NOTES_GID: '0'
+      NOTES_VAULT_DIR: /vault
+    volumes:
+      - /home/owner/Obsidian Vault:/vault
+```
+
+The app's own data (`agent.token`) stays in `${APP_DATA_DIR}/data`; its top-level files follow the chosen ids on start. The folder is then shared with whatever else edits it (Obsidian, sync), so other devices may change notes at any time: Notes and its agents read before writing and refuse stale revisions. Trash goes to the folder's `.trash`, which Obsidian also uses. Remove the override to return to the app's own vault, which is kept.
+
 Wizard Notes joins private agents by default, never the main agent. The install sheet offers **Set up private agent** when none exists. The vault is readable/editable through Wizard only by agents you tick; the owner can explicitly tick other agents and revoke access later. The owner view remains available regardless of agent assignment. This is an app/gateway boundary, not protection against an administrator or a process with access to the owner's disk.
 
 The service accepts owner-authenticated, same-host Wizard browser requests. Optional trusted hosts/origins come from the Runtipi form, never baked-in owner addresses. The declared `/gateway/mcp` route is a box-trusted transport behind owner ingress and the agent-scoped Wizard gateway (which does not inject per-app credentials); browser requests cannot use that route. Direct `/mcp` integrations use the app-data `agent.token` bearer credential. Do not expose the container directly to the Internet.
