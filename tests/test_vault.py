@@ -111,6 +111,14 @@ class VaultTests(unittest.TestCase):
             with self.subTest(target=target):
                 self.bad(lambda:self.v.backlinks(target),404 if target=='Missing.md' else 400)
 
+    def test_table_alias_and_unusable_links_keep_backlinks(self):
+        self.v.write('Target.md','target',create=True)
+        # Obsidian escapes the alias pipe inside a table cell; an unusable link elsewhere is skipped.
+        self.v.write('Table.md','| a |\n|---|\n| [[Target\\|alias]] |\n',create=True)
+        self.v.write('Odd.md','[[bad:name]] [[.hidden]]',create=True)
+        self.assertEqual(self.v.resolve('Target\\|alias','Table.md')['path'],'Target.md')
+        self.assertEqual(self.v.backlinks('Target.md')['notes'],[{'path':'Table.md','title':'Table'}])
+        self.assertEqual(self.v.backlinks('Odd.md')['notes'],[])
     def test_today_idempotent_bangkok(self):
         expected=datetime.now(timezone(timedelta(hours=7))).date().isoformat()
         a=self.v.today();b=self.v.today()

@@ -194,8 +194,27 @@ class Vault:
             return {'notes':out[:100]}
 
     def resolve(self, target, current=''):
-        target = target.split('|')[0].split('#')[0].strip()
+        # Obsidian escapes the alias pipe inside tables: [[Note\|alias]].
+        target = re.split(r'\\?\|', target)[0].split('#')[0].strip()
         if target.endswith('.md'): target = target[:-3]
+        if target.startswith(('./', '../')):
+            # Only explicit leading relative segments are interpreted. The ordinary
+            # path gate still checks the suffix, current note and final destination.
+            self.note_path(current)
+            directory = current.split('/')[:-1]
+            while target.startswith(('./', '../')):
+                if target.startswith('./'): target = target[2:]
+                else:
+                    if not directory: raise Problem(400, 'Outside vault.')
+                    directory.pop(); target = target[3:]
+            candidate = '/'.join([*directory, target + '.md'])
+            self.note_path(candidate)
+            match = next((n for n in self.index()[1] if n['path'].casefold() == candidate.casefold()), None)
+            # Do not silently open a same-named note from another directory.
+            # The legacy create sheet creates in the current folder, not this
+            # explicit destination, so missing relative targets must not use it.
+            if not match: raise Problem(404, 'Linked note not found.')
+            return {'path':match['path']}
         self.path(target + '.md')
         notes = self.index()[1]
         local = ((current.rsplit('/',1)[0]+'/') if '/' in current else '') + target + '.md'
