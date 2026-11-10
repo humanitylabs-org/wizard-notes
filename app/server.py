@@ -27,8 +27,17 @@ WIKI = re.compile(r'\[\[([^\]\n]+)\]\]')
 class Problem(Exception):
     def __init__(self, status, message): self.status, self.message = status, message
 
+# Owner feature switches (wizard.app-switches/1, wizard-os docs/APP_SWITCHES.md). Off by default; state lives on the
+# box in DATA/switches.json (outside the vault), so this page and the Tracker's Try it see one state.
+SWITCHES = [
+    {'id': 'friendly-phone', 'name': 'Friendlier phone layout',
+     'description': 'Labelled New note / Today / Search bar, row actions visible on touch screens, one-tap delete with Undo, one flat note menu and a desktop empty state.',
+     'default': False, 'issues': ['humanitylabs-org/wizard-notes#19']},
+]
+
 class Vault:
     def __init__(self, data, root=None):
+        self.switch_file = Path(data) / 'switches.json'
         # root: an existing folder chosen by the owner (NOTES_VAULT_DIR); default is the app-owned data/vault.
         self.root = Path(root) if root else Path(data) / 'vault'
         if root and not self.root.is_dir(): raise SystemExit(f'NOTES_VAULT_DIR {root} is not a folder; mount it first.')
@@ -208,6 +217,28 @@ class Vault:
         matches = sorted((n for n in notes if n['title'].casefold() == target.casefold()),key=lambda n:n['path'])
         return {'path':matches[0]['path'] if matches else None,'target':target}
 
+    def _saved_switches(self):
+        try: saved = json.loads(self.switch_file.read_text(encoding='utf-8'))
+        except (OSError, ValueError): return {}
+        return saved if isinstance(saved, dict) else {}
+
+    def switches(self):
+        saved = self._saved_switches()
+        return {'contract':'wizard.app-switches/1','switches':[
+            dict(sw, on=saved[sw['id']] if isinstance(saved.get(sw['id']), bool) else sw['default']) for sw in SWITCHES]}
+
+    def set_switch(self, switch_id, on):
+        if not isinstance(switch_id, str) or not isinstance(on, bool): raise Problem(400, 'Send {"id": "...", "on": true|false}.')
+        known = {sw['id'] for sw in SWITCHES}
+        if switch_id not in known: raise Problem(404, 'No such switch.')
+        with self.lock:
+            saved = {k:v for k,v in self._saved_switches().items() if k in known and isinstance(v, bool)}
+            saved[switch_id] = on
+            temp = self.switch_file.with_name('.switches.json.tmp')
+            temp.write_text(json.dumps(saved), encoding='utf-8')
+            os.replace(temp, self.switch_file)
+        return self.switches()
+
     def link_target(self, target, current):
         # One unusable link elsewhere must not break every note's backlinks.
         try: return self.resolve(target, current)['path']
@@ -304,6 +335,7 @@ class Handler(BaseHTTPRequestHandler):
             if path == '/healthz': return self.send(200,{'ok':True,'app':'notes','version':VERSION})
             actions = {'/api/tree':'tree','/api/note':'read','/api/search':'search','/api/backlinks':'backlinks','/api/resolve':'resolve'}
             if path in actions: return self.send(200,service(actions[path],args))
+            if path == '/api/switches': return self.send(200,VAULT.switches())
             if path == '/openapi.json': return self.send(200,(ROOT/'openapi.json').read_bytes())
             name = 'index.html' if path == '/' else path.lstrip('/')
             base = ROOT/'web'; file = (base/name).resolve()
@@ -332,6 +364,11 @@ class Handler(BaseHTTPRequestHandler):
                 if MCP_TOKEN and not internal and not secrets.compare_digest(self.headers.get('Authorization',''), 'Bearer '+MCP_TOKEN):
                     raise Problem(401,'MCP authorization required.')
                 out = rpc(body); return self.send(202 if out is None else 200,out)
+            if path == '/api/switches' and self.command == 'POST':
+                # Owner page or the App Manager on the owner's behalf: the box Origin plus X-Wizard-Switch: 1.
+                if self.headers.get('X-Wizard-Switch') != '1' or not self.headers.get('Origin'): raise Problem(403,'Only this Wizard\u2019s owner can switch Notes.')
+                if not isinstance(body,dict): raise Problem(400,'Send {"id": "...", "on": true|false}.')
+                return self.send(200,VAULT.set_switch(body.get('id'),body.get('on')))
             if path == '/api/note':
                 args = dict(body)
                 args['create'] = self.command == 'POST'
