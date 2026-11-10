@@ -1,4 +1,4 @@
-import {createLiveEditor} from './vendor/live-preview.js';
+import {createLiveEditor,tableBlocks} from './vendor/live-preview.js';
 const $=id=>document.getElementById(id), W=window.WizardApp;
 // Opened from the home screen (not inside the Wizard shell): leave room under the phone's status bar.
 if(window.top===window&&matchMedia('(pointer: coarse),(display-mode: standalone),(display-mode: fullscreen)').matches)document.documentElement.classList.add('own-window');
@@ -11,7 +11,16 @@ const state={folder:'',note:null,tree:[],search:false,read:false,drawer:false,tr
 const phone=()=>matchMedia('(max-width:760px)').matches;
 const collator=new Intl.Collator(undefined,{numeric:true,sensitivity:'base'});
 const drafts=new Map(); let sheetBack=null,searchTimer,searchSeq=0,noticeTimer,navSeq=0;
-const editor=createLiveEditor($('source'),{transform:transformText,continueList,onWiki:target=>act(()=>wiki(target)),onChange:content=>{const n=state.note;if(!n)return;n.content=content;changed(n);},keepCaretVisible:rect=>keepCaretClear(rect)});
+const editor=createLiveEditor($('source'),{transform:transformText,continueList,onWiki:target=>act(()=>wiki(target)),onLink:href=>openLink(href),renderTable:t=>renderTable(t),switchOn:()=>switchOn('tables-and-links'),onChange:content=>{const n=state.note;if(!n)return;n.content=content;changed(n);},keepCaretVisible:rect=>keepCaretClear(rect)});
+// Owner feature switches (GET/POST api/switches, wizard.app-switches/1). Off by default; the state lives on the box,
+// so the Tracker's Try it and this page agree. Re-read when the page becomes visible.
+let switches=[];
+const switchOn=id=>!!switches.find(x=>x.id===id)?.on, rich=()=>switchOn('tables-and-links');
+const SW_HEAD={'X-Wizard-Switch':'1'};
+function switchesChanged(){editor.redraw();if(state.note&&state.read)markdown(state.note.content,$('read'));}
+async function loadSwitches(){const was=JSON.stringify(switches);try{const r=await fetch('api/switches',{cache:'no-store',headers:SW_HEAD});if(r.ok)switches=(await r.json()).switches||[];}catch{}if(was!==JSON.stringify(switches))switchesChanged();}
+async function toggleSwitch(id){const r=await fetch('api/switches',{method:'POST',headers:{...SW_HEAD,'Content-Type':'application/json'},body:JSON.stringify({id,on:!switchOn(id)})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'Could not change the switch.');switches=d.switches||switches;switchesChanged();}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadSwitches();});
 // Keep the caret line clear of the floating formatting bar and the keyboard, with a line of breathing room.
 const CARET_ROOM=56;
 function keepCaretClear(rect){
@@ -100,7 +109,8 @@ async function today(){const n=await api('today',{});await refresh();await openN
 $('add').onclick=()=>act(()=>newNote());$('add-folder').onclick=()=>newFolder();
 $('sort').onclick=()=>{state.sort=state.sort==='name'?'modified':'name';store('notes.sort',state.sort);renderTree();};
 $('collapse').onclick=()=>{state.expanded=state.expanded.size?new Set():new Set(allEntries().filter(n=>n.type==='folder').map(n=>n.path));persistExpanded();renderTree();};
-$('vault-menu').onclick=()=>{const b=sheet('Vault');b.append(el('p','Plain Markdown files. '+$('vault-count').textContent),button('Today',()=>{closeSheet();return today();}),button('Search',()=>{closeSheet();openSearch();}),button('Hide explorer',()=>{closeSheet();if(phone())showDrawer(false);else{state.sidebarHidden=true;store('notes.sidebarHidden',true);renderViews();}}));};
+$('vault-menu').onclick=()=>{const b=sheet('Vault');b.append(el('p','Plain Markdown files. '+$('vault-count').textContent),button('Today',()=>{closeSheet();return today();}),button('Search',()=>{closeSheet();openSearch();}),button('Hide explorer',()=>{closeSheet();if(phone())showDrawer(false);else{state.sidebarHidden=true;store('notes.sidebarHidden',true);renderViews();}}));
+ if(switches.length){b.append(el('h3','Try changes'));for(const x of switches){const t=button((x.on?'On: ':'Off: ')+x.name,()=>act(async()=>{await toggleSwitch(x.id);closeSheet();}));t.setAttribute('role','switch');t.setAttribute('aria-checked',String(!!x.on));t.title=x.description||'';b.append(t);}}};
 function goBack(){
  if($('sheet').open){closeSheet();return true;}
  if(state.search){state.search=false;renderViews();return true;}
@@ -169,14 +179,24 @@ document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['k','p'].inc
 async function wiki(target){const result=await api('resolve?target='+encodeURIComponent(target)+'&current='+encodeURIComponent(state.note.path));if(result.path)return openNote(result.path,false,true);const name=base(result.target),folder=parent(state.note.path);const b=sheet('Create '+name+'?');b.append(el('p','This linked note does not exist yet. Create it in '+(folder||'Vault')+'?'),button('Create note',async()=>{const path=join(folder,name+'.md');await api('note',{path,content:''});closeSheet();await refresh();await openNote(path,true,true);}));}
 // Domain Markdown: core chat-kit.md is shell-only, not exposed by WizardApp.
 // Build DOM from text; raw HTML is never interpreted. Links use a protocol allowlist.
-function inline(text,dest){const rx=/(`[^`]+`|\[\[[^\]\n]+\]\]|\[[^\]\n]+\]\([^\s)]+\)|\*\*[^*]+\*\*|__[^_]+__|\*[^*]+\*|_[^_]+_)/g;let start=0,m;while((m=rx.exec(text))){dest.append(document.createTextNode(text.slice(start,m.index)));const t=m[0];if(t.startsWith('[[')){const bits=t.slice(2,-2).split('|');const b=button(bits[1]||bits[0],()=>wiki(bits[0]));b.className='wiki';dest.append(b);}else if(t.startsWith('`'))dest.append(el('code',t.slice(1,-1)));else if(t.startsWith('[')){const link=t.match(/^\[([^\]]+)\]\(([^)]+)\)$/);let url;try{url=new URL(link[2],location.href);}catch{}if(url&&['https:','http:','mailto:'].includes(url.protocol)){const a=el('a',link[1]);a.href=url.href;a.rel='noopener noreferrer';dest.append(a);}else dest.append(document.createTextNode(t));}else{const strong=t.startsWith('**')||t.startsWith('__'),n=el(strong?'strong':'em');n.textContent=t.slice(strong?2:1,strong?-2:-1);dest.append(n);}start=rx.lastIndex;}dest.append(document.createTextNode(text.slice(start)));}
+function inline(text,dest){const rx=/(`[^`]+`|\[\[[^\]\n]+\]\]|\[[^\]\n]+\]\([^\s)]+\)|\*\*[^*]+\*\*|__[^_]+__|\*[^*]+\*|_[^_]+_)/g;let start=0,m;while((m=rx.exec(text))){dest.append(document.createTextNode(text.slice(start,m.index)));const t=m[0];if(t.startsWith('[[')){const bits=t.slice(2,-2).split(rich()?/\\?\|/:'|');const b=button(bits[1]||bits[0],()=>wiki(bits[0]));b.className='wiki';dest.append(b);}else if(t.startsWith('`'))dest.append(el('code',t.slice(1,-1)));else if(t.startsWith('[')&&!rich()){const link=t.match(/^\[([^\]]+)\]\(([^)]+)\)$/);let url;try{url=new URL(link[2],location.href);}catch{}if(url&&['https:','http:','mailto:'].includes(url.protocol)){const a=el('a',link[1]);a.href=url.href;a.rel='noopener noreferrer';dest.append(a);}else dest.append(document.createTextNode(t));}else if(t.startsWith('[')){const link=t.match(/^\[([^\]]+)\]\(([^)]+)\)$/),note=noteLink(link[2]),url=safeUrl(link[2]);if(note){const b=button(link[1],()=>wiki(note));b.className='wiki';dest.append(b);}else if(url){const a=el('a',link[1]);a.href=url.href;a.target='_blank';a.rel='noopener noreferrer';dest.append(a);}else dest.append(document.createTextNode(t));}else{const strong=t.startsWith('**')||t.startsWith('__'),n=el(strong?'strong':'em');n.textContent=t.slice(strong?2:1,strong?-2:-1);dest.append(n);}start=rx.lastIndex;}dest.append(document.createTextNode(text.slice(start)));}
+// Links leave Notes in a new tab (allowlisted protocols only); a relative link to a .md file is a note link.
+function safeUrl(href){if(!/^(https?:|mailto:)/i.test(href))return null;try{return new URL(href);}catch{return null;}}
+function noteLink(href){if(/^[a-z][a-z0-9+.-]*:/i.test(href)||!/\.md(#.*)?$/i.test(href))return null;try{return decodeURIComponent(href.replace(/#.*$/,'')).replace(/\.md$/i,'');}catch{return null;}}
+function openLink(href){const note=noteLink(href);if(note)return act(()=>wiki(note));const url=safeUrl(href);if(url)window.open(url.href,'_blank','noopener,noreferrer');}
+// GFM table from the shared Lezer parse (tableBlocks); cells keep the same inline rendering as text.
+function renderTable(t){const wrap=el('div',undefined,'md-table-wrap'),table=el('table',undefined,'md-table');let body;
+ for(const row of t.rows){const tr=el('tr');for(const [i,c] of row.cells.entries()){const cell=el(row.header?'th':'td');cell.dataset.from=c.from;if(t.align[i])cell.style.textAlign=t.align[i];inline(c.text,cell);tr.append(cell);}
+  if(row.header){const head=el('thead');head.append(tr);table.append(head);}else{if(!body){body=el('tbody');table.append(body);}body.append(tr);}}
+ wrap.append(table);return wrap;}
 function markdown(text,dest){
- dest.replaceChildren();const lines=text.replace(/\r\n?/g,'\n').split('\n'),note=state.note;let code=null,stack=[],paragraph=null;
+ dest.replaceChildren();const normal=text.replace(/\r\n?/g,'\n'),lines=normal.split('\n'),note=state.note,tables=new Map(rich()?tableBlocks(normal).map(t=>[t.startLine,t]):[]);let code=null,stack=[],paragraph=null;
  const reset=()=>{stack=[];paragraph=null;};
  for(let index=0;index<lines.length;index++){
   const line=lines[index];
   if(/^\s*```/.test(line)){reset();if(code)code=null;else{const pre=el('pre');code=el('code','');pre.append(code);dest.append(pre);}continue;}
   if(code){code.textContent+=line+'\n';continue;}
+  const table=tables.get(index);if(table){reset();dest.append(renderTable(table));index=table.endLine;continue;}
   if(!line.trim()){reset();continue;}
   const heading=line.match(/^(#{1,6})\s+(.+)$/),li=line.match(/^(\s*)([-*+] |\d+[.)] )(.+)$/),quote=line.match(/^>\s?(.*)$/);
   if(heading){reset();const h=el('h'+heading[1].length);inline(heading[2],h);dest.append(h);}
@@ -238,7 +258,7 @@ function viewportChanged(){const v=window.visualViewport;const inset=v?Math.max(
 window.addEventListener('resize',viewportChanged);window.visualViewport?.addEventListener('resize',viewportChanged);window.visualViewport?.addEventListener('scroll',viewportChanged);
 // No repeated app title/header tools: every action remains in the floating pill.
 W.titlebar?.set?.([]).catch(()=>{});
-await refresh();renderViews();
+await loadSwitches();await refresh();renderViews();
 const recovered=stored('notes.drafts',[]);
 for(const raw of recovered){if(typeof raw.path!=='string'||typeof raw.content!=='string')continue;const n={...raw,hold:W.update.hold('Recovered unsaved note'),timer:null,busy:null,error:'Recovered local draft. Retry save after checking for changes.'};drafts.set(n.path,n);}
 if(drafts.size){await openNote(drafts.keys().next().value);notice('Recovered unsaved draft. Your local text is retained; retry save when ready.');}

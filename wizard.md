@@ -35,6 +35,10 @@ system: false
 uses: []
 needs: []
 health: /healthz
+# Owner feature switches (wizard.app-switches/1, wizard-os docs/APP_SWITCHES.md), listed and flipped by the App Manager.
+switches:
+  contract: wizard.app-switches/1
+  path: /api/switches
 ---
 # Wizard Notes
 Plain Markdown is the source of truth. API, MCP and view share one vault service.

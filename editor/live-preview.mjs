@@ -1,9 +1,9 @@
-import {EditorState, EditorSelection, StateEffect, Transaction} from '@codemirror/state';
+import {EditorState, EditorSelection, StateEffect, StateField, Transaction} from '@codemirror/state';
 import {EditorView, Decoration, ViewPlugin, WidgetType, keymap, drawSelection, placeholder} from '@codemirror/view';
 import {history, undo, redo, defaultKeymap, historyKeymap, isolateHistory} from '@codemirror/commands';
-import {RawMarkdown, previewModel, autocapEdits} from './live-preview-model.mjs';
+import {RawMarkdown, previewModel, liveTables, tableBlocks, autocapEdits} from './live-preview-model.mjs';
 
-export {EditorView}; // Standard CM DOM lookup API; useful to host integrations and browser QA.
+export {EditorView, tableBlocks}; // Standard CM DOM lookup API; useful to host integrations and browser QA.
 const refresh = StateEffect.define();
 class PreviewWidget extends WidgetType {
   constructor(item, options) { super(); this.item=item; this.options=options; }
@@ -28,6 +28,52 @@ class PreviewWidget extends WidgetType {
   ignoreEvent() { return true; }
 }
 
+// A rendered GFM table. The host draws it with the same renderer as Reading (inline formatting, links,
+// wiki links), so both views agree. Tapping a cell (not a link) puts the caret in that cell's source;
+// the table then shows as raw, editable Markdown until the caret leaves it.
+class TableWidget extends WidgetType {
+  constructor(table, options) { super(); this.table=table; this.options=options; this.key=JSON.stringify([table.align,table.rows]); }
+  eq(other) { return this.key === other.key; }
+  toDOM(view) {
+    const wrap=this.options.renderTable ? this.options.renderTable(this.table) : fallbackTable(this.table);
+    wrap.classList.add('cm-lp-table');
+    wrap.addEventListener('mousedown',e=>{
+      if(e.button!==0||e.target.closest('a,button,input'))return;
+      e.preventDefault();
+      const cell=e.target.closest('[data-from]'),at=view.posAtDOM(wrap)+(cell?Number(cell.dataset.from):0);
+      view.dispatch({selection:EditorSelection.cursor(Math.min(at,view.state.doc.length)),scrollIntoView:true});view.focus();
+    });
+    return wrap;
+  }
+  ignoreEvent() { return true; }
+}
+function fallbackTable(t) {
+  const wrap=document.createElement('div'),table=document.createElement('table');
+  for(const r of t.rows){const tr=table.insertRow();r.cells.forEach((c,i)=>{const td=document.createElement(r.header?'th':'td');td.textContent=c.text;td.dataset.from=c.from;if(t.align[i])td.style.textAlign=t.align[i];tr.append(td);});}
+  wrap.append(table);return wrap;
+}
+const focusEffect = StateEffect.define();
+const focused = StateField.define({create:()=>false,update(v,tr){for(const e of tr.effects)if(e.is(focusEffect))v=e.value;return v;}});
+// Block widgets that span lines must come from state, not a view plugin (CodeMirror needs them for
+// height maps before layout). During composition existing decorations are only mapped.
+// options.switchOn(): the owner switch tables-and-links (issue 17). Off, no table widgets and no link collapse.
+const switchOn=options=>!!options.switchOn?.();
+function tableDecorations(options) {
+  const build=state=>{
+    if(!switchOn(options))return Decoration.none;
+    const active=state.field(focused)?state.selection.ranges.map(r=>({from:r.from,to:r.to})):[];
+    return Decoration.set(liveTables(state.doc.toString(),active).filter(t=>!t.active).map(t=>Decoration.replace({block:true,widget:new TableWidget(t,options)}).range(t.from,t.to)));
+  };
+  return [focused,EditorView.focusChangeEffect.of((_s,focusing)=>focusEffect.of(focusing)),StateField.define({
+    create:build,
+    update(decos,tr){
+      if(tr.docChanged&&tr.isUserEvent('input.type.compose'))return decos.map(tr.changes);
+      return tr.docChanged||tr.selection||tr.effects.some(e=>e.is(focusEffect)||e.is(refresh))?build(tr.state):decos;
+    },
+    provide:f=>EditorView.decorations.from(f)
+  })];
+}
+
 function liveDecorations(options) {
   return ViewPlugin.fromClass(class {
     constructor(view) { this.decorations=this.build(view); }
@@ -39,19 +85,21 @@ function liveDecorations(options) {
     }
     build(view) {
       const active=view.hasFocus ? view.state.selection.ranges.map(r=>({from:r.from,to:r.to})) : [];
-      const model=previewModel(view.state.doc.toString(),active), ranges=[];
+      const model=previewModel(view.state.doc.toString(),active,{on:switchOn(options)}), ranges=[];
       for (const line of model.lines) {
         const classes=[...line.classes,...(line.active?['cm-lp-active']:[]),...(line.bullet?['cm-lp-bullet']:[])];
         const attributes={class:classes.join(' ')};
         if (line.indent!==undefined && line.bullet) attributes.style=`--lp-indent:${Math.floor(line.indent/2)*22}px`;
         if (classes.length) ranges.push(Decoration.line({attributes}).range(line.from));
       }
-      for(const m of model.marks) if(m.to>m.from) ranges.push(Decoration.mark({class:m.class}).range(m.from,m.to));
+      for(const m of model.marks) if(m.to>m.from) ranges.push(Decoration.mark({class:m.class,...(m.href?{attributes:{'data-href':m.href}}:{})}).range(m.from,m.to));
       for(const r of model.replacements) ranges.push(Decoration.replace({widget:r.kind==='hide'?undefined:new PreviewWidget(r,options)}).range(r.from,r.to));
       return Decoration.set(ranges,true);
     }
   },{decorations:v=>v.decorations});
 }
+
+const linkAt=event=>!event.shiftKey&&!event.altKey&&event.target.closest?.('.cm-lp-link[data-href]');
 
 export function createLiveEditor(parent, options) {
   let raw=new RawMarkdown(''), view, knownRaw=new Map(), settleTimer;
@@ -98,7 +146,7 @@ export function createLiveEditor(parent, options) {
   const extensions=[
     history(),drawSelection(),EditorView.lineWrapping,placeholder('Start writing…'),
     EditorView.contentAttributes.of({'aria-label':'Live Preview editor',spellcheck:'true',autocorrect:'on',autocapitalize:'sentences'}),
-    liveDecorations(options),
+    liveDecorations(options),tableDecorations(options),
     keymap.of([
       {key:'Tab',run:()=>format('indent'),shift:()=>format('outdent')},
       {key:'Enter',run:enter},{key:'Mod-b',run:()=>format('bold')},{key:'Mod-i',run:()=>format('italic')},
@@ -109,7 +157,10 @@ export function createLiveEditor(parent, options) {
         if(!event.isComposing && !view.composing && event.cancelable && ['insertParagraph','insertLineBreak'].includes(event.inputType) && enter()) {event.preventDefault();return true;}
         return false;
       },
-      compositionend() {settleComposition();return false;}
+      compositionend() {settleComposition();return false;},
+      // A collapsed [text](url) opens its target on click, like Obsidian; its source shows on the caret line.
+      mousedown(event) {if(event.button!==0||!linkAt(event))return false;event.preventDefault();return true;},
+      click(event) {const link=linkAt(event);if(!link||event.button!==0)return false;event.preventDefault();options.onLink?.(link.dataset.href);return true;}
     }),
     // Host-supplied caret guard: after typing or moving the caret, let the host keep it clear of
     // overlays CodeMirror cannot see (the floating formatting bar, the on-screen keyboard).
@@ -148,6 +199,7 @@ export function createLiveEditor(parent, options) {
     focus(){view.focus();},
     select(from,to=from){view.dispatch({selection:EditorSelection.range(from,to),effects:refresh.of(null)});view.focus();},
     replace(result){return apply(result);},
+    redraw(){view.dispatch({effects:refresh.of(null)});},
     destroy(){clearTimeout(settleTimer);view.destroy();}
   };
 }
