@@ -239,6 +239,29 @@ class HttpTests(unittest.TestCase):
             self.assertEqual(self.req('/mcp',rpc,headers={'Host':'vault.example.invalid'})[0],200)
             self.assertEqual(self.req('/api/note',{'path':'Denied.md','content':'x'},headers={'Host':'vault.example.invalid','Origin':'https://foreign.example.invalid'})[0],403)
 
+    def test_switches_off_by_default_owner_flip_persists(self):
+        # wizard.app-switches/1 (issue 19): off by default, box state, the Origin plus X-Wizard-Switch: 1 to flip.
+        code,doc=self.req('/api/switches')
+        self.assertEqual(code,200);self.assertEqual(doc['contract'],'wizard.app-switches/1')
+        row=next(x for x in doc['switches'] if x['id']=='friendly-phone')
+        self.assertEqual((row['on'],row['default'],row['issues']),(False,False,['humanitylabs-org/wizard-notes#19']))
+        origin={'Origin':'http://127.0.0.1:'+str(self.port)}
+        flip={'id':'friendly-phone','on':True}
+        self.assertEqual(self.req('/api/switches',flip,headers=origin)[0],403)
+        self.assertEqual(self.req('/api/switches',flip,headers={'X-Wizard-Switch':'1'})[0],403)
+        self.assertEqual(self.req('/api/switches',flip,headers={'X-Wizard-Switch':'1','Origin':'https://evil.test'})[0],403)
+        sw={**origin,'X-Wizard-Switch':'1'}
+        self.assertEqual(self.req('/api/switches',{'id':'nope','on':True},headers=sw)[0],404)
+        self.assertEqual(self.req('/api/switches',{'id':'friendly-phone','on':'yes'},headers=sw)[0],400)
+        on=lambda doc:next(x for x in doc['switches'] if x['id']=='friendly-phone')['on']
+        try:
+            code,doc=self.req('/api/switches',flip,headers=sw)
+            self.assertEqual(code,200);self.assertTrue(on(doc))
+            self.assertTrue(on(s.Vault(self.temp.name).switches()))
+            self.assertFalse((s.VAULT.root/'switches.json').exists(),'switch state stays outside the vault')
+        finally:self.req('/api/switches',{'id':'friendly-phone','on':False},headers=sw)
+        self.assertFalse(on(self.req('/api/switches')[1]))
+
     def test_mcp_direct_credential_and_gateway_route(self):
         rpc={'jsonrpc':'2.0','id':1,'method':'tools/list'}
         with patch.object(s,'MCP_TOKEN','fixture-not-a-credential'):

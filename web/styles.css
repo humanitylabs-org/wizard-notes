@@ -41,3 +41,27 @@ html.own-window{--top-room:calc(max(env(safe-area-inset-top,0px),32px) + 14px)}
 html.own-window #sidebar{padding-top:calc(var(--top-room) + 22px)}
 html.own-window #canvas-tools{padding-top:calc(var(--top-room) + 12px)}
 html.own-window #search{padding-top:var(--top-room)}
+
+/* Switch friendly-phone (issue 19), off by default: html.friendly. Bottom bar: three labelled cells (New note, Today,
+   Search); New folder, Sort and Expand/Collapse move to the gear sheet. Row actions visible on touch; Undo in the toast. */
+.bar-label{display:none}
+html.friendly .vault-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:2px 0 12px}
+html.friendly .vault-tools [id=add-folder],html.friendly .vault-tools #sort,html.friendly .vault-tools #collapse{display:none}
+html.friendly .vault-tools button{display:flex;align-items:center;justify-content:center;gap:6px;min-width:0;padding:8px 6px;color:var(--ink);background:var(--fill);border-radius:999px;font-size:var(--wz-text-sm,.8125rem);font-weight:600;white-space:nowrap}
+html.friendly .vault-tools button svg.icon{width:19px;height:19px;margin:0;flex:none}
+html.friendly .bar-label{display:inline;overflow:hidden;text-overflow:ellipsis}
+html.friendly .vault-tools [id=add]{background:var(--fill-2)}
+#empty{max-width:420px;margin:18vh auto 0;text-align:center;color:var(--ink-2)}
+#empty p{margin:0 0 16px;font-size:var(--wz-text-md,.875rem)}
+.empty-actions{display:flex;justify-content:center;gap:8px}
+.empty-actions button{padding:8px 18px;border-radius:999px;background:var(--fill);color:var(--ink);font-weight:600}
+.empty-actions .primary{background:var(--fill-2)}
+#notice{display:flex;align-items:center;gap:12px}
+#notice .notice-act{min-height:36px;min-width:0;padding:4px 12px;border-radius:999px;background:var(--fill-2);color:var(--ink);font-weight:650}
+html.friendly dialog:focus{outline:none}
+@media (pointer:coarse){#notice .notice-act{min-height:44px}html.friendly .entry .more{display:block!important;opacity:.6;width:44px;min-width:44px}}
+@media(max-width:760px){#empty{display:none}}
+/* Keep the toast above the explorer's bottom bar. */
+html.friendly .no-note #notice,html.friendly .drawer-open #notice{bottom:136px}
+/* The 292px desktop explorer fits all three words when only New note keeps its icon. */
+@media(min-width:761px){html.friendly .vault-tools{grid-template-columns:auto auto auto}html.friendly .vault-tools button{padding:8px 10px}html.friendly .vault-tools button:not([id=add]) svg.icon{display:none}}
