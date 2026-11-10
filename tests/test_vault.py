@@ -262,6 +262,11 @@ class HttpTests(unittest.TestCase):
         finally:self.req('/api/switches',{'id':'friendly-phone','on':False},headers=sw)
         self.assertFalse(on(self.req('/api/switches')[1]))
 
+    def test_reply_draft_switch_listed_off_with_its_issue(self):
+        # Issue 20: Reply ships off by default, linked to its issue so the Tracker's Try it can flip it.
+        row=next(x for x in self.req('/api/switches')[1]['switches'] if x['id']=='reply-draft')
+        self.assertEqual((row['on'],row['default'],row['issues']),(False,False,['humanitylabs-org/wizard-notes#20']))
+
     def test_mcp_direct_credential_and_gateway_route(self):
         rpc={'jsonrpc':'2.0','id':1,'method':'tools/list'}
         with patch.object(s,'MCP_TOKEN','fixture-not-a-credential'):

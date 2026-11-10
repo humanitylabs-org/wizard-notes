@@ -33,6 +33,9 @@ SWITCHES = [
     {'id': 'friendly-phone', 'name': 'Friendlier phone layout',
      'description': 'Labelled New note / Today / Search bar, row actions visible on touch screens, one-tap delete with Undo, one flat note menu and a desktop empty state.',
      'default': False, 'issues': ['humanitylabs-org/wizard-notes#19']},
+    {'id': 'reply-draft', 'name': 'Reply to a note in Chats',
+     'description': 'A Reply control on an open note opens an unsent Chats draft with the note (or the selected passage) attached. Nothing is sent.',
+     'default': False, 'issues': ['humanitylabs-org/wizard-notes#20']},
 ]
 
 class Vault:
