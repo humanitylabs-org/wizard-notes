@@ -79,6 +79,3 @@ html.friendly dialog:focus{outline:none}
 html.friendly .no-note #notice,html.friendly .drawer-open #notice{bottom:136px}
 /* The 292px desktop explorer fits all three words when only New note keeps its icon. */
 @media(min-width:761px){html.friendly .vault-tools{grid-template-columns:auto auto auto}html.friendly .vault-tools button{padding:8px 10px}html.friendly .vault-tools button:not([id=add]) svg.icon{display:none}}
-
-/* Reply (switch reply-draft) sits in the note's action pill as a text control; nothing is sent from Notes. */
-#note-controls #reply{border-radius:var(--wz-radius-pill);padding:0 var(--wz-space-3);font-size:var(--wz-text-sm);font-weight:600;color:var(--wz-text-secondary)}
