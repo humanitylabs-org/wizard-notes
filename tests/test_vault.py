@@ -191,6 +191,14 @@ class VaultTests(unittest.TestCase):
             with self.subTest(target=target):
                 self.bad(lambda:self.v.backlinks(target),404 if target=='Missing.md' else 400)
 
+    def test_table_alias_and_unusable_links_keep_backlinks(self):
+        self.v.write('Target.md','target',create=True)
+        # Obsidian escapes the alias pipe inside a table cell; an unusable link elsewhere is skipped.
+        self.v.write('Table.md','| a |\n|---|\n| [[Target\\|alias]] |\n',create=True)
+        self.v.write('Odd.md','[[bad:name]] [[.hidden]]',create=True)
+        self.assertEqual(self.v.resolve('Target\\|alias','Table.md')['path'],'Target.md')
+        self.assertEqual(self.v.backlinks('Target.md')['notes'],[{'path':'Table.md','title':'Table'}])
+        self.assertEqual(self.v.backlinks('Odd.md')['notes'],[])
     def test_today_idempotent_bangkok(self):
         expected=datetime.now(timezone(timedelta(hours=7))).date().isoformat()
         a=self.v.today();b=self.v.today()
@@ -275,6 +283,28 @@ class HttpTests(unittest.TestCase):
             self.assertEqual(self.req('/gateway/mcp',rpc,headers={'Host':s.INTERNAL_HOST})[0],200)
             self.assertEqual(self.req('/gateway/mcp',rpc,headers={'Host':s.INTERNAL_HOST,'Origin':'https://foreign.example.invalid'})[0],403)
             self.assertEqual(self.req('/gateway/mcp',rpc,headers={'Origin':'http://127.0.0.1:'+str(self.port)})[0],401)
+
+    def test_switches_off_by_default_owner_flip_persists(self):
+        # wizard.app-switches/1 (issue 17): off by default, box state, the Origin plus X-Wizard-Switch: 1 to flip.
+        code,doc=self.req('/api/switches')
+        self.assertEqual(code,200);self.assertEqual(doc['contract'],'wizard.app-switches/1')
+        row=next(x for x in doc['switches'] if x['id']=='tables-and-links')
+        self.assertEqual((row['on'],row['default'],row['issues']),(False,False,['humanitylabs-org/wizard-notes#17']))
+        origin={'Origin':'http://127.0.0.1:'+str(self.port)}
+        flip={'id':'tables-and-links','on':True}
+        self.assertEqual(self.req('/api/switches',flip,headers=origin)[0],403)
+        self.assertEqual(self.req('/api/switches',flip,headers={'X-Wizard-Switch':'1'})[0],403)
+        self.assertEqual(self.req('/api/switches',flip,headers={'X-Wizard-Switch':'1','Origin':'https://evil.test'})[0],403)
+        sw={**origin,'X-Wizard-Switch':'1'}
+        self.assertEqual(self.req('/api/switches',{'id':'nope','on':True},headers=sw)[0],404)
+        self.assertEqual(self.req('/api/switches',{'id':'tables-and-links','on':'yes'},headers=sw)[0],400)
+        try:
+            code,doc=self.req('/api/switches',flip,headers=sw)
+            self.assertEqual(code,200);self.assertTrue(doc['switches'][0]['on'])
+            self.assertTrue(s.Vault(self.temp.name).switches()['switches'][0]['on'])
+            self.assertFalse((s.VAULT.root/'switches.json').exists(),'switch state stays outside the vault')
+        finally:self.req('/api/switches',{'id':'tables-and-links','on':False},headers=sw)
+        self.assertFalse(self.req('/api/switches')[1]['switches'][0]['on'])
 
     def test_mcp(self):
         def rpc(method,params={}):return self.req('/mcp',{'jsonrpc':'2.0','id':1,'method':method,'params':params})[1]['result']

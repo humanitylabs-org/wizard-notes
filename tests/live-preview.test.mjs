@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {RawMarkdown,normalize,previewModel,autocapEdits} from '../editor/live-preview-model.mjs';
+import {RawMarkdown,normalize,previewModel,autocapEdits,tableBlocks,liveTables} from '../editor/live-preview-model.mjs';
 const model=(t,pos)=>previewModel(t,pos===undefined?[]:[{from:pos,to:pos}]);
 test('headings render while active line reveals only its own marks',()=>{const t='# Heading\n## Second\nPlain';const m=model(t,12);assert.ok(m.lines[0].classes.includes('cm-lp-h1'));assert.ok(m.lines[1].classes.includes('cm-lp-h2'));assert.ok(m.replacements.some(r=>r.from===0&&r.to===2));assert.ok(!m.replacements.some(r=>r.from===10));assert.ok(m.lines[1].active);});
 test('emphasis, nested emphasis, strike and inline code are decorated not serialized',()=>{const t='**bold and *italic*** ~~done~~ `code`';const m=model(t);assert.ok(m.marks.some(r=>r.class==='cm-lp-strong'));assert.ok(m.marks.some(r=>r.class==='cm-lp-em'));assert.ok(m.marks.some(r=>r.class==='cm-lp-inline-code'));assert.ok(m.marks.some(r=>r.class==='cm-lp-strike'));assert.equal(model(t,5).replacements.length,0);assert.equal(new RawMarkdown(t).raw,t);});
@@ -63,4 +63,60 @@ test('only a full sentence end capitalises: not after "?)" or ")" inside a sente
   assert.equal(cap('see (above) then'),'See (above) then');
   assert.equal(cap('he said "go." then'),'He said "go." Then');
   assert.equal(cap('done. next'),'Done. Next');
+});
+
+const ON={on:true}; // owner switch tables-and-links (issue 17)
+const TABLE='Intro\n\n| | Box | Link |\n|:--|:-:|--:|\n| ⭐ | **CATLINK** \\| V3 | [Listing](https://x.example/a) |\n| Backup | `a|b` |\n| x | y | z | extra |\n\nAfter';
+test('GFM tables: header, alignment, empty/escaped/missing/extra cells and source offsets',()=>{
+  const [t,...rest]=tableBlocks(TABLE);assert.equal(rest.length,0);
+  assert.deepEqual(t.align,['left','center','right']);
+  assert.deepEqual(t.rows.map(r=>r.header),[true,false,false,false]);
+  assert.deepEqual(t.rows.map(r=>r.cells.map(c=>c.text)),[['','Box','Link'],['⭐','**CATLINK** | V3','[Listing](https://x.example/a)'],['Backup','`a','b`'],['x','y','z']]);
+  const cell=t.rows[1].cells[2];assert.equal(TABLE.slice(cell.from,cell.to),'[Listing](https://x.example/a)');
+  assert.deepEqual([t.startLine,t.endLine],[2,6]);
+  assert.equal(TABLE.split('\n')[t.endLine],'| x | y | z | extra |');
+  assert.deepEqual(tableBlocks('a | b\n--|--\n1 | 2').map(t=>t.rows.map(r=>r.cells.map(c=>c.text))),[[['a','b'],['1','2']]]);
+});
+test('tables inside code, lists or quotes, and pipe text without a delimiter row stay text',()=>{
+  for(const t of ['```\n| a | b |\n|---|---|\n```','- item\n\n  | a | b |\n  |---|---|','> | a | b |\n> |---|---|','| not | a table |\nplain'])assert.equal(tableBlocks(t).length,0,t);
+});
+test('Live Preview: a table renders as one block unless the caret touches it, then its source is editable',()=>{
+  const m=previewModel(TABLE,[{from:1,to:1}],ON),t=m.tables[0],start=TABLE.indexOf('| |'),end=TABLE.indexOf('\n\nAfter');
+  assert.deepEqual([t.from,t.to,t.active],[start,end,false]);
+  assert.equal(t.rows[1].cells[2].from,TABLE.indexOf('[Listing]')-start);   // relative to the table
+  assert.ok(!m.replacements.some(r=>r.from>=start&&r.to<=end),'no inline widgets inside a rendered table');
+  assert.ok(!m.marks.some(r=>r.from>=start&&r.to<=end));
+  const inside=previewModel(TABLE,[{from:TABLE.indexOf('Backup'),to:TABLE.indexOf('Backup')}],ON);
+  assert.equal(inside.tables[0].active,true);
+  assert.deepEqual(inside.lines.filter(l=>l.classes.includes('cm-lp-table-source')).map(l=>l.value.slice(0,5)),['| | B','|:--|','| ⭐ |','| Bac','| x |']);
+  assert.ok(inside.lines.filter(l=>l.classes.includes('cm-lp-table-source')).every(l=>l.active),'whole table is raw');
+  assert.ok(!inside.replacements.some(r=>r.from>=start&&r.to<=end),'no hidden emphasis marks in raw rows');
+  assert.equal(liveTables(TABLE,[{from:end,to:end}])[0].active,true);   // caret at the end of the last row
+  assert.equal(liveTables(TABLE,[{from:end+1,to:end+1}])[0].active,false);
+});
+test('inline links collapse to their text off the caret line and show raw source on it',()=>{
+  const t='See [the **docs**](https://x.example/p?q=1 "Title") now\n[ref][1] and [[Wiki]] and [empty]()\n\n[1]: https://x.example';
+  const off=previewModel(t,[{from:t.length,to:t.length}],ON);
+  assert.deepEqual(off.replacements.filter(r=>r.kind==='hide'&&r.from<50).map(r=>t.slice(r.from,r.to)),['[','**','**','](https://x.example/p?q=1 "Title")']);
+  assert.equal(off.marks.find(m=>m.href).href,'https://x.example/p?q=1');
+  assert.ok(off.marks.some(m=>m.class==='cm-lp-strong'),'formatting inside link text still renders');
+  assert.equal(off.marks.filter(m=>m.href).length,1,'reference, empty and wiki links are not collapsed');
+  const on=previewModel(t,[{from:2,to:2}],ON);
+  assert.ok(!on.replacements.some(r=>r.from<55&&r.kind==='hide'&&t[r.from]==='['));
+  assert.ok(on.marks.some(m=>m.class==='cm-lp-link'&&!m.href&&t.slice(m.from,m.to).startsWith('[the')));
+  assert.equal(previewModel('`[a](https://x.example)`',[],ON).marks.filter(m=>m.href).length,0);
+});
+test('escaped wiki alias pipe from tables resolves to the note and keeps the alias',()=>{
+  const m=previewModel('Go [[Note\\|alias]]',[],ON);assert.deepEqual(m.replacements.filter(r=>r.kind==='wiki').map(r=>[r.target,r.label]),[['Note','alias']]);
+});
+test('switch off (default): no tables, links keep their source, alias splits on a bare pipe only',()=>{
+  const off=previewModel(TABLE,[{from:1,to:1}]);
+  assert.deepEqual(off.tables,[]);
+  assert.ok(!off.lines.some(l=>l.classes.includes('cm-lp-table-source')));
+  const t='See [docs](https://x.example/p) now\nnext';
+  const m=previewModel(t,[{from:t.length,to:t.length}]);
+  assert.equal(m.marks.filter(x=>x.href).length,0);
+  assert.equal(m.replacements.filter(r=>r.kind==='hide').length,0);
+  assert.ok(m.marks.some(x=>x.class==='cm-lp-link'));
+  assert.deepEqual(previewModel('Go [[Note\\|alias]]',[]).replacements.filter(r=>r.kind==='wiki').map(r=>[r.target,r.label]),[['Note\\','alias']]);
 });

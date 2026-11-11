@@ -42,6 +42,20 @@ html.own-window #sidebar{padding-top:calc(var(--top-room) + 22px)}
 html.own-window #canvas-tools{padding-top:calc(var(--top-room) + 12px)}
 html.own-window #search{padding-top:var(--top-room)}
 
+/* GFM tables (Reading and Live Preview share one renderer). Wide tables scroll sideways inside their
+   own box; the drawer swipe guard already ignores touches that start on a table. */
+.md-table-wrap{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;margin:0 0 1em}
+.md-table{width:max-content;border-collapse:collapse;font-size:.88em;line-height:1.45;white-space:normal;overflow-wrap:normal;word-break:normal;text-indent:0}
+.md-table th,.md-table td{border:1px solid var(--line-2);padding:6px 10px;text-align:left;vertical-align:top;max-width:18em}
+.md-table th{font-weight:650;background:var(--fill)}
+.md-table a{color:var(--accent);text-underline-offset:3px}
+.md-table .wiki{font:inherit;color:var(--accent);padding:0;margin:0;border:0;border-radius:0;background:none;min-width:0;min-height:0;display:inline;text-align:left;text-decoration:underline;text-underline-offset:3px}
+.md-table code{font-family:var(--wz-font-mono,monospace);font-size:.88em}
+/* width:0 + min-width:100% keeps a wide table from widening the editor; it scrolls in its own box. */
+#source .cm-lp-table{width:0;min-width:100%;margin:.25em 0 .75em;cursor:text}
+#source .cm-lp-table-source{font-family:var(--wz-font-mono,monospace);font-size:.85em}
+#source .cm-lp-link[data-href]{text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+
 /* Switch friendly-phone (issue 19), off by default: html.friendly. Bottom bar: three labelled cells (New note, Today,
    Search); New folder, Sort and Expand/Collapse move to the gear sheet. Row actions visible on touch; Undo in the toast. */
 .bar-label{display:none}

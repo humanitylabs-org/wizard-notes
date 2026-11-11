@@ -30,6 +30,9 @@ class Problem(Exception):
 # Owner feature switches (wizard.app-switches/1, wizard-os docs/APP_SWITCHES.md). Off by default; state lives on the
 # box in DATA/switches.json (outside the vault), so this page and the Tracker's Try it see one state.
 SWITCHES = [
+    {'id': 'tables-and-links', 'name': 'Tables and tidy links',
+     'description': 'Pipe tables render as tables in Reading and Live Preview, and Live Preview shows only the text of a [text](url) link off the caret line.',
+     'default': False, 'issues': ['humanitylabs-org/wizard-notes#17']},
     {'id': 'friendly-phone', 'name': 'Friendlier phone layout',
      'description': 'Labelled New note / Today / Search bar, row actions visible on touch screens, one-tap delete with Undo, one flat note menu and a desktop empty state.',
      'default': False, 'issues': ['humanitylabs-org/wizard-notes#19']},
@@ -208,9 +211,49 @@ class Vault:
             out.sort(key=(lambda n:(n['rank'],n['title'].casefold(),n['path'])) if q else (lambda n:-n['modified']))
             return {'notes':out[:100]}
 
+    def _saved_switches(self):
+        try: saved = json.loads(self.switch_file.read_text(encoding='utf-8'))
+        except (OSError, ValueError): return {}
+        return saved if isinstance(saved, dict) else {}
+
+    def switches(self):
+        saved = self._saved_switches()
+        return {'contract':'wizard.app-switches/1','switches':[
+            dict(sw, on=saved[sw['id']] if isinstance(saved.get(sw['id']), bool) else sw['default']) for sw in SWITCHES]}
+
+    def set_switch(self, switch_id, on):
+        if not isinstance(switch_id, str) or not isinstance(on, bool): raise Problem(400, 'Send {"id": "...", "on": true|false}.')
+        if switch_id not in {sw['id'] for sw in SWITCHES}: raise Problem(404, 'No such switch.')
+        with self.lock:
+            saved = {k:v for k,v in self._saved_switches().items() if k in {sw['id'] for sw in SWITCHES} and isinstance(v, bool)}
+            saved[switch_id] = on
+            temp = self.switch_file.with_name('.switches.json.tmp')
+            temp.write_text(json.dumps(saved), encoding='utf-8')
+            os.replace(temp, self.switch_file)
+        return self.switches()
+
     def resolve(self, target, current=''):
-        target = target.split('|')[0].split('#')[0].strip()
+        # Obsidian escapes the alias pipe inside tables: [[Note\|alias]].
+        target = re.split(r'\\?\|', target)[0].split('#')[0].strip()
         if target.endswith('.md'): target = target[:-3]
+        if target.startswith(('./', '../')):
+            # Only explicit leading relative segments are interpreted. The ordinary
+            # path gate still checks the suffix, current note and final destination.
+            self.note_path(current)
+            directory = current.split('/')[:-1]
+            while target.startswith(('./', '../')):
+                if target.startswith('./'): target = target[2:]
+                else:
+                    if not directory: raise Problem(400, 'Outside vault.')
+                    directory.pop(); target = target[3:]
+            candidate = '/'.join([*directory, target + '.md'])
+            self.note_path(candidate)
+            match = next((n for n in self.index()[1] if n['path'].casefold() == candidate.casefold()), None)
+            # Do not silently open a same-named note from another directory.
+            # The legacy create sheet creates in the current folder, not this
+            # explicit destination, so missing relative targets must not use it.
+            if not match: raise Problem(404, 'Linked note not found.')
+            return {'path':match['path']}
         self.path(target + '.md')
         notes = self.index()[1]
         local = ((current.rsplit('/',1)[0]+'/') if '/' in current else '') + target + '.md'
