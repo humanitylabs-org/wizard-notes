@@ -211,27 +211,6 @@ class Vault:
             out.sort(key=(lambda n:(n['rank'],n['title'].casefold(),n['path'])) if q else (lambda n:-n['modified']))
             return {'notes':out[:100]}
 
-    def _saved_switches(self):
-        try: saved = json.loads(self.switch_file.read_text(encoding='utf-8'))
-        except (OSError, ValueError): return {}
-        return saved if isinstance(saved, dict) else {}
-
-    def switches(self):
-        saved = self._saved_switches()
-        return {'contract':'wizard.app-switches/1','switches':[
-            dict(sw, on=saved[sw['id']] if isinstance(saved.get(sw['id']), bool) else sw['default']) for sw in SWITCHES]}
-
-    def set_switch(self, switch_id, on):
-        if not isinstance(switch_id, str) or not isinstance(on, bool): raise Problem(400, 'Send {"id": "...", "on": true|false}.')
-        if switch_id not in {sw['id'] for sw in SWITCHES}: raise Problem(404, 'No such switch.')
-        with self.lock:
-            saved = {k:v for k,v in self._saved_switches().items() if k in {sw['id'] for sw in SWITCHES} and isinstance(v, bool)}
-            saved[switch_id] = on
-            temp = self.switch_file.with_name('.switches.json.tmp')
-            temp.write_text(json.dumps(saved), encoding='utf-8')
-            os.replace(temp, self.switch_file)
-        return self.switches()
-
     def resolve(self, target, current=''):
         # Obsidian escapes the alias pipe inside tables: [[Note\|alias]].
         target = re.split(r'\\?\|', target)[0].split('#')[0].strip()
