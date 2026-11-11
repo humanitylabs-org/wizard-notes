@@ -39,7 +39,13 @@ SWITCHES = [
     {'id': 'auto-merge', 'name': 'Merge edits from two devices',
      'description': 'When a note was changed on another device and the two sides touched different lines, both changes are kept and saved without a question; the same lines changed still opens the conflict sheet.',
      'default': False, 'issues': ['humanitylabs-org/wizard-notes#30']},
+    {'id': 'read-images', 'name': 'Images in Read view',
+     'description': 'Read view shows Markdown images ![alt](https://...) and Obsidian embeds ![[photo.jpg]] inline, scaled to the column; tap one to see it full size.',
+     'default': False, 'issues': ['humanitylabs-org/wizard-notes#33']},
 ]
+# Vault images Read view may show (read-images). No SVG: it can carry script if opened directly.
+IMAGE_TYPES = {'.png':'image/png', '.jpg':'image/jpeg', '.jpeg':'image/jpeg', '.gif':'image/gif', '.webp':'image/webp', '.avif':'image/avif', '.bmp':'image/bmp'}
+IMAGE_LIMIT = 25_000_000
 
 class Vault:
     def __init__(self, data, root=None):
@@ -243,6 +249,45 @@ class Vault:
         matches = sorted((n for n in notes if n['title'].casefold() == target.casefold()),key=lambda n:n['path'])
         return {'path':matches[0]['path'] if matches else None,'target':target}
 
+    def image(self, target, current=''):
+        # A vault image for ![[photo.jpg]] / ![alt](photo.jpg), found like Obsidian: next to the note, then the
+        # vault-relative path, then (bare names only) the shortest path with that file name. Every candidate goes
+        # through path(): no dot segments, hidden names or symbolic links.
+        if not isinstance(target, str) or not isinstance(current, str): raise Problem(400, 'Invalid path.')
+        target = target.split('|')[0].split('#')[0].strip().lstrip('/')
+        mime = IMAGE_TYPES.get(Path(target).suffix.lower())
+        if not mime: raise Problem(400, 'Not an image.')
+        directory = current.split('/')[:-1] if current else []
+        if current: self.note_path(current)
+        if target.startswith(('./', '../')):
+            while target.startswith(('./', '../')):
+                if target.startswith('./'): target = target[2:]
+                else:
+                    if not directory: raise Problem(400, 'Outside vault.')
+                    directory.pop(); target = target[3:]
+            candidates = ['/'.join([*directory, target])]
+        else: candidates = ['/'.join([*directory, target]), target] if directory else [target]
+        with self.lock:
+            found = None
+            for candidate in candidates:
+                p = self.path(candidate)
+                if p.is_file(): found = p; break
+            if found is None and '/' not in target:
+                self.path(target)
+                matches = []
+                for folder, dirs, files in os.walk(self.root):
+                    dirs[:] = [d for d in dirs if not d.startswith('.') and not (Path(folder)/d).is_symlink()]
+                    matches += [Path(folder)/f for f in files if f.casefold() == target.casefold()]
+                for m in sorted(matches, key=lambda m: (len(m.relative_to(self.root).parts), m.relative_to(self.root).as_posix())):
+                    p = self.path(m.relative_to(self.root).as_posix())
+                    if p.is_file(): found = p; break
+            if found is None: raise Problem(404, 'Image not found.')
+            if found.stat().st_size > IMAGE_LIMIT: raise Problem(413, 'Image too large.')
+            return found.read_bytes(), IMAGE_TYPES.get(found.suffix.lower(), mime)
+
+    def switch_on(self, switch_id):
+        return any(sw['id'] == switch_id and sw['on'] for sw in self.switches()['switches'])
+
     def _saved_switches(self):
         try: saved = json.loads(self.switch_file.read_text(encoding='utf-8'))
         except (OSError, ValueError): return {}
@@ -349,9 +394,11 @@ def rpc(body):
 
 class Handler(BaseHTTPRequestHandler):
     def send(self, status, value=None, mime='application/json'):
+        # img-src allows https: so Read view can show outside images (read-images, notes#33) the moment the switch
+        # flips, without a reload. Notes never interprets raw HTML, so only that renderer creates <img> elements.
         raw = value if isinstance(value,bytes) else b'' if value is None else json.dumps(value).encode()
         self.send_response(status)
-        for key,val in {'Content-Type':mime,'Content-Length':str(len(raw)),'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'"}.items(): self.send_header(key,val)
+        for key,val in {'Content-Type':mime,'Content-Length':str(len(raw)),'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https:; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'"}.items(): self.send_header(key,val)
         self.end_headers()
         if self.command != 'HEAD': self.wfile.write(raw)
 
@@ -373,6 +420,9 @@ class Handler(BaseHTTPRequestHandler):
             actions = {'/api/tree':'tree','/api/note':'read','/api/search':'search','/api/backlinks':'backlinks','/api/resolve':'resolve'}
             if path in actions: return self.send(200,service(actions[path],args))
             if path == '/api/switches': return self.send(200,VAULT.switches())
+            if path == '/api/image':
+                if not VAULT.switch_on('read-images'): raise Problem(404,'Not found.')
+                return self.send(200,*VAULT.image(args.get('target',''),args.get('current','')))
             if path == '/openapi.json': return self.send(200,(ROOT/'openapi.json').read_bytes())
             name = 'index.html' if path == '/' else path.lstrip('/')
             base = ROOT/'web'; file = (base/name).resolve()

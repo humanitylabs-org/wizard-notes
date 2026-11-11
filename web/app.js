@@ -208,7 +208,34 @@ document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['k','p'].inc
 async function wiki(target){const result=await api('resolve?target='+encodeURIComponent(target)+'&current='+encodeURIComponent(state.note.path));if(result.path)return openNote(result.path,false,true);const name=base(result.target),folder=parent(state.note.path);const b=sheet('Create '+name+'?');b.append(el('p','This linked note does not exist yet. Create it in '+(folder||'Vault')+'?'),button('Create note',async()=>{const path=join(folder,name+'.md');await api('note',{path,content:''});closeSheet();await refresh();await openNote(path,true,true);}));}
 // Domain Markdown: core chat-kit.md is shell-only, not exposed by WizardApp.
 // Build DOM from text; raw HTML is never interpreted. Links use a protocol allowlist.
-function inline(text,dest){const rx=/(`[^`]+`|\[\[[^\]\n]+\]\]|\[[^\]\n]+\]\([^\s)]+\)|\*\*[^*]+\*\*|__[^_]+__|\*[^*]+\*|_[^_]+_)/g;let start=0,m;while((m=rx.exec(text))){dest.append(document.createTextNode(text.slice(start,m.index)));const t=m[0];if(t.startsWith('[[')){const bits=t.slice(2,-2).split(rich()?/\\?\|/:'|');const b=button(bits[1]||bits[0],()=>wiki(bits[0]));b.className='wiki';dest.append(b);}else if(t.startsWith('`'))dest.append(el('code',t.slice(1,-1)));else if(t.startsWith('[')&&!rich()){const link=t.match(/^\[([^\]]+)\]\(([^)]+)\)$/);let url;try{url=new URL(link[2],location.href);}catch{}if(url&&['https:','http:','mailto:'].includes(url.protocol)){const a=el('a',link[1]);a.href=url.href;a.rel='noopener noreferrer';dest.append(a);}else dest.append(document.createTextNode(t));}else if(t.startsWith('[')){const link=t.match(/^\[([^\]]+)\]\(([^)]+)\)$/),note=noteLink(link[2]),url=safeUrl(link[2]);if(note){const b=button(link[1],()=>wiki(note));b.className='wiki';dest.append(b);}else if(url){const a=el('a',link[1]);a.href=url.href;a.target='_blank';a.rel='noopener noreferrer';dest.append(a);}else dest.append(document.createTextNode(t));}else{const strong=t.startsWith('**')||t.startsWith('__'),n=el(strong?'strong':'em');n.textContent=t.slice(strong?2:1,strong?-2:-1);dest.append(n);}start=rx.lastIndex;}dest.append(document.createTextNode(text.slice(start)));}
+function inline(text,dest){const rx=new RegExp('('+(switchOn('read-images')?IMAGE_RX+'|':'')+INLINE_RX+')','g');let start=0,m;while((m=rx.exec(text))){dest.append(document.createTextNode(text.slice(start,m.index)));const t=m[0];if(t.startsWith('!'))dest.append(mdImage(t));else if(t.startsWith('[[')){const bits=t.slice(2,-2).split(rich()?/\\?\|/:'|');const b=button(bits[1]||bits[0],()=>wiki(bits[0]));b.className='wiki';dest.append(b);}else if(t.startsWith('`'))dest.append(el('code',t.slice(1,-1)));else if(t.startsWith('[')&&!rich()){const link=t.match(/^\[([^\]]+)\]\(([^)]+)\)$/);let url;try{url=new URL(link[2],location.href);}catch{}if(url&&['https:','http:','mailto:'].includes(url.protocol)){const a=el('a',link[1]);a.href=url.href;a.rel='noopener noreferrer';dest.append(a);}else dest.append(document.createTextNode(t));}else if(t.startsWith('[')){const link=t.match(/^\[([^\]]+)\]\(([^)]+)\)$/),note=noteLink(link[2]),url=safeUrl(link[2]);if(note){const b=button(link[1],()=>wiki(note));b.className='wiki';dest.append(b);}else if(url){const a=el('a',link[1]);a.href=url.href;a.target='_blank';a.rel='noopener noreferrer';dest.append(a);}else dest.append(document.createTextNode(t));}else{const strong=t.startsWith('**')||t.startsWith('__'),n=el(strong?'strong':'em');n.textContent=t.slice(strong?2:1,strong?-2:-1);dest.append(n);}start=rx.lastIndex;}dest.append(document.createTextNode(text.slice(start)));}
+const INLINE_RX=/`[^`]+`|\[\[[^\]\n]+\]\]|\[[^\]\n]+\]\([^\s)]+\)|\*\*[^*]+\*\*|__[^_]+__|\*[^*]+\*|_[^_]+_/.source;
+// Images in Read view (switch read-images, notes#33): ![alt](https://...) and ![alt](vault/path.jpg) or Obsidian ![[photo.jpg|300]].
+// Vault images come through api/image (same path gate as notes); outside images only over https; anything else stays text.
+const IMAGE_RX=/!\[\[[^\]\n]+\]\]|!\[[^\]\n]*\]\((?:<[^>\n]+>|[^\s)]+)(?:\s+"[^"\n]*")?\)/.source,IMAGE_EXT=/\.(png|jpe?g|gif|webp|avif|bmp)$/i;
+function vaultImage(target){return 'api/image?target='+encodeURIComponent(target)+'&current='+encodeURIComponent(state.note?.path||'');}
+function imageSource(t){
+ let alt='',width=0,href;
+ if(t.startsWith('![[')){const bits=t.slice(3,-2).split(/\\?\|/),opt=(bits[1]||'').trim(),size=opt.match(/^(\d+)(?:x\d+)?$/);href=bits[0].trim();if(size)width=+size[1];else alt=opt;if(!IMAGE_EXT.test(href.split('#')[0]))return null;return {src:vaultImage(href),alt:alt||base(href),width,external:false};}
+ const m=t.match(/^!\[([^\]]*)\]\((?:<([^>]+)>|([^\s)]+))(?:\s+"([^"]*)")?\)$/);if(!m)return null;
+ const size=m[1].match(/^(.*?)\|(\d+)(?:x\d+)?$/);alt=size?size[1]:m[1];width=size?+size[2]:0;href=m[2]||m[3];
+ if(/^https:/i.test(href)){try{return {src:new URL(href).href,alt,width,external:true};}catch{return null;}}
+ if(/^[a-z][a-z0-9+.-]*:/i.test(href)||href.startsWith('//'))return null;
+ let path=href.replace(/[?#].*$/,'');try{path=decodeURIComponent(path);}catch{}
+ return IMAGE_EXT.test(path)?{src:vaultImage(path),alt,width,external:false}:null;
+}
+function mdImage(t){
+ const image=imageSource(t);if(!image){const rest=document.createDocumentFragment();rest.append('!');inline(t.slice(1),rest);return rest;}
+ const img=el('img',undefined,'md-img');img.alt=image.alt;img.loading='lazy';img.decoding='async';if(image.external)img.referrerPolicy='no-referrer';if(image.width)img.width=image.width;
+ img.tabIndex=0;img.setAttribute('role','button');img.title=image.alt||'Open image';
+ img.onerror=()=>img.replaceWith(el('span',image.alt||'Image','md-img-missing'));
+ img.onclick=()=>showImage(image);img.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showImage(image);}};
+ img.src=image.src;return img;
+}
+// Tap an image: full size in a dialog over the note; a tap, Escape or Back closes it.
+function showImage(image){const d=el('dialog',undefined,'lightbox'),big=el('img');big.alt=image.alt;if(image.external)big.referrerPolicy='no-referrer';big.src=image.src;d.setAttribute('aria-label',image.alt||'Image');d.append(big);let back=null;
+ // Close and clean up directly; the dialog close event is not delivered everywhere (seen in headless Chrome).
+ const done=()=>{if(d.open)d.close();d.remove();const b=back;back=null;b?.release();};d.onclick=done;d.onclose=done;d.onkeydown=e=>{if(e.key==='Escape'){e.preventDefault();done();}};document.body.append(d);d.showModal();back=W.back.push(()=>{done();return true;});}
 // Links leave Notes in a new tab (allowlisted protocols only); a relative link to a .md file is a note link.
 function safeUrl(href){if(!/^(https?:|mailto:)/i.test(href))return null;try{return new URL(href);}catch{return null;}}
 function noteLink(href){if(/^[a-z][a-z0-9+.-]*:/i.test(href)||!/\.md(#.*)?$/i.test(href))return null;try{return decodeURIComponent(href.replace(/#.*$/,'')).replace(/\.md$/i,'');}catch{return null;}}

@@ -424,6 +424,49 @@
         ]
       }
     },
+    "/api/image": {
+      "get": {
+        "summary": "A vault image (png, jpg, gif, webp, avif, bmp) for Read view, found like Obsidian: next to the current note, then vault-relative, then the shortest path with that name. Same path gate as notes. 404 unless the read-images switch is on.",
+        "responses": {
+          "200": {
+            "description": "Image bytes",
+            "content": {
+              "image/*": {}
+            }
+          },
+          "400": {
+            "description": "Invalid path or not an image"
+          },
+          "403": {
+            "description": "Untrusted Host or Origin"
+          },
+          "404": {
+            "description": "Not found, or the read-images switch is off"
+          },
+          "413": {
+            "description": "Image too large"
+          }
+        },
+        "parameters": [
+          {
+            "name": "target",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "current",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
     "/api/today": {
       "post": {
         "summary": "Create/open Daily/YYYY-MM-DD.md in Asia/Bangkok",
