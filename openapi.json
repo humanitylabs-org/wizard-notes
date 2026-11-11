@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Notes Markdown vault API",
-    "version": "0.1.0-alpha.4"
+    "version": "0.1.0-alpha.7"
   },
   "paths": {
     "/api/tree": {
@@ -530,6 +530,59 @@
           },
           "409": {
             "description": "Revision conflict or occupied name. Reread and reconcile; never overwrite."
+          }
+        }
+      }
+    },
+    "/api/switches": {
+      "get": {
+        "summary": "Owner feature switches (wizard.app-switches/1), off by default",
+        "responses": {
+          "200": {
+            "description": "{contract, switches:[{id,name,description,on,default,issues}]}"
+          },
+          "403": {
+            "description": "Untrusted Host or Origin"
+          }
+        }
+      },
+      "post": {
+        "summary": "Turn one owner feature switch on or off. Needs the box Origin and X-Wizard-Switch: 1",
+        "responses": {
+          "200": {
+            "description": "The same listing as GET"
+          },
+          "400": {
+            "description": "Invalid body"
+          },
+          "403": {
+            "description": "Not the owner's page or the App Manager"
+          },
+          "404": {
+            "description": "No such switch"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "on": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "id",
+                  "on"
+                ],
+                "additionalProperties": false
+              }
+            }
           }
         }
       }

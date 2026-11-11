@@ -16,7 +16,7 @@ from urllib.parse import parse_qs, unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 PORT = int(os.environ.get('PORT', '8799'))
-VERSION = '0.1.0-alpha.4'
+VERSION = '0.1.0-alpha.7'
 # Explicit allowlists replace development defaults, never silently re-add loopback.
 HOSTS = set(filter(None, os.environ.get('WIZARD_TRUSTED_HOSTS', '').split(',')))
 ORIGINS = set(filter(None, os.environ.get('WIZARD_TRUSTED_ORIGINS', '').split(',')))
@@ -33,17 +33,26 @@ SWITCHES = [
     {'id': 'tables-and-links', 'name': 'Tables and tidy links',
      'description': 'Pipe tables render as tables in Reading and Live Preview, and Live Preview shows only the text of a [text](url) link off the caret line.',
      'default': False, 'issues': ['humanitylabs-org/wizard-notes#17']},
+    {'id': 'friendly-phone', 'name': 'Friendlier phone layout',
+     'description': 'Labelled New note / Today / Search bar, row actions visible on touch screens, one-tap delete with Undo, one flat note menu and a desktop empty state.',
+     'default': False, 'issues': ['humanitylabs-org/wizard-notes#19']},
+    {'id': 'reply-draft', 'name': 'Reply to a note in Chats',
+     'description': 'A Reply control on an open note opens an unsent Chats draft with the note (or the selected passage) attached. Nothing is sent.',
+     'default': False, 'issues': ['humanitylabs-org/wizard-notes#20']},
 ]
 
 class Vault:
-    def __init__(self, data):
+    def __init__(self, data, root=None):
         self.switch_file = Path(data) / 'switches.json'
-        self.root = Path(data) / 'vault'
+        # root: an existing folder chosen by the owner (NOTES_VAULT_DIR); default is the app-owned data/vault.
+        self.root = Path(root) if root else Path(data) / 'vault'
+        if root and not self.root.is_dir(): raise SystemExit(f'NOTES_VAULT_DIR {root} is not a folder; mount it first.')
         self.root.mkdir(parents=True, exist_ok=True)
+        Path(data).mkdir(parents=True, exist_ok=True)
         self.lock = threading.RLock()
         self.cache = {}
         marker = Path(data) / '.initialized'
-        if not marker.exists():
+        if root is None and not marker.exists():
             if not any(self.root.iterdir()):
                 (self.root / 'Inbox').mkdir()
                 (self.root / 'Welcome.md').write_text('# A place to think\n\nNotes are plain Markdown files. Make folders, nest them, and organise them your way.\n\nConnect thoughts with [[Welcome]] or [[A new thought|a friendly label]]. Search finds titles and the words inside your notes.\n\nToday opens a daily note, dated in Bangkok. Everything stays in your vault, ready for Obsidian.\n', encoding='utf-8')
@@ -254,6 +263,28 @@ class Vault:
         matches = sorted((n for n in notes if n['title'].casefold() == target.casefold()),key=lambda n:n['path'])
         return {'path':matches[0]['path'] if matches else None,'target':target}
 
+    def _saved_switches(self):
+        try: saved = json.loads(self.switch_file.read_text(encoding='utf-8'))
+        except (OSError, ValueError): return {}
+        return saved if isinstance(saved, dict) else {}
+
+    def switches(self):
+        saved = self._saved_switches()
+        return {'contract':'wizard.app-switches/1','switches':[
+            dict(sw, on=saved[sw['id']] if isinstance(saved.get(sw['id']), bool) else sw['default']) for sw in SWITCHES]}
+
+    def set_switch(self, switch_id, on):
+        if not isinstance(switch_id, str) or not isinstance(on, bool): raise Problem(400, 'Send {"id": "...", "on": true|false}.')
+        known = {sw['id'] for sw in SWITCHES}
+        if switch_id not in known: raise Problem(404, 'No such switch.')
+        with self.lock:
+            saved = {k:v for k,v in self._saved_switches().items() if k in known and isinstance(v, bool)}
+            saved[switch_id] = on
+            temp = self.switch_file.with_name('.switches.json.tmp')
+            temp.write_text(json.dumps(saved), encoding='utf-8')
+            os.replace(temp, self.switch_file)
+        return self.switches()
+
     def link_target(self, target, current):
         # One unusable link elsewhere must not break every note's backlinks.
         try: return self.resolve(target, current)['path']
@@ -398,7 +429,9 @@ class Handler(BaseHTTPRequestHandler):
 
 if __name__ == '__main__':
     data = Path(os.environ.get('DATA_DIR',str(ROOT/'.data')))
-    VAULT = Vault(data)
+    vault_dir = os.environ.get('NOTES_VAULT_DIR','').strip()
+    if vault_dir and not os.path.isabs(vault_dir): raise SystemExit('NOTES_VAULT_DIR must be an absolute path.')
+    VAULT = Vault(data, vault_dir or None)
     credential = data/'agent.token'
     if not credential.exists():
         with open(credential,'x',opener=lambda path,flags: os.open(path,flags,0o600)) as f:

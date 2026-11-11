@@ -1,4 +1,5 @@
 import {createLiveEditor,tableBlocks} from './vendor/live-preview.js';
+import {replyPayload,replySupported,openReply} from './reply.js';
 const $=id=>document.getElementById(id), W=window.WizardApp;
 // Opened from the home screen (not inside the Wizard shell): leave room under the phone's status bar.
 if(window.top===window&&matchMedia('(pointer: coarse),(display-mode: standalone),(display-mode: fullscreen)').matches)document.documentElement.classList.add('own-window');
@@ -11,16 +12,16 @@ const state={folder:'',note:null,tree:[],search:false,read:false,drawer:false,tr
 const phone=()=>matchMedia('(max-width:760px)').matches;
 const collator=new Intl.Collator(undefined,{numeric:true,sensitivity:'base'});
 const drafts=new Map(); let sheetBack=null,searchTimer,searchSeq=0,noticeTimer,navSeq=0;
-const editor=createLiveEditor($('source'),{transform:transformText,continueList,onWiki:target=>act(()=>wiki(target)),onLink:href=>openLink(href),renderTable:t=>renderTable(t),switchOn:()=>switchOn('tables-and-links'),onChange:content=>{const n=state.note;if(!n)return;n.content=content;changed(n);},keepCaretVisible:rect=>keepCaretClear(rect)});
 // Owner feature switches (GET/POST api/switches, wizard.app-switches/1). Off by default; the state lives on the box,
 // so the Tracker's Try it and this page agree. Re-read when the page becomes visible.
 let switches=[];
-const switchOn=id=>!!switches.find(x=>x.id===id)?.on, rich=()=>switchOn('tables-and-links');
+const switchOn=id=>!!switches.find(x=>x.id===id)?.on, friendly=()=>switchOn('friendly-phone'), rich=()=>switchOn('tables-and-links');
 const SW_HEAD={'X-Wizard-Switch':'1'};
-function switchesChanged(){editor.redraw();if(state.note&&state.read)markdown(state.note.content,$('read'));}
+function switchesChanged(){document.documentElement.classList.toggle('friendly',friendly());$('today').hidden=!friendly();renderViews();editor.redraw();if(state.note&&state.read)markdown(state.note.content,$('read'));}
 async function loadSwitches(){const was=JSON.stringify(switches);try{const r=await fetch('api/switches',{cache:'no-store',headers:SW_HEAD});if(r.ok)switches=(await r.json()).switches||[];}catch{}if(was!==JSON.stringify(switches))switchesChanged();}
 async function toggleSwitch(id){const r=await fetch('api/switches',{method:'POST',headers:{...SW_HEAD,'Content-Type':'application/json'},body:JSON.stringify({id,on:!switchOn(id)})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'Could not change the switch.');switches=d.switches||switches;switchesChanged();}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadSwitches();});
+const editor=createLiveEditor($('source'),{transform:transformText,continueList,onWiki:target=>act(()=>wiki(target)),onLink:href=>openLink(href),renderTable:t=>renderTable(t),switchOn:()=>switchOn('tables-and-links'),onChange:content=>{const n=state.note;if(!n)return;n.content=content;changed(n);},keepCaretVisible:rect=>keepCaretClear(rect)});
 // Keep the caret line clear of the floating formatting bar and the keyboard, with a line of breathing room.
 const CARET_ROOM=56;
 function keepCaretClear(rect){
@@ -34,7 +35,7 @@ function keepCaretClear(rect){
 const parent=p=>p.includes('/')?p.slice(0,p.lastIndexOf('/')):'', base=p=>p.split('/').pop(), join=(a,b)=>a?a+'/'+b:b;
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
 const button=(text,fn,label)=>{const b=el('button',text);b.type='button';b.onclick=async()=>{if(b.disabled)return;b.disabled=true;try{await act(fn);}finally{b.disabled=false;}};if(label)b.setAttribute('aria-label',label);return b;};
-function notice(text){$('notice').textContent=text;clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>$('notice').textContent='',6500);}
+function notice(text,action){const box=$('notice');box.replaceChildren(document.createTextNode(text));if(action){const b=el('button',action.label,'notice-act');b.type='button';b.onclick=()=>{box.replaceChildren();act(action.run);};box.append(b);}clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>box.replaceChildren(),action?9000:6500);}
 async function act(fn){try{await fn();}catch(e){notice(e.message);}}
 async function api(route,body,method='POST',keepalive=false){let r;try{r=await fetch('api/'+route,{method:body===undefined?'GET':method,headers:body===undefined?{}:{'Content-Type':'application/json'},body:body===undefined?undefined:JSON.stringify(body),keepalive});}catch(err){const e=new Error('Notes is unreachable.');e.transient=true;throw e;}const text=await r.text();let v=null;try{v=text?JSON.parse(text):null;}catch{}
   // An empty or non-JSON reply (Notes restarting, proxy 502) or a 5xx is temporary: the caller retries.
@@ -64,7 +65,7 @@ function renderTree(){
  $('collapse').setAttribute('aria-label',state.expanded.size?'Collapse all folders':'Expand all folders');
 }
 function renderViews(){
- $('note').hidden=!state.note||state.search;$('note-controls').hidden=!state.note||state.search;$('search').hidden=!state.search;
+ $('note').hidden=!state.note||state.search;$('empty').hidden=!friendly()||!!state.note||state.search;$('note-controls').hidden=!state.note||state.search;$('reply').hidden=!switchOn('reply-draft')||!replySupported(W);$('search').hidden=!state.search;
  $('app').classList.toggle('no-note',!state.note);$('app').classList.toggle('drawer-open',state.drawer);$('app').classList.toggle('search-open',state.search);$('app').classList.toggle('sidebar-hidden',state.sidebarHidden&&!!state.note);
  $('backdrop').hidden=!state.drawer||!state.note;$('back').setAttribute('aria-expanded',String(phone()?state.drawer:!state.sidebarHidden));
  $('formatting').hidden=!state.note||state.read||state.search;renderTree();
@@ -91,25 +92,48 @@ $('title').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();editor.select(0)
 $('title').oninput=()=>{const n=state.note;n.titleDraft=$('title').value;changed(n);};
 $('save').onclick=()=>act(()=>state.note.conflict?resolveConflict(state.note):save(state.note));
 async function resolveConflict(n){const body=sheet('Note changed elsewhere');body.append(el('p','Your local text is safe. Keep both versions by saving your draft as a new note, or cancel and reconcile before retrying.'));try{const latest=await api('note?path='+encodeURIComponent(n.path));const details=el('details'),summary=el('summary','Latest saved version'),pre=el('pre',latest.content);details.append(summary,pre);body.append(details);}catch{body.append(el('p','The original note may have moved or is temporarily unavailable.'));}body.append(button('Save draft as a new note',async()=>{const folder=parent(n.path);for(let i=1;i<=100;i++){const title=n.titleDraft.trim()+' (copy'+(i>1?' '+i:'')+')',path=join(folder,title+'.md');try{await api('note',{path,content:n.content});n.hold?.release();n.hold=null;clearTimeout(n.timer);drafts.delete(n.path);persistDrafts();closeSheet();await refresh();await openNote(path);notice('Draft saved as a separate note. Original unchanged.');return;}catch(e){if(e.status!==409)throw e;}}throw new Error('Choose a different title for your copy.');}),button('Cancel',closeSheet));}
+// Reply (switch reply-draft): an UNSENT Chats draft with this note (or the selected passage) attached. Synchronous in the
+// click so the shell keeps user activation; the text is already loaded, so nothing is awaited first.
+function replySelection(){
+ const n=state.note;if(!n)return null;
+ if(state.read){const s=window.getSelection(),read=$('read');if(!s||s.isCollapsed||!s.rangeCount)return null;const r=s.getRangeAt(0);if(!read.contains(r.startContainer)||!read.contains(r.endContainer))return null;const before=r.cloneRange();before.selectNodeContents(read);before.setEnd(r.startContainer,r.startOffset);const text=s.toString(),start=before.toString().length;return text.trim()?{text,start,end:start+text.length}:null;}
+ const m=editor.view.state.selection.main;if(m.empty)return null;const text=editor.view.state.sliceDoc(m.from,m.to);return text.trim()?{text,start:m.from,end:m.to}:null;
+}
+$('reply').onpointerdown=e=>e.preventDefault();// keep the selected passage
+$('reply').onclick=()=>{const n=state.note;if(!n||!switchOn('reply-draft'))return;let out;try{out=openReply(W,replyPayload({path:n.path,title:n.titleDraft,content:n.content,unsaved:dirty(n)},replySelection()));}catch(e){out={text:e.message||'Could not open Chats. Nothing sent.'};}notice(out.text);};
 $('mode').onclick=()=>{state.read=!state.read;renderNote();if(!state.read)editor.focus();};
 // Reading is deliberately non-editable. Only the book/pencil control changes view.
 
 function shareNote(){const n=state.note;W.share.text({title:n.titleDraft,text:'# '+n.titleDraft+'\n\n'+n.content}).then(out=>notice(out==='copied'?'Copied':out==='shared'?'Shared':out==='cancelled'?'Sharing cancelled':'Sharing unavailable')).catch(()=>notice('Sharing unavailable'));}
-$('note-menu').onclick=()=>{const b=sheet(state.note.titleDraft);b.append(button('Search',()=>{closeSheet();openSearch();}),button('Today',()=>{closeSheet();return today();}),button('Share',()=>{closeSheet();shareNote();}),button('Note actions…',()=>itemMenu({path:state.note.path,name:state.note.title,type:'note'})));};
+$('note-menu').onclick=()=>{const b=sheet(state.note.titleDraft);
+ // Switch on: one flat sheet (Share, Rename, Move to…, Delete, Today, Search) instead of a nested actions sheet.
+ if(friendly()){const n={path:state.note.path,name:state.note.title,type:'note'};b.append(button('Share',()=>{closeSheet();shareNote();}),...noteActions(n),button('Today',()=>{closeSheet();return today();}),button('Search',()=>{closeSheet();openSearch();}));return;}
+ b.append(button('Search',()=>{closeSheet();openSearch();}),button('Today',()=>{closeSheet();return today();}),button('Share',()=>{closeSheet();shareNote();}),button('Note actions…',()=>itemMenu({path:state.note.path,name:state.note.title,type:'note'})));};
 function closeSheet(){if($('sheet').open)$('sheet').close();sheetBack?.release();sheetBack=null;}
-function sheet(title){closeSheet();$('sheet-title').textContent=title;$('sheet-body').replaceChildren();$('sheet').showModal();sheetBack=W.back.push(()=>{closeSheet();return true;});return $('sheet-body');}
+function sheet(title){closeSheet();$('sheet-title').textContent=title;$('sheet-body').replaceChildren();$('sheet').showModal();if(friendly())$('sheet').focus();sheetBack=W.back.push(()=>{closeSheet();return true;});return $('sheet-body');}
 $('close-sheet').onclick=closeSheet;$('sheet').oncancel=e=>{e.preventDefault();closeSheet();};
 function askName(title,value,submit){const body=sheet(title),form=el('form'),input=el('input');input.type='text';input.required=true;input.maxLength=150;input.value=value;input.setAttribute('aria-label',title);const error=el('p');const actions=el('div',undefined,'actions');actions.append(button('Cancel',closeSheet));const ok=el('button','Save','primary');ok.type='submit';actions.append(ok);form.append(input,error,actions);form.onsubmit=e=>{e.preventDefault();act(async()=>{ok.disabled=true;try{await submit(input.value.trim());closeSheet();}catch(err){error.textContent=err.message;}finally{ok.disabled=false;}});};body.append(form);requestAnimationFrame(()=>{input.focus();input.select();});}
 function newFolder(folder=state.folder){askName('New folder','',async name=>{const path=join(folder,name);await api('folder',{path});if(folder)state.expanded.add(folder);persistExpanded();await refresh();});}
 async function newNote(folder=state.folder){let name='Untitled',i=1;const paths=new Set(allEntries().map(n=>n.path));while(paths.has(join(folder,name+'.md')))name='Untitled '+(++i);const path=join(folder,name+'.md');await api('note',{path,content:''});closeSheet();await refresh();await openNote(path,true);}
-function itemMenu(n){const b=sheet(n.name);const here=n.type==='folder'?n.path:parent(n.path);b.append(button('New note here',()=>newNote(here)),button('New folder here',()=>newFolder(here)),button('Rename',()=>askName('Rename',n.name,async name=>{await flush();const to=join(parent(n.path),name+(n.type==='note'?'.md':''));await api('move',{from:n.path,to});await afterMove(n.path,to); })),button('Move to…',()=>folderPicker(n)),button('Delete',()=>{const body=sheet('Move to trash?');body.append(el('p',n.name+' can be restored from the vault’s .trash folder or the restore API.'),button('Move to trash',async()=>{await flush();const r=await api('delete',{path:n.path});if(state.note&&(state.note.path===n.path||state.note.path.startsWith(n.path+'/')))openFolder(parent(n.path));for(const [path] of drafts)if(path===n.path||path.startsWith(n.path+'/'))drafts.delete(path);if(state.folder===n.path||state.folder.startsWith(n.path+'/'))state.folder=parent(n.path);closeSheet();await refresh();const undo=sheet('Moved to trash');undo.append(button('Undo delete',async()=>{await api('restore',{trash_id:r.trash_id});closeSheet();await refresh();}),button('Done',closeSheet));}));}));}
+function itemMenu(n){const b=sheet(n.name);const here=n.type==='folder'?n.path:parent(n.path);b.append(button('New note here',()=>newNote(here)),button('New folder here',()=>newFolder(here)),...noteActions(n));}
+function noteActions(n){return [button('Rename',()=>askName('Rename',n.name,async name=>{await flush();const to=join(parent(n.path),name+(n.type==='note'?'.md':''));await api('move',{from:n.path,to});await afterMove(n.path,to); })),button('Move to…',()=>folderPicker(n)),friendly()?button('Delete',()=>trash(n)):button('Delete',()=>{const body=sheet('Move to trash?');body.append(el('p',n.name+' can be restored from the vault’s .trash folder or the restore API.'),button('Move to trash',async()=>{await flush();const r=await api('delete',{path:n.path});if(state.note&&(state.note.path===n.path||state.note.path.startsWith(n.path+'/')))openFolder(parent(n.path));for(const [path] of drafts)if(path===n.path||path.startsWith(n.path+'/'))drafts.delete(path);if(state.folder===n.path||state.folder.startsWith(n.path+'/'))state.folder=parent(n.path);closeSheet();await refresh();const undo=sheet('Moved to trash');undo.append(button('Undo delete',async()=>{await api('restore',{trash_id:r.trash_id});closeSheet();await refresh();}),button('Done',closeSheet));}));})];}
+// Switch on: Delete is one tap; the item leaves at once and Undo waits in the toast (files go to the vault's .trash).
+async function trash(n){await flush();const r=await api('delete',{path:n.path});if(state.note&&(state.note.path===n.path||state.note.path.startsWith(n.path+'/')))openFolder(parent(n.path));for(const [path] of drafts)if(path===n.path||path.startsWith(n.path+'/'))drafts.delete(path);if(state.folder===n.path||state.folder.startsWith(n.path+'/'))state.folder=parent(n.path);closeSheet();await refresh();notice(n.name+' moved to trash',{label:'Undo',run:async()=>{await api('restore',{trash_id:r.trash_id});await refresh();notice('Restored');}});}
 async function afterMove(from,to){for(const [p,n] of [...drafts])if(p===from||p.startsWith(from+'/')){drafts.delete(p);n.path=to+p.slice(from.length);n.title=base(n.path).replace(/\.md$/,'');n.titleDraft=n.title;drafts.set(n.path,n);}if(state.folder===from||state.folder.startsWith(from+'/'))state.folder=to+state.folder.slice(from.length);if(state.note){$('title').value=state.note.titleDraft;state.folder=parent(state.note.path);}await refresh();renderViews();}
 function folderPicker(item){let at='';const body=sheet('Move '+item.name);const draw=()=>{body.replaceChildren();const bar=el('div',undefined,'tools');bar.append(button('‹',()=>{if(at){at=parent(at);draw();}else closeSheet();},'Parent folder'),el('span',at||'Vault'));body.append(bar);const choices=folderChildren(at).filter(n=>n.type==='folder'&&n.path!==item.path&&!n.path.startsWith(item.path+'/'));for(const n of choices)body.append(button('▱  '+n.name,()=>{at=n.path;draw();}));const move=button('Move here',async()=>{await flush();const to=join(at,base(item.path));await api('move',{from:item.path,to});await afterMove(item.path,to);closeSheet();});move.className='primary';body.append(move);};draw();}
 async function today(){const n=await api('today',{});await refresh();await openNote(n.path);}
 $('add').onclick=()=>act(()=>newNote());$('add-folder').onclick=()=>newFolder();
 $('sort').onclick=()=>{state.sort=state.sort==='name'?'modified':'name';store('notes.sort',state.sort);renderTree();};
 $('collapse').onclick=()=>{state.expanded=state.expanded.size?new Set():new Set(allEntries().filter(n=>n.type==='folder').map(n=>n.path));persistExpanded();renderTree();};
-$('vault-menu').onclick=()=>{const b=sheet('Vault');b.append(el('p','Plain Markdown files. '+$('vault-count').textContent),button('Today',()=>{closeSheet();return today();}),button('Search',()=>{closeSheet();openSearch();}),button('Hide explorer',()=>{closeSheet();if(phone())showDrawer(false);else{state.sidebarHidden=true;store('notes.sidebarHidden',true);renderViews();}}));
+$('today').onclick=$('empty-today').onclick=()=>act(today);$('empty-new').onclick=()=>act(()=>newNote());
+function hideExplorer(){closeSheet();if(phone())showDrawer(false);else{state.sidebarHidden=true;store('notes.sidebarHidden',true);renderViews();}}
+$('vault-menu').onclick=()=>{const b=sheet('Vault');b.append(el('p','Plain Markdown files. '+$('vault-count').textContent));
+ // Switch on: the bar keeps New note / Today / Search; the less frequent vault tools live here, in words.
+ if(friendly())b.append(button('New folder',()=>{newFolder();}),
+  button(state.sort==='name'?'Sort by last modified':'Sort by name',()=>{state.sort=state.sort==='name'?'modified':'name';store('notes.sort',state.sort);renderTree();closeSheet();}),
+  button(state.expanded.size?'Collapse all folders':'Expand all folders',()=>{state.expanded=state.expanded.size?new Set():new Set(allEntries().filter(n=>n.type==='folder').map(n=>n.path));persistExpanded();renderTree();closeSheet();}),
+  ...(state.note?[button('Hide explorer',hideExplorer)]:[]));
+ else b.append(button('Today',()=>{closeSheet();return today();}),button('Search',()=>{closeSheet();openSearch();}),button('Hide explorer',hideExplorer));
  if(switches.length){b.append(el('h3','Try changes'));for(const x of switches){const t=button((x.on?'On: ':'Off: ')+x.name,()=>act(async()=>{await toggleSwitch(x.id);closeSheet();}));t.setAttribute('role','switch');t.setAttribute('aria-checked',String(!!x.on));t.title=x.description||'';b.append(t);}}};
 function goBack(){
  if($('sheet').open){closeSheet();return true;}
@@ -246,9 +270,9 @@ function continueList(text,start,end){
  return {text:text.slice(0,start)+value+text.slice(end),start:pos,end:pos};
 }
 function format(kind){if(state.note)editor.format(kind);}
-const paths={sidebar:'M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1ZM8 3v18',book:'M12 5v16M12 5C9 2 4 3 2 3v16c5 0 8 0 10 2 2-2 5-2 10-2V3c-5 0-8 0-10 2Z',edit:'m15 4 5 5M4 16 16 4a2 2 0 0 1 4 4L8 20l-5 1 1-5Z',more:'M12 5h.01M12 12h.01M12 19h.01',note:'M14 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-9M10 14l9-9 2 2-9 9-3 1 1-3Z',folder:'M3 7V5h7l2 2h9v14H3V7ZM12 11v6M9 14h6',sort:'M7 3v18M3 7l4-4 4 4M13 8h4M13 13h6M13 18h8',collapse:'m7 3 5 5 5-5M7 21l5-5 5 5',search:'M16 16l5 5M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z',gear:'M9 3h6l1 3 3 1 2 5-2 5-3 1-1 3H9l-1-3-3-1-2-5 2-5 3-1 1-3ZM16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z',indent:'m3 8 4 4-4 4M11 5h10M11 12h10M11 19h10',outdent:'m7 8-4 4 4 4M11 5h10M11 12h10M11 19h10',undo:'m8 4-5 5 5 5M3 9h11a6 6 0 1 1 0 12',redo:'m16 4 5 5-5 5M21 9H10a6 6 0 1 0 0 12',bullet:'M3 5h.01M3 12h.01M3 19h.01M8 5h13M8 12h13M8 19h13',numbered:'M2 3h2v6M2 9h4M2 15c0-3 4-3 4 0 0 2-4 3-4 6h4M10 5h11M10 12h11M10 19h11'};
+const paths={today:'M4 6h16v15H4zM4 10h16M8 3v5M16 3v5',sidebar:'M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1ZM8 3v18',book:'M12 5v16M12 5C9 2 4 3 2 3v16c5 0 8 0 10 2 2-2 5-2 10-2V3c-5 0-8 0-10 2Z',edit:'m15 4 5 5M4 16 16 4a2 2 0 0 1 4 4L8 20l-5 1 1-5Z',more:'M12 5h.01M12 12h.01M12 19h.01',note:'M14 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-9M10 14l9-9 2 2-9 9-3 1 1-3Z',folder:'M3 7V5h7l2 2h9v14H3V7ZM12 11v6M9 14h6',sort:'M7 3v18M3 7l4-4 4 4M13 8h4M13 13h6M13 18h8',collapse:'m7 3 5 5 5-5M7 21l5-5 5 5',search:'M16 16l5 5M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z',gear:'M9 3h6l1 3 3 1 2 5-2 5-3 1-1 3H9l-1-3-3-1-2-5 2-5 3-1 1-3ZM16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z',indent:'m3 8 4 4-4 4M11 5h10M11 12h10M11 19h10',outdent:'m7 8-4 4 4 4M11 5h10M11 12h10M11 19h10',undo:'m8 4-5 5 5 5M3 9h11a6 6 0 1 1 0 12',redo:'m16 4 5 5-5 5M21 9H10a6 6 0 1 0 0 12',bullet:'M3 5h.01M3 12h.01M3 19h.01M8 5h13M8 12h13M8 19h13',numbered:'M2 3h2v6M2 9h4M2 15c0-3 4-3 4 0 0 2-4 3-4 6h4M10 5h11M10 12h11M10 19h11'};
 function icon(name){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('class','icon');svg.setAttribute('aria-hidden','true');const path=document.createElementNS(svg.namespaceURI,'path');path.setAttribute('d',paths[name]||paths.more);svg.append(path);return svg;}
-for(const [id,name] of Object.entries({back:'sidebar',add:'note','add-folder':'folder',sort:'sort',collapse:'collapse',find:'search','vault-menu':'gear','note-menu':'more'}))$(id).append(icon(name));
+for(const [id,name] of Object.entries({back:'sidebar',add:'note',today:'today','add-folder':'folder',sort:'sort',collapse:'collapse',find:'search','vault-menu':'gear','note-menu':'more'}))$(id).prepend(icon(name));
 for(const [kind,label,display]of [['checkbox','Checkbox','[ ]'],['indent','Indent','indent'],['outdent','Outdent','outdent'],['undo','Undo','undo'],['redo','Redo','redo'],['bullet','Bullet list','bullet'],['numbered','Numbered list','numbered'],['bold','Bold','B'],['italic','Italic','I'],['link','Wikilink','[[ ]]']]){
  const b=button('',()=>format(kind),label);b.title=label;b.onpointerdown=e=>e.preventDefault();b.append(paths[display]?icon(display):el(kind==='bold'?'b':kind==='italic'?'i':'span',display));$('formatting').append(b);
 }
@@ -258,7 +282,8 @@ function viewportChanged(){const v=window.visualViewport;const inset=v?Math.max(
 window.addEventListener('resize',viewportChanged);window.visualViewport?.addEventListener('resize',viewportChanged);window.visualViewport?.addEventListener('scroll',viewportChanged);
 // No repeated app title/header tools: every action remains in the floating pill.
 W.titlebar?.set?.([]).catch(()=>{});
-await loadSwitches();await refresh();renderViews();
+await loadSwitches();
+await refresh();renderViews();
 const recovered=stored('notes.drafts',[]);
 for(const raw of recovered){if(typeof raw.path!=='string'||typeof raw.content!=='string')continue;const n={...raw,hold:W.update.hold('Recovered unsaved note'),timer:null,busy:null,error:'Recovered local draft. Retry save after checking for changes.'};drafts.set(n.path,n);}
 if(drafts.size){await openNote(drafts.keys().next().value);notice('Recovered unsaved draft. Your local text is retained; retry save when ready.');}

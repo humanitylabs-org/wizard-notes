@@ -15,3 +15,14 @@ test('links: only web/mail URLs open externally; relative .md links are note lin
  assert.equal(links.noteLink('Shopping/Cat%20litter%20box.md'),'Shopping/Cat litter box');assert.equal(links.noteLink('Note.md#Heading'),'Note');
  for(const no of ['https://x.example/a.md','page.html','%E0%A4%A.md'])assert.equal(links.noteLink(no),null,no);
 });
+test('friendly-phone switch (issue 19): off keeps the old bar, confirm delete and nested note menu',()=>{
+ const css=fs.readFileSync(__dirname+'/../web/styles.css','utf8'),html=fs.readFileSync(__dirname+'/../web/index.html','utf8');
+ // Labels, Today and the empty state only show under html.friendly; the old icons stay in the bar.
+ assert.match(css,/\.bar-label\{display:none\}/);for(const id of ['add-folder','sort','collapse'])assert.match(html,new RegExp('id="'+id+'"'));
+ assert.match(html,/id="today"[^>]*hidden/);assert.match(html,/id="empty" hidden/);
+ for(const rule of css.split('}').filter(r=>/\.entry \.more\{display:block/.test(r)))assert.match(rule,/html\.friendly/);
+ // Off: Delete asks first and the note menu keeps "Note actions…"; on: one tap with Undo in the toast.
+ assert.match(source,/friendly\(\)\?button\('Delete',\(\)=>trash\(n\)\):button\('Delete',\(\)=>\{const body=sheet\('Move to trash\?'\)/);
+ assert.match(source,/if\(friendly\(\)\)\{const n=.*return;\}\n b\.append\(button\('Search'.*Note actions…/);
+ assert.match(source,/\$\('empty'\)\.hidden=!friendly\(\)/);
+});
