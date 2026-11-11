@@ -36,6 +36,9 @@ SWITCHES = [
     {'id': 'friendly-phone', 'name': 'Friendlier phone layout',
      'description': 'Labelled New note / Today / Search bar, row actions visible on touch screens, one-tap delete with Undo, one flat note menu and a desktop empty state.',
      'default': False, 'issues': ['humanitylabs-org/wizard-notes#19']},
+    {'id': 'auto-merge', 'name': 'Merge edits from two devices',
+     'description': 'When a note was changed on another device and the two sides touched different lines, both changes are kept and saved without a question; the same lines changed still opens the conflict sheet.',
+     'default': False, 'issues': ['humanitylabs-org/wizard-notes#30']},
 ]
 
 class Vault:
