@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "build:editor": "node scripts/build-editor.mjs",
-    "test": "node --test tests/conflict.test.cjs tests/merge.test.cjs tests/editor.test.cjs tests/live-preview.test.mjs tests/link-boundaries.test.mjs tests/images.test.cjs"
+    "test": "node --test tests/conflict.test.cjs tests/merge.test.cjs tests/editor.test.cjs tests/live-preview.test.mjs tests/link-boundaries.test.mjs tests/images.test.cjs tests/links.test.cjs"
   },
   "devDependencies": {
     "@codemirror/commands": "6.10.1",

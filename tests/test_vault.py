@@ -297,6 +297,8 @@ class HttpTests(unittest.TestCase):
         self.assertEqual(code,200);self.assertEqual(doc['contract'],'wizard.app-switches/1')
         row=next(x for x in doc['switches'] if x['id']=='tables-and-links')
         self.assertEqual((row['on'],row['default'],row['issues']),(False,False,['humanitylabs-org/wizard-notes#17']))
+        links=next(x for x in doc['switches'] if x['id']=='read-links')  # issue 34
+        self.assertEqual((links['on'],links['default'],links['issues']),(False,False,['humanitylabs-org/wizard-notes#34']))
         origin={'Origin':'http://127.0.0.1:'+str(self.port)}
         flip={'id':'tables-and-links','on':True}
         self.assertEqual(self.req('/api/switches',flip,headers=origin)[0],403)

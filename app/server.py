@@ -42,6 +42,9 @@ SWITCHES = [
     {'id': 'read-images', 'name': 'Images in Read view',
      'description': 'Read view shows Markdown images ![alt](https://...) and Obsidian embeds ![[photo.jpg]] inline, scaled to the column; tap one to see it full size.',
      'default': False, 'issues': ['humanitylabs-org/wizard-notes#33']},
+    {'id': 'read-links', 'name': 'Tappable links and tables in Read view',
+     'description': 'Read view turns bare web addresses (https://..., www.example.com, page.line.me/x), email addresses and phone numbers into links (phones start a call) and shows pipe tables as tables that scroll sideways on a phone. Text inside code is never linked.',
+     'default': False, 'issues': ['humanitylabs-org/wizard-notes#34']},
 ]
 # Vault images Read view may show (read-images). No SVG: it can carry script if opened directly.
 IMAGE_TYPES = {'.png':'image/png', '.jpg':'image/jpeg', '.jpeg':'image/jpeg', '.gif':'image/gif', '.webp':'image/webp', '.avif':'image/avif', '.bmp':'image/bmp'}
