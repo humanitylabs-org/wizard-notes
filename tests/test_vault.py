@@ -247,6 +247,18 @@ class HttpTests(unittest.TestCase):
             self.assertEqual(self.req('/mcp',rpc,headers={'Host':'vault.example.invalid'})[0],200)
             self.assertEqual(self.req('/api/note',{'path':'Denied.md','content':'x'},headers={'Host':'vault.example.invalid','Origin':'https://foreign.example.invalid'})[0],403)
 
+    def test_dropped_reply_draft_switch_and_its_stored_value_are_gone(self):
+        # notes#26: the dropped reply-draft switch (#20) is not listed, cannot be flipped, and a saved value is pruned.
+        self.assertNotIn('reply-draft',[x['id'] for x in self.req('/api/switches')[1]['switches']])
+        with tempfile.TemporaryDirectory() as d:
+            (Path(d)/'switches.json').write_text(json.dumps({'reply-draft':True,'tables-and-links':True}),encoding='utf-8')
+            v=s.Vault(d)
+            self.assertEqual(json.loads((Path(d)/'switches.json').read_text(encoding='utf-8')),{'tables-and-links':True})
+            self.assertNotIn('reply-draft',[x['id'] for x in v.switches()['switches']])
+            with self.assertRaises(s.Problem) as c:v.set_switch('reply-draft',True)
+            self.assertEqual(c.exception.status,404)
+        self.assertFalse((Path(__file__).parents[1]/'web'/'reply.js').exists())
+
     def test_switches_off_by_default_owner_flip_persists(self):
         # wizard.app-switches/1 (issue 19): off by default, box state, the Origin plus X-Wizard-Switch: 1 to flip.
         code,doc=self.req('/api/switches')
@@ -269,11 +281,6 @@ class HttpTests(unittest.TestCase):
             self.assertFalse((s.VAULT.root/'switches.json').exists(),'switch state stays outside the vault')
         finally:self.req('/api/switches',{'id':'friendly-phone','on':False},headers=sw)
         self.assertFalse(on(self.req('/api/switches')[1]))
-
-    def test_reply_draft_switch_listed_off_with_its_issue(self):
-        # Issue 20: Reply ships off by default, linked to its issue so the Tracker's Try it can flip it.
-        row=next(x for x in self.req('/api/switches')[1]['switches'] if x['id']=='reply-draft')
-        self.assertEqual((row['on'],row['default'],row['issues']),(False,False,['humanitylabs-org/wizard-notes#20']))
 
     def test_mcp_direct_credential_and_gateway_route(self):
         rpc={'jsonrpc':'2.0','id':1,'method':'tools/list'}

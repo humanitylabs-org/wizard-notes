@@ -36,9 +36,6 @@ SWITCHES = [
     {'id': 'friendly-phone', 'name': 'Friendlier phone layout',
      'description': 'Labelled New note / Today / Search bar, row actions visible on touch screens, one-tap delete with Undo, one flat note menu and a desktop empty state.',
      'default': False, 'issues': ['humanitylabs-org/wizard-notes#19']},
-    {'id': 'reply-draft', 'name': 'Reply to a note in Chats',
-     'description': 'A Reply control on an open note opens an unsent Chats draft with the note (or the selected passage) attached. Nothing is sent.',
-     'default': False, 'issues': ['humanitylabs-org/wizard-notes#20']},
 ]
 
 class Vault:
@@ -51,6 +48,7 @@ class Vault:
         Path(data).mkdir(parents=True, exist_ok=True)
         self.lock = threading.RLock()
         self.cache = {}
+        self._prune_switches()
         marker = Path(data) / '.initialized'
         if root is None and not marker.exists():
             if not any(self.root.iterdir()):
@@ -247,6 +245,19 @@ class Vault:
         except (OSError, ValueError): return {}
         return saved if isinstance(saved, dict) else {}
 
+    def _write_switches(self, saved):
+        temp = self.switch_file.with_name('.switches.json.tmp')
+        temp.write_text(json.dumps(saved), encoding='utf-8')
+        os.replace(temp, self.switch_file)
+
+    def _prune_switches(self):
+        # Drop stored values for switches that no longer exist (e.g. the dropped reply-draft, notes#26).
+        saved = self._saved_switches()
+        known = {sw['id'] for sw in SWITCHES}
+        kept = {k:v for k,v in saved.items() if k in known and isinstance(v, bool)}
+        if kept != saved:
+            with self.lock: self._write_switches(kept)
+
     def switches(self):
         saved = self._saved_switches()
         return {'contract':'wizard.app-switches/1','switches':[
@@ -259,9 +270,7 @@ class Vault:
         with self.lock:
             saved = {k:v for k,v in self._saved_switches().items() if k in known and isinstance(v, bool)}
             saved[switch_id] = on
-            temp = self.switch_file.with_name('.switches.json.tmp')
-            temp.write_text(json.dumps(saved), encoding='utf-8')
-            os.replace(temp, self.switch_file)
+            self._write_switches(saved)
         return self.switches()
 
     def link_target(self, target, current):
