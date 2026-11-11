@@ -313,6 +313,11 @@ class HttpTests(unittest.TestCase):
         finally:self.req('/api/switches',{'id':'tables-and-links','on':False},headers=sw)
         self.assertFalse(self.req('/api/switches')[1]['switches'][0]['on'])
 
+    def test_auto_merge_switch_listed_off(self):
+        # Issue 30: merging edits from two devices waits behind its own off-by-default switch.
+        row=next(x for x in self.req('/api/switches')[1]['switches'] if x['id']=='auto-merge')
+        self.assertEqual((row['on'],row['default'],row['issues']),(False,False,['humanitylabs-org/wizard-notes#30']))
+
     def test_mcp(self):
         def rpc(method,params={}):return self.req('/mcp',{'jsonrpc':'2.0','id':1,'method':method,'params':params})[1]['result']
         self.assertEqual(rpc('initialize')['serverInfo']['name'],'notes')
