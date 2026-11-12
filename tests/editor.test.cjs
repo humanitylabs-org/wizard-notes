@@ -9,7 +9,8 @@ test('indent selection excludes following line at boundary',()=>{assert.equal(ed
 test('Enter continues bullets, ordered lists and unchecked tasks',()=>{for(const [text,want]of [['- one','- one\n- '],['  9. one','  9. one\n  10. '],['- [x] done','- [x] done\n- [ ] ']])assert.equal(context.continueList(text,text.length,text.length).text,want);});
 test('empty list item ends list, ordinary paragraph uses native Enter',()=>{for(const text of ['- ','  1. ','- [ ] '])assert.equal(context.continueList(text,text.length,text.length).text,'');assert.equal(context.continueList('plain',5,5),null);});
 test('links: only web/mail URLs open externally; relative .md links are note links',()=>{
- const links=vm.createContext({URL});vm.runInContext(source.slice(source.indexOf('function safeUrl('),source.indexOf('function openLink(')),links);
+ let tel=false;const links=vm.createContext({URL,links:()=>tel});vm.runInContext(source.slice(source.indexOf('function safeUrl('),source.indexOf('function openLink(')),links);
+ assert.equal(links.safeUrl('tel:+66925537070'),null,'tel: only with the read-links switch (issue 34)');tel=true;assert.equal(links.safeUrl('tel:+66925537070').protocol,'tel:');tel=false;
  assert.equal(links.safeUrl('https://example.com/a?b=1').href,'https://example.com/a?b=1');assert.equal(links.safeUrl('mailto:a@example.com').protocol,'mailto:');
  for(const bad of ['javascript:alert(1)','data:text/html,x','file:///etc/passwd','/api/note','Other.md'])assert.equal(links.safeUrl(bad),null,bad);
  assert.equal(links.noteLink('Shopping/Cat%20litter%20box.md'),'Shopping/Cat litter box');assert.equal(links.noteLink('Note.md#Heading'),'Note');
