@@ -402,13 +402,26 @@ class Handler(BaseHTTPRequestHandler):
         raw = value if isinstance(value,bytes) else b'' if value is None else json.dumps(value).encode()
         self.send_response(status)
         for key,val in {'Content-Type':mime,'Content-Length':str(len(raw)),'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https:; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'"}.items(): self.send_header(key,val)
+        if status == 200 and self.opaque_asset(): self.send_header('Access-Control-Allow-Origin','*')
         self.end_headers()
         if self.command != 'HEAD': self.wfile.write(raw)
+
+    # Under the shell's browser boundary (wizard-os#133) Notes runs in a sandboxed frame with an opaque origin, so the
+    # browser asks for its module script (app.js and what it imports) with `Origin: null` and needs a CORS answer.
+    # Only the app's own public files get that: GET/HEAD of a script, style, font or picture under web/, no cookies
+    # (a module script from an opaque page carries none). The API still refuses `Origin: null`; the shell carries the
+    # page's own API calls.
+    ASSETS = {'.js','.css','.woff2','.svg','.png','.jpg'}
+    def opaque_asset(self):
+        if self.command not in {'GET','HEAD'} or self.headers.get('Origin') != 'null': return False
+        path = unquote(urlsplit(self.path).path)
+        return not path.startswith('/api/') and Path(path).suffix in self.ASSETS
 
     def trusted(self, write=False):
         if urlsplit(self.path).path == '/healthz': return
         host = self.headers.get('Host','').lower()
         if not host or (HOSTS and host not in HOSTS and host != INTERNAL_HOST): raise Problem(403,'Unknown host.')
+        if not write and self.opaque_asset(): return
         origin = self.headers.get('Origin','')
         same_host = bool(origin and urlsplit(origin).scheme in {'http','https'} and urlsplit(origin).netloc.lower() == host)
         if (origin and origin not in ORIGINS and not same_host) or (write and not origin and self.headers.get('Sec-Fetch-Site') in {'cross-site','same-site'}):
