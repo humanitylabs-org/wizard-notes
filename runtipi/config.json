@@ -10,7 +10,7 @@
     "app"
   ],
   "description": "Private-by-default plain Markdown notes, nested folders, linked thoughts and search.",
-  "tipi_version": 3,
+  "tipi_version": 4,
   "version": "0.1.0-alpha.9",
   "source": "https://github.com/humanitylabs-org/wizard-notes",
   "exposable": false,
