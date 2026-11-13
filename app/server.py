@@ -42,9 +42,6 @@ SWITCHES = [
     {'id': 'read-images', 'name': 'Images in notes',
      'description': 'Read view and Live Preview show Markdown images ![alt](https://...) and Obsidian embeds ![[photo.jpg]] inline, scaled to the column (in Live Preview the source returns on the line you edit); tap one to see it full size.',
      'default': False, 'issues': ['humanitylabs-org/wizard-notes#33']},
-    {'id': 'read-links', 'name': 'Tappable links and tables in Read view',
-     'description': 'Read view turns bare web addresses (https://..., www.example.com, page.line.me/x), email addresses and phone numbers into links (phones start a call) and shows pipe tables as tables that scroll sideways on a phone. Text inside code is never linked.',
-     'default': False, 'issues': ['humanitylabs-org/wizard-notes#34']},
 ]
 # Vault images Read view may show (read-images). No SVG: it can carry script if opened directly.
 IMAGE_TYPES = {'.png':'image/png', '.jpg':'image/jpeg', '.jpeg':'image/jpeg', '.gif':'image/gif', '.webp':'image/webp', '.avif':'image/avif', '.bmp':'image/bmp'}
@@ -302,7 +299,7 @@ class Vault:
         os.replace(temp, self.switch_file)
 
     def _prune_switches(self):
-        # Drop stored values for switches that no longer exist (e.g. the dropped reply-draft, notes#26).
+        # Drop stored values for switches that no longer exist (the dropped reply-draft, notes#26; read-links, on for everyone since notes#34).
         saved = self._saved_switches()
         known = {sw['id'] for sw in SWITCHES}
         kept = {k:v for k,v in saved.items() if k in known and isinstance(v, bool)}
