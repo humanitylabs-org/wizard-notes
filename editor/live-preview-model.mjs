@@ -77,7 +77,10 @@ export function liveTables(text, active = [], tree) {
 
 // `on` is the owner switch tables-and-links (issue 17). Off, the model is exactly the earlier one:
 // no tables, links keep their source and the wiki alias splits on a bare pipe only.
-export function previewModel(text, active = [], {on = false} = {}) {
+// `image(raw)` (switch read-images, notes#33): when given, an image embed off the caret line (![[photo.jpg]],
+// ![alt](https://...)) for which it returns true becomes an image widget; its source returns on the caret line.
+export const IMAGE_EMBED = /!\[\[[^\]\n]+\]\]|!\[[^\]\n]*\]\((?:<[^>\n]+>|[^\s)]+)(?:\s+"[^"\n]*")?\)/g;
+export function previewModel(text, active = [], {on = false, image = null} = {}) {
   const lines = []; let from = 0;
   for (const value of text.split('\n')) {
     const to = from + value.length;
@@ -99,9 +102,17 @@ export function previewModel(text, active = [], {on = false} = {}) {
   const inTable = (a, b) => tables.some(t => !t.active && a < t.to && b > t.from);
   const codeRanges = nodes.filter(n => ['FencedCode', 'CodeBlock', 'InlineCode'].includes(n.name));
   const inCode = (a,b) => codeRanges.some(n => a >= n.from && b <= n.to);
+  const images = [];
+  if (image) for (const m of text.matchAll(IMAGE_EMBED)) {
+    const item = {from:m.index, to:m.index+m[0].length, kind:'image', raw:m[0]};
+    if (inCode(item.from, item.to) || /\\$/.test(text.slice(0,m.index)) || !image(m[0])) continue;
+    images.push(item);
+    if (!lineAt(item.from).active) replacements.push(item);
+  }
+  const inImage = (a, b) => images.some(i => a < i.to && b > i.from);
   const wiki = [];
   for (const m of text.matchAll(/\[\[([^\]\n]+)\]\]/g)) {
-    if (inCode(m.index, m.index + m[0].length) || /\\$/.test(text.slice(0,m.index))) continue;
+    if (inCode(m.index, m.index + m[0].length) || /\\$/.test(text.slice(0,m.index)) || inImage(m.index, m.index + m[0].length)) continue;
     const [target, ...alias] = m[1].split(on ? /\\?\|/ : '|'); // [[Note\|alias]] is Obsidian's in-table form
     const item = {from:m.index, to:m.index+m[0].length, kind:'wiki', target, label:alias.join('|')||target};
     wiki.push(item);
@@ -144,7 +155,7 @@ export function previewModel(text, active = [], {on = false} = {}) {
       if (n.parent === 'InlineCode') { if (!line.active) replacements.push({from:n.from,to:n.to,kind:'hide'}); }
       else { line.classes.push('cm-lp-fence'); if (!line.active) replacements.push({from:line.from,to:line.to,kind:'hide'}); }
     }
-    if (n.name === 'Link' && !wiki.some(w=> w.from < n.to && w.to > n.from)) {
+    if (n.name === 'Link' && !wiki.some(w=> w.from < n.to && w.to > n.from) && !inImage(n.from, n.to)) {
       // Obsidian: off the caret line an inline link shows only its text; the raw [text](url) returns
       // on the active line. Reference/empty and multiline links keep their source:
       // a ViewPlugin replacement cannot consume a line break, even in a link title.

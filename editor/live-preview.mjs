@@ -7,9 +7,14 @@ export {EditorView, tableBlocks}; // Standard CM DOM lookup API; useful to host 
 const refresh = StateEffect.define();
 class PreviewWidget extends WidgetType {
   constructor(item, options) { super(); this.item=item; this.options=options; }
-  eq(other) { return JSON.stringify(this.item) === JSON.stringify(other.item); }
+  // An image keeps its element (no reload) while the text around it changes.
+  eq(other) { return this.item.kind==='image' ? other.item.kind==='image' && this.item.raw===other.item.raw : JSON.stringify(this.item) === JSON.stringify(other.item); }
   toDOM(view) {
     const r=this.item;
+    if (r.kind==='image') {
+      const box=document.createElement('span');box.className='cm-lp-image';box.append(this.options.renderImage(r.raw));
+      return box;
+    }
     if (r.kind==='wiki') {
       const link=document.createElement('button');link.type='button';link.className='cm-lp-wiki';link.textContent=r.label;
       link.setAttribute('aria-label','Open linked note '+r.label);
@@ -85,7 +90,7 @@ function liveDecorations(options) {
     }
     build(view) {
       const active=view.hasFocus ? view.state.selection.ranges.map(r=>({from:r.from,to:r.to})) : [];
-      const model=previewModel(view.state.doc.toString(),active,{on:switchOn(options)}), ranges=[];
+      const model=previewModel(view.state.doc.toString(),active,{on:switchOn(options),image:options.renderImage&&options.imagesOn?.()?options.isImage:null}), ranges=[];
       for (const line of model.lines) {
         const classes=[...line.classes,...(line.active?['cm-lp-active']:[]),...(line.bullet?['cm-lp-bullet']:[])];
         const attributes={class:classes.join(' ')};
