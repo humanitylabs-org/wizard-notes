@@ -11,7 +11,7 @@
   ],
   "description": "Private-by-default plain Markdown notes, nested folders, linked thoughts and search.",
   "tipi_version": 3,
-  "version": "0.1.0-alpha.8",
+  "version": "0.1.0-alpha.9",
   "source": "https://github.com/humanitylabs-org/wizard-notes",
   "exposable": false,
   "supported_architectures": [
@@ -19,7 +19,7 @@
     "arm64"
   ],
   "created_at": 1792886400000,
-  "updated_at": 1794550237935,
+  "updated_at": 1794584360550,
   "dynamic_config": true,
   "min_tipi_version": "4.8.0",
   "uid": 1000,

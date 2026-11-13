@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Notes Markdown vault API",
-    "version": "0.1.0-alpha.8"
+    "version": "0.1.0-alpha.9"
   },
   "paths": {
     "/api/tree": {
