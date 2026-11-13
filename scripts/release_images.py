@@ -43,15 +43,28 @@ if a.push_ghcr:
     if os.environ.get('GH_TOKEN'):token_request.add_header('Authorization','Basic '+__import__('base64').b64encode((os.environ.get('GITHUB_ACTOR','x')+':'+os.environ['GH_TOKEN']).encode()).decode())
     with urllib.request.urlopen(token_request) as response:
         read_token=json.load(response)['token']
-    tags=['sha-'+a.commit]+['sha-'+a.commit+'-'+arch for arch in ['amd64','arm64']]
-    if a.release_version:tags.append(version)
-    for tag in tags:
+    def exists(tag):
         request=urllib.request.Request('https://'+registry+'/v2/'+repository+'/manifests/'+tag,method='HEAD',headers={'Authorization':'Bearer '+read_token,'Accept':'application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.v2+json'})
         try:
-            with urllib.request.urlopen(request) as response:raise SystemExit('Refusing existing immutable image tag '+tag)
+            with urllib.request.urlopen(request):return True
         except urllib.error.HTTPError as error:
             if error.code!=404:raise
-    if a.release_version:assert os.environ.get('GITHUB_REF')=='refs/tags/v'+version
+            return False
+    if a.release_version:
+        assert os.environ.get('GITHUB_REF')=='refs/tags/v'+version
+        if exists(version):raise SystemExit('Refusing existing immutable image tag '+version)
+    shas=['sha-'+a.commit]+['sha-'+a.commit+'-'+arch for arch in ['amd64','arm64']]
+    built=[tag for tag in shas if exists(tag)]
+    if built and a.release_version and len(built)==len(shas):
+        # The main push run already built, smoked and pushed this exact commit (a release merge runs it first). Add the
+        # version tag to that same multi-arch image after checking its revision label; never rebuild an immutable tag.
+        immutable='ghcr.io/'+repository+':sha-'+a.commit
+        found=json.loads(subprocess.check_output([*docker,'buildx','imagetools','inspect',immutable,'--format','{{json .Image}}']))
+        assert set(found)=={'linux/amd64','linux/arm64'}, found.keys()
+        assert all(v['config']['Labels']['org.opencontainers.image.revision']==a.commit for v in found.values())
+        subprocess.run([*docker,'buildx','imagetools','create','-t',image,immutable],check=True)
+        print(json.dumps({'commit':a.commit,'version':version,'image':image,'from':immutable}));sys.exit(0)
+    if built:raise SystemExit('Refusing existing immutable image tag '+built[0])
 a.output.mkdir(parents=True,exist_ok=True)
 receipt={'commit':a.commit,'version':version,'image':image,'architectures':{}}
 for arch,command in zip(['amd64','arm64'],commands):
