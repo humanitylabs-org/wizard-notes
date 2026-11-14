@@ -33,3 +33,17 @@ test('the image rule is off unless the read-images switch is on, and raw HTML is
   assert.match(img,/onclick=\(\)=>showImage\(image\)/);
   assert.doesNotMatch(source,/innerHTML|insertAdjacentHTML|outerHTML/);
 });
+
+test('notes#49: images in a table cell reserve a 4:3 box at most the cell width, so rows do not grow as photos load',()=>{
+  vm.runInContext(source.slice(source.indexOf('const CELL_IMAGE='),source.indexOf('// Tap an image')),context);
+  assert.equal(context.imageHeight('![[cars/c1.jpg|180]]'),139);
+  assert.equal(context.imageHeight('![[cars/c1.jpg\\|180]]'),139,'escaped pipe as written inside a table');
+  assert.equal(context.imageHeight('![[big.jpg|900]]'),178,'wider than the cell: capped');
+  assert.equal(context.imageHeight('![x](https://x.test/a.jpg)'),178,'no size: assume the full cell width');
+  assert.equal(context.imageHeight('![[a.jpg|100]] and ![[b.jpg|100]]'),2*79);
+  assert.equal(context.imageHeight('Toyota Hilux'),0);
+  assert.equal(context.imageHeight('![[Some note]]'),0,'a note embed is not an image');
+  const css=fs.readFileSync(__dirname+'/../web/styles.css','utf8');
+  assert.match(css,/#read \.md-table \.md-img\[width\],#source \.md-table \.md-img\[width\]\{aspect-ratio:4\/3;object-fit:cover\}/);
+  assert.match(source,/imageHeight:t=>imageHeight\(t\)/,'Live Preview gets the estimate');
+});

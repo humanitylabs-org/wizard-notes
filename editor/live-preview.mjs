@@ -1,7 +1,7 @@
 import {EditorState, EditorSelection, StateEffect, StateField, Transaction} from '@codemirror/state';
 import {EditorView, Decoration, ViewPlugin, WidgetType, keymap, drawSelection, placeholder} from '@codemirror/view';
 import {history, undo, redo, defaultKeymap, historyKeymap, isolateHistory} from '@codemirror/commands';
-import {RawMarkdown, previewModel, liveTables, tableBlocks, autocapEdits} from './live-preview-model.mjs';
+import {RawMarkdown, previewModel, liveTables, tableBlocks, tableHeight, autocapEdits} from './live-preview-model.mjs';
 
 export {EditorView, tableBlocks}; // Standard CM DOM lookup API; useful to host integrations and browser QA.
 const refresh = StateEffect.define();
@@ -39,6 +39,8 @@ class PreviewWidget extends WidgetType {
 class TableWidget extends WidgetType {
   constructor(table, options) { super(); this.table=table; this.options=options; this.key=JSON.stringify([table.align,table.rows]); }
   eq(other) { return this.key === other.key; }
+  // Reserve about the drawn height for tables outside the viewport (notes#49); CodeMirror measures it once drawn.
+  get estimatedHeight() { return this.estimate ??= tableHeight(this.table, this.options.imagesOn?.() ? this.options.imageHeight : undefined); }
   toDOM(view) {
     const wrap=this.options.renderTable ? this.options.renderTable(this.table) : fallbackTable(this.table);
     wrap.classList.add('cm-lp-table');

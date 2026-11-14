@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {RawMarkdown,normalize,previewModel,autocapEdits,tableBlocks,liveTables} from '../editor/live-preview-model.mjs';
+import {RawMarkdown,normalize,previewModel,autocapEdits,tableBlocks,liveTables,tableHeight} from '../editor/live-preview-model.mjs';
 const model=(t,pos)=>previewModel(t,pos===undefined?[]:[{from:pos,to:pos}]);
 test('headings render while active line reveals only its own marks',()=>{const t='# Heading\n## Second\nPlain';const m=model(t,12);assert.ok(m.lines[0].classes.includes('cm-lp-h1'));assert.ok(m.lines[1].classes.includes('cm-lp-h2'));assert.ok(m.replacements.some(r=>r.from===0&&r.to===2));assert.ok(!m.replacements.some(r=>r.from===10));assert.ok(m.lines[1].active);});
 test('emphasis, nested emphasis, strike and inline code are decorated not serialized',()=>{const t='**bold and *italic*** ~~done~~ `code`';const m=model(t);assert.ok(m.marks.some(r=>r.class==='cm-lp-strong'));assert.ok(m.marks.some(r=>r.class==='cm-lp-em'));assert.ok(m.marks.some(r=>r.class==='cm-lp-inline-code'));assert.ok(m.marks.some(r=>r.class==='cm-lp-strike'));assert.equal(model(t,5).replacements.length,0);assert.equal(new RawMarkdown(t).raw,t);});
@@ -133,4 +133,17 @@ test('image embeds become image widgets off the caret line only when the read-im
   const caret=t.indexOf('apt-fb');
   assert.deepEqual(previewModel(t,[{from:caret,to:caret}],{image:isImage}).replacements.filter(r=>r.kind==='image').map(r=>r.raw),['![door](https://x.test/a.jpg)'],'source returns on the caret line');
   assert.equal(previewModel('\\![[a.jpg]]',[],{image:()=>true}).replacements.filter(r=>r.kind==='image').length,0,'escaped embed stays text');
+});
+
+test('notes#49: a table not yet drawn reserves about its drawn height, photo rows included',()=>{
+  const rows=n=>Array.from({length:n},(_,i)=>`| ![[cars/c${i}.jpg\\|180]] | Car ${i} | 2015 | ok |`).join('\n');
+  const note=`# Cars\n\n| Photo | Model | Year | Notes |\n|---|---|---|---|\n${rows(19)}\n`;
+  const [t]=liveTables(note);
+  assert.equal(t.rows.length,20);
+  assert.equal(t.rows[1].cells[0].text,'![[cars/c0.jpg|180]]','the escaped pipe stays inside the image cell');
+  const plain=tableHeight(t),photos=tableHeight(t,text=>text.startsWith('![[')?139:0);
+  assert.ok(plain>=20*33&&plain<20*45,'text rows: one short line each ('+plain+')');
+  assert.equal(photos,16+33+19*(139+13),'photo rows: the reserved image box plus cell padding');
+  const long=tableHeight({rows:[{header:true,cells:[{text:'x'.repeat(95)}]}]});
+  assert.equal(long,16+4*20+13,'a long cell wraps onto more lines');
 });

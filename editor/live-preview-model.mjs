@@ -75,6 +75,21 @@ export function liveTables(text, active = [], tree) {
   });
 }
 
+// About how tall a rendered table will be, in px, so CodeMirror reserves that much for a table it has not
+// drawn yet (notes#49). Without it each table counted as a few text lines; on a long note with photo
+// rows the page jumped and swipes skipped whole tables once the real heights were measured.
+// image(text) gives the px height the images in a cell take (0 when it has none or images are off).
+export const TABLE_ROW = 33, TABLE_CHARS = 30;
+export function tableHeight(table, image = () => 0) {
+  let height = 16; // the widget's top and bottom margin
+  for (const row of table.rows) {
+    let tallest = 0;
+    for (const cell of row.cells) tallest = Math.max(tallest, Math.ceil(Math.max(1, cell.text.length) / TABLE_CHARS) * 20, image(cell.text) || 0);
+    height += Math.max(tallest + 13, TABLE_ROW);
+  }
+  return Math.round(height);
+}
+
 // `on` is the owner switch tables-and-links (issue 17). Off, the model is exactly the earlier one:
 // no tables, links keep their source and the wiki alias splits on a bare pipe only.
 // `image(raw)` (switch read-images, notes#33): when given, an image embed off the caret line (![[photo.jpg]],
