@@ -24,7 +24,7 @@ test('taking the saved version clears a conflict',()=>{
 test('refresh on return never touches a draft, and the sheet offers the saved version',()=>{
   const fresh=source.slice(source.indexOf('async function freshenOpenNote('),source.indexOf('async function save('));
   assert.match(fresh,/dirty\(n\)\)return;/);
-  assert.match(source,/else freshenOpenNote\(\)/);
+  assert.match(source,/else catchUp\(\)/);
   const sheet=source.slice(source.indexOf('async function resolveConflict('));
   assert.match(sheet,/Use the saved version/);assert.match(sheet,/Save draft as a new note/);
   assert.match(source,/if\(e\.status===409\)return resolveConflict\(n\)/);
