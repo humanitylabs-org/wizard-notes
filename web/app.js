@@ -41,7 +41,8 @@ async function api(route,body,method='POST',keepalive=false){let r;try{r=await f
   if(!r.ok||!v){const e=new Error(v?.error||'Unable to save. Retry.');e.status=r.status;e.transient=!v||r.status>=500;throw e;}return v;}
 function allEntries(nodes=state.tree){return nodes.flatMap(n=>[n,...(n.children?allEntries(n.children):[])]);}
 function folderChildren(path){return path?allEntries().find(n=>n.path===path)?.children||[]:state.tree;}
-async function refresh(){state.tree=(await api('tree')).children;renderTree();}
+let treeSig='';
+async function refresh(){const t=await api('tree');treeSig=JSON.stringify(t.children);state.tree=t.children;renderTree();}
 function ordered(nodes){return [...nodes].sort((a,b)=>(a.type!==b.type?(a.type==='folder'?-1:1):0)||(state.sort==='modified'?(b.modified||0)-(a.modified||0):0)||collator.compare(a.name,b.name));}
 function persistExpanded(){store('notes.expanded',[...state.expanded]);}
 function toggleFolder(path){state.folder=path;state.expanded.has(path)?state.expanded.delete(path):state.expanded.add(path);persistExpanded();renderTree();}
@@ -89,7 +90,13 @@ function merge3(base,mine,theirs){if(mine===theirs||theirs===base)return mine;if
 function showMerged(n){if(state.note!==n)return;const v=editor.view,had=v.hasFocus,old=v.state.doc.toString(),pos=v.state.selection.main.head;editor.setValue(n.content);if(state.read)markdown(n.content,$('read'));if(!had)return;const now=editor.view.state.doc.toString();let p=0;while(p<old.length&&p<now.length&&old[p]===now[p])p++;let s=0;while(s<old.length-p&&s<now.length-p&&old[old.length-1-s]===now[now.length-1-s])s++;editor.select(pos<=p?pos:pos>=old.length-s?pos+now.length-old.length:Math.min(pos,now.length));}
 // Coming back to Notes (phone woken, tab refocused): re-read the open note so edits start from the newest copy.
 let freshening=null;
-async function freshenOpenNote(){const n=state.note;if(!n||freshening||n.busy||dirty(n))return;freshening=(async()=>{try{const latest=await api('note?path='+encodeURIComponent(n.path));if(state.note!==n||n.busy||dirty(n))return;if(takeLatest(n,latest)){drafts.set(n.path,n);$('title').value=n.titleDraft;editor.setValue(n.content);if(state.read)markdown(n.content,$('read'));saveStatus(n);}}catch{}finally{freshening=null;}})();return freshening;}
+async function freshenOpenNote(){const n=state.note;if(!n||freshening||n.busy||editor.composing||dirty(n))return;freshening=(async()=>{try{const latest=await api('note?path='+encodeURIComponent(n.path));if(state.note!==n||n.busy||editor.composing||dirty(n))return;if(takeLatest(n,latest)){drafts.set(n.path,n);$('title').value=n.titleDraft;showMerged(n);saveStatus(n);}}catch(e){// Renamed, moved or deleted on another device: a clean copy has nothing to keep, so close it and say so.
+  if(e.status===404&&state.note===n&&!n.busy&&!dirty(n)){drafts.delete(n.path);openFolder(parent(n.path));notice('This note was moved or deleted on another device.');}}finally{freshening=null;}})();return freshening;}
+// Changes made on another device (issue #46): re-read the note list and the open note whenever Notes comes back
+// (focus, visible again, back online, restored from the back/forward cache) and every 15 s while it stays on screen.
+const CATCH_UP_MS=15000;let catching=null;
+async function refreshTree(){const t=await api('tree'),sig=JSON.stringify(t.children);if(sig===treeSig)return false;treeSig=sig;state.tree=t.children;renderTree();return true;}
+function catchUp(){if(document.hidden||catching)return catching;catching=(async()=>{try{await refreshTree();}catch{}await freshenOpenNote();})().finally(()=>{catching=null;});return catching;}
 
 function persistDrafts(){store('notes.drafts',[...drafts.values()].filter(dirty).map(({path,content,rev,title,titleDraft,saved})=>({path,content,rev,title,titleDraft,saved})));}
 function changed(n){n.error=null;persistDrafts();if(!n.hold)n.hold=W.update.hold('Unsaved note: '+n.path);clearTimeout(n.timer);n.timer=editor.composing?null:setTimeout(()=>act(()=>save(n)),600);saveStatus(n);}
@@ -328,8 +335,9 @@ for(const [id,name] of Object.entries({back:'sidebar',add:'note',today:'today','
 for(const [kind,label,display]of [['checkbox','Checkbox','[ ]'],['indent','Indent','indent'],['outdent','Outdent','outdent'],['undo','Undo','undo'],['redo','Redo','redo'],['bullet','Bullet list','bullet'],['numbered','Numbered list','numbered'],['bold','Bold','B'],['italic','Italic','I'],['link','Wikilink','[[ ]]']]){
  const b=button('',()=>format(kind),label);b.title=label;b.onpointerdown=e=>e.preventDefault();b.append(paths[display]?icon(display):el(kind==='bold'?'b':kind==='italic'?'i':'span',display));$('formatting').append(b);
 }
-document.addEventListener('visibilitychange',()=>{if(document.hidden){for(const n of drafts.values())if(dirty(n))act(()=>save(n,true));}else freshenOpenNote();});
-window.addEventListener('focus',()=>freshenOpenNote());
+document.addEventListener('visibilitychange',()=>{if(document.hidden){for(const n of drafts.values())if(dirty(n))act(()=>save(n,true));}else catchUp();});
+for(const ev of ['focus','online','pageshow'])window.addEventListener(ev,()=>catchUp());
+setInterval(()=>catchUp(),CATCH_UP_MS);
 window.addEventListener('pagehide',()=>{for(const n of drafts.values())if(dirty(n))act(()=>save(n,true));});
 function viewportChanged(){const v=window.visualViewport;const inset=v?Math.max(0,innerHeight-v.height-v.offsetTop):0;$('app').style.setProperty('--keyboard-inset',inset+'px');if(!state.read)autoSize();renderViews();if(!state.read&&document.activeElement?.closest?.('#source'))requestAnimationFrame(()=>keepCaretClear(editor.caretRect()));}
 window.addEventListener('resize',viewportChanged);window.visualViewport?.addEventListener('resize',viewportChanged);window.visualViewport?.addEventListener('scroll',viewportChanged);
