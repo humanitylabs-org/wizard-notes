@@ -20,7 +20,7 @@ function switchesChanged(){document.documentElement.classList.toggle('friendly',
 async function loadSwitches(){const was=JSON.stringify(switches);try{const r=await fetch('api/switches',{cache:'no-store',headers:SW_HEAD});if(r.ok)switches=(await r.json()).switches||[];}catch{}if(was!==JSON.stringify(switches))switchesChanged();}
 async function toggleSwitch(id){const r=await fetch('api/switches',{method:'POST',headers:{...SW_HEAD,'Content-Type':'application/json'},body:JSON.stringify({id,on:!switchOn(id)})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'Could not change the switch.');switches=d.switches||switches;switchesChanged();}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadSwitches();});
-const editor=createLiveEditor($('source'),{transform:transformText,continueList,onWiki:target=>act(()=>wiki(target)),onLink:href=>openLink(href),renderTable:t=>renderTable(t),switchOn:()=>switchOn('tables-and-links'),imagesOn:()=>switchOn('read-images'),isImage:t=>!!imageSource(t),renderImage:t=>mdImage(t),onChange:content=>{const n=state.note;if(!n)return;n.content=content;changed(n);},keepCaretVisible:rect=>keepCaretClear(rect)});
+const editor=createLiveEditor($('source'),{transform:transformText,continueList,onWiki:target=>act(()=>wiki(target)),onLink:href=>openLink(href),renderTable:t=>renderTable(t),switchOn:()=>switchOn('tables-and-links'),imagesOn:()=>switchOn('read-images'),isImage:t=>!!imageSource(t),renderImage:t=>mdImage(t),imageHeight:t=>imageHeight(t),onChange:content=>{const n=state.note;if(!n)return;n.content=content;changed(n);},keepCaretVisible:rect=>keepCaretClear(rect)});
 // Keep the caret line clear of the floating formatting bar and the keyboard, with a line of breathing room.
 const CARET_ROOM=56;
 function keepCaretClear(rect){
@@ -259,6 +259,10 @@ function mdImage(t){
  img.onclick=()=>showImage(image);img.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showImage(image);}};
  img.src=image.src;return img;
 }
+// The space the images in a table cell take once drawn (notes#49): table thumbnails are a fixed 4:3 box
+// (styles.css), at most the cell's width. Live Preview uses it to reserve room for tables it has not drawn.
+const CELL_IMAGE=232;
+function imageHeight(text){let h=0;for(const t of text.match(new RegExp(IMAGE_RX,'g'))||[]){const image=imageSource(t);if(image)h+=Math.round(Math.min(image.width||CELL_IMAGE,CELL_IMAGE)*3/4)+4;}return h;}
 // Tap an image: full size in a dialog over the note; a tap, Escape or Back closes it.
 function showImage(image){const d=el('dialog',undefined,'lightbox'),big=el('img');big.alt=image.alt;if(image.external)big.referrerPolicy='no-referrer';big.src=image.src;d.setAttribute('aria-label',image.alt||'Image');d.append(big);let back=null;
  // Close and clean up directly; the dialog close event is not delivered everywhere (seen in headless Chrome).
