@@ -251,10 +251,12 @@ function imageSource(t){
  let path=href.replace(/[?#].*$/,'');try{path=decodeURIComponent(path);}catch{}
  return IMAGE_EXT.test(path)?{src:vaultImage(path),alt,width,external:false}:null;
 }
+// A photo shows a soft pulsing box until it has arrived (notes#53), so a note never looks finished while photos load.
 function mdImage(t){
  const image=imageSource(t);if(!image){const rest=document.createDocumentFragment();rest.append('!');inline(t.slice(1),rest);return rest;}
  const img=el('img',undefined,'md-img');img.alt=image.alt;img.loading='lazy';img.decoding='async';if(image.external)img.referrerPolicy='no-referrer';if(image.width)img.width=image.width;
  img.tabIndex=0;img.setAttribute('role','button');img.title=image.alt||'Open image';
+ img.classList.add('md-img-loading');img.onload=()=>img.classList.remove('md-img-loading');
  img.onerror=()=>img.replaceWith(el('span',image.alt||'Image','md-img-missing'));
  img.onclick=()=>showImage(image);img.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showImage(image);}};
  img.src=image.src;return img;

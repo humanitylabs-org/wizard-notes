@@ -8,6 +8,7 @@ import os
 import re
 import secrets
 import threading
+import time
 import uuid
 from datetime import datetime, timezone, timedelta
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -46,6 +47,7 @@ SWITCHES = [
 # Vault images Read view may show (read-images). No SVG: it can carry script if opened directly.
 IMAGE_TYPES = {'.png':'image/png', '.jpg':'image/jpeg', '.jpeg':'image/jpeg', '.gif':'image/gif', '.webp':'image/webp', '.avif':'image/avif', '.bmp':'image/bmp'}
 IMAGE_LIMIT = 25_000_000
+IMAGE_INDEX_TTL = 30
 
 class Vault:
     def __init__(self, data, root=None):
@@ -250,9 +252,14 @@ class Vault:
         return {'path':matches[0]['path'] if matches else None,'target':target}
 
     def image(self, target, current=''):
+        path, mime = self.image_file(target, current)
+        return path.read_bytes(), mime
+
+    def image_file(self, target, current=''):
         # A vault image for ![[photo.jpg]] / ![alt](photo.jpg), found like Obsidian: next to the note, then the
         # vault-relative path, then (bare names only) the shortest path with that file name. Every candidate goes
-        # through path(): no dot segments, hidden names or symbolic links.
+        # through path(): no dot segments, hidden names or symbolic links. Returns (file, mime); the caller reads
+        # it outside the vault lock, so a page of photos loads in parallel (notes#53).
         if not isinstance(target, str) or not isinstance(current, str): raise Problem(400, 'Invalid path.')
         target = target.split('|')[0].split('#')[0].strip().lstrip('/')
         mime = IMAGE_TYPES.get(Path(target).suffix.lower())
@@ -274,16 +281,29 @@ class Vault:
                 if p.is_file(): found = p; break
             if found is None and '/' not in target:
                 self.path(target)
-                matches = []
+                found = self._named_image(target)
+            if found is None: raise Problem(404, 'Image not found.')
+        if found.stat().st_size > IMAGE_LIMIT: raise Problem(413, 'Image too large.')
+        return found, IMAGE_TYPES.get(found.suffix.lower(), mime)
+
+    def _named_image(self, name):
+        # Bare-name lookup through a short-lived index of the vault's file names (notes#53): a note with many
+        # ![[photo.jpg]] embeds walked the whole vault once per photo. The index is rebuilt when it is older than
+        # IMAGE_INDEX_TTL seconds, or on a miss once it is over a second old, so a new or moved photo shows at once.
+        index = getattr(self, '_image_index', None)
+        for attempt in range(2):
+            age = time.monotonic() - index[0] if index else None
+            if index is None or age > IMAGE_INDEX_TTL or (attempt and age > 1):
+                names = {}
                 for folder, dirs, files in os.walk(self.root):
                     dirs[:] = [d for d in dirs if not d.startswith('.') and not (Path(folder)/d).is_symlink()]
-                    matches += [Path(folder)/f for f in files if f.casefold() == target.casefold()]
-                for m in sorted(matches, key=lambda m: (len(m.relative_to(self.root).parts), m.relative_to(self.root).as_posix())):
-                    p = self.path(m.relative_to(self.root).as_posix())
-                    if p.is_file(): found = p; break
-            if found is None: raise Problem(404, 'Image not found.')
-            if found.stat().st_size > IMAGE_LIMIT: raise Problem(413, 'Image too large.')
-            return found.read_bytes(), IMAGE_TYPES.get(found.suffix.lower(), mime)
+                    for f in files: names.setdefault(f.casefold(), []).append(Path(folder)/f)
+                index = self._image_index = (time.monotonic(), names)
+            for m in sorted(index[1].get(name.casefold(), []), key=lambda m: (len(m.relative_to(self.root).parts), m.relative_to(self.root).as_posix())):
+                try: p = self.path(m.relative_to(self.root).as_posix())
+                except Problem: continue
+                if p.is_file(): return p
+        return None
 
     def switch_on(self, switch_id):
         return any(sw['id'] == switch_id and sw['on'] for sw in self.switches()['switches'])
@@ -393,15 +413,29 @@ def rpc(body):
     return {'jsonrpc':'2.0','id':body['id'],'result':out}
 
 class Handler(BaseHTTPRequestHandler):
-    def send(self, status, value=None, mime='application/json'):
+    def send(self, status, value=None, mime='application/json', cache='no-store', extra=None):
         # img-src allows https: so Read view can show outside images (read-images, notes#33) the moment the switch
         # flips, without a reload. Notes never interprets raw HTML, so only that renderer creates <img> elements.
         raw = value if isinstance(value,bytes) else b'' if value is None else json.dumps(value).encode()
         self.send_response(status)
-        for key,val in {'Content-Type':mime,'Content-Length':str(len(raw)),'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https:; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'"}.items(): self.send_header(key,val)
+        for key,val in {'Content-Type':mime,'Content-Length':str(len(raw)),'Cache-Control':cache,**(extra or {}),'X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https:; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'"}.items(): self.send_header(key,val)
         if status == 200 and self.opaque_asset(): self.send_header('Access-Control-Allow-Origin','*')
         self.end_headers()
         if self.command != 'HEAD': self.wfile.write(raw)
+
+    # Vault photos may be kept by the browser (notes#53): with no-store, every note open, every Live Preview
+    # redraw and every table scrolled back into view fetched each full-size photo again, so a note with many
+    # pictures stayed blank for seconds. The browser may reuse a photo for a minute and then shows the kept copy
+    # while it checks the ETag (a 304 without the photo when nothing changed). private: never in a shared cache.
+    IMAGE_CACHE = 'private, max-age=60, stale-while-revalidate=86400'
+    def send_image(self, file, mime):
+        st = file.stat()
+        tag = '"%s-%x-%x"' % (hashlib.sha256(str(file).encode()).hexdigest()[:12], st.st_mtime_ns, st.st_size)
+        if tag in [t.strip() for t in self.headers.get('If-None-Match','').split(',')]:
+            self.send_response(304)
+            for key,val in {'ETag':tag,'Cache-Control':self.IMAGE_CACHE,'X-Content-Type-Options':'nosniff'}.items(): self.send_header(key,val)
+            self.end_headers(); return
+        return self.send(200, file.read_bytes(), mime, cache=self.IMAGE_CACHE, extra={'ETag':tag})
 
     # Under the shell's browser boundary (wizard-os#133) Notes runs in a sandboxed frame with an opaque origin, so the
     # browser asks for its module script (app.js and what it imports) with `Origin: null` and needs a CORS answer.
@@ -435,7 +469,7 @@ class Handler(BaseHTTPRequestHandler):
             if path == '/api/switches': return self.send(200,VAULT.switches())
             if path == '/api/image':
                 if not VAULT.switch_on('read-images'): raise Problem(404,'Not found.')
-                return self.send(200,*VAULT.image(args.get('target',''),args.get('current','')))
+                return self.send_image(*VAULT.image_file(args.get('target',''),args.get('current','')))
             if path == '/openapi.json': return self.send(200,(ROOT/'openapi.json').read_bytes())
             name = 'index.html' if path == '/' else path.lstrip('/')
             base = ROOT/'web'; file = (base/name).resolve()
