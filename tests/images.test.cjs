@@ -34,6 +34,15 @@ test('the image rule is off unless the read-images switch is on, and raw HTML is
   assert.doesNotMatch(source,/innerHTML|insertAdjacentHTML|outerHTML/);
 });
 
+test('notes#53: a photo shows a pulsing box until it has arrived',()=>{
+  const img=source.slice(source.indexOf('function mdImage('),source.indexOf('// Tap an image'));
+  assert.match(img,/img\.classList\.add\('md-img-loading'\);img\.onload=\(\)=>img\.classList\.remove\('md-img-loading'\)/);
+  assert.ok(img.indexOf("classList.add('md-img-loading')")<img.indexOf('img.src='),'class set before the photo starts loading');
+  const css=fs.readFileSync(__dirname+'/../web/styles.css','utf8');
+  assert.match(css,/#read \.md-img-loading,#source \.cm-lp-image \.md-img-loading\{background:var\(--fill-2\);animation:md-img-wait/);
+  assert.match(css,/\.md-img-loading:not\(\[width\]\)\{min-width:min\(100%,240px\);aspect-ratio:auto 4\/3\}/,'a sized photo keeps its own box (notes#49)');
+  assert.match(css,/prefers-reduced-motion:reduce\)\{#read \.md-img-loading,#source \.cm-lp-image \.md-img-loading\{animation:none\}/);
+});
 test('notes#49: images in a table cell reserve a 4:3 box at most the cell width, so rows do not grow as photos load',()=>{
   vm.runInContext(source.slice(source.indexOf('const CELL_IMAGE='),source.indexOf('// Tap an image')),context);
   assert.equal(context.imageHeight('![[cars/c1.jpg|180]]'),139);

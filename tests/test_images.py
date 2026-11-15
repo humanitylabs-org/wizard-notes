@@ -58,6 +58,39 @@ class ImageTests(unittest.TestCase):
         with self.assertRaises(s.Problem) as c: self.v.image('missing.jpg', self.note)
         self.assertEqual(c.exception.status, 404)
 
+class ImageSpeedTests(unittest.TestCase):
+    # notes#53: many photos in one note load fast.
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory(dir=os.environ.get('TMPDIR'))
+        self.addCleanup(self.temp.cleanup)
+        self.v = s.Vault(self.temp.name); self.root = self.v.root
+        (self.root / 'Trips').mkdir(); (self.root / 'Trips/Trip.md').write_text('x')
+        (self.root / 'Attachments').mkdir()
+        for k in range(30): (self.root / f'Attachments/p{k}.jpg').write_bytes(b'p%d' % k)
+
+    def test_bare_names_walk_the_vault_once_not_per_photo(self):
+        real, walks = os.walk, []
+        def counting(*a, **k): walks.append(a); return real(*a, **k)
+        s.os.walk = counting
+        try:
+            for k in range(30): self.assertEqual(self.v.image(f'p{k}.jpg', 'Trips/Trip.md')[0], b'p%d' % k)
+        finally: s.os.walk = real
+        self.assertEqual(len(walks), 1)
+
+    def test_new_moved_and_removed_photos_are_still_found_right(self):
+        self.v.image('p1.jpg', 'Trips/Trip.md')
+        self.v._image_index = (self.v._image_index[0] - 5, self.v._image_index[1])
+        (self.root / 'Trips/new.jpg').write_bytes(b'new')
+        self.assertEqual(self.v.image('new.jpg', 'Trips/Trip.md')[0], b'new', 'next to the note')
+        (self.root / 'Attachments/late.jpg').write_bytes(b'late')
+        self.assertEqual(self.v.image('late.jpg')[0], b'late', 'added after the index was built')
+        (self.root / 'Deep').mkdir(); os.replace(self.root / 'Attachments/p2.jpg', self.root / 'Deep/p2.jpg')
+        self.v._image_index = (self.v._image_index[0] - 5, self.v._image_index[1])
+        self.assertEqual(self.v.image('p2.jpg')[0], b'p2', 'moved after the index was built')
+        (self.root / 'Deep/p2.jpg').unlink()
+        with self.assertRaises(s.Problem) as c: self.v.image('p2.jpg')
+        self.assertEqual(c.exception.status, 404)
+
 class ImageHttpTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -71,9 +104,9 @@ class ImageHttpTests(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.server.shutdown(); cls.server.server_close(); cls.thread.join(); s.VAULT = cls.old; cls.temp.cleanup()
-    def get(self, path):
+    def get(self, path, headers=None):
         try:
-            with urlopen('http://127.0.0.1:%d%s' % (self.port, path)) as r: return r.status, r.headers, r.read()
+            with urlopen(Request('http://127.0.0.1:%d%s' % (self.port, path), headers=headers or {})) as r: return r.status, r.headers, r.read()
         except HTTPError as e:
             with e: return e.code, e.headers, e.read()
     def flip(self, on):
@@ -96,6 +129,24 @@ class ImageHttpTests(unittest.TestCase):
             self.assertEqual(self.get('/api/image?target=nope.png')[0], 404)
         finally: self.flip(False)
         self.assertEqual(self.get('/api/image?target=pic.png')[0], 404)
+
+    def test_photos_are_kept_by_the_browser_and_revalidated(self):
+        # notes#53: no-store made every redraw fetch every full-size photo again.
+        self.flip(True)
+        try:
+            code, headers, body = self.get('/api/image?target=pic.png')
+            self.assertEqual((code, body), (200, PNG))
+            self.assertEqual(headers['Cache-Control'], 'private, max-age=60, stale-while-revalidate=86400')
+            tag = headers['ETag']; self.assertTrue(tag.startswith('"') and tag.endswith('"'))
+            code, headers, body = self.get('/api/image?target=pic.png', {'If-None-Match': tag})
+            self.assertEqual((code, body, headers['ETag']), (304, b'', tag))
+            (s.VAULT.root / 'pic.png').write_bytes(PNG + b'changed')
+            code, headers, body = self.get('/api/image?target=pic.png', {'If-None-Match': tag})
+            self.assertEqual((code, body), (200, PNG + b'changed'), 'a changed photo is sent again')
+            self.assertNotEqual(headers['ETag'], tag)
+            self.assertEqual(self.get('/api/tree')[1]['Cache-Control'], 'no-store', 'notes themselves are never kept')
+        finally:
+            (s.VAULT.root / 'pic.png').write_bytes(PNG); self.flip(False)
 
     def test_page_allows_https_images_but_no_other_hosts(self):
         csp = self.get('/')[1]['Content-Security-Policy']
