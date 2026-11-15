@@ -120,11 +120,11 @@ test('switch off (default): no tables, links keep their source, alias splits on 
   assert.ok(m.marks.some(x=>x.class==='cm-lp-link'));
   assert.deepEqual(previewModel('Go [[Note\\|alias]]',[]).replacements.filter(r=>r.kind==='wiki').map(r=>[r.target,r.label]),[['Note\\','alias']]);
 });
-test('image embeds become image widgets off the caret line only when the read-images switch passes image() (notes#33)',()=>{
+test('image embeds become image widgets off the caret line only when the host passes image() (notes#33; Notes always does)',()=>{
   const t='- **Townhome**, Wattana\n  ![[apt-fb-french.jpg]]\n![door](https://x.test/a.jpg) and [[Note]]\n`![[code.jpg]]`\n![[Some note]]';
   const isImage=raw=>!/Some note/.test(raw);
   const off=previewModel(t,[]);
-  assert.equal(off.replacements.filter(r=>r.kind==='image').length,0,'switch off: no widgets');
+  assert.equal(off.replacements.filter(r=>r.kind==='image').length,0,'no image(): no widgets');
   assert.deepEqual(off.replacements.filter(r=>r.kind==='wiki').map(r=>r.target),['apt-fb-french.jpg','Note','Some note']);
   const on=previewModel(t,[],{image:isImage});
   assert.deepEqual(on.replacements.filter(r=>r.kind==='image').map(r=>r.raw),['![[apt-fb-french.jpg]]','![door](https://x.test/a.jpg)']);

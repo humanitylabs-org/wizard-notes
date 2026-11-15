@@ -92,7 +92,7 @@ export function tableHeight(table, image = () => 0) {
 
 // `on` is the owner switch tables-and-links (issue 17). Off, the model is exactly the earlier one:
 // no tables, links keep their source and the wiki alias splits on a bare pipe only.
-// `image(raw)` (switch read-images, notes#33): when given, an image embed off the caret line (![[photo.jpg]],
+// `image(raw)` (notes#33; Notes always passes it): when given, an image embed off the caret line (![[photo.jpg]],
 // ![alt](https://...)) for which it returns true becomes an image widget; its source returns on the caret line.
 export const IMAGE_EMBED = /!\[\[[^\]\n]+\]\]|!\[[^\]\n]*\]\((?:<[^>\n]+>|[^\s)]+)(?:\s+"[^"\n]*")?\)/g;
 export function previewModel(text, active = [], {on = false, image = null} = {}) {

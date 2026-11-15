@@ -25,8 +25,9 @@ test('anything else stays text: http, data, javascript, protocol-relative, note 
   for(const t of ['![x](http://x.test/a.jpg)','![x](data:image/png;base64,AAAA)','![x](javascript:alert(1))','![x](//x.test/a.jpg)','![[Some note]]','![[doc.pdf]]','![x](notes.md)','![x](photo.svg)'])
     assert.equal(context.imageSource(t),null,t);
 });
-test('the image rule is off unless the read-images switch is on, and raw HTML is never parsed',()=>{
-  assert.match(source,/new RegExp\('\('\+\(switchOn\('read-images'\)\?IMAGE_RX\+'\|':''\)\+INLINE_RX\+/);
+test('the image rule is always on (notes#33, no switch), and raw HTML is never parsed',()=>{
+  assert.match(source,/new RegExp\('\('\+IMAGE_RX\+'\|'\+INLINE_RX\+/);
+  assert.doesNotMatch(source,/read-images|imagesOn/);
   const img=source.slice(source.indexOf('function mdImage('),source.indexOf('// Tap an image'));
   assert.match(img,/img\.loading='lazy'/);assert.match(img,/referrerPolicy='no-referrer'/);
   assert.match(img,/onerror=\(\)=>img\.replaceWith\(el\('span',image\.alt\|\|'Image','md-img-missing'\)\)/);

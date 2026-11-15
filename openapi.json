@@ -426,7 +426,7 @@
     },
     "/api/image": {
       "get": {
-        "summary": "A vault image (png, jpg, gif, webp, avif, bmp) for Read view, found like Obsidian: next to the current note, then vault-relative, then the shortest path with that name. Same path gate as notes. 404 unless the read-images switch is on.",
+        "summary": "A vault image (png, jpg, gif, webp, avif, bmp) for Read view, found like Obsidian: next to the current note, then vault-relative, then the shortest path with that name. Same path gate as notes.",
         "responses": {
           "200": {
             "description": "Image bytes",
@@ -441,7 +441,7 @@
             "description": "Untrusted Host or Origin"
           },
           "404": {
-            "description": "Not found, or the read-images switch is off"
+            "description": "Not found"
           },
           "413": {
             "description": "Image too large"

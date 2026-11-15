@@ -263,11 +263,22 @@ class HttpTests(unittest.TestCase):
         # notes#34: tappable links and tables are on for everyone; the read-links switch is gone, can't be flipped, and a saved value is pruned.
         self.assertNotIn('read-links',[x['id'] for x in self.req('/api/switches')[1]['switches']])
         with tempfile.TemporaryDirectory() as d:
-            (Path(d)/'switches.json').write_text(json.dumps({'read-links':False,'read-images':True}),encoding='utf-8')
+            (Path(d)/'switches.json').write_text(json.dumps({'read-links':False,'auto-merge':True}),encoding='utf-8')
             v=s.Vault(d)
-            self.assertEqual(json.loads((Path(d)/'switches.json').read_text(encoding='utf-8')),{'read-images':True})
+            self.assertEqual(json.loads((Path(d)/'switches.json').read_text(encoding='utf-8')),{'auto-merge':True})
             self.assertNotIn('read-links',[x['id'] for x in v.switches()['switches']])
             with self.assertRaises(s.Problem) as c:v.set_switch('read-links',True)
+            self.assertEqual(c.exception.status,404)
+
+    def test_read_images_switch_removed_and_its_stored_value_pruned(self):
+        # notes#33: photos in notes are on for everyone; the read-images switch is gone, can't be flipped, and a saved value is pruned.
+        self.assertNotIn('read-images',[x['id'] for x in self.req('/api/switches')[1]['switches']])
+        with tempfile.TemporaryDirectory() as d:
+            (Path(d)/'switches.json').write_text(json.dumps({'read-images':True,'auto-merge':False}),encoding='utf-8')
+            v=s.Vault(d)
+            self.assertEqual(json.loads((Path(d)/'switches.json').read_text(encoding='utf-8')),{'auto-merge':False})
+            self.assertNotIn('read-images',[x['id'] for x in v.switches()['switches']])
+            with self.assertRaises(s.Problem) as c:v.set_switch('read-images',True)
             self.assertEqual(c.exception.status,404)
 
     def test_switches_off_by_default_owner_flip_persists(self):
