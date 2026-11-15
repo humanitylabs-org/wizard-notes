@@ -109,30 +109,17 @@ class ImageHttpTests(unittest.TestCase):
             with urlopen(Request('http://127.0.0.1:%d%s' % (self.port, path), headers=headers or {})) as r: return r.status, r.headers, r.read()
         except HTTPError as e:
             with e: return e.code, e.headers, e.read()
-    def flip(self, on):
-        origin = 'http://127.0.0.1:%d' % self.port
-        req = Request(origin + '/api/switches', data=json.dumps({'id': 'read-images', 'on': on}).encode(), method='POST',
-                      headers={'Content-Type': 'application/json', 'X-Wizard-Switch': '1', 'Origin': origin})
-        with urlopen(req) as r: return json.loads(r.read())
-
-    def test_switch_is_off_by_default_and_gates_the_endpoint(self):
-        row = next(x for x in json.loads(self.get('/api/switches')[2])['switches'] if x['id'] == 'read-images')
-        self.assertFalse(row['on']); self.assertFalse(row['default'])
-        self.assertEqual(row['issues'], ['humanitylabs-org/wizard-notes#33'])
-        self.assertEqual(self.get('/api/image?target=pic.png')[0], 404)
-        self.flip(True)
-        try:
-            code, headers, body = self.get('/api/image?target=pic.png')
-            self.assertEqual((code, headers['Content-Type'], body), (200, 'image/png', PNG))
-            self.assertEqual(headers['X-Content-Type-Options'], 'nosniff')
-            self.assertEqual(self.get('/api/image?target=.trash/x.png')[0], 400)
-            self.assertEqual(self.get('/api/image?target=nope.png')[0], 404)
-        finally: self.flip(False)
-        self.assertEqual(self.get('/api/image?target=pic.png')[0], 404)
+    def test_images_are_on_for_everyone_without_a_switch(self):
+        # notes#33 (switch-default): photos in notes are on for everyone; the read-images switch is gone.
+        self.assertNotIn('read-images', [x['id'] for x in json.loads(self.get('/api/switches')[2])['switches']])
+        code, headers, body = self.get('/api/image?target=pic.png')
+        self.assertEqual((code, headers['Content-Type'], body), (200, 'image/png', PNG))
+        self.assertEqual(headers['X-Content-Type-Options'], 'nosniff')
+        self.assertEqual(self.get('/api/image?target=.trash/x.png')[0], 400)
+        self.assertEqual(self.get('/api/image?target=nope.png')[0], 404)
 
     def test_photos_are_kept_by_the_browser_and_revalidated(self):
         # notes#53: no-store made every redraw fetch every full-size photo again.
-        self.flip(True)
         try:
             code, headers, body = self.get('/api/image?target=pic.png')
             self.assertEqual((code, body), (200, PNG))
@@ -146,7 +133,7 @@ class ImageHttpTests(unittest.TestCase):
             self.assertNotEqual(headers['ETag'], tag)
             self.assertEqual(self.get('/api/tree')[1]['Cache-Control'], 'no-store', 'notes themselves are never kept')
         finally:
-            (s.VAULT.root / 'pic.png').write_bytes(PNG); self.flip(False)
+            (s.VAULT.root / 'pic.png').write_bytes(PNG)
 
     def test_page_allows_https_images_but_no_other_hosts(self):
         csp = self.get('/')[1]['Content-Security-Policy']

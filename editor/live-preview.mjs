@@ -40,7 +40,7 @@ class TableWidget extends WidgetType {
   constructor(table, options) { super(); this.table=table; this.options=options; this.key=JSON.stringify([table.align,table.rows]); }
   eq(other) { return this.key === other.key; }
   // Reserve about the drawn height for tables outside the viewport (notes#49); CodeMirror measures it once drawn.
-  get estimatedHeight() { return this.estimate ??= tableHeight(this.table, this.options.imagesOn?.() ? this.options.imageHeight : undefined); }
+  get estimatedHeight() { return this.estimate ??= tableHeight(this.table, this.options.imageHeight); }
   toDOM(view) {
     const wrap=this.options.renderTable ? this.options.renderTable(this.table) : fallbackTable(this.table);
     wrap.classList.add('cm-lp-table');
@@ -92,7 +92,7 @@ function liveDecorations(options) {
     }
     build(view) {
       const active=view.hasFocus ? view.state.selection.ranges.map(r=>({from:r.from,to:r.to})) : [];
-      const model=previewModel(view.state.doc.toString(),active,{on:switchOn(options),image:options.renderImage&&options.imagesOn?.()?options.isImage:null}), ranges=[];
+      const model=previewModel(view.state.doc.toString(),active,{on:switchOn(options),image:options.renderImage?options.isImage:null}), ranges=[];
       for (const line of model.lines) {
         const classes=[...line.classes,...(line.active?['cm-lp-active']:[]),...(line.bullet?['cm-lp-bullet']:[])];
         const attributes={class:classes.join(' ')};

@@ -40,11 +40,8 @@ SWITCHES = [
     {'id': 'auto-merge', 'name': 'Merge edits from two devices',
      'description': 'When a note was changed on another device and the two sides touched different lines, both changes are kept and saved without a question; the same lines changed still opens the conflict sheet.',
      'default': False, 'issues': ['humanitylabs-org/wizard-notes#30']},
-    {'id': 'read-images', 'name': 'Images in notes',
-     'description': 'Read view and Live Preview show Markdown images ![alt](https://...) and Obsidian embeds ![[photo.jpg]] inline, scaled to the column (in Live Preview the source returns on the line you edit); tap one to see it full size.',
-     'default': False, 'issues': ['humanitylabs-org/wizard-notes#33']},
 ]
-# Vault images Read view may show (read-images). No SVG: it can carry script if opened directly.
+# Vault images Read view and Live Preview show (on for everyone since notes#33). No SVG: it can carry script if opened directly.
 IMAGE_TYPES = {'.png':'image/png', '.jpg':'image/jpeg', '.jpeg':'image/jpeg', '.gif':'image/gif', '.webp':'image/webp', '.avif':'image/avif', '.bmp':'image/bmp'}
 IMAGE_LIMIT = 25_000_000
 IMAGE_INDEX_TTL = 30
@@ -305,9 +302,6 @@ class Vault:
                 if p.is_file(): return p
         return None
 
-    def switch_on(self, switch_id):
-        return any(sw['id'] == switch_id and sw['on'] for sw in self.switches()['switches'])
-
     def _saved_switches(self):
         try: saved = json.loads(self.switch_file.read_text(encoding='utf-8'))
         except (OSError, ValueError): return {}
@@ -319,7 +313,7 @@ class Vault:
         os.replace(temp, self.switch_file)
 
     def _prune_switches(self):
-        # Drop stored values for switches that no longer exist (the dropped reply-draft, notes#26; read-links, on for everyone since notes#34).
+        # Drop stored values for switches that no longer exist (the dropped reply-draft, notes#26; read-links, on for everyone since notes#34; read-images, since notes#33).
         saved = self._saved_switches()
         known = {sw['id'] for sw in SWITCHES}
         kept = {k:v for k,v in saved.items() if k in known and isinstance(v, bool)}
@@ -414,8 +408,7 @@ def rpc(body):
 
 class Handler(BaseHTTPRequestHandler):
     def send(self, status, value=None, mime='application/json', cache='no-store', extra=None):
-        # img-src allows https: so Read view can show outside images (read-images, notes#33) the moment the switch
-        # flips, without a reload. Notes never interprets raw HTML, so only that renderer creates <img> elements.
+        # img-src allows https: so Read view can show outside images (notes#33). Notes never interprets raw HTML, so only that renderer creates <img> elements.
         raw = value if isinstance(value,bytes) else b'' if value is None else json.dumps(value).encode()
         self.send_response(status)
         for key,val in {'Content-Type':mime,'Content-Length':str(len(raw)),'Cache-Control':cache,**(extra or {}),'X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https:; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'"}.items(): self.send_header(key,val)
@@ -468,7 +461,6 @@ class Handler(BaseHTTPRequestHandler):
             if path in actions: return self.send(200,service(actions[path],args))
             if path == '/api/switches': return self.send(200,VAULT.switches())
             if path == '/api/image':
-                if not VAULT.switch_on('read-images'): raise Problem(404,'Not found.')
                 return self.send_image(*VAULT.image_file(args.get('target',''),args.get('current','')))
             if path == '/openapi.json': return self.send(200,(ROOT/'openapi.json').read_bytes())
             name = 'index.html' if path == '/' else path.lstrip('/')

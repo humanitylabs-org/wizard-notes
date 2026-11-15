@@ -2513,46 +2513,45 @@ createElement("input");s.type="checkbox",s.checked=e.checked,s.setAttribute("ari
 r=>r.preventDefault(),s.onchange=()=>{t.composing||t.dispatch({changes:{from:e.taskAt+1,to:e.taskAt+2,insert:s.checked?"\
 x":" "},annotations:J.userEvent.of("input.task")})},i.append(s)}else i.textContent=e.marker;return i}ignoreEvent(){return!0}},
 no=class extends qt{constructor(t,e){super(),this.table=t,this.options=e,this.key=JSON.stringify([t.align,t.rows])}eq(t){
-return this.key===t.key}get estimatedHeight(){return this.estimate??=tf(this.table,this.options.imagesOn?.()?this.options.
-imageHeight:void 0)}toDOM(t){let e=this.options.renderTable?this.options.renderTable(this.table):Jd(this.table);return e.
-classList.add("cm-lp-table"),e.addEventListener("mousedown",i=>{if(i.button!==0||i.target.closest("a,button,input"))return;
-i.preventDefault();let s=i.target.closest("[data-from]"),r=t.posAtDOM(e)+(s?Number(s.dataset.from):0);t.dispatch({selection:C.
-cursor(Math.min(r,t.state.doc.length)),scrollIntoView:!0}),t.focus()}),e}ignoreEvent(){return!0}};function Jd(n){let t=document.
-createElement("div"),e=document.createElement("table");for(let i of n.rows){let s=e.insertRow();i.cells.forEach((r,o)=>{
-let l=document.createElement(i.header?"th":"td");l.textContent=r.text,l.dataset.from=r.from,n.align[o]&&(l.style.textAlign=
-n.align[o]),s.append(l)})}return t.append(e),t}var so=q.define(),nf=ct.define({create:()=>!1,update(n,t){for(let e of t.
-effects)e.is(so)&&(n=e.value);return n}}),rf=n=>!!n.switchOn?.();function Yd(n){let t=e=>{if(!rf(n))return z.none;let i=e.
-field(nf)?e.selection.ranges.map(s=>({from:s.from,to:s.to})):[];return z.set(to(e.doc.toString(),i).filter(s=>!s.active).
-map(s=>z.replace({block:!0,widget:new no(s,n)}).range(s.from,s.to)))};return[nf,B.focusChangeEffect.of((e,i)=>so.of(i)),
-ct.define({create:t,update(e,i){return i.docChanged&&i.isUserEvent("input.type.compose")?e.map(i.changes):i.docChanged||
-i.selection||i.effects.some(s=>s.is(so)||s.is(Wi))?t(i.state):e},provide:e=>B.decorations.from(e)})]}function Qd(n){return Kt.
-fromClass(class{constructor(t){this.decorations=this.build(t)}update(t){if(t.view.composing){this.decorations=this.decorations.
-map(t.changes);return}(t.docChanged||t.selectionSet||t.focusChanged||t.transactions.some(e=>e.effects.some(i=>i.is(Wi))))&&
-(this.decorations=this.build(t.view))}build(t){let e=t.hasFocus?t.state.selection.ranges.map(r=>({from:r.from,to:r.to})):
-[],i=eo(t.state.doc.toString(),e,{on:rf(n),image:n.renderImage&&n.imagesOn?.()?n.isImage:null}),s=[];for(let r of i.lines){
-let o=[...r.classes,...r.active?["cm-lp-active"]:[],...r.bullet?["cm-lp-bullet"]:[]],l={class:o.join(" ")};r.indent!==void 0&&
-r.bullet&&(l.style=`--lp-indent:${Math.floor(r.indent/2)*22}px`),o.length&&s.push(z.line({attributes:l}).range(r.from))}
-for(let r of i.marks)r.to>r.from&&s.push(z.mark({class:r.class,...r.href?{attributes:{"data-href":r.href}}:{}}).range(r.
-from,r.to));for(let r of i.replacements)s.push(z.replace({widget:r.kind==="hide"?void 0:new io(r,n)}).range(r.from,r.to));
-return z.set(s,!0)}},{decorations:t=>t.decorations})}var sf=n=>!n.shiftKey&&!n.altKey&&n.target.closest?.(".cm-lp-link[d\
-ata-href]");function Jp(n,t){let e=new Je(""),i,s=new Map,r,o=()=>{clearTimeout(r);let p=()=>{if(i.dom.isConnected){if(i.
-composing){r=setTimeout(p,60);return}u(),i.dispatch({effects:Wi.of(null)}),t.onChange(e.raw,!1)}};r=setTimeout(p,80)},l=()=>{
-s.set(e.text,e.raw),s.size>160&&s.delete(s.keys().next().value)},a=p=>{if(!p||i.composing)return!1;let m=i.state.doc.toString(),
-g=0,y=m.length,v=p.text.length;for(;g<y&&g<v&&m[g]===p.text[g];)g++;for(;y>g&&v>g&&m[y-1]===p.text[v-1];)y--,v--;return i.
-dispatch({changes:{from:g,to:y,insert:p.text.slice(g,v)},selection:C.range(p.start,p.end),annotations:J.userEvent.of("in\
-put.format"),scrollIntoView:!0}),i.focus(),!0},h=p=>{if(i.composing)return!1;if(p==="undo"||p==="redo")return i.focus(),
-(p==="undo"?Fn:Ii)(i);let m=i.state.selection.main;return a(t.transform(i.state.doc.toString(),m.from,m.to,p))},f=()=>{if(i.
-composing)return!1;let p=i.state.selection.main;return eo(i.state.doc.toString()).lines.find(g=>g.from<=p.from&&g.to>=p.
-from)?.classes.includes("cm-lp-code")?!1:a(t.continueList(i.state.doc.toString(),p.from,p.to))},c=[],u=()=>{if(!c.length||
-i.composing)return;let p=c;c=[];let m=i.state.doc.toString(),g=new Set,y=[];for(let v of p)for(let A of ef(m,v.from,v.to))
-g.has(A.from)||(g.add(A.from),y.push(A));y.length&&i.dispatch({changes:y,annotations:[J.userEvent.of("input.autocap"),Pr.
-of("full")]})},d=[qa(),pa(),B.lineWrapping,ga("Start writing\u2026"),B.contentAttributes.of({"aria-label":"Live Preview \
-editor",spellcheck:"true",autocorrect:"on",autocapitalize:"sentences"}),Qd(t),Yd(t),or.of([{key:"Tab",run:()=>h("indent"),
-shift:()=>h("outdent")},{key:"Enter",run:f},{key:"Mod-b",run:()=>h("bold")},{key:"Mod-i",run:()=>h("italic")},...ja,...bh]),
-B.domEventHandlers({beforeinput(p){return!p.isComposing&&!i.composing&&p.cancelable&&["insertParagraph","insertLineBreak"].
-includes(p.inputType)&&f()?(p.preventDefault(),!0):!1},compositionend(){return o(),!1},mousedown(p){return p.button!==0||
-!sf(p)?!1:(p.preventDefault(),!0)},click(p){let m=sf(p);return!m||p.button!==0?!1:(p.preventDefault(),t.onLink?.(m.dataset.
-href),!0)}}),B.updateListener.of(p=>{!t.keepCaretVisible||!i.hasFocus||!(p.docChanged||p.selectionSet||p.geometryChanged)||
+return this.key===t.key}get estimatedHeight(){return this.estimate??=tf(this.table,this.options.imageHeight)}toDOM(t){let e=this.
+options.renderTable?this.options.renderTable(this.table):Jd(this.table);return e.classList.add("cm-lp-table"),e.addEventListener(
+"mousedown",i=>{if(i.button!==0||i.target.closest("a,button,input"))return;i.preventDefault();let s=i.target.closest("[d\
+ata-from]"),r=t.posAtDOM(e)+(s?Number(s.dataset.from):0);t.dispatch({selection:C.cursor(Math.min(r,t.state.doc.length)),
+scrollIntoView:!0}),t.focus()}),e}ignoreEvent(){return!0}};function Jd(n){let t=document.createElement("div"),e=document.
+createElement("table");for(let i of n.rows){let s=e.insertRow();i.cells.forEach((r,o)=>{let l=document.createElement(i.header?
+"th":"td");l.textContent=r.text,l.dataset.from=r.from,n.align[o]&&(l.style.textAlign=n.align[o]),s.append(l)})}return t.
+append(e),t}var so=q.define(),nf=ct.define({create:()=>!1,update(n,t){for(let e of t.effects)e.is(so)&&(n=e.value);return n}}),
+rf=n=>!!n.switchOn?.();function Yd(n){let t=e=>{if(!rf(n))return z.none;let i=e.field(nf)?e.selection.ranges.map(s=>({from:s.
+from,to:s.to})):[];return z.set(to(e.doc.toString(),i).filter(s=>!s.active).map(s=>z.replace({block:!0,widget:new no(s,n)}).
+range(s.from,s.to)))};return[nf,B.focusChangeEffect.of((e,i)=>so.of(i)),ct.define({create:t,update(e,i){return i.docChanged&&
+i.isUserEvent("input.type.compose")?e.map(i.changes):i.docChanged||i.selection||i.effects.some(s=>s.is(so)||s.is(Wi))?t(
+i.state):e},provide:e=>B.decorations.from(e)})]}function Qd(n){return Kt.fromClass(class{constructor(t){this.decorations=
+this.build(t)}update(t){if(t.view.composing){this.decorations=this.decorations.map(t.changes);return}(t.docChanged||t.selectionSet||
+t.focusChanged||t.transactions.some(e=>e.effects.some(i=>i.is(Wi))))&&(this.decorations=this.build(t.view))}build(t){let e=t.
+hasFocus?t.state.selection.ranges.map(r=>({from:r.from,to:r.to})):[],i=eo(t.state.doc.toString(),e,{on:rf(n),image:n.renderImage?
+n.isImage:null}),s=[];for(let r of i.lines){let o=[...r.classes,...r.active?["cm-lp-active"]:[],...r.bullet?["cm-lp-bull\
+et"]:[]],l={class:o.join(" ")};r.indent!==void 0&&r.bullet&&(l.style=`--lp-indent:${Math.floor(r.indent/2)*22}px`),o.length&&
+s.push(z.line({attributes:l}).range(r.from))}for(let r of i.marks)r.to>r.from&&s.push(z.mark({class:r.class,...r.href?{attributes:{
+"data-href":r.href}}:{}}).range(r.from,r.to));for(let r of i.replacements)s.push(z.replace({widget:r.kind==="hide"?void 0:
+new io(r,n)}).range(r.from,r.to));return z.set(s,!0)}},{decorations:t=>t.decorations})}var sf=n=>!n.shiftKey&&!n.altKey&&
+n.target.closest?.(".cm-lp-link[data-href]");function Jp(n,t){let e=new Je(""),i,s=new Map,r,o=()=>{clearTimeout(r);let p=()=>{
+if(i.dom.isConnected){if(i.composing){r=setTimeout(p,60);return}u(),i.dispatch({effects:Wi.of(null)}),t.onChange(e.raw,!1)}};
+r=setTimeout(p,80)},l=()=>{s.set(e.text,e.raw),s.size>160&&s.delete(s.keys().next().value)},a=p=>{if(!p||i.composing)return!1;
+let m=i.state.doc.toString(),g=0,y=m.length,v=p.text.length;for(;g<y&&g<v&&m[g]===p.text[g];)g++;for(;y>g&&v>g&&m[y-1]===
+p.text[v-1];)y--,v--;return i.dispatch({changes:{from:g,to:y,insert:p.text.slice(g,v)},selection:C.range(p.start,p.end),
+annotations:J.userEvent.of("input.format"),scrollIntoView:!0}),i.focus(),!0},h=p=>{if(i.composing)return!1;if(p==="undo"||
+p==="redo")return i.focus(),(p==="undo"?Fn:Ii)(i);let m=i.state.selection.main;return a(t.transform(i.state.doc.toString(),
+m.from,m.to,p))},f=()=>{if(i.composing)return!1;let p=i.state.selection.main;return eo(i.state.doc.toString()).lines.find(
+g=>g.from<=p.from&&g.to>=p.from)?.classes.includes("cm-lp-code")?!1:a(t.continueList(i.state.doc.toString(),p.from,p.to))},
+c=[],u=()=>{if(!c.length||i.composing)return;let p=c;c=[];let m=i.state.doc.toString(),g=new Set,y=[];for(let v of p)for(let A of ef(
+m,v.from,v.to))g.has(A.from)||(g.add(A.from),y.push(A));y.length&&i.dispatch({changes:y,annotations:[J.userEvent.of("inp\
+ut.autocap"),Pr.of("full")]})},d=[qa(),pa(),B.lineWrapping,ga("Start writing\u2026"),B.contentAttributes.of({"aria-label":"\
+Live Preview editor",spellcheck:"true",autocorrect:"on",autocapitalize:"sentences"}),Qd(t),Yd(t),or.of([{key:"Tab",run:()=>h(
+"indent"),shift:()=>h("outdent")},{key:"Enter",run:f},{key:"Mod-b",run:()=>h("bold")},{key:"Mod-i",run:()=>h("italic")},
+...ja,...bh]),B.domEventHandlers({beforeinput(p){return!p.isComposing&&!i.composing&&p.cancelable&&["insertParagraph","i\
+nsertLineBreak"].includes(p.inputType)&&f()?(p.preventDefault(),!0):!1},compositionend(){return o(),!1},mousedown(p){return p.
+button!==0||!sf(p)?!1:(p.preventDefault(),!0)},click(p){let m=sf(p);return!m||p.button!==0?!1:(p.preventDefault(),t.onLink?.(
+m.dataset.href),!0)}}),B.updateListener.of(p=>{!t.keepCaretVisible||!i.hasFocus||!(p.docChanged||p.selectionSet||p.geometryChanged)||
 i.requestMeasure({key:"notes-caret-guard",read:m=>m.coordsAtPos(m.state.selection.main.head,-1)||m.coordsAtPos(m.state.selection.
 main.head,1),write:m=>{m&&t.keepCaretVisible(m)}})}),B.updateListener.of(p=>{if(p.docChanged){l();for(let m of p.transactions)
 if(m.docChanged){let g=m.newDoc.toString(),y=(m.isUserEvent("undo")||m.isUserEvent("redo"))&&s.get(g);if(y!==!1&&y!==void 0)
