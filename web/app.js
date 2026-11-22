@@ -19,7 +19,20 @@ const SW_HEAD={'X-Wizard-Switch':'1'};
 function switchesChanged(){document.documentElement.classList.toggle('friendly',friendly());$('today').hidden=!friendly();renderViews();editor.redraw();if(state.note&&state.read)markdown(state.note.content,$('read'));}
 async function loadSwitches(){const was=JSON.stringify(switches);try{const r=await fetch('api/switches',{cache:'no-store',headers:SW_HEAD});if(r.ok)switches=(await r.json()).switches||[];}catch{}if(was!==JSON.stringify(switches))switchesChanged();}
 async function toggleSwitch(id){const r=await fetch('api/switches',{method:'POST',headers:{...SW_HEAD,'Content-Type':'application/json'},body:JSON.stringify({id,on:!switchOn(id)})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'Could not change the switch.');switches=d.switches||switches;switchesChanged();}
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadSwitches();});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){loadSwitches();loadVault();}});
+// The owner's own vault folder (notes#58, switch vault-folder). The box picks the vault at startup, so GET api/vault says
+// which one this run uses; flipping the switch restarts Notes on the box and the page reloads once it is back.
+let vault={folder:null,using:'own',problem:null,restart:false};
+async function loadVault(){try{const r=await fetch('api/vault',{cache:'no-store'});if(r.ok)vault=await r.json();}catch{}}
+function vaultLine(){if(!switchOn('vault-folder')&&!vault.restart)return '';
+ if(vault.restart)return 'Restart Notes to open '+(switchOn('vault-folder')?vault.folder:'its own vault')+'.';
+ if(vault.using==='folder')return 'Vault folder: '+vault.folder;
+ if(vault.using==='custom')return 'This Wizard sets the vault folder itself.';
+ if(!vault.folder)return 'Choose a Vault folder in Notes\u2019 app settings. Until then Notes keeps its own vault.';
+ return 'Notes could not open '+vault.folder+': '+(vault.problem||'the folder is not there.')+' It is using its own vault.';}
+async function switchVault(){await loadVault();if(!vault.folder||vault.using==='custom')return;notice('Switching vault\u2026');let gone=false;
+ for(let i=0;i<40;i++){await new Promise(r=>setTimeout(r,750));try{const r=await fetch('api/vault',{cache:'no-store'});if(!r.ok)throw 0;vault=await r.json();if(gone)return location.reload();if(i>=4)break;}catch{gone=true;}}
+ notice(vaultLine()||'Notes kept its own vault.');}
 const editor=createLiveEditor($('source'),{transform:transformText,continueList,onWiki:target=>act(()=>wiki(target)),onLink:href=>openLink(href),renderTable:t=>renderTable(t),switchOn:()=>switchOn('tables-and-links'),isImage:t=>!!imageSource(t),renderImage:t=>mdImage(t),imageHeight:t=>imageHeight(t),onChange:content=>{const n=state.note;if(!n)return;n.content=content;changed(n);},keepCaretVisible:rect=>keepCaretClear(rect)});
 // Keep the caret line clear of the floating formatting bar and the keyboard, with a line of breathing room.
 const CARET_ROOM=56;
@@ -139,14 +152,14 @@ $('sort').onclick=()=>{state.sort=state.sort==='name'?'modified':'name';store('n
 $('collapse').onclick=()=>{state.expanded=state.expanded.size?new Set():new Set(allEntries().filter(n=>n.type==='folder').map(n=>n.path));persistExpanded();renderTree();};
 $('today').onclick=$('empty-today').onclick=()=>act(today);$('empty-new').onclick=()=>act(()=>newNote());
 function hideExplorer(){closeSheet();if(phone())showDrawer(false);else{state.sidebarHidden=true;store('notes.sidebarHidden',true);renderViews();}}
-$('vault-menu').onclick=()=>{const b=sheet('Vault');b.append(el('p','Plain Markdown files. '+$('vault-count').textContent));
+$('vault-menu').onclick=()=>{const b=sheet('Vault');b.append(el('p','Plain Markdown files. '+$('vault-count').textContent));if(vaultLine())b.append(el('p',vaultLine(),'vault-folder'));
  // Switch on: the bar keeps New note / Today / Search; the less frequent vault tools live here, in words.
  if(friendly())b.append(button('New folder',()=>{newFolder();}),
   button(state.sort==='name'?'Sort by last modified':'Sort by name',()=>{state.sort=state.sort==='name'?'modified':'name';store('notes.sort',state.sort);renderTree();closeSheet();}),
   button(state.expanded.size?'Collapse all folders':'Expand all folders',()=>{state.expanded=state.expanded.size?new Set():new Set(allEntries().filter(n=>n.type==='folder').map(n=>n.path));persistExpanded();renderTree();closeSheet();}),
   ...(state.note?[button('Hide explorer',hideExplorer)]:[]));
  else b.append(button('Today',()=>{closeSheet();return today();}),button('Search',()=>{closeSheet();openSearch();}),button('Hide explorer',hideExplorer));
- if(switches.length){b.append(el('h3','Try changes'));for(const x of switches){const t=button((x.on?'On: ':'Off: ')+x.name,()=>act(async()=>{await toggleSwitch(x.id);closeSheet();}));t.setAttribute('role','switch');t.setAttribute('aria-checked',String(!!x.on));t.title=x.description||'';b.append(t);}}};
+ if(switches.length){b.append(el('h3','Try changes'));for(const x of switches){const t=button((x.on?'On: ':'Off: ')+x.name,()=>act(async()=>{await toggleSwitch(x.id);closeSheet();if(x.id==='vault-folder')await switchVault();}));t.setAttribute('role','switch');t.setAttribute('aria-checked',String(!!x.on));t.title=x.description||'';b.append(t);}}};
 function goBack(){
  if($('sheet').open){closeSheet();return true;}
  if(state.search){state.search=false;renderViews();return true;}
@@ -349,7 +362,7 @@ function viewportChanged(){const v=window.visualViewport;const inset=v?Math.max(
 window.addEventListener('resize',viewportChanged);window.visualViewport?.addEventListener('resize',viewportChanged);window.visualViewport?.addEventListener('scroll',viewportChanged);
 // No repeated app title/header tools: every action remains in the floating pill.
 W.titlebar?.set?.([]).catch(()=>{});
-await loadSwitches();
+await Promise.all([loadSwitches(),loadVault()]);
 await refresh();renderViews();
 const recovered=stored('notes.drafts',[]);
 for(const raw of recovered){if(typeof raw.path!=='string'||typeof raw.content!=='string')continue;

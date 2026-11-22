@@ -40,7 +40,26 @@ SWITCHES = [
     {'id': 'auto-merge', 'name': 'Merge edits from two devices',
      'description': 'When a note was changed on another device and the two sides touched different lines, both changes are kept and saved without a question; the same lines changed still opens the conflict sheet.',
      'default': False, 'issues': ['humanitylabs-org/wizard-notes#30']},
+    {'id': 'vault-folder', 'name': 'Use my own vault folder',
+     'description': 'Notes opens the folder set as Vault folder in its app settings (for example a synced Obsidian vault) instead of its own private vault, and saves files as that folder\u2019s owner. Notes restarts once to switch; its own vault is kept.',
+     'default': False, 'issues': ['humanitylabs-org/wizard-notes#58']},
 ]
+
+def vault_status():
+    """Which vault this run uses (notes#58). start.py decides at startup; a flip of vault-folder restarts Notes."""
+    folder = os.environ.get('NOTES_VAULT_FOLDER','').strip() or None
+    using = 'folder' if os.environ.get('NOTES_VAULT_IN_USE') == 'folder' else 'custom' if os.environ.get('NOTES_VAULT_DIR','').strip() else 'own'
+    on = VAULT.switch_on('vault-folder') if VAULT else False
+    return {'folder':folder, 'using':using, 'problem':os.environ.get('NOTES_VAULT_PROBLEM') or None,
+            'restart': bool(folder) and using != 'custom' and on != (using == 'folder') and not (on and os.environ.get('NOTES_VAULT_PROBLEM'))}
+
+def restart_for_vault():
+    # Called when the owner flips vault-folder. In the container the server is PID 1: exiting lets Docker (restart:
+    # unless-stopped) start it again, and start.py then picks the vault afresh (so a fixed folder is retried).
+    # Anywhere else the page says a restart is needed.
+    status = vault_status()
+    if status['folder'] and status['using'] != 'custom' and os.getpid() == 1: threading.Timer(1.0, os._exit, (0,)).start()
+
 # Vault images Read view and Live Preview show (on for everyone since notes#33). No SVG: it can carry script if opened directly.
 IMAGE_TYPES = {'.png':'image/png', '.jpg':'image/jpeg', '.jpeg':'image/jpeg', '.gif':'image/gif', '.webp':'image/webp', '.avif':'image/avif', '.bmp':'image/bmp'}
 IMAGE_LIMIT = 25_000_000
@@ -320,6 +339,10 @@ class Vault:
         if kept != saved:
             with self.lock: self._write_switches(kept)
 
+    def switch_on(self, switch_id):
+        saved = self._saved_switches().get(switch_id)
+        return saved if isinstance(saved, bool) else next(sw['default'] for sw in SWITCHES if sw['id'] == switch_id)
+
     def switches(self):
         saved = self._saved_switches()
         return {'contract':'wizard.app-switches/1','switches':[
@@ -460,6 +483,7 @@ class Handler(BaseHTTPRequestHandler):
             actions = {'/api/tree':'tree','/api/note':'read','/api/search':'search','/api/backlinks':'backlinks','/api/resolve':'resolve'}
             if path in actions: return self.send(200,service(actions[path],args))
             if path == '/api/switches': return self.send(200,VAULT.switches())
+            if path == '/api/vault': return self.send(200,vault_status())
             if path == '/api/image':
                 return self.send_image(*VAULT.image_file(args.get('target',''),args.get('current','')))
             if path == '/openapi.json': return self.send(200,(ROOT/'openapi.json').read_bytes())
@@ -494,7 +518,10 @@ class Handler(BaseHTTPRequestHandler):
                 # Owner page or the App Manager on the owner's behalf: the box Origin plus X-Wizard-Switch: 1.
                 if self.headers.get('X-Wizard-Switch') != '1' or not self.headers.get('Origin'): raise Problem(403,'Only this Wizard\u2019s owner can switch Notes.')
                 if not isinstance(body,dict): raise Problem(400,'Send {"id": "...", "on": true|false}.')
-                return self.send(200,VAULT.set_switch(body.get('id'),body.get('on')))
+                was = VAULT.switch_on('vault-folder')
+                out = VAULT.set_switch(body.get('id'),body.get('on'))
+                if body.get('id') == 'vault-folder' and VAULT.switch_on('vault-folder') != was: restart_for_vault()
+                return self.send(200,out)
             if path == '/api/note':
                 args = dict(body)
                 args['create'] = self.command == 'POST'
