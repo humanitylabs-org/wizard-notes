@@ -116,7 +116,8 @@ class ServerReportsTheVault(unittest.TestCase):
             self.assertFalse(self.get('/api/vault')['restart'])
 
     def test_flip_asks_for_a_restart_and_only_pid_1_exits(self):
-        with patch.dict(os.environ, {'NOTES_VAULT_FOLDER': '/srv/notes'}), patch.object(s.threading, 'Timer') as timer:
+        # The release job runs these tests inside the image, where the test runner itself is PID 1: pin the pid.
+        with patch.dict(os.environ, {'NOTES_VAULT_FOLDER': '/srv/notes'}), patch.object(s.threading, 'Timer') as timer, patch.object(s.os, 'getpid', return_value=4242):
             self.assertEqual(self.get('/api/vault'), {'folder': '/srv/notes', 'using': 'own', 'problem': None, 'restart': False})
             self.flip(True)
             self.assertTrue(self.get('/api/vault')['restart']); timer.assert_not_called()
@@ -145,6 +146,7 @@ class ServerReportsTheVault(unittest.TestCase):
             self.assertEqual(self.get('/api/vault')['using'], 'custom'); self.assertFalse(self.get('/api/vault')['restart'])
 
 
+@unittest.skipUnless((ROOT/'runtipi/config.json').is_file(), 'the image carries no runtipi package files')
 class PackageOffersTheSetting(unittest.TestCase):
     def test_form_field_and_mount(self):
         config = json.loads((ROOT/'runtipi/config.json').read_text())
