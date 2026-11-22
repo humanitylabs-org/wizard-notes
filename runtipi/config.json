@@ -41,6 +41,16 @@
       "required": false,
       "default": "",
       "hint": "Same-host origins work automatically. Add exact origins only if needed."
+    },
+    {
+      "type": "text",
+      "label": "Vault folder (optional)",
+      "env_variable": "NOTES_VAULT_FOLDER",
+      "required": false,
+      "default": "",
+      "hint": "Absolute path of an existing folder on this Wizard, for example a synced Obsidian vault. Notes opens it while the 'Use my own vault folder' switch is on and saves files as the folder's owner. Blank keeps Notes' own vault.",
+      "regex": "^(/[^:$\\n]*)?$",
+      "pattern_error": "Use an absolute folder path such as /home/you/Obsidian Vault, without ':' or '$'."
     }
   ]
 }
