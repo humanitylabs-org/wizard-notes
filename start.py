@@ -3,11 +3,10 @@
 NOTES_UID / NOTES_GID choose that user (default 1000:1000). To edit a mounted host folder,
 such as a synced Obsidian vault, use the container ids that own it on the host; see README.
 
-The owner's own vault folder (notes#58): the app setting NOTES_VAULT_FOLDER is mounted at /vault. While the
-vault-folder switch is on, Notes opens it and runs as the ids that own it, so files keep the owner's ownership.
+The owner's own vault folder (notes#58): the app setting NOTES_VAULT_FOLDER is mounted at /vault. When it is set,
+Notes opens it and runs as the ids that own it, so files keep the owner's ownership.
 A hand-written NOTES_VAULT_DIR override always wins and is left exactly as before.
 """
-import json
 import os
 import sys
 from pathlib import Path
@@ -29,13 +28,10 @@ def container_root_is_host_root():
             if inside <= 0 < inside + count: return outside - inside == 0
     return True
 
-def picked_vault(data):
-    """(path, uid, gid) of the owner's vault folder when the vault-folder switch is on, else None.
+def picked_vault():
+    """(path, uid, gid) of the owner's vault folder when the Vault folder setting is filled in, else None.
     A problem leaves Notes on its own vault and is reported to the page through NOTES_VAULT_PROBLEM."""
     if not os.environ.get('NOTES_VAULT_FOLDER', '').strip() or os.environ.get('NOTES_VAULT_DIR', '').strip(): return None
-    try: saved = json.loads((data/'switches.json').read_text(encoding='utf-8'))
-    except (OSError, ValueError): return None
-    if not isinstance(saved, dict) or saved.get('vault-folder') is not True: return None
     mount = Path(os.environ.get('NOTES_VAULT_MOUNT', '').strip() or '/vault')
     problem, st = None, None
     if mount.is_symlink() or not mount.is_dir(): problem = 'the folder is not there.'
@@ -50,7 +46,7 @@ def picked_vault(data):
 
 uid, gid = ident('NOTES_UID'), ident('NOTES_GID')
 data = Path(os.environ.get('DATA_DIR', '/data'))
-picked = picked_vault(data)
+picked = picked_vault()
 if picked:
     os.environ['NOTES_VAULT_DIR'] = str(picked[0])
     os.environ['NOTES_VAULT_IN_USE'] = 'folder'

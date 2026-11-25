@@ -20,19 +20,14 @@ function switchesChanged(){document.documentElement.classList.toggle('friendly',
 async function loadSwitches(){const was=JSON.stringify(switches);try{const r=await fetch('api/switches',{cache:'no-store',headers:SW_HEAD});if(r.ok)switches=(await r.json()).switches||[];}catch{}if(was!==JSON.stringify(switches))switchesChanged();}
 async function toggleSwitch(id){const r=await fetch('api/switches',{method:'POST',headers:{...SW_HEAD,'Content-Type':'application/json'},body:JSON.stringify({id,on:!switchOn(id)})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'Could not change the switch.');switches=d.switches||switches;switchesChanged();}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden){loadSwitches();loadVault();}});
-// The owner's own vault folder (notes#58, switch vault-folder). The box picks the vault at startup, so GET api/vault says
-// which one this run uses; flipping the switch restarts Notes on the box and the page reloads once it is back.
-let vault={folder:null,using:'own',problem:null,restart:false};
+// The owner's own vault folder (notes#58). The box picks the vault at startup from the Vault folder app setting, so
+// GET api/vault says which one this run uses.
+let vault={folder:null,using:'own',problem:null};
 async function loadVault(){try{const r=await fetch('api/vault',{cache:'no-store'});if(r.ok)vault=await r.json();}catch{}}
-function vaultLine(){if(!switchOn('vault-folder')&&!vault.restart)return '';
- if(vault.restart)return 'Restart Notes to open '+(switchOn('vault-folder')?vault.folder:'its own vault')+'.';
- if(vault.using==='folder')return 'Vault folder: '+vault.folder;
+function vaultLine(){if(vault.using==='folder')return 'Vault folder: '+vault.folder;
  if(vault.using==='custom')return 'This Wizard sets the vault folder itself.';
- if(!vault.folder)return 'Choose a Vault folder in Notes\u2019 app settings. Until then Notes keeps its own vault.';
+ if(!vault.folder)return 'To open a folder you already have (like an Obsidian vault), set Vault folder in Notes\u2019 app settings.';
  return 'Notes could not open '+vault.folder+': '+(vault.problem||'the folder is not there.')+' It is using its own vault.';}
-async function switchVault(){await loadVault();if(!vault.folder||vault.using==='custom')return;notice('Switching vault\u2026');let gone=false;
- for(let i=0;i<40;i++){await new Promise(r=>setTimeout(r,750));try{const r=await fetch('api/vault',{cache:'no-store'});if(!r.ok)throw 0;vault=await r.json();if(gone)return location.reload();if(i>=4)break;}catch{gone=true;}}
- notice(vaultLine()||'Notes kept its own vault.');}
 const editor=createLiveEditor($('source'),{transform:transformText,continueList,onWiki:target=>act(()=>wiki(target)),onLink:href=>openLink(href),renderTable:t=>renderTable(t),switchOn:()=>switchOn('tables-and-links'),isImage:t=>!!imageSource(t),renderImage:t=>mdImage(t),imageHeight:t=>imageHeight(t),onChange:content=>{const n=state.note;if(!n)return;n.content=content;changed(n);},keepCaretVisible:rect=>keepCaretClear(rect)});
 // Keep the caret line clear of the floating formatting bar and the keyboard, with a line of breathing room.
 const CARET_ROOM=56;
@@ -159,7 +154,7 @@ $('vault-menu').onclick=()=>{const b=sheet('Vault');b.append(el('p','Plain Markd
   button(state.expanded.size?'Collapse all folders':'Expand all folders',()=>{state.expanded=state.expanded.size?new Set():new Set(allEntries().filter(n=>n.type==='folder').map(n=>n.path));persistExpanded();renderTree();closeSheet();}),
   ...(state.note?[button('Hide explorer',hideExplorer)]:[]));
  else b.append(button('Today',()=>{closeSheet();return today();}),button('Search',()=>{closeSheet();openSearch();}),button('Hide explorer',hideExplorer));
- if(switches.length){b.append(el('h3','Try changes'));for(const x of switches){const t=button((x.on?'On: ':'Off: ')+x.name,()=>act(async()=>{await toggleSwitch(x.id);closeSheet();if(x.id==='vault-folder')await switchVault();}));t.setAttribute('role','switch');t.setAttribute('aria-checked',String(!!x.on));t.title=x.description||'';b.append(t);}}};
+ if(switches.length){b.append(el('h3','Try changes'));for(const x of switches){const t=button((x.on?'On: ':'Off: ')+x.name,()=>act(async()=>{await toggleSwitch(x.id);closeSheet();}));t.setAttribute('role','switch');t.setAttribute('aria-checked',String(!!x.on));t.title=x.description||'';b.append(t);}}};
 function goBack(){
  if($('sheet').open){closeSheet();return true;}
  if(state.search){state.search=false;renderViews();return true;}

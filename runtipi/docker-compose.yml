@@ -13,7 +13,7 @@ services:
       DATA_DIR: /data
       WIZARD_TRUSTED_HOSTS: ${WIZARD_TRUSTED_HOSTS:-}
       WIZARD_TRUSTED_ORIGINS: ${WIZARD_TRUSTED_ORIGINS:-}
-      # Vault folder app setting (notes#58); Notes opens it only while the vault-folder switch is on.
+      # Vault folder app setting (notes#58); when set, Notes opens it instead of its own vault.
       NOTES_VAULT_FOLDER: ${NOTES_VAULT_FOLDER:-}
     volumes:
       - ${APP_DATA_DIR}/data:/data
