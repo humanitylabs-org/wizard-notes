@@ -557,10 +557,10 @@
     },
     "/api/vault": {
       "get": {
-        "summary": "Which vault Notes uses: its own, the owner's Vault folder app setting (switch vault-folder, notes#58) or a box override",
+        "summary": "Which vault Notes uses: its own, the owner's Vault folder app setting (notes#58) or a box override",
         "responses": {
           "200": {
-            "description": "{folder: host path or null, using: own|folder|custom, problem: text or null, restart: true while a switch flip waits for a restart}"
+            "description": "{folder: host path or null, using: own|folder|custom, problem: text or null}"
           },
           "403": {
             "description": "Untrusted Host or Origin"
